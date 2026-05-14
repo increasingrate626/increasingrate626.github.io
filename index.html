@@ -99,7 +99,7 @@
         <blockquote>
 <p><strong>Status: Open for Summer Internship 2026 &#x2F; 暑期实习求职中</strong></p>
 </blockquote>
-<h2 id="👨‍💻-基本信息"><a href="#👨‍💻-基本信息" class="headerlink" title="👨‍💻 基本信息"></a>👨‍💻 基本信息</h2><p>我是<strong>张梓亮</strong>，目前是湖南师范大学（211 双一流）计算机科学与技术专业的在读硕士研究生。主要技术方向为 <strong>Java 后端高并发架构</strong>与 <strong>AI 应用工程（Agent &#x2F; RAG）</strong> 的结合与落地。</p>
+<h2 id="👨‍💻-基本信息"><a href="#👨‍💻-基本信息" class="headerlink" title="👨‍💻 基本信息"></a>👨‍💻 基本信息</h2><p>我是<strong>张梓亮</strong>，目前是湖南师范大学（211 双一流）计算机科学与技术专业的在读硕士研究生。主要技术方向为 <strong>Java 后端高并发架构</strong>与 <strong>AI 应用工程（Agent &#x2F; RAG）</strong> 的结合与落地。技术博客还在不断更新中……</p>
 <h2 id="🎓-教育背景"><a href="#🎓-教育背景" class="headerlink" title="🎓 教育背景"></a>🎓 教育背景</h2><ul>
 <li><strong>硕士</strong>: 湖南师范大学 - 计算机科学与技术 (2024.09 - 2027.06)</li>
 <li><strong>本科</strong>: 青岛科技大学 - 计算机科学与技术 (2020.09 - 2024.06)</li>
@@ -125,14 +125,524 @@
 <li><strong>实验突破</strong>：在 OrganAMNIST 医疗数据集上进行对抗测试，在高达 30% 恶意客户端（Label-Flipping 攻击）的极端场景下，成功将模型准确率恢复至约 82%。</li>
 </ul>
 <h2 id="📬-联系我"><a href="#📬-联系我" class="headerlink" title="📬 联系我"></a>📬 联系我</h2><ul>
-<li><strong>Email</strong>: <a href="mailto:&#49;&#x38;&#53;&#x37;&#55;&#x33;&#50;&#49;&#x31;&#x36;&#57;&#64;&#x31;&#54;&#x33;&#46;&#x63;&#111;&#x6d;">18577321169@163.com</a></li>
+<li><strong>Email</strong>: <a href="mailto:&#x31;&#56;&#53;&#x37;&#x37;&#51;&#50;&#x31;&#49;&#54;&#57;&#64;&#x31;&#54;&#51;&#x2e;&#x63;&#111;&#x6d;">18577321169@163.com</a></li>
 <li><strong>WeChat</strong>: Struggletofree</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2099/12/31/about-me/" data-id="cuidAr3abtPoJAEEHEIGW5evl" data-title="欢迎来到我的技术博客" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2099/12/31/about-me/" data-id="cuidTcTIcZpAZi8iM7d0EVRAH" data-title="欢迎来到我的技术博客" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-JAVA并发-技术文档" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/14/JAVA%E5%B9%B6%E5%8F%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="article-date">
+  <time class="dt-published" datetime="2026-05-14T14:32:00.000Z" itemprop="datePublished">2026-05-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/14/JAVA%E5%B9%B6%E5%8F%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JAVA 并发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Java-并发技术文档：线程、JMM、锁、AQS、并发容器与线程池"><a href="#Java-并发技术文档：线程、JMM、锁、AQS、并发容器与线程池" class="headerlink" title="Java 并发技术文档：线程、JMM、锁、AQS、并发容器与线程池"></a>Java 并发技术文档：线程、JMM、锁、AQS、并发容器与线程池</h1><h2 id="1-Java-并发核心知识图谱"><a href="#1-Java-并发核心知识图谱" class="headerlink" title="1. Java 并发核心知识图谱"></a>1. Java 并发核心知识图谱</h2><p>Java 并发可以按五条主线学习：线程基础、线程安全三要素、锁与 AQS、并发容器、线程池。面试中很多问题看似分散，本质都能回到这几条主线上。</p>
+<p><img src="/images/tech-docs/java-concurrency-core-map.png" alt="Java 并发核心图谱"></p>
+<h2 id="2-线程安全三要素"><a href="#2-线程安全三要素" class="headerlink" title="2. 线程安全三要素"></a>2. 线程安全三要素</h2><p>线程安全通常围绕三个关键词展开：原子性、可见性、有序性。</p>
+<table>
+<thead>
+<tr>
+<th>要素</th>
+<th>含义</th>
+<th>常见解决方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原子性</td>
+<td>一个操作不可被中断，要么全部成功，要么全部失败</td>
+<td><code>synchronized</code>、<code>Lock</code>、CAS、原子类</td>
+</tr>
+<tr>
+<td>可见性</td>
+<td>一个线程修改共享变量后，其他线程能及时看到</td>
+<td><code>volatile</code>、<code>synchronized</code>、<code>final</code>、锁释放与获取</td>
+</tr>
+<tr>
+<td>有序性</td>
+<td>程序执行顺序符合预期，不被危险重排序破坏</td>
+<td><code>volatile</code>、锁、happens-before 规则</td>
+</tr>
+</tbody></table>
+<p>写并发代码时，不要只问“有没有加锁”，更要问这段代码是否同时满足原子性、可见性和有序性。</p>
+<h2 id="3-线程与协程"><a href="#3-线程与协程" class="headerlink" title="3. 线程与协程"></a>3. 线程与协程</h2><h3 id="3-1-线程是什么"><a href="#3-1-线程是什么" class="headerlink" title="3.1 线程是什么"></a>3.1 线程是什么</h3><p>线程是操作系统调度 CPU 的基本执行单元。一个 Java 进程中可以有多个线程，它们共享进程内存空间，但每个线程有自己的程序计数器、虚拟机栈和本地方法栈。</p>
+<p>线程适合表达并发任务，但线程不是免费的。创建、销毁、调度和上下文切换都会消耗系统资源。</p>
+<h3 id="3-2-协程是什么"><a href="#3-2-协程是什么" class="headerlink" title="3.2 协程是什么"></a>3.2 协程是什么</h3><p>协程是一种更轻量级的并发单元，通常由程序或运行时自己调度，不直接依赖操作系统内核线程调度。它适合在单线程或少量线程上承载大量 I&#x2F;O 密集型任务。</p>
+<p>协程的关键特点：</p>
+<ul>
+<li>调度成本更低。</li>
+<li>更适合 I&#x2F;O 密集型高并发。</li>
+<li>通常采用协作式调度。</li>
+<li>阻塞点需要由运行时管理，否则可能阻塞底层线程。</li>
+</ul>
+<p>Java 传统并发以线程和线程池为主。现代 Java 中也可以关注虚拟线程，但理解线程、锁、JMM 和线程池仍然是基础。</p>
+<h2 id="4-线程创建方式"><a href="#4-线程创建方式" class="headerlink" title="4. 线程创建方式"></a>4. 线程创建方式</h2><p>Java 中创建线程常见方式有三种：</p>
+<h3 id="4-1-继承-Thread"><a href="#4-1-继承-Thread" class="headerlink" title="4.1 继承 Thread"></a>4.1 继承 Thread</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyThread</span> <span class="keyword">extends</span> <span class="title class_">Thread</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;running&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">MyThread</span>().start();</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-实现-Runnable"><a href="#4-2-实现-Runnable" class="headerlink" title="4.2 实现 Runnable"></a>4.2 实现 Runnable</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Runnable</span> <span class="variable">task</span> <span class="operator">=</span> () -&gt; System.out.println(<span class="string">&quot;running&quot;</span>);</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Thread</span>(task).start();</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-实现-Callable"><a href="#4-3-实现-Callable" class="headerlink" title="4.3 实现 Callable"></a>4.3 实现 Callable</h3><p><code>Callable</code> 可以返回结果，也可以抛出异常，通常配合 <code>FutureTask</code> 或线程池使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Callable&lt;Integer&gt; task = () -&gt; <span class="number">1</span> + <span class="number">1</span>;</span><br><span class="line">FutureTask&lt;Integer&gt; futureTask = <span class="keyword">new</span> <span class="title class_">FutureTask</span>&lt;&gt;(task);</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Thread</span>(futureTask).start();</span><br><span class="line"></span><br><span class="line"><span class="type">Integer</span> <span class="variable">result</span> <span class="operator">=</span> futureTask.get();</span><br></pre></td></tr></table></figure>
+
+<p>注意，真正启动新线程应调用 <code>start()</code>。如果直接调用 <code>run()</code>，只是普通方法调用，不会开启新线程。</p>
+<h2 id="5-线程生命周期"><a href="#5-线程生命周期" class="headerlink" title="5. 线程生命周期"></a>5. 线程生命周期</h2><p>Java 线程主要有六种状态：<code>NEW</code>、<code>RUNNABLE</code>、<code>BLOCKED</code>、<code>WAITING</code>、<code>TIMED_WAITING</code>、<code>TERMINATED</code>。</p>
+<p><img src="/images/tech-docs/java-concurrency-thread-lifecycle.png" alt="Java 线程生命周期"></p>
+<p>简要说明：</p>
+<ul>
+<li><code>NEW</code>：线程对象已创建，但还没有调用 <code>start()</code>。</li>
+<li><code>RUNNABLE</code>：可运行状态，包括就绪和运行中。</li>
+<li><code>BLOCKED</code>：等待获取 <code>synchronized</code> 监视器锁。</li>
+<li><code>WAITING</code>：无限期等待，需要其他线程唤醒。</li>
+<li><code>TIMED_WAITING</code>：有超时时间的等待。</li>
+<li><code>TERMINATED</code>：线程执行结束。</li>
+</ul>
+<p>线程上下文切换是指 CPU 从运行一个线程转向运行另一个线程的过程。频繁切换会带来寄存器保存、恢复、调度、缓存失效等开销。</p>
+<h2 id="6-如何停止一个线程"><a href="#6-如何停止一个线程" class="headerlink" title="6. 如何停止一个线程"></a>6. 如何停止一个线程</h2><h3 id="6-1-interrupt"><a href="#6-1-interrupt" class="headerlink" title="6.1 interrupt"></a>6.1 interrupt</h3><p><code>interrupt()</code> 会把线程的中断标志设置为 <code>true</code>，但不会强行杀死线程。线程是否退出，取决于线程自身是否检查并响应中断。</p>
+<p>常见写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (!Thread.currentThread().isInterrupted()) &#123;</span><br><span class="line">    doWork();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当线程处于 <code>sleep()</code>、<code>wait()</code>、<code>join()</code> 等阻塞方法中时，被中断会抛出 <code>InterruptedException</code>，同时清除中断标志。通常应恢复中断标志或明确退出。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">    Thread.currentThread().interrupt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-stop"><a href="#6-2-stop" class="headerlink" title="6.2 stop"></a>6.2 stop</h3><p><code>Thread.stop()</code> 已不推荐使用。它会强制终止线程，可能导致对象状态不一致、锁被异常释放、资源泄露等问题。</p>
+<p>推荐方式是使用中断、共享停止标志或线程池的关闭方法。</p>
+<h2 id="7-线程间通信方式"><a href="#7-线程间通信方式" class="headerlink" title="7. 线程间通信方式"></a>7. 线程间通信方式</h2><p>常见线程通信方式：</p>
+<ul>
+<li>共享变量：配合 <code>volatile</code> 或锁保证可见性和互斥。</li>
+<li><code>wait()</code> &#x2F; <code>notify()</code> &#x2F; <code>notifyAll()</code>：基于对象监视器的等待通知。</li>
+<li><code>Lock</code> + <code>Condition</code>：更灵活的条件队列。</li>
+<li><code>BlockingQueue</code>：生产者-消费者模型的常用选择。</li>
+<li><code>CountDownLatch</code> &#x2F; <code>CyclicBarrier</code> &#x2F; <code>Semaphore</code>：并发协作工具。</li>
+<li><code>Exchanger</code>：两个线程之间交换数据。</li>
+<li><code>CompletableFuture</code>：异步编排和结果传递。</li>
+</ul>
+<p>高层并发工具通常比手写 <code>wait()</code> &#x2F; <code>notify()</code> 更安全，也更容易维护。</p>
+<h2 id="8-sleep-和-wait-的区别"><a href="#8-sleep-和-wait-的区别" class="headerlink" title="8. sleep 和 wait 的区别"></a>8. sleep 和 wait 的区别</h2><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th><code>sleep()</code></th>
+<th><code>wait()</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>所属类</td>
+<td><code>Thread</code></td>
+<td><code>Object</code></td>
+</tr>
+<tr>
+<td>是否释放锁</td>
+<td>不释放已持有的锁</td>
+<td>会释放当前对象监视器锁</td>
+</tr>
+<tr>
+<td>使用前提</td>
+<td>任意地方可调用</td>
+<td>必须在同步代码块或同步方法中调用</td>
+</tr>
+<tr>
+<td>唤醒方式</td>
+<td>时间到或被中断</td>
+<td><code>notify()</code>、<code>notifyAll()</code>、超时或被中断</td>
+</tr>
+<tr>
+<td>线程状态</td>
+<td><code>TIMED_WAITING</code></td>
+<td><code>WAITING</code> 或 <code>TIMED_WAITING</code></td>
+</tr>
+</tbody></table>
+<p><code>wait()</code> 通常要放在循环中判断条件，避免虚假唤醒。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span> (lock) &#123;</span><br><span class="line">    <span class="keyword">while</span> (!condition) &#123;</span><br><span class="line">        lock.wait();</span><br><span class="line">    &#125;</span><br><span class="line">    doSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-Java-内存模型与-happens-before"><a href="#9-Java-内存模型与-happens-before" class="headerlink" title="9. Java 内存模型与 happens-before"></a>9. Java 内存模型与 happens-before</h2><p>Java 内存模型简称 JMM，用来定义线程之间如何通过内存进行交互。它关注的核心问题是：一个线程写入共享变量后，另一个线程什么时候能看见。</p>
+<p>每个线程可以把共享变量读入自己的工作内存中操作，最终再同步回主内存。如果没有正确的同步手段，不同线程看到的值可能不一致。</p>
+<p>常见 happens-before 规则：</p>
+<ul>
+<li>程序次序规则：同一个线程内，前面的操作先行发生于后面的操作。</li>
+<li>监视器锁规则：一次 unlock 先行发生于后续对同一把锁的 lock。</li>
+<li>volatile 变量规则：对 volatile 变量的写先行发生于后续对它的读。</li>
+<li>线程启动规则：<code>Thread.start()</code> 先行发生于启动线程中的动作。</li>
+<li>线程终止规则：线程中的所有操作先行发生于其他线程检测到它已终止。</li>
+<li>传递性：如果 A 先行发生于 B，B 先行发生于 C，则 A 先行发生于 C。</li>
+</ul>
+<h2 id="10-volatile"><a href="#10-volatile" class="headerlink" title="10. volatile"></a>10. volatile</h2><h3 id="10-1-volatile-保证什么"><a href="#10-1-volatile-保证什么" class="headerlink" title="10.1 volatile 保证什么"></a>10.1 volatile 保证什么</h3><p><code>volatile</code> 主要保证可见性和一定的有序性，但不保证复合操作的原子性。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="type">boolean</span> <span class="variable">running</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<p>一个线程修改 <code>running = false</code> 后，其他线程能尽快看到这个变化。</p>
+<p>但下面的代码即使用了 <code>volatile</code>，也不是线程安全的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">increment</span><span class="params">()</span> &#123;</span><br><span class="line">    count++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>count++</code> 包含读取、加一、写回三个步骤，不是一个不可分割的原子操作。</p>
+<h3 id="10-2-volatile-如何保证可见性"><a href="#10-2-volatile-如何保证可见性" class="headerlink" title="10.2 volatile 如何保证可见性"></a>10.2 volatile 如何保证可见性</h3><p>线程写 volatile 变量时，JVM 会在合适位置插入写屏障，将修改刷新到主内存，并阻止前面的普通写被重排序到 volatile 写之后。</p>
+<p>线程读 volatile 变量时，JVM 会插入读屏障，使本地缓存中相关变量失效，从主内存读取最新值，并阻止后面的普通读写被重排序到 volatile 读之前。</p>
+<h3 id="10-3-volatile-如何保证有序性"><a href="#10-3-volatile-如何保证有序性" class="headerlink" title="10.3 volatile 如何保证有序性"></a>10.3 volatile 如何保证有序性</h3><p>volatile 的重排序约束可以简化理解为：</p>
+<ul>
+<li>volatile 写之前的操作不能被重排序到 volatile 写之后。</li>
+<li>volatile 读之后的操作不能被重排序到 volatile 读之前。</li>
+<li>对同一个 volatile 变量的写先行发生于后续读。</li>
+</ul>
+<h2 id="11-synchronized"><a href="#11-synchronized" class="headerlink" title="11. synchronized"></a>11. synchronized</h2><h3 id="11-1-synchronized-可以修饰什么"><a href="#11-1-synchronized-可以修饰什么" class="headerlink" title="11.1 synchronized 可以修饰什么"></a>11.1 synchronized 可以修饰什么</h3><p><code>synchronized</code> 可以修饰实例方法、静态方法和代码块。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">instanceMethod</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 锁是当前对象 this</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">staticMethod</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 锁是当前 Class 对象</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">block</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="built_in">this</span>) &#123;</span><br><span class="line">        <span class="comment">// 锁是 this</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-2-synchronized-保证什么"><a href="#11-2-synchronized-保证什么" class="headerlink" title="11.2 synchronized 保证什么"></a>11.2 synchronized 保证什么</h3><p><code>synchronized</code> 可以同时保证原子性、可见性和有序性。</p>
+<ul>
+<li>原子性：同一时刻只有一个线程能进入同一把锁保护的临界区。</li>
+<li>可见性：线程释放锁前的修改，对后续获取同一把锁的线程可见。</li>
+<li>有序性：锁规则形成 happens-before 关系。</li>
+</ul>
+<h3 id="11-3-synchronized-锁升级"><a href="#11-3-synchronized-锁升级" class="headerlink" title="11.3 synchronized 锁升级"></a>11.3 synchronized 锁升级</h3><p>JDK 早期对 <code>synchronized</code> 做了大量优化。常见锁状态包括无锁、偏向锁、轻量级锁、重量级锁。</p>
+<p>需要注意，偏向锁在较新 JDK 中已经逐步弱化甚至移除，面试中更重要的是理解优化思路：当没有竞争时尽量降低加锁成本；当出现竞争时逐步升级，必要时进入操作系统互斥量。</p>
+<p>常见升级路径可以理解为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">无锁 -&gt; 偏向锁 -&gt; 轻量级锁 -&gt; 重量级锁</span><br></pre></td></tr></table></figure>
+
+<p>锁升级通常不可逆，目的是在不同竞争程度下取得性能平衡。</p>
+<h2 id="12-ReentrantLock-与-AQS"><a href="#12-ReentrantLock-与-AQS" class="headerlink" title="12. ReentrantLock 与 AQS"></a>12. ReentrantLock 与 AQS</h2><p><code>ReentrantLock</code> 是 <code>java.util.concurrent.locks</code> 包下的可重入锁。它底层依赖 AQS，也就是 <code>AbstractQueuedSynchronizer</code>。</p>
+<p><img src="/images/tech-docs/java-concurrency-aqs-reentrantlock.png" alt="AQS 与 ReentrantLock 工作流程"></p>
+<h3 id="12-1-ReentrantLock-特点"><a href="#12-1-ReentrantLock-特点" class="headerlink" title="12.1 ReentrantLock 特点"></a>12.1 ReentrantLock 特点</h3><p>相比 <code>synchronized</code>，<code>ReentrantLock</code> 提供了更丰富的能力：</p>
+<ul>
+<li>可重入。</li>
+<li>可中断获取锁：<code>lockInterruptibly()</code>。</li>
+<li>可尝试获取锁：<code>tryLock()</code>。</li>
+<li>可设置公平锁或非公平锁。</li>
+<li>可创建多个 <code>Condition</code> 条件队列。</li>
+</ul>
+<h3 id="12-2-公平锁与非公平锁"><a href="#12-2-公平锁与非公平锁" class="headerlink" title="12.2 公平锁与非公平锁"></a>12.2 公平锁与非公平锁</h3><p>非公平锁会先尝试让当前线程直接通过 CAS 抢锁，抢不到再进入 AQS 队列。它吞吐量通常更高，但可能让等待时间较长的线程继续等待。</p>
+<p>公平锁会先检查 AQS 队列中是否已有前驱节点。如果有，就排队等待；如果没有，才尝试获取锁。它更符合先来先服务，但吞吐量通常低一些。</p>
+<h3 id="12-3-lock-流程"><a href="#12-3-lock-流程" class="headerlink" title="12.3 lock 流程"></a>12.3 lock 流程</h3><p>简化流程：</p>
+<ol>
+<li>判断 <code>state</code> 是否为 <code>0</code>。</li>
+<li>非公平锁会先 CAS 抢锁；公平锁会先检查队列前驱。</li>
+<li>抢锁成功后，把当前线程设置为 owner，并把 <code>state</code> 置为 <code>1</code>。</li>
+<li>如果当前线程已经持有锁，说明是可重入获取，<code>state + 1</code>。</li>
+<li>如果锁被其他线程持有，则进入 AQS 队列等待。</li>
+</ol>
+<h3 id="12-4-unlock-流程"><a href="#12-4-unlock-流程" class="headerlink" title="12.4 unlock 流程"></a>12.4 unlock 流程</h3><p>简化流程：</p>
+<ol>
+<li>判断当前线程是否是持锁线程。</li>
+<li>将 <code>state - 1</code>。</li>
+<li>如果 <code>state</code> 不为 <code>0</code>，说明还有重入层数，锁并未真正释放。</li>
+<li>如果 <code>state</code> 为 <code>0</code>，清空 owner。</li>
+<li>唤醒 AQS 队列中的后继节点。</li>
+</ol>
+<h2 id="13-CAS-与原子类"><a href="#13-CAS-与原子类" class="headerlink" title="13. CAS 与原子类"></a>13. CAS 与原子类</h2><p>CAS 是 Compare-And-Swap，比较并交换。它通常包含三个值：</p>
+<ul>
+<li>内存位置 V。</li>
+<li>预期值 A。</li>
+<li>新值 B。</li>
+</ul>
+<p>只有当 V 的当前值等于 A 时，才把 V 更新为 B；否则更新失败。</p>
+<p>典型伪代码：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compareAndSet(V, expected, newValue)</span><br></pre></td></tr></table></figure>
+
+<p>Java 中的原子类如 <code>AtomicInteger</code>、<code>AtomicLong</code>、<code>AtomicReference</code> 等都大量使用 CAS。</p>
+<p>CAS 常见问题：</p>
+<ul>
+<li>ABA 问题：值从 A 变成 B，又变回 A，CAS 可能误以为没有变化。</li>
+<li>自旋开销：竞争激烈时不断 CAS 失败，会浪费 CPU。</li>
+<li>只能直接保证单个变量更新的原子性，复杂一致性仍可能需要锁。</li>
+</ul>
+<p>解决 ABA 问题可以使用带版本号的引用，例如 <code>AtomicStampedReference</code>。</p>
+<h2 id="14-ThreadLocal"><a href="#14-ThreadLocal" class="headerlink" title="14. ThreadLocal"></a>14. ThreadLocal</h2><p><code>ThreadLocal</code> 用来为每个线程提供独立的变量副本，避免线程之间共享变量带来的竞争。</p>
+<p>典型用法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal&lt;String&gt; LOCAL = <span class="keyword">new</span> <span class="title class_">ThreadLocal</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">    LOCAL.set(<span class="string">&quot;value&quot;</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        doWork();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        LOCAL.remove();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-1-ThreadLocalMap"><a href="#14-1-ThreadLocalMap" class="headerlink" title="14.1 ThreadLocalMap"></a>14.1 ThreadLocalMap</h3><p>每个线程内部维护一个 <code>ThreadLocalMap</code>。<code>ThreadLocal</code> 对象作为 key，线程本地变量作为 value。</p>
+<p><code>ThreadLocalMap</code> 的 key 是弱引用。如果 <code>ThreadLocal</code> 外部强引用消失，key 可能被 GC 回收，但 value 还被线程持有，尤其在线程池线程长期存活时，可能造成内存泄漏。</p>
+<p>因此，在线程池中使用 <code>ThreadLocal</code> 时，一定要在 <code>finally</code> 中调用 <code>remove()</code>。</p>
+<h3 id="14-2-InheritableThreadLocal"><a href="#14-2-InheritableThreadLocal" class="headerlink" title="14.2 InheritableThreadLocal"></a>14.2 InheritableThreadLocal</h3><p><code>InheritableThreadLocal</code> 可以让子线程继承父线程中的变量副本。</p>
+<p>但在线程池中要谨慎使用，因为线程池里的线程不是每次任务提交都新建，继承关系可能不符合业务预期。</p>
+<h2 id="15-ConcurrentHashMap"><a href="#15-ConcurrentHashMap" class="headerlink" title="15. ConcurrentHashMap"></a>15. ConcurrentHashMap</h2><h3 id="15-1-JDK-7-与-JDK-8-实现差异"><a href="#15-1-JDK-7-与-JDK-8-实现差异" class="headerlink" title="15.1 JDK 7 与 JDK 8 实现差异"></a>15.1 JDK 7 与 JDK 8 实现差异</h3><p>JDK 7 中，<code>ConcurrentHashMap</code> 使用分段锁。每个 <code>Segment</code> 本质上类似一个小型 <code>HashMap</code>，写操作锁住对应分段。</p>
+<p>JDK 8 中，它改为数组 + 链表 + 红黑树结构，并使用 CAS + <code>synchronized</code> 控制并发写。</p>
+<h3 id="15-2-JDK-8-put-流程"><a href="#15-2-JDK-8-put-流程" class="headerlink" title="15.2 JDK 8 put 流程"></a>15.2 JDK 8 put 流程</h3><p>简化流程：</p>
+<ol>
+<li>根据 key 计算 hash。</li>
+<li>如果 table 未初始化，先初始化。</li>
+<li>如果目标桶为空，通过 CAS 插入节点。</li>
+<li>如果目标桶不为空，用 <code>synchronized</code> 锁住桶头节点。</li>
+<li>判断桶中是链表还是红黑树。</li>
+<li>如果 key 已存在，则覆盖 value。</li>
+<li>如果 key 不存在，则插入新节点。</li>
+<li>检查是否需要树化。</li>
+<li>检查是否需要扩容。</li>
+</ol>
+<h3 id="15-3-size-如何统计"><a href="#15-3-size-如何统计" class="headerlink" title="15.3 size 如何统计"></a>15.3 size 如何统计</h3><p><code>ConcurrentHashMap</code> 的大小统计不是简单地给一个全局变量加锁。</p>
+<p>常见思路：</p>
+<ul>
+<li>优先尝试 CAS 更新 <code>baseCount</code>。</li>
+<li>如果 CAS 失败，根据线程哈希定位到 <code>CounterCell</code>。</li>
+<li>尝试 CAS 更新对应 <code>CounterCell</code> 的 value。</li>
+<li>总大小约等于 <code>baseCount + 所有 CounterCell.value 之和</code>。</li>
+</ul>
+<p>这种设计类似分散热点，减少多个线程竞争同一个计数变量。</p>
+<h2 id="16-CopyOnWriteArrayList"><a href="#16-CopyOnWriteArrayList" class="headerlink" title="16. CopyOnWriteArrayList"></a>16. CopyOnWriteArrayList</h2><p><code>CopyOnWriteArrayList</code> 的核心思想是写时复制。</p>
+<ul>
+<li>读操作不加锁，直接读取当前数组。</li>
+<li>写操作加锁，并复制一个新数组，在新数组上修改。</li>
+<li>修改完成后，把引用指向新数组。</li>
+<li>迭代器遍历的是创建时的快照。</li>
+</ul>
+<p>适用场景：</p>
+<ul>
+<li>读多写少。</li>
+<li>数据规模不大。</li>
+<li>需要遍历过程稳定，不希望抛出 <code>ConcurrentModificationException</code>。</li>
+</ul>
+<p>不适合场景：</p>
+<ul>
+<li>写操作频繁。</li>
+<li>集合很大。</li>
+<li>对实时一致性要求很高。</li>
+</ul>
+<h2 id="17-BlockingQueue-与生产者-消费者"><a href="#17-BlockingQueue-与生产者-消费者" class="headerlink" title="17. BlockingQueue 与生产者-消费者"></a>17. BlockingQueue 与生产者-消费者</h2><p><code>BlockingQueue</code> 是阻塞队列，常用于生产者-消费者模型。</p>
+<p>常见实现：</p>
+<ul>
+<li><code>ArrayBlockingQueue</code>：基于数组的有界阻塞队列。</li>
+<li><code>LinkedBlockingQueue</code>：基于链表的阻塞队列，可有界也可无界。</li>
+<li><code>PriorityBlockingQueue</code>：支持优先级的无界阻塞队列。</li>
+<li><code>DelayQueue</code>：延迟队列，元素到期后才能取出。</li>
+<li><code>SynchronousQueue</code>：不存储元素，每个 put 必须等待 take。</li>
+</ul>
+<p>常见方法：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>抛异常</th>
+<th>返回特殊值</th>
+<th>阻塞</th>
+<th>超时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>插入</td>
+<td><code>add()</code></td>
+<td><code>offer()</code></td>
+<td><code>put()</code></td>
+<td><code>offer(e, time, unit)</code></td>
+</tr>
+<tr>
+<td>移除</td>
+<td><code>remove()</code></td>
+<td><code>poll()</code></td>
+<td><code>take()</code></td>
+<td><code>poll(time, unit)</code></td>
+</tr>
+<tr>
+<td>查看</td>
+<td><code>element()</code></td>
+<td><code>peek()</code></td>
+<td>无</td>
+<td>无</td>
+</tr>
+</tbody></table>
+<h2 id="18-线程池"><a href="#18-线程池" class="headerlink" title="18. 线程池"></a>18. 线程池</h2><p>线程池的意义是复用线程、控制并发规模、统一管理任务生命周期，避免频繁创建和销毁线程。</p>
+<p><img src="/images/tech-docs/java-concurrency-threadpool-lifecycle.png" alt="ThreadPoolExecutor 执行流程与生命周期"></p>
+<h3 id="18-1-ThreadPoolExecutor-核心参数"><a href="#18-1-ThreadPoolExecutor-核心参数" class="headerlink" title="18.1 ThreadPoolExecutor 核心参数"></a>18.1 ThreadPoolExecutor 核心参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>corePoolSize</code></td>
+<td>核心线程数</td>
+</tr>
+<tr>
+<td><code>maximumPoolSize</code></td>
+<td>最大线程数</td>
+</tr>
+<tr>
+<td><code>keepAliveTime</code></td>
+<td>非核心线程空闲存活时间</td>
+</tr>
+<tr>
+<td><code>workQueue</code></td>
+<td>任务队列</td>
+</tr>
+<tr>
+<td><code>threadFactory</code></td>
+<td>线程工厂</td>
+</tr>
+<tr>
+<td><code>handler</code></td>
+<td>拒绝策略</td>
+</tr>
+</tbody></table>
+<h3 id="18-2-任务执行流程"><a href="#18-2-任务执行流程" class="headerlink" title="18.2 任务执行流程"></a>18.2 任务执行流程</h3><p>线程池收到任务后：</p>
+<ol>
+<li>如果当前线程数小于 <code>corePoolSize</code>，创建核心线程执行任务。</li>
+<li>否则尝试把任务放入 <code>workQueue</code>。</li>
+<li>如果队列已满，且当前线程数小于 <code>maximumPoolSize</code>，创建非核心线程执行任务。</li>
+<li>如果仍无法处理，执行拒绝策略。</li>
+</ol>
+<h3 id="18-3-常见拒绝策略"><a href="#18-3-常见拒绝策略" class="headerlink" title="18.3 常见拒绝策略"></a>18.3 常见拒绝策略</h3><ul>
+<li><code>AbortPolicy</code>：直接抛出 <code>RejectedExecutionException</code>，默认策略。</li>
+<li><code>CallerRunsPolicy</code>：由提交任务的线程执行任务。</li>
+<li><code>DiscardPolicy</code>：直接丢弃任务，不抛异常。</li>
+<li><code>DiscardOldestPolicy</code>：丢弃队列中最旧的任务，再尝试提交新任务。</li>
+</ul>
+<h3 id="18-4-shutdown-与-shutdownNow"><a href="#18-4-shutdown-与-shutdownNow" class="headerlink" title="18.4 shutdown 与 shutdownNow"></a>18.4 shutdown 与 shutdownNow</h3><p><code>shutdown()</code> 是平滑关闭：</p>
+<ul>
+<li>不再接收新任务。</li>
+<li>已提交任务会尽量执行完。</li>
+<li>队列中的任务仍会被处理。</li>
+</ul>
+<p><code>shutdownNow()</code> 是立即关闭：</p>
+<ul>
+<li>不再接收新任务。</li>
+<li>尝试中断正在执行的任务。</li>
+<li>返回尚未执行的任务列表。</li>
+</ul>
+<p>能否真正停止正在执行的任务，仍取决于任务是否响应中断。</p>
+<h2 id="19-CompletableFuture"><a href="#19-CompletableFuture" class="headerlink" title="19. CompletableFuture"></a>19. CompletableFuture</h2><p><code>CompletableFuture</code> 用于异步编排，既可以表示异步计算结果，也可以组合多个异步任务。</p>
+<p>常见方法：</p>
+<ul>
+<li><code>supplyAsync()</code>：异步执行有返回值任务。</li>
+<li><code>runAsync()</code>：异步执行无返回值任务。</li>
+<li><code>thenApply()</code>：转换结果。</li>
+<li><code>thenAccept()</code>：消费结果。</li>
+<li><code>thenCompose()</code>：扁平化串联异步任务。</li>
+<li><code>thenCombine()</code>：组合两个异步结果。</li>
+<li><code>allOf()</code>：等待多个任务全部完成。</li>
+<li><code>anyOf()</code>：等待任意一个任务完成。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CompletableFuture&lt;Integer&gt; future = CompletableFuture</span><br><span class="line">        .supplyAsync(() -&gt; query())</span><br><span class="line">        .thenApply(value -&gt; value + <span class="number">1</span>)</span><br><span class="line">        .exceptionally(ex -&gt; <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<p>实际项目中要注意自定义线程池，避免所有异步任务都挤在公共线程池里。</p>
+<h2 id="20-死锁排查"><a href="#20-死锁排查" class="headerlink" title="20. 死锁排查"></a>20. 死锁排查</h2><p>死锁通常满足四个条件：</p>
+<ul>
+<li>互斥条件。</li>
+<li>请求并保持。</li>
+<li>不可剥夺。</li>
+<li>循环等待。</li>
+</ul>
+<p>排查方式：</p>
+<ol>
+<li>使用 <code>jps -l</code> 找到 Java 进程 PID。</li>
+<li>使用 <code>jstack -l &lt;PID&gt;</code> 导出线程快照。</li>
+<li>在快照中查找 <code>deadlock</code>、<code>BLOCKED</code>、锁对象地址和持锁线程。</li>
+<li>分析线程之间的锁等待关系。</li>
+</ol>
+<p>常见预防方式：</p>
+<ul>
+<li>固定加锁顺序。</li>
+<li>缩小锁粒度。</li>
+<li>避免持锁执行耗时 I&#x2F;O。</li>
+<li>使用 <code>tryLock()</code> 设置超时。</li>
+<li>减少嵌套锁。</li>
+</ul>
+<h2 id="21-高频面试题速记"><a href="#21-高频面试题速记" class="headerlink" title="21. 高频面试题速记"></a>21. 高频面试题速记</h2><h3 id="21-1-怎么保证线程安全"><a href="#21-1-怎么保证线程安全" class="headerlink" title="21.1 怎么保证线程安全"></a>21.1 怎么保证线程安全</h3><p>可以从三要素回答：</p>
+<ul>
+<li>原子性：使用 <code>synchronized</code>、<code>ReentrantLock</code>、CAS、原子类。</li>
+<li>可见性：使用 <code>volatile</code>、锁、线程安全容器。</li>
+<li>有序性：使用 <code>volatile</code>、锁、happens-before 规则。</li>
+</ul>
+<p>再补充工程实践：</p>
+<ul>
+<li>尽量使用不可变对象。</li>
+<li>减少共享状态。</li>
+<li>优先使用并发工具类。</li>
+<li>使用线程池管理线程。</li>
+</ul>
+<h3 id="21-2-synchronized-和-ReentrantLock-的区别"><a href="#21-2-synchronized-和-ReentrantLock-的区别" class="headerlink" title="21.2 synchronized 和 ReentrantLock 的区别"></a>21.2 synchronized 和 ReentrantLock 的区别</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>synchronized</th>
+<th>ReentrantLock</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>JVM 关键字</td>
+<td>JDK 类</td>
+</tr>
+<tr>
+<td>释放锁</td>
+<td>自动释放</td>
+<td>需要 <code>unlock()</code></td>
+</tr>
+<tr>
+<td>可中断</td>
+<td>不支持等待锁时中断</td>
+<td>支持 <code>lockInterruptibly()</code></td>
+</tr>
+<tr>
+<td>公平性</td>
+<td>非公平</td>
+<td>支持公平&#x2F;非公平</td>
+</tr>
+<tr>
+<td>条件队列</td>
+<td>一个隐式等待队列</td>
+<td>可创建多个 <code>Condition</code></td>
+</tr>
+<tr>
+<td>使用复杂度</td>
+<td>简单</td>
+<td>更灵活，也更容易写错</td>
+</tr>
+</tbody></table>
+<p>一般场景优先使用 <code>synchronized</code>。需要可中断、超时、公平锁或多个条件队列时，再考虑 <code>ReentrantLock</code>。</p>
+<h3 id="21-3-volatile-和-synchronized-的区别"><a href="#21-3-volatile-和-synchronized-的区别" class="headerlink" title="21.3 volatile 和 synchronized 的区别"></a>21.3 volatile 和 synchronized 的区别</h3><p><code>volatile</code> 适合状态标记、配置开关、单次发布等场景。它保证可见性和有序性，但不保证复合操作原子性。</p>
+<p><code>synchronized</code> 可以保护临界区，同时保证原子性、可见性和有序性，但会引入互斥和阻塞。</p>
+<h3 id="21-4-ThreadLocal-为什么可能内存泄漏"><a href="#21-4-ThreadLocal-为什么可能内存泄漏" class="headerlink" title="21.4 ThreadLocal 为什么可能内存泄漏"></a>21.4 ThreadLocal 为什么可能内存泄漏</h3><p><code>ThreadLocalMap</code> 的 key 是弱引用，value 是强引用。如果 key 被回收，而线程又长期存活，value 可能无法及时释放。</p>
+<p>在线程池中使用 <code>ThreadLocal</code> 时，应在 <code>finally</code> 中调用 <code>remove()</code>。</p>
+<h3 id="21-5-线程池为什么不推荐-Executors"><a href="#21-5-线程池为什么不推荐-Executors" class="headerlink" title="21.5 线程池为什么不推荐 Executors"></a>21.5 线程池为什么不推荐 Executors</h3><p><code>Executors</code> 的一些工厂方法隐藏了关键参数，容易带来风险：</p>
+<ul>
+<li><code>newFixedThreadPool()</code> 使用无界队列，任务堆积可能导致 OOM。</li>
+<li><code>newCachedThreadPool()</code> 最大线程数非常大，可能创建过多线程。</li>
+<li><code>newSingleThreadExecutor()</code> 同样可能因为无界队列堆积任务。</li>
+</ul>
+<p>更推荐直接使用 <code>ThreadPoolExecutor</code>，明确设置核心线程数、最大线程数、队列容量、线程工厂和拒绝策略。</p>
+<h2 id="22-复习总结"><a href="#22-复习总结" class="headerlink" title="22. 复习总结"></a>22. 复习总结</h2><p>Java 并发的核心不是背 API，而是理解共享状态如何被多个线程正确访问。</p>
+<ul>
+<li>线程基础解决“任务如何并发执行”。</li>
+<li>JMM 解决“线程之间如何看见彼此的修改”。</li>
+<li><code>volatile</code> 解决可见性和有序性，但不解决复合原子性。</li>
+<li><code>synchronized</code> 和 <code>ReentrantLock</code> 通过互斥保护临界区。</li>
+<li>AQS 是很多同步器的底层框架。</li>
+<li>并发容器封装了常见共享数据结构的线程安全问题。</li>
+<li>线程池负责控制线程数量、复用线程、管理任务生命周期。</li>
+</ul>
+<p>回答并发问题时，可以按“是否共享状态 -&gt; 是否满足三要素 -&gt; 用什么同步工具 -&gt; 有什么性能和一致性代价”这条链路展开。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/14/JAVA%E5%B9%B6%E5%8F%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidmLuiatJ8_mP6HtAIORGDP" data-title="JAVA 并发" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -579,7 +1089,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/14/JAVA%E9%9B%86%E5%90%88-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidN2OGDzv8lq-RJznM-gHsN" data-title="JAVA 集合" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2026/05/14/JAVA%E9%9B%86%E5%90%88-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidxpgouLK-JA7FDo4evWXF3" data-title="JAVA 集合" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -1232,7 +1742,959 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidFDto9-xwFRgZFdgxdRyq6" data-title="JAVA SE" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidpA0x51Du02bQZRRe_905j" data-title="JAVA SE" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-JVM-技术文档" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="article-date">
+  <time class="dt-published" datetime="2026-05-14T02:00:00.000Z" itemprop="datePublished">2026-05-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JVM</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="内存模型、类加载、GC-与调优实战"><a href="#内存模型、类加载、GC-与调优实战" class="headerlink" title="内存模型、类加载、GC 与调优实战"></a>内存模型、类加载、GC 与调优实战</h1><h2 id="1-JVM-整体视图"><a href="#1-JVM-整体视图" class="headerlink" title="1. JVM 整体视图"></a>1. JVM 整体视图</h2><p>Java 程序从源码到运行，大致经历以下链路：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Java 源码 -&gt; javac 编译 -&gt; .class 字节码 -&gt; 类加载子系统 -&gt; 运行时数据区 -&gt; 执行引擎</span><br></pre></td></tr></table></figure>
+
+<p>JVM 的核心组成可以按功能拆成四块：</p>
+<table>
+<thead>
+<tr>
+<th>组成</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类加载子系统</td>
+<td>加载、验证、准备、解析、初始化 class 文件</td>
+</tr>
+<tr>
+<td>运行时数据区</td>
+<td>管理线程、对象、类元数据、方法调用等运行时内存</td>
+</tr>
+<tr>
+<td>执行引擎</td>
+<td>解释执行、JIT 编译、垃圾回收</td>
+</tr>
+<tr>
+<td>本地接口</td>
+<td>通过 JNI 调用本地方法和本地库</td>
+</tr>
+</tbody></table>
+<p>理解 JVM 时，可以抓住三条主线：</p>
+<ol>
+<li>一个类如何被加载到 JVM。</li>
+<li>一个对象如何被创建、布局、引用和回收。</li>
+<li>当内存、CPU、GC 出问题时如何定位。</li>
+</ol>
+<h2 id="JVM-核心知识图谱"><a href="#JVM-核心知识图谱" class="headerlink" title="JVM 核心知识图谱"></a>JVM 核心知识图谱</h2><p>下图概括了本文中最核心的几组知识：运行时数据区、对象创建流程、类加载生命周期、可达性分析、GC 算法和 G1 收集器。</p>
+<p><img src="/images/tech-docs/jvm-core-map.png" alt="JVM 核心知识图谱"></p>
+<h2 id="2-运行时数据区"><a href="#2-运行时数据区" class="headerlink" title="2. 运行时数据区"></a>2. 运行时数据区</h2><p>JVM 运行时数据区主要包括程序计数器、Java 虚拟机栈、本地方法栈、堆、方法区。直接内存不是 JVM 规范中的运行时数据区，但在 NIO 和高性能服务中非常重要。</p>
+<h3 id="2-1-程序计数器"><a href="#2-1-程序计数器" class="headerlink" title="2.1 程序计数器"></a>2.1 程序计数器</h3><p>程序计数器也叫 PC Register，用于记录当前线程正在执行的字节码指令地址。</p>
+<p>关键特征：</p>
+<ul>
+<li>线程私有，每个线程都有自己的程序计数器。</li>
+<li>执行 Java 方法时，记录下一条 JVM 指令地址。</li>
+<li>执行 Native 方法时，值通常为空或未定义，取决于具体 JVM 实现。</li>
+<li>这是 JVM 规范中唯一不会出现 <code>OutOfMemoryError</code> 的运行时数据区。</li>
+</ul>
+<p>程序计数器很小，但它支撑了线程切换后的恢复执行。线程被 CPU 挂起后再次获得时间片时，JVM 可以根据程序计数器继续从正确的指令位置执行。</p>
+<h3 id="2-2-Java-虚拟机栈"><a href="#2-2-Java-虚拟机栈" class="headerlink" title="2.2 Java 虚拟机栈"></a>2.2 Java 虚拟机栈</h3><p>Java 虚拟机栈是线程私有的，描述 Java 方法调用的内存模型。每一次方法调用都会创建一个栈帧，方法执行结束后对应栈帧出栈。</p>
+<p>栈帧通常包含：</p>
+<table>
+<thead>
+<tr>
+<th>组成</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>局部变量表</td>
+<td>存放方法参数和局部变量</td>
+</tr>
+<tr>
+<td>操作数栈</td>
+<td>字节码指令执行时的临时计算区</td>
+</tr>
+<tr>
+<td>动态链接</td>
+<td>指向运行时常量池中该方法所属符号引用的解析结果</td>
+</tr>
+<tr>
+<td>方法返回地址</td>
+<td>记录方法正常返回或异常退出后的控制流位置</td>
+</tr>
+</tbody></table>
+<p>常见异常：</p>
+<ul>
+<li><code>StackOverflowError</code>：栈深度超过限制，常见于递归过深。</li>
+<li><code>OutOfMemoryError</code>：线程过多或栈空间申请失败时可能出现。</li>
+</ul>
+<p>局部变量线程安全问题需要分情况看：</p>
+<ul>
+<li>如果局部变量是基本类型，或引用对象没有逃出当前方法，一般是线程安全的。</li>
+<li>如果局部变量引用了共享对象，并且对象逃出了方法作用域，则仍然需要考虑线程安全。</li>
+</ul>
+<p>相关参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xss256k</span><br><span class="line">-Xss1m</span><br></pre></td></tr></table></figure>
+
+<p><code>-Xss</code> 控制每个线程栈大小。栈越大，单线程可承受的调用深度越高，但同一进程可创建的线程数会减少。</p>
+<h3 id="2-3-本地方法栈"><a href="#2-3-本地方法栈" class="headerlink" title="2.3 本地方法栈"></a>2.3 本地方法栈</h3><p>本地方法栈服务于 Native 方法调用，和 Java 虚拟机栈类似，只是面向 JNI、本地库和操作系统级调用。</p>
+<p>在 HotSpot 中，虚拟机栈和本地方法栈的实现通常联系很紧密。排查本地方法导致的问题时，需要结合崩溃日志、JNI 调用、系统库和 Native Memory Tracking。</p>
+<h3 id="2-4-堆"><a href="#2-4-堆" class="headerlink" title="2.4 堆"></a>2.4 堆</h3><p>堆是 JVM 中最大的一块内存区域，几乎所有对象实例和数组都会在堆中分配。堆是线程共享的，也是垃圾回收器管理的主要区域。</p>
+<p>关键特征：</p>
+<ul>
+<li>通过 <code>new</code> 创建的对象通常进入堆。</li>
+<li>堆中的对象需要考虑线程安全，因为多个线程可能共享同一个对象。</li>
+<li>堆由 GC 管理，出现问题时常见异常是 <code>java.lang.OutOfMemoryError: Java heap space</code>。</li>
+</ul>
+<p>常用参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xms2g</span><br><span class="line">-Xmx2g</span><br></pre></td></tr></table></figure>
+
+<p><code>-Xms</code> 是初始堆大小，<code>-Xmx</code> 是最大堆大小。生产环境常把两者设置为相同值，避免运行过程中堆扩缩容造成额外抖动。</p>
+<h3 id="2-5-方法区与元空间"><a href="#2-5-方法区与元空间" class="headerlink" title="2.5 方法区与元空间"></a>2.5 方法区与元空间</h3><p>方法区是 JVM 规范概念，用于存储类相关信息，例如类元数据、字段、方法、运行时常量池等。HotSpot 在不同 JDK 版本中实现不同：</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>实现方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JDK 7 及之前</td>
+<td>永久代 PermGen</td>
+<td>位于 JVM 管理内存中，容易因类过多出现 <code>PermGen space</code></td>
+</tr>
+<tr>
+<td>JDK 8 及之后</td>
+<td>元空间 Metaspace</td>
+<td>使用本地内存，类元数据移入元空间</td>
+</tr>
+</tbody></table>
+<p>需要注意：</p>
+<ul>
+<li>字符串常量池在 JDK 7 后已经移到堆中。</li>
+<li>元空间使用本地内存，不受 <code>-Xmx</code> 直接限制。</li>
+<li>如果动态生成类过多、类加载器泄漏，可能出现 <code>OutOfMemoryError: Metaspace</code>。</li>
+</ul>
+<p>相关参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:MetaspaceSize=256m</span><br><span class="line">-XX:MaxMetaspaceSize=512m</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-6-运行时常量池"><a href="#2-6-运行时常量池" class="headerlink" title="2.6 运行时常量池"></a>2.6 运行时常量池</h3><p>运行时常量池是方法区的一部分，来源于 class 文件中的常量池。类加载后，class 文件常量池中的字面量和符号引用会进入运行时常量池。</p>
+<p>它主要保存：</p>
+<ul>
+<li>类和接口的全限定名。</li>
+<li>字段名和描述符。</li>
+<li>方法名和描述符。</li>
+<li>字符串、数字等字面量。</li>
+<li>符号引用到直接引用的解析结果。</li>
+</ul>
+<p>字节码指令会通过运行时常量池定位类、方法、字段等信息。类加载的解析阶段会把符号引用替换为可以直接访问目标的引用。</p>
+<h3 id="2-7-StringTable"><a href="#2-7-StringTable" class="headerlink" title="2.7 StringTable"></a>2.7 StringTable</h3><p><code>StringTable</code> 用于管理字符串驻留。它是一个哈希表结构，保存字符串对象引用。</p>
+<p>常见规则：</p>
+<ul>
+<li>字符串字面量会进入字符串常量池。</li>
+<li><code>String.intern()</code> 会尝试把字符串对象放入池中，并返回池中的引用。</li>
+<li>JDK 7 之后，字符串常量池位于堆中。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">a</span> <span class="operator">=</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">b</span> <span class="operator">=</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">System.out.println(a == b); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">System.out.println(a == c); <span class="comment">// false</span></span><br><span class="line">System.out.println(a == c.intern()); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>不要为了“省内存”盲目调用 <code>intern()</code>。如果高基数字符串被大量驻留，反而会增加堆压力和 GC 压力。</p>
+<h3 id="2-8-直接内存"><a href="#2-8-直接内存" class="headerlink" title="2.8 直接内存"></a>2.8 直接内存</h3><p>直接内存常见于 NIO 场景，例如 <code>ByteBuffer.allocateDirect()</code>。它分配在 JVM 堆外，可以减少 Java 堆和 Native 内存之间的数据复制。</p>
+<p>特点：</p>
+<ul>
+<li>读写性能通常较好，适合 IO 缓冲区。</li>
+<li>分配和释放成本较高。</li>
+<li>不受普通堆 GC 直接管理。</li>
+<li>释放依赖 Cleaner、虚引用和 ReferenceHandler 等机制。</li>
+</ul>
+<p>相关参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:MaxDirectMemorySize=1g</span><br></pre></td></tr></table></figure>
+
+<p>直接内存泄漏可能表现为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: Direct buffer memory</span><br></pre></td></tr></table></figure>
+
+<p>排查时可以结合：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jcmd &lt;pid&gt; VM.native_memory summary</span><br><span class="line">jcmd &lt;pid&gt; VM.native_memory detail</span><br></pre></td></tr></table></figure>
+
+<p>需要先打开 Native Memory Tracking：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:NativeMemoryTracking=summary</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-对象创建与内存布局"><a href="#3-对象创建与内存布局" class="headerlink" title="3. 对象创建与内存布局"></a>3. 对象创建与内存布局</h2><h3 id="3-1-对象创建流程"><a href="#3-1-对象创建流程" class="headerlink" title="3.1 对象创建流程"></a>3.1 对象创建流程</h3><p>执行 <code>new</code> 指令时，JVM 大致会做这些事情：</p>
+<ol>
+<li>检查类是否已经加载、解析和初始化。</li>
+<li>如果没有加载，先触发类加载。</li>
+<li>在堆中为对象分配内存。</li>
+<li>将分配到的内存初始化为零值。</li>
+<li>设置对象头，例如 Mark Word、类型指针。</li>
+<li>执行构造方法 <code>&lt;init&gt;</code>，完成业务字段初始化。</li>
+</ol>
+<p>对象分配常见方式：</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>指针碰撞</td>
+<td>堆内存规整，空闲区域连续</td>
+</tr>
+<tr>
+<td>空闲列表</td>
+<td>堆内存不规整，需要维护可用内存块列表</td>
+</tr>
+<tr>
+<td>TLAB</td>
+<td>给每个线程分配一小块私有堆空间，减少多线程分配竞争</td>
+</tr>
+</tbody></table>
+<p>TLAB 全称 Thread Local Allocation Buffer。大多数对象会优先在线程自己的 TLAB 中分配，分配失败再走慢路径。</p>
+<h3 id="3-2-对象内存布局"><a href="#3-2-对象内存布局" class="headerlink" title="3.2 对象内存布局"></a>3.2 对象内存布局</h3><p>HotSpot 中普通对象大致由三部分组成：</p>
+<table>
+<thead>
+<tr>
+<th>区域</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>对象头</td>
+<td>Mark Word、类型指针，数组对象还包含数组长度</td>
+</tr>
+<tr>
+<td>实例数据</td>
+<td>对象字段的实际数据</td>
+</tr>
+<tr>
+<td>对齐填充</td>
+<td>保证对象大小按机器要求对齐</td>
+</tr>
+</tbody></table>
+<p>对象头说明：</p>
+<ul>
+<li>Mark Word 存放哈希码、GC 年龄、锁状态等信息。</li>
+<li>类型指针指向类元数据，用于确定对象属于哪个类。</li>
+<li>开启压缩指针后，64 位 JVM 中对象头和引用大小会减少。</li>
+</ul>
+<p>一个对象不一定总是物理分配在堆上。JIT 可能通过逃逸分析判断对象不会逃出方法，从而进行标量替换、锁消除等优化。实际排查时仍然应以 JVM 日志和分析工具结果为准。</p>
+<h2 id="4-类加载机制"><a href="#4-类加载机制" class="headerlink" title="4. 类加载机制"></a>4. 类加载机制</h2><h3 id="4-1-类生命周期"><a href="#4-1-类生命周期" class="headerlink" title="4.1 类生命周期"></a>4.1 类生命周期</h3><p>类从加载到卸载通常经历：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">加载 -&gt; 验证 -&gt; 准备 -&gt; 解析 -&gt; 初始化 -&gt; 使用 -&gt; 卸载</span><br></pre></td></tr></table></figure>
+
+<p>其中验证、准备、解析统称为链接。</p>
+<h3 id="4-2-加载"><a href="#4-2-加载" class="headerlink" title="4.2 加载"></a>4.2 加载</h3><p>加载阶段做三件事：</p>
+<ol>
+<li>通过类的全限定名获取二进制字节流。</li>
+<li>将字节流表示的静态结构转换为方法区中的运行时数据结构。</li>
+<li>在堆中生成代表该类的 <code>java.lang.Class</code> 对象，作为访问类元数据的入口。</li>
+</ol>
+<p>HotSpot 中，类元数据位于元空间，而 <code>java.lang.Class</code> 镜像对象位于堆中。</p>
+<h3 id="4-3-验证、准备、解析"><a href="#4-3-验证、准备、解析" class="headerlink" title="4.3 验证、准备、解析"></a>4.3 验证、准备、解析</h3><p>验证阶段确保 class 文件符合 JVM 规范，避免非法字节码破坏 JVM 安全。</p>
+<p>准备阶段为类变量分配内存并设置默认值：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>准备阶段后，<code>count</code> 先是默认值 <code>0</code>，真正赋值为 <code>10</code> 发生在初始化阶段。</p>
+<p>如果是编译期常量：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">SIZE</span> <span class="operator">=</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这类常量可能在准备阶段就得到常量值。</p>
+<p>解析阶段把符号引用替换为直接引用。例如把“某个类的某个方法”这种符号描述，解析成 JVM 可直接定位的引用。</p>
+<h3 id="4-4-初始化触发条件"><a href="#4-4-初始化触发条件" class="headerlink" title="4.4 初始化触发条件"></a>4.4 初始化触发条件</h3><p>类初始化本质上是执行类构造器 <code>&lt;clinit&gt;</code>，也就是静态变量赋值和静态代码块。</p>
+<p>会触发初始化的典型场景：</p>
+<ul>
+<li>执行 <code>new</code> 创建对象。</li>
+<li>读取或设置类的静态字段，编译期常量除外。</li>
+<li>调用类的静态方法。</li>
+<li>反射调用类。</li>
+<li>初始化子类时，如果父类尚未初始化，会先初始化父类。</li>
+<li>JVM 启动时初始化包含 <code>main</code> 方法的主类。</li>
+</ul>
+<p>不会触发初始化的典型场景：</p>
+<ul>
+<li>访问 <code>static final</code> 编译期常量。</li>
+<li>通过数组定义引用类。</li>
+<li>使用 <code>ClassLoader.loadClass()</code> 但不主动使用类。</li>
+<li><code>Class.forName(name, false, loader)</code> 中 <code>initialize</code> 参数为 <code>false</code>。</li>
+</ul>
+<h3 id="4-5-双亲委派模型"><a href="#4-5-双亲委派模型" class="headerlink" title="4.5 双亲委派模型"></a>4.5 双亲委派模型</h3><p>双亲委派模型的核心规则：</p>
+<ol>
+<li>类加载请求先交给父加载器。</li>
+<li>父加载器无法加载时，子加载器才尝试加载。</li>
+<li>核心类库通常由顶层加载器加载，避免重复加载和安全问题。</li>
+</ol>
+<p>常见类加载器：</p>
+<table>
+<thead>
+<tr>
+<th>类加载器</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bootstrap ClassLoader</td>
+<td>加载 Java 核心类库</td>
+</tr>
+<tr>
+<td>Platform ClassLoader</td>
+<td>加载平台相关模块，JDK 9 后替代部分扩展类加载职责</td>
+</tr>
+<tr>
+<td>Application ClassLoader</td>
+<td>加载应用 classpath 或 module path 下的类</td>
+</tr>
+<tr>
+<td>自定义 ClassLoader</td>
+<td>插件化、热部署、隔离加载等场景</td>
+</tr>
+</tbody></table>
+<p>双亲委派不是绝对不能打破。JDBC、SPI、OSGi、应用服务器、插件系统都可能使用特殊的类加载策略。破坏双亲委派时需要特别关注类隔离、类冲突和类加载器泄漏。</p>
+<h2 id="5-Java-内存模型与并发可见性"><a href="#5-Java-内存模型与并发可见性" class="headerlink" title="5. Java 内存模型与并发可见性"></a>5. Java 内存模型与并发可见性</h2><p>JVM 内存区域关注“运行时内存如何划分”，Java 内存模型 JMM 关注“多线程共享数据时如何保证可见性、有序性和原子性”。</p>
+<h3 id="5-1-三个核心问题"><a href="#5-1-三个核心问题" class="headerlink" title="5.1 三个核心问题"></a>5.1 三个核心问题</h3><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原子性</td>
+<td>一个操作是否不可分割</td>
+</tr>
+<tr>
+<td>可见性</td>
+<td>一个线程修改的值，其他线程是否能及时看到</td>
+</tr>
+<tr>
+<td>有序性</td>
+<td>编译器和 CPU 重排序是否影响程序语义</td>
+</tr>
+</tbody></table>
+<h3 id="5-2-synchronized"><a href="#5-2-synchronized" class="headerlink" title="5.2 synchronized"></a>5.2 synchronized</h3><p><code>synchronized</code> 可以保证：</p>
+<ul>
+<li>互斥访问，也就是同一时刻只有一个线程进入临界区。</li>
+<li>进入锁和退出锁之间的 happens-before 关系。</li>
+<li>临界区内共享变量对后续获得同一把锁的线程可见。</li>
+</ul>
+<p>缺点是粒度过大时性能较低，容易造成线程阻塞。现代 JVM 对 <code>synchronized</code> 做了大量优化，但仍要避免把耗时 IO、远程调用放入锁内。</p>
+<h3 id="5-3-volatile"><a href="#5-3-volatile" class="headerlink" title="5.3 volatile"></a>5.3 volatile</h3><p><code>volatile</code> 可以保证：</p>
+<ul>
+<li>变量写入对其他线程可见。</li>
+<li>禁止特定类型的指令重排序。</li>
+</ul>
+<p>但 <code>volatile</code> 不能保证复合操作的原子性：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">count++; <span class="comment">// 不是原子操作</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-4-双重检查锁"><a href="#5-4-双重检查锁" class="headerlink" title="5.4 双重检查锁"></a>5.4 双重检查锁</h3><p>双重检查锁实现单例时，需要使用 <code>volatile</code> 防止指令重排序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">                    instance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果没有 <code>volatile</code>，对象引用赋值可能与构造初始化发生重排序，其他线程可能看到一个“引用非空但尚未完全初始化”的对象。</p>
+<h2 id="6-垃圾回收基础"><a href="#6-垃圾回收基础" class="headerlink" title="6. 垃圾回收基础"></a>6. 垃圾回收基础</h2><h3 id="6-1-如何判断对象可回收"><a href="#6-1-如何判断对象可回收" class="headerlink" title="6.1 如何判断对象可回收"></a>6.1 如何判断对象可回收</h3><p>现代 JVM 通常使用可达性分析，而不是引用计数。</p>
+<p>可达性分析从 GC Roots 出发，沿引用链查找所有可达对象。无法从 GC Roots 到达的对象，就可能被回收。</p>
+<p>常见 GC Roots：</p>
+<ul>
+<li>虚拟机栈中局部变量表引用的对象。</li>
+<li>本地方法栈中 JNI 引用的对象。</li>
+<li>方法区中类静态属性引用的对象。</li>
+<li>运行时常量池引用的对象。</li>
+<li>被同步锁持有的对象。</li>
+<li>JVM 内部引用，例如 Class 对象、系统类加载器等。</li>
+</ul>
+<h3 id="6-2-引用类型"><a href="#6-2-引用类型" class="headerlink" title="6.2 引用类型"></a>6.2 引用类型</h3><p>Java 中引用强度从强到弱大致如下：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>回收规则</th>
+<th>典型用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>强引用 StrongReference</td>
+<td>只要可达就不会被 GC 回收</td>
+<td>普通对象引用</td>
+</tr>
+<tr>
+<td>软引用 SoftReference</td>
+<td>内存不足时可能回收</td>
+<td>缓存，但现代服务中慎用</td>
+</tr>
+<tr>
+<td>弱引用 WeakReference</td>
+<td>下一次 GC 会回收</td>
+<td>ThreadLocalMap、规范化映射</td>
+</tr>
+<tr>
+<td>虚引用 PhantomReference</td>
+<td>不影响生命周期，用于回收通知</td>
+<td>直接内存清理、资源释放跟踪</td>
+</tr>
+<tr>
+<td>终结器引用 FinalReference</td>
+<td>与 <code>finalize()</code> 相关</td>
+<td>不推荐使用</td>
+</tr>
+</tbody></table>
+<p><code>finalize()</code> 不可靠、不可控、性能差，应避免用于资源释放。资源释放优先使用 <code>try-with-resources</code>、显式 <code>close()</code> 或 Cleaner 等机制。</p>
+<h3 id="6-3-垃圾回收算法"><a href="#6-3-垃圾回收算法" class="headerlink" title="6.3 垃圾回收算法"></a>6.3 垃圾回收算法</h3><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>优点</th>
+<th>缺点</th>
+<th>典型区域</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>标记-清除</td>
+<td>实现简单，不移动对象</td>
+<td>产生内存碎片</td>
+<td>老年代、CMS</td>
+</tr>
+<tr>
+<td>标记-整理</td>
+<td>无碎片</td>
+<td>移动对象成本高</td>
+<td>老年代</td>
+</tr>
+<tr>
+<td>复制</td>
+<td>无碎片，分配快</td>
+<td>需要额外空间</td>
+<td>新生代</td>
+</tr>
+</tbody></table>
+<p>标记-清除流程：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">标记可达对象 -&gt; 清除不可达对象</span><br></pre></td></tr></table></figure>
+
+<p>标记-整理流程：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">标记可达对象 -&gt; 移动存活对象 -&gt; 清理边界外空间</span><br></pre></td></tr></table></figure>
+
+<p>复制算法流程：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from 区存活对象 -&gt; 复制到 to 区 -&gt; 清空 from 区 -&gt; 交换 from/to</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-4-分代垃圾回收"><a href="#6-4-分代垃圾回收" class="headerlink" title="6.4 分代垃圾回收"></a>6.4 分代垃圾回收</h3><p>分代理论基于两个经验：</p>
+<ul>
+<li>大部分对象朝生夕死。</li>
+<li>熬过多次 GC 的对象更可能继续存活。</li>
+</ul>
+<p>传统堆结构：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">新生代 = Eden + Survivor From + Survivor To</span><br><span class="line">老年代 = 长期存活对象、大对象等</span><br></pre></td></tr></table></figure>
+
+<p>对象通常先分配在 Eden。Minor GC 后仍存活的对象会进入 Survivor 区并增加年龄。年龄达到阈值后晋升到老年代。HotSpot 对象年龄通常由对象头中的 age 字段记录，最大年龄常见为 15。</p>
+<p>对象进入老年代的常见原因：</p>
+<ul>
+<li>年龄达到晋升阈值。</li>
+<li>大对象直接进入老年代。</li>
+<li>Survivor 空间不足，担保分配进入老年代。</li>
+<li>动态年龄判断触发提前晋升。</li>
+</ul>
+<p>动态年龄判断示例：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果 Survivor 中相同年龄对象大小总和超过 Survivor 空间的一半，</span><br><span class="line">则年龄大于或等于该年龄的对象可以直接进入老年代。</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-5-GC-类型"><a href="#6-5-GC-类型" class="headerlink" title="6.5 GC 类型"></a>6.5 GC 类型</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Minor GC &#x2F; Young GC</td>
+<td>新生代回收</td>
+</tr>
+<tr>
+<td>Major GC &#x2F; Old GC</td>
+<td>老年代回收，CMS 中常见叫法</td>
+</tr>
+<tr>
+<td>Mixed GC</td>
+<td>G1 中同时回收新生代和部分老年代 Region</td>
+</tr>
+<tr>
+<td>Full GC</td>
+<td>回收整个 Java 堆和方法区相关空间，通常代价最高</td>
+</tr>
+</tbody></table>
+<p>Full GC 常见触发原因：</p>
+<ul>
+<li>老年代空间不足。</li>
+<li>元空间不足。</li>
+<li>显式调用 <code>System.gc()</code>。</li>
+<li>Minor GC 后晋升对象大小超过老年代可用空间。</li>
+<li>堆内存碎片或连续空间不足。</li>
+</ul>
+<p>生产环境通常需要关注 Full GC，因为它往往伴随较长 STW。</p>
+<h2 id="7-垃圾回收器"><a href="#7-垃圾回收器" class="headerlink" title="7. 垃圾回收器"></a>7. 垃圾回收器</h2><h3 id="7-1-收集器选型目标"><a href="#7-1-收集器选型目标" class="headerlink" title="7.1 收集器选型目标"></a>7.1 收集器选型目标</h3><p>不同收集器关注的目标不同：</p>
+<table>
+<thead>
+<tr>
+<th>目标</th>
+<th>解释</th>
+<th>典型场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>吞吐量优先</td>
+<td>更多 CPU 时间用于业务线程</td>
+<td>后台计算、批处理</td>
+</tr>
+<tr>
+<td>响应时间优先</td>
+<td>尽量降低单次暂停时间</td>
+<td>Web 服务、交易系统</td>
+</tr>
+<tr>
+<td>资源占用优先</td>
+<td>简单、低开销</td>
+<td>小应用、客户端工具</td>
+</tr>
+</tbody></table>
+<h3 id="7-2-Serial"><a href="#7-2-Serial" class="headerlink" title="7.2 Serial"></a>7.2 Serial</h3><p>Serial 是单线程垃圾回收器，回收时会暂停所有用户线程。</p>
+<p>适合：</p>
+<ul>
+<li>单核或小堆应用。</li>
+<li>客户端程序。</li>
+<li>对吞吐和延迟要求不高的场景。</li>
+</ul>
+<p>参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseSerialGC</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-3-Parallel"><a href="#7-3-Parallel" class="headerlink" title="7.3 Parallel"></a>7.3 Parallel</h3><p>Parallel 关注吞吐量，使用多线程进行垃圾回收。常与 Parallel Old 搭配。</p>
+<p>适合：</p>
+<ul>
+<li>多核 CPU。</li>
+<li>后台任务。</li>
+<li>批处理系统。</li>
+<li>更关注总运行时间，而不是单次请求延迟。</li>
+</ul>
+<p>参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseParallelGC</span><br><span class="line">-XX:+UseParallelOldGC</span><br><span class="line">-XX:ParallelGCThreads=8</span><br><span class="line">-XX:GCTimeRatio=99</span><br><span class="line">-XX:MaxGCPauseMillis=200</span><br></pre></td></tr></table></figure>
+
+<p><code>GCTimeRatio=99</code> 表示 GC 时间占比目标约为 <code>1 / (1 + 99)</code>。</p>
+<h3 id="7-4-CMS"><a href="#7-4-CMS" class="headerlink" title="7.4 CMS"></a>7.4 CMS</h3><p>CMS 全称 Concurrent Mark Sweep，目标是降低老年代停顿时间。它基于标记-清除算法。</p>
+<p>典型阶段：</p>
+<ol>
+<li>初始标记，STW。</li>
+<li>并发标记，业务线程和 GC 线程并发。</li>
+<li>重新标记，STW。</li>
+<li>并发清除。</li>
+</ol>
+<p>优点：</p>
+<ul>
+<li>老年代回收大部分阶段与业务线程并发。</li>
+<li>停顿时间比传统串行老年代收集器更短。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>标记-清除会产生内存碎片。</li>
+<li>并发阶段会占用 CPU。</li>
+<li>可能发生 Concurrent Mode Failure，退化为 Full GC。</li>
+</ul>
+<p>常见参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseConcMarkSweepGC</span><br><span class="line">-XX:CMSInitiatingOccupancyFraction=70</span><br><span class="line">-XX:+UseCMSInitiatingOccupancyOnly</span><br><span class="line">-XX:+CMSScavengeBeforeRemark</span><br></pre></td></tr></table></figure>
+
+<p>CMS 在新版本 JDK 中已经逐步退出主流，历史系统仍然可能大量使用。</p>
+<h3 id="7-5-G1"><a href="#7-5-G1" class="headerlink" title="7.5 G1"></a>7.5 G1</h3><p>G1 全称 Garbage First，目标是在可预测暂停时间内获得较好吞吐。它从 JDK 9 开始成为 HotSpot 默认垃圾回收器。</p>
+<p>G1 的核心思想：</p>
+<ul>
+<li>将堆划分为多个大小相等的 Region。</li>
+<li>不再严格使用连续的新生代、老年代物理分区。</li>
+<li>跟踪每个 Region 的垃圾比例和回收收益。</li>
+<li>优先回收价值最高的 Region。</li>
+</ul>
+<p>G1 中 Region 角色包括：</p>
+<ul>
+<li>Eden Region。</li>
+<li>Survivor Region。</li>
+<li>Old Region。</li>
+<li>Humongous Region，大对象区域。</li>
+</ul>
+<p>大对象规则：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象大小超过 Region 一半时，可能作为 Humongous Object 处理。</span><br></pre></td></tr></table></figure>
+
+<p>G1 常见阶段：</p>
+<ol>
+<li>Young GC，回收年轻代 Region。</li>
+<li>并发标记，从 GC Roots 开始识别老年代存活对象。</li>
+<li>Mixed GC，回收年轻代和部分收益较高的老年代 Region。</li>
+<li>必要时触发 Full GC，通常表示压力较大或调优不合理。</li>
+</ol>
+<p>G1 的重要机制：</p>
+<ul>
+<li>Remembered Set：记录跨 Region 引用。</li>
+<li>Write Barrier：写屏障，维护引用变化。</li>
+<li>SATB：原始快照算法，用于并发标记。</li>
+<li>Pause Prediction：根据停顿目标选择回收集合。</li>
+</ul>
+<p>常用参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseG1GC</span><br><span class="line">-XX:MaxGCPauseMillis=200</span><br><span class="line">-XX:G1HeapRegionSize=8m</span><br><span class="line">-XX:InitiatingHeapOccupancyPercent=45</span><br><span class="line">-XX:ParallelGCThreads=8</span><br><span class="line">-XX:ConcGCThreads=2</span><br></pre></td></tr></table></figure>
+
+<p>G1 适合：</p>
+<ul>
+<li>大堆内存。</li>
+<li>多核服务器。</li>
+<li>同时关注吞吐和低延迟的服务。</li>
+<li>希望减少 Full GC 风险的应用。</li>
+</ul>
+<p>G1 不适合把 <code>MaxGCPauseMillis</code> 设置得过低。目标过激时，G1 可能频繁 GC，吞吐反而下降。</p>
+<h3 id="7-6-现代低延迟收集器"><a href="#7-6-现代低延迟收集器" class="headerlink" title="7.6 现代低延迟收集器"></a>7.6 现代低延迟收集器</h3><p>如果系统对暂停时间非常敏感，可以关注 ZGC 和 Shenandoah。</p>
+<table>
+<thead>
+<tr>
+<th>收集器</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ZGC</td>
+<td>低延迟，适合大堆，暂停时间通常很短</td>
+</tr>
+<tr>
+<td>Shenandoah</td>
+<td>并发整理，低暂停，部分发行版支持较好</td>
+</tr>
+</tbody></table>
+<p>这些收集器的收益依赖 JDK 版本、发行版、内存规模和业务特征。生产使用前应通过压测和 GC 日志验证。</p>
+<h2 id="8-JVM-参数速查"><a href="#8-JVM-参数速查" class="headerlink" title="8. JVM 参数速查"></a>8. JVM 参数速查</h2><h3 id="8-1-内存参数"><a href="#8-1-内存参数" class="headerlink" title="8.1 内存参数"></a>8.1 内存参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-Xms</code></td>
+<td>初始堆大小</td>
+<td><code>-Xms2g</code></td>
+</tr>
+<tr>
+<td><code>-Xmx</code></td>
+<td>最大堆大小</td>
+<td><code>-Xmx2g</code></td>
+</tr>
+<tr>
+<td><code>-Xss</code></td>
+<td>单线程栈大小</td>
+<td><code>-Xss512k</code></td>
+</tr>
+<tr>
+<td><code>-XX:MetaspaceSize</code></td>
+<td>元空间初始触发阈值</td>
+<td><code>-XX:MetaspaceSize=256m</code></td>
+</tr>
+<tr>
+<td><code>-XX:MaxMetaspaceSize</code></td>
+<td>元空间最大值</td>
+<td><code>-XX:MaxMetaspaceSize=512m</code></td>
+</tr>
+<tr>
+<td><code>-XX:MaxDirectMemorySize</code></td>
+<td>直接内存最大值</td>
+<td><code>-XX:MaxDirectMemorySize=1g</code></td>
+</tr>
+</tbody></table>
+<h3 id="8-2-GC-参数"><a href="#8-2-GC-参数" class="headerlink" title="8.2 GC 参数"></a>8.2 GC 参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-XX:+UseSerialGC</code></td>
+<td>使用 Serial 收集器</td>
+</tr>
+<tr>
+<td><code>-XX:+UseParallelGC</code></td>
+<td>使用 Parallel 收集器</td>
+</tr>
+<tr>
+<td><code>-XX:+UseG1GC</code></td>
+<td>使用 G1 收集器</td>
+</tr>
+<tr>
+<td><code>-XX:MaxGCPauseMillis</code></td>
+<td>期望最大 GC 暂停时间</td>
+</tr>
+<tr>
+<td><code>-XX:ParallelGCThreads</code></td>
+<td>并行 GC 线程数</td>
+</tr>
+<tr>
+<td><code>-XX:ConcGCThreads</code></td>
+<td>并发 GC 线程数</td>
+</tr>
+<tr>
+<td><code>-XX:InitiatingHeapOccupancyPercent</code></td>
+<td>G1 并发标记触发阈值</td>
+</tr>
+</tbody></table>
+<h3 id="8-3-日志参数"><a href="#8-3-日志参数" class="headerlink" title="8.3 日志参数"></a>8.3 日志参数</h3><p>JDK 8：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-XX:+PrintGCDetails</span><br><span class="line">-XX:+PrintGCDateStamps</span><br><span class="line">-Xloggc:/path/to/gc.log</span><br></pre></td></tr></table></figure>
+
+<p>JDK 9 及之后：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Xlog:gc*:file=/path/to/gc.log:<span class="keyword">time</span>,<span class="built_in">uptime</span>,level,tags:filecount=10,filesize=100m</span><br></pre></td></tr></table></figure>
+
+<p>OOM 自动导出堆转储：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:+HeapDumpOnOutOfMemoryError</span><br><span class="line">-XX:HeapDumpPath=/path/to/dump</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-JVM-排障工具"><a href="#9-JVM-排障工具" class="headerlink" title="9. JVM 排障工具"></a>9. JVM 排障工具</h2><h3 id="9-1-命令行工具"><a href="#9-1-命令行工具" class="headerlink" title="9.1 命令行工具"></a>9.1 命令行工具</h3><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>jps</code></td>
+<td>查看 Java 进程</td>
+</tr>
+<tr>
+<td><code>jstack</code></td>
+<td>查看线程栈</td>
+</tr>
+<tr>
+<td><code>jmap</code></td>
+<td>查看堆信息、导出 heap dump</td>
+</tr>
+<tr>
+<td><code>jstat</code></td>
+<td>查看 GC、类加载、编译等统计信息</td>
+</tr>
+<tr>
+<td><code>jcmd</code></td>
+<td>综合诊断工具，推荐优先使用</td>
+</tr>
+<tr>
+<td><code>jhat</code></td>
+<td>旧版 heap dump 分析工具，现代场景较少使用</td>
+</tr>
+</tbody></table>
+<p>常用命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">jps -l</span><br><span class="line">jstat -gcutil &lt;pid&gt; 1000 10</span><br><span class="line">jmap -heap &lt;pid&gt;</span><br><span class="line">jmap -dump:format=b,file=heap.hprof &lt;pid&gt;</span><br><span class="line">jstack -l &lt;pid&gt; &gt; thread.txt</span><br><span class="line">jcmd &lt;pid&gt; GC.heap_info</span><br><span class="line">jcmd &lt;pid&gt; Thread.<span class="built_in">print</span></span><br><span class="line">jcmd &lt;pid&gt; GC.class_histogram</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-2-可视化工具"><a href="#9-2-可视化工具" class="headerlink" title="9.2 可视化工具"></a>9.2 可视化工具</h3><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VisualVM</td>
+<td>查看堆、线程、CPU、采样、dump</td>
+</tr>
+<tr>
+<td>JConsole</td>
+<td>基础 JMX 监控</td>
+</tr>
+<tr>
+<td>Java Mission Control</td>
+<td>分析 JFR，适合低开销生产诊断</td>
+</tr>
+<tr>
+<td>Eclipse MAT</td>
+<td>分析 heap dump，定位内存泄漏</td>
+</tr>
+</tbody></table>
+<h2 id="10-典型问题定位流程"><a href="#10-典型问题定位流程" class="headerlink" title="10. 典型问题定位流程"></a>10. 典型问题定位流程</h2><h3 id="10-1-CPU-占用过高"><a href="#10-1-CPU-占用过高" class="headerlink" title="10.1 CPU 占用过高"></a>10.1 CPU 占用过高</h3><p>Linux 常用流程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">top</span><br><span class="line">top -Hp &lt;pid&gt;</span><br><span class="line"><span class="built_in">printf</span> <span class="string">&quot;%x\n&quot;</span> &lt;tid&gt;</span><br><span class="line">jstack -l &lt;pid&gt; &gt; thread.txt</span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>thread.txt</code> 中搜索十六进制线程 id，对应 Java 线程栈，定位热点代码。</p>
+<p>常见原因：</p>
+<ul>
+<li>死循环。</li>
+<li>频繁 GC。</li>
+<li>锁竞争或自旋。</li>
+<li>正则、序列化、加密等 CPU 密集计算。</li>
+<li>线程池任务堆积。</li>
+</ul>
+<h3 id="10-2-堆内存溢出"><a href="#10-2-堆内存溢出" class="headerlink" title="10.2 堆内存溢出"></a>10.2 堆内存溢出</h3><p>现象：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: Java heap space</span><br></pre></td></tr></table></figure>
+
+<p>定位流程：</p>
+<ol>
+<li>开启 OOM dump。</li>
+<li>使用 MAT 或 VisualVM 打开 hprof。</li>
+<li>查看 Dominator Tree。</li>
+<li>找到占用最大对象和 GC Roots 引用链。</li>
+<li>判断是正常容量不足还是内存泄漏。</li>
+</ol>
+<p>建议参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:+HeapDumpOnOutOfMemoryError</span><br><span class="line">-XX:HeapDumpPath=/data/dumps</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-3-栈溢出"><a href="#10-3-栈溢出" class="headerlink" title="10.3 栈溢出"></a>10.3 栈溢出</h3><p>现象：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.StackOverflowError</span><br></pre></td></tr></table></figure>
+
+<p>常见原因：</p>
+<ul>
+<li>无终止条件递归。</li>
+<li>对象相互调用 <code>toString()</code>、<code>equals()</code>、JSON 序列化。</li>
+<li>AOP 或代理链递归。</li>
+</ul>
+<p>处理方式：</p>
+<ul>
+<li>修复递归终止条件。</li>
+<li>改成迭代。</li>
+<li>检查对象互相引用。</li>
+<li>必要时调整 <code>-Xss</code>，但不要只靠加大栈掩盖代码问题。</li>
+</ul>
+<h3 id="10-4-元空间溢出"><a href="#10-4-元空间溢出" class="headerlink" title="10.4 元空间溢出"></a>10.4 元空间溢出</h3><p>现象：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: Metaspace</span><br></pre></td></tr></table></figure>
+
+<p>常见原因：</p>
+<ul>
+<li>动态代理、CGLIB、ByteBuddy 生成类过多。</li>
+<li>热部署或插件系统中 ClassLoader 泄漏。</li>
+<li>应用频繁加载但不卸载类。</li>
+</ul>
+<p>定位方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jcmd &lt;pid&gt; GC.class_histogram</span><br><span class="line">jcmd &lt;pid&gt; VM.classloader_stats</span><br></pre></td></tr></table></figure>
+
+<p>处理思路：</p>
+<ul>
+<li>限制动态类生成数量。</li>
+<li>修复 ClassLoader 引用链。</li>
+<li>设置合理的 <code>MaxMetaspaceSize</code>，让问题尽早暴露。</li>
+</ul>
+<h3 id="10-5-直接内存溢出"><a href="#10-5-直接内存溢出" class="headerlink" title="10.5 直接内存溢出"></a>10.5 直接内存溢出</h3><p>现象：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: Direct buffer memory</span><br></pre></td></tr></table></figure>
+
+<p>常见原因：</p>
+<ul>
+<li>NIO DirectByteBuffer 未及时释放。</li>
+<li>Netty direct memory 配置过大或泄漏。</li>
+<li>堆外缓存没有上限。</li>
+</ul>
+<p>定位方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jcmd &lt;pid&gt; VM.native_memory summary</span><br><span class="line">jcmd &lt;pid&gt; VM.native_memory detail</span><br></pre></td></tr></table></figure>
+
+<p>处理思路：</p>
+<ul>
+<li>配置 <code>-XX:MaxDirectMemorySize</code>。</li>
+<li>检查 Netty、NIO、文件映射等堆外内存使用。</li>
+<li>结合框架自带 leak detector。</li>
+</ul>
+<h3 id="10-6-频繁-Full-GC"><a href="#10-6-频繁-Full-GC" class="headerlink" title="10.6 频繁 Full GC"></a>10.6 频繁 Full GC</h3><p>排查方向：</p>
+<ul>
+<li>老年代是否增长过快。</li>
+<li>大对象是否直接进入老年代。</li>
+<li>Survivor 是否过小导致对象提前晋升。</li>
+<li>是否有显式 <code>System.gc()</code>。</li>
+<li>元空间是否频繁扩容。</li>
+<li>G1 是否存在 Humongous Object 过多。</li>
+</ul>
+<p>基础观察命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jstat -gcutil &lt;pid&gt; 1000</span><br><span class="line">jcmd &lt;pid&gt; GC.heap_info</span><br><span class="line">jcmd &lt;pid&gt; GC.class_histogram</span><br></pre></td></tr></table></figure>
+
+<p>GC 日志分析关注：</p>
+<ul>
+<li>Full GC 触发原因。</li>
+<li>Young GC 后晋升大小。</li>
+<li>老年代使用率变化。</li>
+<li>单次暂停时间。</li>
+<li>回收前后堆空间变化。</li>
+</ul>
+<h2 id="11-调优原则"><a href="#11-调优原则" class="headerlink" title="11. 调优原则"></a>11. 调优原则</h2><p>JVM 调优不是先改参数，而是先确认目标和证据。</p>
+<h3 id="11-1-明确目标"><a href="#11-1-明确目标" class="headerlink" title="11.1 明确目标"></a>11.1 明确目标</h3><p>常见目标：</p>
+<ul>
+<li>降低平均延迟。</li>
+<li>降低 P99 或 P999 延迟。</li>
+<li>提高吞吐。</li>
+<li>减少 Full GC。</li>
+<li>降低内存占用。</li>
+<li>提升启动速度。</li>
+</ul>
+<p>不同目标可能互相冲突。例如降低暂停时间可能牺牲吞吐，提高吞吐可能导致单次暂停变长。</p>
+<h3 id="11-2-建议流程"><a href="#11-2-建议流程" class="headerlink" title="11.2 建议流程"></a>11.2 建议流程</h3><ol>
+<li>收集现状：QPS、RT、CPU、内存、GC 日志、线程数。</li>
+<li>复现问题：压测或找到线上稳定触发条件。</li>
+<li>分析瓶颈：先判断是业务代码、内存泄漏、GC 还是系统资源。</li>
+<li>小步调整：一次只调整少数参数。</li>
+<li>对比验证：用相同流量和数据规模观察结果。</li>
+<li>固化配置：记录参数、原因和回滚方案。</li>
+</ol>
+<h3 id="11-3-常见建议"><a href="#11-3-常见建议" class="headerlink" title="11.3 常见建议"></a>11.3 常见建议</h3><ul>
+<li>服务端应用通常设置 <code>-Xms</code> 等于 <code>-Xmx</code>。</li>
+<li>开启 GC 日志，并保留滚动文件。</li>
+<li>对容器环境，确认 JVM 是否正确识别容器内存限制。</li>
+<li>不要盲目追求极小 GC 暂停。</li>
+<li>不要在业务代码中随意调用 <code>System.gc()</code>。</li>
+<li>大对象、缓存、批量查询、一次性加载是堆压力的重要来源。</li>
+<li>类加载器泄漏、线程池泄漏、ThreadLocal 泄漏比单纯调参更常见。</li>
+</ul>
+<h2 id="12-面试与复盘速记"><a href="#12-面试与复盘速记" class="headerlink" title="12. 面试与复盘速记"></a>12. 面试与复盘速记</h2><h3 id="12-1-JVM-内存区域"><a href="#12-1-JVM-内存区域" class="headerlink" title="12.1 JVM 内存区域"></a>12.1 JVM 内存区域</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">线程私有：程序计数器、Java 虚拟机栈、本地方法栈</span><br><span class="line">线程共享：堆、方法区/元空间</span><br><span class="line">堆外相关：直接内存</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-2-对象引用"><a href="#12-2-对象引用" class="headerlink" title="12.2 对象引用"></a>12.2 对象引用</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">强引用：不会被回收</span><br><span class="line">软引用：内存不足时回收</span><br><span class="line">弱引用：下次 GC 回收</span><br><span class="line">虚引用：用于回收通知</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-3-GC-算法"><a href="#12-3-GC-算法" class="headerlink" title="12.3 GC 算法"></a>12.3 GC 算法</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">标记-清除：会产生碎片</span><br><span class="line">标记-整理：无碎片但移动成本高</span><br><span class="line">复制算法：无碎片但需要额外空间</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-4-G1-关键词"><a href="#12-4-G1-关键词" class="headerlink" title="12.4 G1 关键词"></a>12.4 G1 关键词</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Region</span><br><span class="line">Remembered Set</span><br><span class="line">Write Barrier</span><br><span class="line">SATB</span><br><span class="line">Young GC</span><br><span class="line">Mixed GC</span><br><span class="line">Humongous Object</span><br><span class="line">MaxGCPauseMillis</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-5-类加载过程"><a href="#12-5-类加载过程" class="headerlink" title="12.5 类加载过程"></a>12.5 类加载过程</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">加载 -&gt; 验证 -&gt; 准备 -&gt; 解析 -&gt; 初始化 -&gt; 使用 -&gt; 卸载</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-6-HelloWorld-运行时发生了什么"><a href="#12-6-HelloWorld-运行时发生了什么" class="headerlink" title="12.6 HelloWorld 运行时发生了什么"></a>12.6 HelloWorld 运行时发生了什么</h3><ol>
+<li><code>javac</code> 把 <code>.java</code> 编译为 <code>.class</code>。</li>
+<li>JVM 启动，创建运行时数据区。</li>
+<li>类加载器加载 <code>HelloWorld.class</code>。</li>
+<li>验证、准备、解析、初始化主类。</li>
+<li>主线程创建栈帧，执行 <code>main</code> 方法。</li>
+<li>执行引擎解释执行或 JIT 编译热点代码。</li>
+<li>对象在堆中分配，方法调用进入虚拟机栈。</li>
+<li>GC 在合适时机回收不可达对象。</li>
+</ol>
+<h2 id="13-推荐生产启动参数模板"><a href="#13-推荐生产启动参数模板" class="headerlink" title="13. 推荐生产启动参数模板"></a>13. 推荐生产启动参数模板</h2><p>以下模板仅作为起点，不能直接替代压测。</p>
+<p>JDK 8 G1 示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">java \</span><br><span class="line">  -server \</span><br><span class="line">  -Xms2g \</span><br><span class="line">  -Xmx2g \</span><br><span class="line">  -Xss512k \</span><br><span class="line">  -XX:+UseG1GC \</span><br><span class="line">  -XX:MaxGCPauseMillis=200 \</span><br><span class="line">  -XX:MetaspaceSize=256m \</span><br><span class="line">  -XX:MaxMetaspaceSize=512m \</span><br><span class="line">  -XX:+HeapDumpOnOutOfMemoryError \</span><br><span class="line">  -XX:HeapDumpPath=/data/dump \</span><br><span class="line">  -XX:+PrintGCDetails \</span><br><span class="line">  -XX:+PrintGCDateStamps \</span><br><span class="line">  -Xloggc:/data/logs/gc.log \</span><br><span class="line">  -jar app.jar</span><br></pre></td></tr></table></figure>
+
+<p>JDK 11 及之后 G1 示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">java \</span><br><span class="line">  -server \</span><br><span class="line">  -Xms2g \</span><br><span class="line">  -Xmx2g \</span><br><span class="line">  -Xss512k \</span><br><span class="line">  -XX:+UseG1GC \</span><br><span class="line">  -XX:MaxGCPauseMillis=200 \</span><br><span class="line">  -XX:MetaspaceSize=256m \</span><br><span class="line">  -XX:MaxMetaspaceSize=512m \</span><br><span class="line">  -XX:+HeapDumpOnOutOfMemoryError \</span><br><span class="line">  -XX:HeapDumpPath=/data/dump \</span><br><span class="line">  -Xlog:gc*:file=/data/logs/gc.log:<span class="keyword">time</span>,<span class="built_in">uptime</span>,level,tags:filecount=10,filesize=100m \</span><br><span class="line">  -jar app.jar</span><br></pre></td></tr></table></figure>
+
+<p>容器环境还需要额外关注：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:MaxRAMPercentage=75</span><br><span class="line">-XX:InitialRAMPercentage=75</span><br></pre></td></tr></table></figure>
+
+<p>容器中不要只看 <code>-Xmx</code>，还要预留元空间、直接内存、线程栈、JIT CodeCache、本地库等内存。</p>
+<h2 id="14-总结"><a href="#14-总结" class="headerlink" title="14. 总结"></a>14. 总结</h2><p>JVM 学习可以从“内存区域、类加载、对象生命周期、GC、排障工具”五个模块建立骨架：</p>
+<ul>
+<li>内存区域帮助判断问题发生在哪里。</li>
+<li>类加载解释类何时进入 JVM，以及静态变量何时初始化。</li>
+<li>对象生命周期串起创建、引用、分配、晋升和回收。</li>
+<li>GC 算法和收集器决定系统吞吐与延迟表现。</li>
+<li>工具和日志是线上问题定位的依据。</li>
+</ul>
+<p>真正的 JVM 调优不是背参数，而是基于证据做取舍。先观察，再定位，再调整，最后验证，这比一次性堆满参数更可靠。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidQVnwttngDkYmTLFg--pZf" data-title="JVM" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -2208,959 +3670,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidNkzNVy8IgN4UpCj_8P7UE" data-title="计网" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-JVM-技术文档" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="article-date">
-  <time class="dt-published" datetime="2026-05-14T02:00:00.000Z" itemprop="datePublished">2026-05-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JVM</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="内存模型、类加载、GC-与调优实战"><a href="#内存模型、类加载、GC-与调优实战" class="headerlink" title="内存模型、类加载、GC 与调优实战"></a>内存模型、类加载、GC 与调优实战</h1><h2 id="1-JVM-整体视图"><a href="#1-JVM-整体视图" class="headerlink" title="1. JVM 整体视图"></a>1. JVM 整体视图</h2><p>Java 程序从源码到运行，大致经历以下链路：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Java 源码 -&gt; javac 编译 -&gt; .class 字节码 -&gt; 类加载子系统 -&gt; 运行时数据区 -&gt; 执行引擎</span><br></pre></td></tr></table></figure>
-
-<p>JVM 的核心组成可以按功能拆成四块：</p>
-<table>
-<thead>
-<tr>
-<th>组成</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>类加载子系统</td>
-<td>加载、验证、准备、解析、初始化 class 文件</td>
-</tr>
-<tr>
-<td>运行时数据区</td>
-<td>管理线程、对象、类元数据、方法调用等运行时内存</td>
-</tr>
-<tr>
-<td>执行引擎</td>
-<td>解释执行、JIT 编译、垃圾回收</td>
-</tr>
-<tr>
-<td>本地接口</td>
-<td>通过 JNI 调用本地方法和本地库</td>
-</tr>
-</tbody></table>
-<p>理解 JVM 时，可以抓住三条主线：</p>
-<ol>
-<li>一个类如何被加载到 JVM。</li>
-<li>一个对象如何被创建、布局、引用和回收。</li>
-<li>当内存、CPU、GC 出问题时如何定位。</li>
-</ol>
-<h2 id="JVM-核心知识图谱"><a href="#JVM-核心知识图谱" class="headerlink" title="JVM 核心知识图谱"></a>JVM 核心知识图谱</h2><p>下图概括了本文中最核心的几组知识：运行时数据区、对象创建流程、类加载生命周期、可达性分析、GC 算法和 G1 收集器。</p>
-<p><img src="/images/tech-docs/jvm-core-map.png" alt="JVM 核心知识图谱"></p>
-<h2 id="2-运行时数据区"><a href="#2-运行时数据区" class="headerlink" title="2. 运行时数据区"></a>2. 运行时数据区</h2><p>JVM 运行时数据区主要包括程序计数器、Java 虚拟机栈、本地方法栈、堆、方法区。直接内存不是 JVM 规范中的运行时数据区，但在 NIO 和高性能服务中非常重要。</p>
-<h3 id="2-1-程序计数器"><a href="#2-1-程序计数器" class="headerlink" title="2.1 程序计数器"></a>2.1 程序计数器</h3><p>程序计数器也叫 PC Register，用于记录当前线程正在执行的字节码指令地址。</p>
-<p>关键特征：</p>
-<ul>
-<li>线程私有，每个线程都有自己的程序计数器。</li>
-<li>执行 Java 方法时，记录下一条 JVM 指令地址。</li>
-<li>执行 Native 方法时，值通常为空或未定义，取决于具体 JVM 实现。</li>
-<li>这是 JVM 规范中唯一不会出现 <code>OutOfMemoryError</code> 的运行时数据区。</li>
-</ul>
-<p>程序计数器很小，但它支撑了线程切换后的恢复执行。线程被 CPU 挂起后再次获得时间片时，JVM 可以根据程序计数器继续从正确的指令位置执行。</p>
-<h3 id="2-2-Java-虚拟机栈"><a href="#2-2-Java-虚拟机栈" class="headerlink" title="2.2 Java 虚拟机栈"></a>2.2 Java 虚拟机栈</h3><p>Java 虚拟机栈是线程私有的，描述 Java 方法调用的内存模型。每一次方法调用都会创建一个栈帧，方法执行结束后对应栈帧出栈。</p>
-<p>栈帧通常包含：</p>
-<table>
-<thead>
-<tr>
-<th>组成</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>局部变量表</td>
-<td>存放方法参数和局部变量</td>
-</tr>
-<tr>
-<td>操作数栈</td>
-<td>字节码指令执行时的临时计算区</td>
-</tr>
-<tr>
-<td>动态链接</td>
-<td>指向运行时常量池中该方法所属符号引用的解析结果</td>
-</tr>
-<tr>
-<td>方法返回地址</td>
-<td>记录方法正常返回或异常退出后的控制流位置</td>
-</tr>
-</tbody></table>
-<p>常见异常：</p>
-<ul>
-<li><code>StackOverflowError</code>：栈深度超过限制，常见于递归过深。</li>
-<li><code>OutOfMemoryError</code>：线程过多或栈空间申请失败时可能出现。</li>
-</ul>
-<p>局部变量线程安全问题需要分情况看：</p>
-<ul>
-<li>如果局部变量是基本类型，或引用对象没有逃出当前方法，一般是线程安全的。</li>
-<li>如果局部变量引用了共享对象，并且对象逃出了方法作用域，则仍然需要考虑线程安全。</li>
-</ul>
-<p>相关参数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xss256k</span><br><span class="line">-Xss1m</span><br></pre></td></tr></table></figure>
-
-<p><code>-Xss</code> 控制每个线程栈大小。栈越大，单线程可承受的调用深度越高，但同一进程可创建的线程数会减少。</p>
-<h3 id="2-3-本地方法栈"><a href="#2-3-本地方法栈" class="headerlink" title="2.3 本地方法栈"></a>2.3 本地方法栈</h3><p>本地方法栈服务于 Native 方法调用，和 Java 虚拟机栈类似，只是面向 JNI、本地库和操作系统级调用。</p>
-<p>在 HotSpot 中，虚拟机栈和本地方法栈的实现通常联系很紧密。排查本地方法导致的问题时，需要结合崩溃日志、JNI 调用、系统库和 Native Memory Tracking。</p>
-<h3 id="2-4-堆"><a href="#2-4-堆" class="headerlink" title="2.4 堆"></a>2.4 堆</h3><p>堆是 JVM 中最大的一块内存区域，几乎所有对象实例和数组都会在堆中分配。堆是线程共享的，也是垃圾回收器管理的主要区域。</p>
-<p>关键特征：</p>
-<ul>
-<li>通过 <code>new</code> 创建的对象通常进入堆。</li>
-<li>堆中的对象需要考虑线程安全，因为多个线程可能共享同一个对象。</li>
-<li>堆由 GC 管理，出现问题时常见异常是 <code>java.lang.OutOfMemoryError: Java heap space</code>。</li>
-</ul>
-<p>常用参数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xms2g</span><br><span class="line">-Xmx2g</span><br></pre></td></tr></table></figure>
-
-<p><code>-Xms</code> 是初始堆大小，<code>-Xmx</code> 是最大堆大小。生产环境常把两者设置为相同值，避免运行过程中堆扩缩容造成额外抖动。</p>
-<h3 id="2-5-方法区与元空间"><a href="#2-5-方法区与元空间" class="headerlink" title="2.5 方法区与元空间"></a>2.5 方法区与元空间</h3><p>方法区是 JVM 规范概念，用于存储类相关信息，例如类元数据、字段、方法、运行时常量池等。HotSpot 在不同 JDK 版本中实现不同：</p>
-<table>
-<thead>
-<tr>
-<th>版本</th>
-<th>实现方式</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>JDK 7 及之前</td>
-<td>永久代 PermGen</td>
-<td>位于 JVM 管理内存中，容易因类过多出现 <code>PermGen space</code></td>
-</tr>
-<tr>
-<td>JDK 8 及之后</td>
-<td>元空间 Metaspace</td>
-<td>使用本地内存，类元数据移入元空间</td>
-</tr>
-</tbody></table>
-<p>需要注意：</p>
-<ul>
-<li>字符串常量池在 JDK 7 后已经移到堆中。</li>
-<li>元空间使用本地内存，不受 <code>-Xmx</code> 直接限制。</li>
-<li>如果动态生成类过多、类加载器泄漏，可能出现 <code>OutOfMemoryError: Metaspace</code>。</li>
-</ul>
-<p>相关参数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:MetaspaceSize=256m</span><br><span class="line">-XX:MaxMetaspaceSize=512m</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-6-运行时常量池"><a href="#2-6-运行时常量池" class="headerlink" title="2.6 运行时常量池"></a>2.6 运行时常量池</h3><p>运行时常量池是方法区的一部分，来源于 class 文件中的常量池。类加载后，class 文件常量池中的字面量和符号引用会进入运行时常量池。</p>
-<p>它主要保存：</p>
-<ul>
-<li>类和接口的全限定名。</li>
-<li>字段名和描述符。</li>
-<li>方法名和描述符。</li>
-<li>字符串、数字等字面量。</li>
-<li>符号引用到直接引用的解析结果。</li>
-</ul>
-<p>字节码指令会通过运行时常量池定位类、方法、字段等信息。类加载的解析阶段会把符号引用替换为可以直接访问目标的引用。</p>
-<h3 id="2-7-StringTable"><a href="#2-7-StringTable" class="headerlink" title="2.7 StringTable"></a>2.7 StringTable</h3><p><code>StringTable</code> 用于管理字符串驻留。它是一个哈希表结构，保存字符串对象引用。</p>
-<p>常见规则：</p>
-<ul>
-<li>字符串字面量会进入字符串常量池。</li>
-<li><code>String.intern()</code> 会尝试把字符串对象放入池中，并返回池中的引用。</li>
-<li>JDK 7 之后，字符串常量池位于堆中。</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">a</span> <span class="operator">=</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">b</span> <span class="operator">=</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">System.out.println(a == b); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">System.out.println(a == c); <span class="comment">// false</span></span><br><span class="line">System.out.println(a == c.intern()); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>不要为了“省内存”盲目调用 <code>intern()</code>。如果高基数字符串被大量驻留，反而会增加堆压力和 GC 压力。</p>
-<h3 id="2-8-直接内存"><a href="#2-8-直接内存" class="headerlink" title="2.8 直接内存"></a>2.8 直接内存</h3><p>直接内存常见于 NIO 场景，例如 <code>ByteBuffer.allocateDirect()</code>。它分配在 JVM 堆外，可以减少 Java 堆和 Native 内存之间的数据复制。</p>
-<p>特点：</p>
-<ul>
-<li>读写性能通常较好，适合 IO 缓冲区。</li>
-<li>分配和释放成本较高。</li>
-<li>不受普通堆 GC 直接管理。</li>
-<li>释放依赖 Cleaner、虚引用和 ReferenceHandler 等机制。</li>
-</ul>
-<p>相关参数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:MaxDirectMemorySize=1g</span><br></pre></td></tr></table></figure>
-
-<p>直接内存泄漏可能表现为：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: Direct buffer memory</span><br></pre></td></tr></table></figure>
-
-<p>排查时可以结合：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jcmd &lt;pid&gt; VM.native_memory summary</span><br><span class="line">jcmd &lt;pid&gt; VM.native_memory detail</span><br></pre></td></tr></table></figure>
-
-<p>需要先打开 Native Memory Tracking：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:NativeMemoryTracking=summary</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-对象创建与内存布局"><a href="#3-对象创建与内存布局" class="headerlink" title="3. 对象创建与内存布局"></a>3. 对象创建与内存布局</h2><h3 id="3-1-对象创建流程"><a href="#3-1-对象创建流程" class="headerlink" title="3.1 对象创建流程"></a>3.1 对象创建流程</h3><p>执行 <code>new</code> 指令时，JVM 大致会做这些事情：</p>
-<ol>
-<li>检查类是否已经加载、解析和初始化。</li>
-<li>如果没有加载，先触发类加载。</li>
-<li>在堆中为对象分配内存。</li>
-<li>将分配到的内存初始化为零值。</li>
-<li>设置对象头，例如 Mark Word、类型指针。</li>
-<li>执行构造方法 <code>&lt;init&gt;</code>，完成业务字段初始化。</li>
-</ol>
-<p>对象分配常见方式：</p>
-<table>
-<thead>
-<tr>
-<th>方式</th>
-<th>适用场景</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>指针碰撞</td>
-<td>堆内存规整，空闲区域连续</td>
-</tr>
-<tr>
-<td>空闲列表</td>
-<td>堆内存不规整，需要维护可用内存块列表</td>
-</tr>
-<tr>
-<td>TLAB</td>
-<td>给每个线程分配一小块私有堆空间，减少多线程分配竞争</td>
-</tr>
-</tbody></table>
-<p>TLAB 全称 Thread Local Allocation Buffer。大多数对象会优先在线程自己的 TLAB 中分配，分配失败再走慢路径。</p>
-<h3 id="3-2-对象内存布局"><a href="#3-2-对象内存布局" class="headerlink" title="3.2 对象内存布局"></a>3.2 对象内存布局</h3><p>HotSpot 中普通对象大致由三部分组成：</p>
-<table>
-<thead>
-<tr>
-<th>区域</th>
-<th>内容</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>对象头</td>
-<td>Mark Word、类型指针，数组对象还包含数组长度</td>
-</tr>
-<tr>
-<td>实例数据</td>
-<td>对象字段的实际数据</td>
-</tr>
-<tr>
-<td>对齐填充</td>
-<td>保证对象大小按机器要求对齐</td>
-</tr>
-</tbody></table>
-<p>对象头说明：</p>
-<ul>
-<li>Mark Word 存放哈希码、GC 年龄、锁状态等信息。</li>
-<li>类型指针指向类元数据，用于确定对象属于哪个类。</li>
-<li>开启压缩指针后，64 位 JVM 中对象头和引用大小会减少。</li>
-</ul>
-<p>一个对象不一定总是物理分配在堆上。JIT 可能通过逃逸分析判断对象不会逃出方法，从而进行标量替换、锁消除等优化。实际排查时仍然应以 JVM 日志和分析工具结果为准。</p>
-<h2 id="4-类加载机制"><a href="#4-类加载机制" class="headerlink" title="4. 类加载机制"></a>4. 类加载机制</h2><h3 id="4-1-类生命周期"><a href="#4-1-类生命周期" class="headerlink" title="4.1 类生命周期"></a>4.1 类生命周期</h3><p>类从加载到卸载通常经历：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">加载 -&gt; 验证 -&gt; 准备 -&gt; 解析 -&gt; 初始化 -&gt; 使用 -&gt; 卸载</span><br></pre></td></tr></table></figure>
-
-<p>其中验证、准备、解析统称为链接。</p>
-<h3 id="4-2-加载"><a href="#4-2-加载" class="headerlink" title="4.2 加载"></a>4.2 加载</h3><p>加载阶段做三件事：</p>
-<ol>
-<li>通过类的全限定名获取二进制字节流。</li>
-<li>将字节流表示的静态结构转换为方法区中的运行时数据结构。</li>
-<li>在堆中生成代表该类的 <code>java.lang.Class</code> 对象，作为访问类元数据的入口。</li>
-</ol>
-<p>HotSpot 中，类元数据位于元空间，而 <code>java.lang.Class</code> 镜像对象位于堆中。</p>
-<h3 id="4-3-验证、准备、解析"><a href="#4-3-验证、准备、解析" class="headerlink" title="4.3 验证、准备、解析"></a>4.3 验证、准备、解析</h3><p>验证阶段确保 class 文件符合 JVM 规范，避免非法字节码破坏 JVM 安全。</p>
-<p>准备阶段为类变量分配内存并设置默认值：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-
-<p>准备阶段后，<code>count</code> 先是默认值 <code>0</code>，真正赋值为 <code>10</code> 发生在初始化阶段。</p>
-<p>如果是编译期常量：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">SIZE</span> <span class="operator">=</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-
-<p>这类常量可能在准备阶段就得到常量值。</p>
-<p>解析阶段把符号引用替换为直接引用。例如把“某个类的某个方法”这种符号描述，解析成 JVM 可直接定位的引用。</p>
-<h3 id="4-4-初始化触发条件"><a href="#4-4-初始化触发条件" class="headerlink" title="4.4 初始化触发条件"></a>4.4 初始化触发条件</h3><p>类初始化本质上是执行类构造器 <code>&lt;clinit&gt;</code>，也就是静态变量赋值和静态代码块。</p>
-<p>会触发初始化的典型场景：</p>
-<ul>
-<li>执行 <code>new</code> 创建对象。</li>
-<li>读取或设置类的静态字段，编译期常量除外。</li>
-<li>调用类的静态方法。</li>
-<li>反射调用类。</li>
-<li>初始化子类时，如果父类尚未初始化，会先初始化父类。</li>
-<li>JVM 启动时初始化包含 <code>main</code> 方法的主类。</li>
-</ul>
-<p>不会触发初始化的典型场景：</p>
-<ul>
-<li>访问 <code>static final</code> 编译期常量。</li>
-<li>通过数组定义引用类。</li>
-<li>使用 <code>ClassLoader.loadClass()</code> 但不主动使用类。</li>
-<li><code>Class.forName(name, false, loader)</code> 中 <code>initialize</code> 参数为 <code>false</code>。</li>
-</ul>
-<h3 id="4-5-双亲委派模型"><a href="#4-5-双亲委派模型" class="headerlink" title="4.5 双亲委派模型"></a>4.5 双亲委派模型</h3><p>双亲委派模型的核心规则：</p>
-<ol>
-<li>类加载请求先交给父加载器。</li>
-<li>父加载器无法加载时，子加载器才尝试加载。</li>
-<li>核心类库通常由顶层加载器加载，避免重复加载和安全问题。</li>
-</ol>
-<p>常见类加载器：</p>
-<table>
-<thead>
-<tr>
-<th>类加载器</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Bootstrap ClassLoader</td>
-<td>加载 Java 核心类库</td>
-</tr>
-<tr>
-<td>Platform ClassLoader</td>
-<td>加载平台相关模块，JDK 9 后替代部分扩展类加载职责</td>
-</tr>
-<tr>
-<td>Application ClassLoader</td>
-<td>加载应用 classpath 或 module path 下的类</td>
-</tr>
-<tr>
-<td>自定义 ClassLoader</td>
-<td>插件化、热部署、隔离加载等场景</td>
-</tr>
-</tbody></table>
-<p>双亲委派不是绝对不能打破。JDBC、SPI、OSGi、应用服务器、插件系统都可能使用特殊的类加载策略。破坏双亲委派时需要特别关注类隔离、类冲突和类加载器泄漏。</p>
-<h2 id="5-Java-内存模型与并发可见性"><a href="#5-Java-内存模型与并发可见性" class="headerlink" title="5. Java 内存模型与并发可见性"></a>5. Java 内存模型与并发可见性</h2><p>JVM 内存区域关注“运行时内存如何划分”，Java 内存模型 JMM 关注“多线程共享数据时如何保证可见性、有序性和原子性”。</p>
-<h3 id="5-1-三个核心问题"><a href="#5-1-三个核心问题" class="headerlink" title="5.1 三个核心问题"></a>5.1 三个核心问题</h3><table>
-<thead>
-<tr>
-<th>问题</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>原子性</td>
-<td>一个操作是否不可分割</td>
-</tr>
-<tr>
-<td>可见性</td>
-<td>一个线程修改的值，其他线程是否能及时看到</td>
-</tr>
-<tr>
-<td>有序性</td>
-<td>编译器和 CPU 重排序是否影响程序语义</td>
-</tr>
-</tbody></table>
-<h3 id="5-2-synchronized"><a href="#5-2-synchronized" class="headerlink" title="5.2 synchronized"></a>5.2 synchronized</h3><p><code>synchronized</code> 可以保证：</p>
-<ul>
-<li>互斥访问，也就是同一时刻只有一个线程进入临界区。</li>
-<li>进入锁和退出锁之间的 happens-before 关系。</li>
-<li>临界区内共享变量对后续获得同一把锁的线程可见。</li>
-</ul>
-<p>缺点是粒度过大时性能较低，容易造成线程阻塞。现代 JVM 对 <code>synchronized</code> 做了大量优化，但仍要避免把耗时 IO、远程调用放入锁内。</p>
-<h3 id="5-3-volatile"><a href="#5-3-volatile" class="headerlink" title="5.3 volatile"></a>5.3 volatile</h3><p><code>volatile</code> 可以保证：</p>
-<ul>
-<li>变量写入对其他线程可见。</li>
-<li>禁止特定类型的指令重排序。</li>
-</ul>
-<p>但 <code>volatile</code> 不能保证复合操作的原子性：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">count++; <span class="comment">// 不是原子操作</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="5-4-双重检查锁"><a href="#5-4-双重检查锁" class="headerlink" title="5.4 双重检查锁"></a>5.4 双重检查锁</h3><p>双重检查锁实现单例时，需要使用 <code>volatile</code> 防止指令重排序：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">                    instance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果没有 <code>volatile</code>，对象引用赋值可能与构造初始化发生重排序，其他线程可能看到一个“引用非空但尚未完全初始化”的对象。</p>
-<h2 id="6-垃圾回收基础"><a href="#6-垃圾回收基础" class="headerlink" title="6. 垃圾回收基础"></a>6. 垃圾回收基础</h2><h3 id="6-1-如何判断对象可回收"><a href="#6-1-如何判断对象可回收" class="headerlink" title="6.1 如何判断对象可回收"></a>6.1 如何判断对象可回收</h3><p>现代 JVM 通常使用可达性分析，而不是引用计数。</p>
-<p>可达性分析从 GC Roots 出发，沿引用链查找所有可达对象。无法从 GC Roots 到达的对象，就可能被回收。</p>
-<p>常见 GC Roots：</p>
-<ul>
-<li>虚拟机栈中局部变量表引用的对象。</li>
-<li>本地方法栈中 JNI 引用的对象。</li>
-<li>方法区中类静态属性引用的对象。</li>
-<li>运行时常量池引用的对象。</li>
-<li>被同步锁持有的对象。</li>
-<li>JVM 内部引用，例如 Class 对象、系统类加载器等。</li>
-</ul>
-<h3 id="6-2-引用类型"><a href="#6-2-引用类型" class="headerlink" title="6.2 引用类型"></a>6.2 引用类型</h3><p>Java 中引用强度从强到弱大致如下：</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>回收规则</th>
-<th>典型用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>强引用 StrongReference</td>
-<td>只要可达就不会被 GC 回收</td>
-<td>普通对象引用</td>
-</tr>
-<tr>
-<td>软引用 SoftReference</td>
-<td>内存不足时可能回收</td>
-<td>缓存，但现代服务中慎用</td>
-</tr>
-<tr>
-<td>弱引用 WeakReference</td>
-<td>下一次 GC 会回收</td>
-<td>ThreadLocalMap、规范化映射</td>
-</tr>
-<tr>
-<td>虚引用 PhantomReference</td>
-<td>不影响生命周期，用于回收通知</td>
-<td>直接内存清理、资源释放跟踪</td>
-</tr>
-<tr>
-<td>终结器引用 FinalReference</td>
-<td>与 <code>finalize()</code> 相关</td>
-<td>不推荐使用</td>
-</tr>
-</tbody></table>
-<p><code>finalize()</code> 不可靠、不可控、性能差，应避免用于资源释放。资源释放优先使用 <code>try-with-resources</code>、显式 <code>close()</code> 或 Cleaner 等机制。</p>
-<h3 id="6-3-垃圾回收算法"><a href="#6-3-垃圾回收算法" class="headerlink" title="6.3 垃圾回收算法"></a>6.3 垃圾回收算法</h3><table>
-<thead>
-<tr>
-<th>算法</th>
-<th>优点</th>
-<th>缺点</th>
-<th>典型区域</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>标记-清除</td>
-<td>实现简单，不移动对象</td>
-<td>产生内存碎片</td>
-<td>老年代、CMS</td>
-</tr>
-<tr>
-<td>标记-整理</td>
-<td>无碎片</td>
-<td>移动对象成本高</td>
-<td>老年代</td>
-</tr>
-<tr>
-<td>复制</td>
-<td>无碎片，分配快</td>
-<td>需要额外空间</td>
-<td>新生代</td>
-</tr>
-</tbody></table>
-<p>标记-清除流程：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">标记可达对象 -&gt; 清除不可达对象</span><br></pre></td></tr></table></figure>
-
-<p>标记-整理流程：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">标记可达对象 -&gt; 移动存活对象 -&gt; 清理边界外空间</span><br></pre></td></tr></table></figure>
-
-<p>复制算法流程：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from 区存活对象 -&gt; 复制到 to 区 -&gt; 清空 from 区 -&gt; 交换 from/to</span><br></pre></td></tr></table></figure>
-
-<h3 id="6-4-分代垃圾回收"><a href="#6-4-分代垃圾回收" class="headerlink" title="6.4 分代垃圾回收"></a>6.4 分代垃圾回收</h3><p>分代理论基于两个经验：</p>
-<ul>
-<li>大部分对象朝生夕死。</li>
-<li>熬过多次 GC 的对象更可能继续存活。</li>
-</ul>
-<p>传统堆结构：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">新生代 = Eden + Survivor From + Survivor To</span><br><span class="line">老年代 = 长期存活对象、大对象等</span><br></pre></td></tr></table></figure>
-
-<p>对象通常先分配在 Eden。Minor GC 后仍存活的对象会进入 Survivor 区并增加年龄。年龄达到阈值后晋升到老年代。HotSpot 对象年龄通常由对象头中的 age 字段记录，最大年龄常见为 15。</p>
-<p>对象进入老年代的常见原因：</p>
-<ul>
-<li>年龄达到晋升阈值。</li>
-<li>大对象直接进入老年代。</li>
-<li>Survivor 空间不足，担保分配进入老年代。</li>
-<li>动态年龄判断触发提前晋升。</li>
-</ul>
-<p>动态年龄判断示例：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果 Survivor 中相同年龄对象大小总和超过 Survivor 空间的一半，</span><br><span class="line">则年龄大于或等于该年龄的对象可以直接进入老年代。</span><br></pre></td></tr></table></figure>
-
-<h3 id="6-5-GC-类型"><a href="#6-5-GC-类型" class="headerlink" title="6.5 GC 类型"></a>6.5 GC 类型</h3><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Minor GC &#x2F; Young GC</td>
-<td>新生代回收</td>
-</tr>
-<tr>
-<td>Major GC &#x2F; Old GC</td>
-<td>老年代回收，CMS 中常见叫法</td>
-</tr>
-<tr>
-<td>Mixed GC</td>
-<td>G1 中同时回收新生代和部分老年代 Region</td>
-</tr>
-<tr>
-<td>Full GC</td>
-<td>回收整个 Java 堆和方法区相关空间，通常代价最高</td>
-</tr>
-</tbody></table>
-<p>Full GC 常见触发原因：</p>
-<ul>
-<li>老年代空间不足。</li>
-<li>元空间不足。</li>
-<li>显式调用 <code>System.gc()</code>。</li>
-<li>Minor GC 后晋升对象大小超过老年代可用空间。</li>
-<li>堆内存碎片或连续空间不足。</li>
-</ul>
-<p>生产环境通常需要关注 Full GC，因为它往往伴随较长 STW。</p>
-<h2 id="7-垃圾回收器"><a href="#7-垃圾回收器" class="headerlink" title="7. 垃圾回收器"></a>7. 垃圾回收器</h2><h3 id="7-1-收集器选型目标"><a href="#7-1-收集器选型目标" class="headerlink" title="7.1 收集器选型目标"></a>7.1 收集器选型目标</h3><p>不同收集器关注的目标不同：</p>
-<table>
-<thead>
-<tr>
-<th>目标</th>
-<th>解释</th>
-<th>典型场景</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>吞吐量优先</td>
-<td>更多 CPU 时间用于业务线程</td>
-<td>后台计算、批处理</td>
-</tr>
-<tr>
-<td>响应时间优先</td>
-<td>尽量降低单次暂停时间</td>
-<td>Web 服务、交易系统</td>
-</tr>
-<tr>
-<td>资源占用优先</td>
-<td>简单、低开销</td>
-<td>小应用、客户端工具</td>
-</tr>
-</tbody></table>
-<h3 id="7-2-Serial"><a href="#7-2-Serial" class="headerlink" title="7.2 Serial"></a>7.2 Serial</h3><p>Serial 是单线程垃圾回收器，回收时会暂停所有用户线程。</p>
-<p>适合：</p>
-<ul>
-<li>单核或小堆应用。</li>
-<li>客户端程序。</li>
-<li>对吞吐和延迟要求不高的场景。</li>
-</ul>
-<p>参数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseSerialGC</span><br></pre></td></tr></table></figure>
-
-<h3 id="7-3-Parallel"><a href="#7-3-Parallel" class="headerlink" title="7.3 Parallel"></a>7.3 Parallel</h3><p>Parallel 关注吞吐量，使用多线程进行垃圾回收。常与 Parallel Old 搭配。</p>
-<p>适合：</p>
-<ul>
-<li>多核 CPU。</li>
-<li>后台任务。</li>
-<li>批处理系统。</li>
-<li>更关注总运行时间，而不是单次请求延迟。</li>
-</ul>
-<p>参数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseParallelGC</span><br><span class="line">-XX:+UseParallelOldGC</span><br><span class="line">-XX:ParallelGCThreads=8</span><br><span class="line">-XX:GCTimeRatio=99</span><br><span class="line">-XX:MaxGCPauseMillis=200</span><br></pre></td></tr></table></figure>
-
-<p><code>GCTimeRatio=99</code> 表示 GC 时间占比目标约为 <code>1 / (1 + 99)</code>。</p>
-<h3 id="7-4-CMS"><a href="#7-4-CMS" class="headerlink" title="7.4 CMS"></a>7.4 CMS</h3><p>CMS 全称 Concurrent Mark Sweep，目标是降低老年代停顿时间。它基于标记-清除算法。</p>
-<p>典型阶段：</p>
-<ol>
-<li>初始标记，STW。</li>
-<li>并发标记，业务线程和 GC 线程并发。</li>
-<li>重新标记，STW。</li>
-<li>并发清除。</li>
-</ol>
-<p>优点：</p>
-<ul>
-<li>老年代回收大部分阶段与业务线程并发。</li>
-<li>停顿时间比传统串行老年代收集器更短。</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>标记-清除会产生内存碎片。</li>
-<li>并发阶段会占用 CPU。</li>
-<li>可能发生 Concurrent Mode Failure，退化为 Full GC。</li>
-</ul>
-<p>常见参数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseConcMarkSweepGC</span><br><span class="line">-XX:CMSInitiatingOccupancyFraction=70</span><br><span class="line">-XX:+UseCMSInitiatingOccupancyOnly</span><br><span class="line">-XX:+CMSScavengeBeforeRemark</span><br></pre></td></tr></table></figure>
-
-<p>CMS 在新版本 JDK 中已经逐步退出主流，历史系统仍然可能大量使用。</p>
-<h3 id="7-5-G1"><a href="#7-5-G1" class="headerlink" title="7.5 G1"></a>7.5 G1</h3><p>G1 全称 Garbage First，目标是在可预测暂停时间内获得较好吞吐。它从 JDK 9 开始成为 HotSpot 默认垃圾回收器。</p>
-<p>G1 的核心思想：</p>
-<ul>
-<li>将堆划分为多个大小相等的 Region。</li>
-<li>不再严格使用连续的新生代、老年代物理分区。</li>
-<li>跟踪每个 Region 的垃圾比例和回收收益。</li>
-<li>优先回收价值最高的 Region。</li>
-</ul>
-<p>G1 中 Region 角色包括：</p>
-<ul>
-<li>Eden Region。</li>
-<li>Survivor Region。</li>
-<li>Old Region。</li>
-<li>Humongous Region，大对象区域。</li>
-</ul>
-<p>大对象规则：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象大小超过 Region 一半时，可能作为 Humongous Object 处理。</span><br></pre></td></tr></table></figure>
-
-<p>G1 常见阶段：</p>
-<ol>
-<li>Young GC，回收年轻代 Region。</li>
-<li>并发标记，从 GC Roots 开始识别老年代存活对象。</li>
-<li>Mixed GC，回收年轻代和部分收益较高的老年代 Region。</li>
-<li>必要时触发 Full GC，通常表示压力较大或调优不合理。</li>
-</ol>
-<p>G1 的重要机制：</p>
-<ul>
-<li>Remembered Set：记录跨 Region 引用。</li>
-<li>Write Barrier：写屏障，维护引用变化。</li>
-<li>SATB：原始快照算法，用于并发标记。</li>
-<li>Pause Prediction：根据停顿目标选择回收集合。</li>
-</ul>
-<p>常用参数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseG1GC</span><br><span class="line">-XX:MaxGCPauseMillis=200</span><br><span class="line">-XX:G1HeapRegionSize=8m</span><br><span class="line">-XX:InitiatingHeapOccupancyPercent=45</span><br><span class="line">-XX:ParallelGCThreads=8</span><br><span class="line">-XX:ConcGCThreads=2</span><br></pre></td></tr></table></figure>
-
-<p>G1 适合：</p>
-<ul>
-<li>大堆内存。</li>
-<li>多核服务器。</li>
-<li>同时关注吞吐和低延迟的服务。</li>
-<li>希望减少 Full GC 风险的应用。</li>
-</ul>
-<p>G1 不适合把 <code>MaxGCPauseMillis</code> 设置得过低。目标过激时，G1 可能频繁 GC，吞吐反而下降。</p>
-<h3 id="7-6-现代低延迟收集器"><a href="#7-6-现代低延迟收集器" class="headerlink" title="7.6 现代低延迟收集器"></a>7.6 现代低延迟收集器</h3><p>如果系统对暂停时间非常敏感，可以关注 ZGC 和 Shenandoah。</p>
-<table>
-<thead>
-<tr>
-<th>收集器</th>
-<th>特点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ZGC</td>
-<td>低延迟，适合大堆，暂停时间通常很短</td>
-</tr>
-<tr>
-<td>Shenandoah</td>
-<td>并发整理，低暂停，部分发行版支持较好</td>
-</tr>
-</tbody></table>
-<p>这些收集器的收益依赖 JDK 版本、发行版、内存规模和业务特征。生产使用前应通过压测和 GC 日志验证。</p>
-<h2 id="8-JVM-参数速查"><a href="#8-JVM-参数速查" class="headerlink" title="8. JVM 参数速查"></a>8. JVM 参数速查</h2><h3 id="8-1-内存参数"><a href="#8-1-内存参数" class="headerlink" title="8.1 内存参数"></a>8.1 内存参数</h3><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>作用</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>-Xms</code></td>
-<td>初始堆大小</td>
-<td><code>-Xms2g</code></td>
-</tr>
-<tr>
-<td><code>-Xmx</code></td>
-<td>最大堆大小</td>
-<td><code>-Xmx2g</code></td>
-</tr>
-<tr>
-<td><code>-Xss</code></td>
-<td>单线程栈大小</td>
-<td><code>-Xss512k</code></td>
-</tr>
-<tr>
-<td><code>-XX:MetaspaceSize</code></td>
-<td>元空间初始触发阈值</td>
-<td><code>-XX:MetaspaceSize=256m</code></td>
-</tr>
-<tr>
-<td><code>-XX:MaxMetaspaceSize</code></td>
-<td>元空间最大值</td>
-<td><code>-XX:MaxMetaspaceSize=512m</code></td>
-</tr>
-<tr>
-<td><code>-XX:MaxDirectMemorySize</code></td>
-<td>直接内存最大值</td>
-<td><code>-XX:MaxDirectMemorySize=1g</code></td>
-</tr>
-</tbody></table>
-<h3 id="8-2-GC-参数"><a href="#8-2-GC-参数" class="headerlink" title="8.2 GC 参数"></a>8.2 GC 参数</h3><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>-XX:+UseSerialGC</code></td>
-<td>使用 Serial 收集器</td>
-</tr>
-<tr>
-<td><code>-XX:+UseParallelGC</code></td>
-<td>使用 Parallel 收集器</td>
-</tr>
-<tr>
-<td><code>-XX:+UseG1GC</code></td>
-<td>使用 G1 收集器</td>
-</tr>
-<tr>
-<td><code>-XX:MaxGCPauseMillis</code></td>
-<td>期望最大 GC 暂停时间</td>
-</tr>
-<tr>
-<td><code>-XX:ParallelGCThreads</code></td>
-<td>并行 GC 线程数</td>
-</tr>
-<tr>
-<td><code>-XX:ConcGCThreads</code></td>
-<td>并发 GC 线程数</td>
-</tr>
-<tr>
-<td><code>-XX:InitiatingHeapOccupancyPercent</code></td>
-<td>G1 并发标记触发阈值</td>
-</tr>
-</tbody></table>
-<h3 id="8-3-日志参数"><a href="#8-3-日志参数" class="headerlink" title="8.3 日志参数"></a>8.3 日志参数</h3><p>JDK 8：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-XX:+PrintGCDetails</span><br><span class="line">-XX:+PrintGCDateStamps</span><br><span class="line">-Xloggc:/path/to/gc.log</span><br></pre></td></tr></table></figure>
-
-<p>JDK 9 及之后：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Xlog:gc*:file=/path/to/gc.log:<span class="keyword">time</span>,<span class="built_in">uptime</span>,level,tags:filecount=10,filesize=100m</span><br></pre></td></tr></table></figure>
-
-<p>OOM 自动导出堆转储：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:+HeapDumpOnOutOfMemoryError</span><br><span class="line">-XX:HeapDumpPath=/path/to/dump</span><br></pre></td></tr></table></figure>
-
-<h2 id="9-JVM-排障工具"><a href="#9-JVM-排障工具" class="headerlink" title="9. JVM 排障工具"></a>9. JVM 排障工具</h2><h3 id="9-1-命令行工具"><a href="#9-1-命令行工具" class="headerlink" title="9.1 命令行工具"></a>9.1 命令行工具</h3><table>
-<thead>
-<tr>
-<th>工具</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>jps</code></td>
-<td>查看 Java 进程</td>
-</tr>
-<tr>
-<td><code>jstack</code></td>
-<td>查看线程栈</td>
-</tr>
-<tr>
-<td><code>jmap</code></td>
-<td>查看堆信息、导出 heap dump</td>
-</tr>
-<tr>
-<td><code>jstat</code></td>
-<td>查看 GC、类加载、编译等统计信息</td>
-</tr>
-<tr>
-<td><code>jcmd</code></td>
-<td>综合诊断工具，推荐优先使用</td>
-</tr>
-<tr>
-<td><code>jhat</code></td>
-<td>旧版 heap dump 分析工具，现代场景较少使用</td>
-</tr>
-</tbody></table>
-<p>常用命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">jps -l</span><br><span class="line">jstat -gcutil &lt;pid&gt; 1000 10</span><br><span class="line">jmap -heap &lt;pid&gt;</span><br><span class="line">jmap -dump:format=b,file=heap.hprof &lt;pid&gt;</span><br><span class="line">jstack -l &lt;pid&gt; &gt; thread.txt</span><br><span class="line">jcmd &lt;pid&gt; GC.heap_info</span><br><span class="line">jcmd &lt;pid&gt; Thread.<span class="built_in">print</span></span><br><span class="line">jcmd &lt;pid&gt; GC.class_histogram</span><br></pre></td></tr></table></figure>
-
-<h3 id="9-2-可视化工具"><a href="#9-2-可视化工具" class="headerlink" title="9.2 可视化工具"></a>9.2 可视化工具</h3><table>
-<thead>
-<tr>
-<th>工具</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>VisualVM</td>
-<td>查看堆、线程、CPU、采样、dump</td>
-</tr>
-<tr>
-<td>JConsole</td>
-<td>基础 JMX 监控</td>
-</tr>
-<tr>
-<td>Java Mission Control</td>
-<td>分析 JFR，适合低开销生产诊断</td>
-</tr>
-<tr>
-<td>Eclipse MAT</td>
-<td>分析 heap dump，定位内存泄漏</td>
-</tr>
-</tbody></table>
-<h2 id="10-典型问题定位流程"><a href="#10-典型问题定位流程" class="headerlink" title="10. 典型问题定位流程"></a>10. 典型问题定位流程</h2><h3 id="10-1-CPU-占用过高"><a href="#10-1-CPU-占用过高" class="headerlink" title="10.1 CPU 占用过高"></a>10.1 CPU 占用过高</h3><p>Linux 常用流程：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">top</span><br><span class="line">top -Hp &lt;pid&gt;</span><br><span class="line"><span class="built_in">printf</span> <span class="string">&quot;%x\n&quot;</span> &lt;tid&gt;</span><br><span class="line">jstack -l &lt;pid&gt; &gt; thread.txt</span><br></pre></td></tr></table></figure>
-
-<p>然后在 <code>thread.txt</code> 中搜索十六进制线程 id，对应 Java 线程栈，定位热点代码。</p>
-<p>常见原因：</p>
-<ul>
-<li>死循环。</li>
-<li>频繁 GC。</li>
-<li>锁竞争或自旋。</li>
-<li>正则、序列化、加密等 CPU 密集计算。</li>
-<li>线程池任务堆积。</li>
-</ul>
-<h3 id="10-2-堆内存溢出"><a href="#10-2-堆内存溢出" class="headerlink" title="10.2 堆内存溢出"></a>10.2 堆内存溢出</h3><p>现象：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: Java heap space</span><br></pre></td></tr></table></figure>
-
-<p>定位流程：</p>
-<ol>
-<li>开启 OOM dump。</li>
-<li>使用 MAT 或 VisualVM 打开 hprof。</li>
-<li>查看 Dominator Tree。</li>
-<li>找到占用最大对象和 GC Roots 引用链。</li>
-<li>判断是正常容量不足还是内存泄漏。</li>
-</ol>
-<p>建议参数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:+HeapDumpOnOutOfMemoryError</span><br><span class="line">-XX:HeapDumpPath=/data/dumps</span><br></pre></td></tr></table></figure>
-
-<h3 id="10-3-栈溢出"><a href="#10-3-栈溢出" class="headerlink" title="10.3 栈溢出"></a>10.3 栈溢出</h3><p>现象：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.StackOverflowError</span><br></pre></td></tr></table></figure>
-
-<p>常见原因：</p>
-<ul>
-<li>无终止条件递归。</li>
-<li>对象相互调用 <code>toString()</code>、<code>equals()</code>、JSON 序列化。</li>
-<li>AOP 或代理链递归。</li>
-</ul>
-<p>处理方式：</p>
-<ul>
-<li>修复递归终止条件。</li>
-<li>改成迭代。</li>
-<li>检查对象互相引用。</li>
-<li>必要时调整 <code>-Xss</code>，但不要只靠加大栈掩盖代码问题。</li>
-</ul>
-<h3 id="10-4-元空间溢出"><a href="#10-4-元空间溢出" class="headerlink" title="10.4 元空间溢出"></a>10.4 元空间溢出</h3><p>现象：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: Metaspace</span><br></pre></td></tr></table></figure>
-
-<p>常见原因：</p>
-<ul>
-<li>动态代理、CGLIB、ByteBuddy 生成类过多。</li>
-<li>热部署或插件系统中 ClassLoader 泄漏。</li>
-<li>应用频繁加载但不卸载类。</li>
-</ul>
-<p>定位方式：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jcmd &lt;pid&gt; GC.class_histogram</span><br><span class="line">jcmd &lt;pid&gt; VM.classloader_stats</span><br></pre></td></tr></table></figure>
-
-<p>处理思路：</p>
-<ul>
-<li>限制动态类生成数量。</li>
-<li>修复 ClassLoader 引用链。</li>
-<li>设置合理的 <code>MaxMetaspaceSize</code>，让问题尽早暴露。</li>
-</ul>
-<h3 id="10-5-直接内存溢出"><a href="#10-5-直接内存溢出" class="headerlink" title="10.5 直接内存溢出"></a>10.5 直接内存溢出</h3><p>现象：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: Direct buffer memory</span><br></pre></td></tr></table></figure>
-
-<p>常见原因：</p>
-<ul>
-<li>NIO DirectByteBuffer 未及时释放。</li>
-<li>Netty direct memory 配置过大或泄漏。</li>
-<li>堆外缓存没有上限。</li>
-</ul>
-<p>定位方式：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jcmd &lt;pid&gt; VM.native_memory summary</span><br><span class="line">jcmd &lt;pid&gt; VM.native_memory detail</span><br></pre></td></tr></table></figure>
-
-<p>处理思路：</p>
-<ul>
-<li>配置 <code>-XX:MaxDirectMemorySize</code>。</li>
-<li>检查 Netty、NIO、文件映射等堆外内存使用。</li>
-<li>结合框架自带 leak detector。</li>
-</ul>
-<h3 id="10-6-频繁-Full-GC"><a href="#10-6-频繁-Full-GC" class="headerlink" title="10.6 频繁 Full GC"></a>10.6 频繁 Full GC</h3><p>排查方向：</p>
-<ul>
-<li>老年代是否增长过快。</li>
-<li>大对象是否直接进入老年代。</li>
-<li>Survivor 是否过小导致对象提前晋升。</li>
-<li>是否有显式 <code>System.gc()</code>。</li>
-<li>元空间是否频繁扩容。</li>
-<li>G1 是否存在 Humongous Object 过多。</li>
-</ul>
-<p>基础观察命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jstat -gcutil &lt;pid&gt; 1000</span><br><span class="line">jcmd &lt;pid&gt; GC.heap_info</span><br><span class="line">jcmd &lt;pid&gt; GC.class_histogram</span><br></pre></td></tr></table></figure>
-
-<p>GC 日志分析关注：</p>
-<ul>
-<li>Full GC 触发原因。</li>
-<li>Young GC 后晋升大小。</li>
-<li>老年代使用率变化。</li>
-<li>单次暂停时间。</li>
-<li>回收前后堆空间变化。</li>
-</ul>
-<h2 id="11-调优原则"><a href="#11-调优原则" class="headerlink" title="11. 调优原则"></a>11. 调优原则</h2><p>JVM 调优不是先改参数，而是先确认目标和证据。</p>
-<h3 id="11-1-明确目标"><a href="#11-1-明确目标" class="headerlink" title="11.1 明确目标"></a>11.1 明确目标</h3><p>常见目标：</p>
-<ul>
-<li>降低平均延迟。</li>
-<li>降低 P99 或 P999 延迟。</li>
-<li>提高吞吐。</li>
-<li>减少 Full GC。</li>
-<li>降低内存占用。</li>
-<li>提升启动速度。</li>
-</ul>
-<p>不同目标可能互相冲突。例如降低暂停时间可能牺牲吞吐，提高吞吐可能导致单次暂停变长。</p>
-<h3 id="11-2-建议流程"><a href="#11-2-建议流程" class="headerlink" title="11.2 建议流程"></a>11.2 建议流程</h3><ol>
-<li>收集现状：QPS、RT、CPU、内存、GC 日志、线程数。</li>
-<li>复现问题：压测或找到线上稳定触发条件。</li>
-<li>分析瓶颈：先判断是业务代码、内存泄漏、GC 还是系统资源。</li>
-<li>小步调整：一次只调整少数参数。</li>
-<li>对比验证：用相同流量和数据规模观察结果。</li>
-<li>固化配置：记录参数、原因和回滚方案。</li>
-</ol>
-<h3 id="11-3-常见建议"><a href="#11-3-常见建议" class="headerlink" title="11.3 常见建议"></a>11.3 常见建议</h3><ul>
-<li>服务端应用通常设置 <code>-Xms</code> 等于 <code>-Xmx</code>。</li>
-<li>开启 GC 日志，并保留滚动文件。</li>
-<li>对容器环境，确认 JVM 是否正确识别容器内存限制。</li>
-<li>不要盲目追求极小 GC 暂停。</li>
-<li>不要在业务代码中随意调用 <code>System.gc()</code>。</li>
-<li>大对象、缓存、批量查询、一次性加载是堆压力的重要来源。</li>
-<li>类加载器泄漏、线程池泄漏、ThreadLocal 泄漏比单纯调参更常见。</li>
-</ul>
-<h2 id="12-面试与复盘速记"><a href="#12-面试与复盘速记" class="headerlink" title="12. 面试与复盘速记"></a>12. 面试与复盘速记</h2><h3 id="12-1-JVM-内存区域"><a href="#12-1-JVM-内存区域" class="headerlink" title="12.1 JVM 内存区域"></a>12.1 JVM 内存区域</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">线程私有：程序计数器、Java 虚拟机栈、本地方法栈</span><br><span class="line">线程共享：堆、方法区/元空间</span><br><span class="line">堆外相关：直接内存</span><br></pre></td></tr></table></figure>
-
-<h3 id="12-2-对象引用"><a href="#12-2-对象引用" class="headerlink" title="12.2 对象引用"></a>12.2 对象引用</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">强引用：不会被回收</span><br><span class="line">软引用：内存不足时回收</span><br><span class="line">弱引用：下次 GC 回收</span><br><span class="line">虚引用：用于回收通知</span><br></pre></td></tr></table></figure>
-
-<h3 id="12-3-GC-算法"><a href="#12-3-GC-算法" class="headerlink" title="12.3 GC 算法"></a>12.3 GC 算法</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">标记-清除：会产生碎片</span><br><span class="line">标记-整理：无碎片但移动成本高</span><br><span class="line">复制算法：无碎片但需要额外空间</span><br></pre></td></tr></table></figure>
-
-<h3 id="12-4-G1-关键词"><a href="#12-4-G1-关键词" class="headerlink" title="12.4 G1 关键词"></a>12.4 G1 关键词</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Region</span><br><span class="line">Remembered Set</span><br><span class="line">Write Barrier</span><br><span class="line">SATB</span><br><span class="line">Young GC</span><br><span class="line">Mixed GC</span><br><span class="line">Humongous Object</span><br><span class="line">MaxGCPauseMillis</span><br></pre></td></tr></table></figure>
-
-<h3 id="12-5-类加载过程"><a href="#12-5-类加载过程" class="headerlink" title="12.5 类加载过程"></a>12.5 类加载过程</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">加载 -&gt; 验证 -&gt; 准备 -&gt; 解析 -&gt; 初始化 -&gt; 使用 -&gt; 卸载</span><br></pre></td></tr></table></figure>
-
-<h3 id="12-6-HelloWorld-运行时发生了什么"><a href="#12-6-HelloWorld-运行时发生了什么" class="headerlink" title="12.6 HelloWorld 运行时发生了什么"></a>12.6 HelloWorld 运行时发生了什么</h3><ol>
-<li><code>javac</code> 把 <code>.java</code> 编译为 <code>.class</code>。</li>
-<li>JVM 启动，创建运行时数据区。</li>
-<li>类加载器加载 <code>HelloWorld.class</code>。</li>
-<li>验证、准备、解析、初始化主类。</li>
-<li>主线程创建栈帧，执行 <code>main</code> 方法。</li>
-<li>执行引擎解释执行或 JIT 编译热点代码。</li>
-<li>对象在堆中分配，方法调用进入虚拟机栈。</li>
-<li>GC 在合适时机回收不可达对象。</li>
-</ol>
-<h2 id="13-推荐生产启动参数模板"><a href="#13-推荐生产启动参数模板" class="headerlink" title="13. 推荐生产启动参数模板"></a>13. 推荐生产启动参数模板</h2><p>以下模板仅作为起点，不能直接替代压测。</p>
-<p>JDK 8 G1 示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">java \</span><br><span class="line">  -server \</span><br><span class="line">  -Xms2g \</span><br><span class="line">  -Xmx2g \</span><br><span class="line">  -Xss512k \</span><br><span class="line">  -XX:+UseG1GC \</span><br><span class="line">  -XX:MaxGCPauseMillis=200 \</span><br><span class="line">  -XX:MetaspaceSize=256m \</span><br><span class="line">  -XX:MaxMetaspaceSize=512m \</span><br><span class="line">  -XX:+HeapDumpOnOutOfMemoryError \</span><br><span class="line">  -XX:HeapDumpPath=/data/dump \</span><br><span class="line">  -XX:+PrintGCDetails \</span><br><span class="line">  -XX:+PrintGCDateStamps \</span><br><span class="line">  -Xloggc:/data/logs/gc.log \</span><br><span class="line">  -jar app.jar</span><br></pre></td></tr></table></figure>
-
-<p>JDK 11 及之后 G1 示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">java \</span><br><span class="line">  -server \</span><br><span class="line">  -Xms2g \</span><br><span class="line">  -Xmx2g \</span><br><span class="line">  -Xss512k \</span><br><span class="line">  -XX:+UseG1GC \</span><br><span class="line">  -XX:MaxGCPauseMillis=200 \</span><br><span class="line">  -XX:MetaspaceSize=256m \</span><br><span class="line">  -XX:MaxMetaspaceSize=512m \</span><br><span class="line">  -XX:+HeapDumpOnOutOfMemoryError \</span><br><span class="line">  -XX:HeapDumpPath=/data/dump \</span><br><span class="line">  -Xlog:gc*:file=/data/logs/gc.log:<span class="keyword">time</span>,<span class="built_in">uptime</span>,level,tags:filecount=10,filesize=100m \</span><br><span class="line">  -jar app.jar</span><br></pre></td></tr></table></figure>
-
-<p>容器环境还需要额外关注：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:MaxRAMPercentage=75</span><br><span class="line">-XX:InitialRAMPercentage=75</span><br></pre></td></tr></table></figure>
-
-<p>容器中不要只看 <code>-Xmx</code>，还要预留元空间、直接内存、线程栈、JIT CodeCache、本地库等内存。</p>
-<h2 id="14-总结"><a href="#14-总结" class="headerlink" title="14. 总结"></a>14. 总结</h2><p>JVM 学习可以从“内存区域、类加载、对象生命周期、GC、排障工具”五个模块建立骨架：</p>
-<ul>
-<li>内存区域帮助判断问题发生在哪里。</li>
-<li>类加载解释类何时进入 JVM，以及静态变量何时初始化。</li>
-<li>对象生命周期串起创建、引用、分配、晋升和回收。</li>
-<li>GC 算法和收集器决定系统吞吐与延迟表现。</li>
-<li>工具和日志是线上问题定位的依据。</li>
-</ul>
-<p>真正的 JVM 调优不是背参数，而是基于证据做取舍。先观察，再定位，再调整，最后验证，这比一次性堆满参数更可靠。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuida3H7jpery7Hxonc6bwPM1" data-title="JVM" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidscmYQJ6Wx9lLWtorCoTUM" data-title="计网" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -3918,7 +4428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidKXfkIXvHJ8FYUtDWyH4dr" data-title="操作系统" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuiduZ3cqy4b6UAUY-Udpn0yX" data-title="操作系统" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -3965,15 +4475,15 @@
           </li>
         
           <li>
+            <a href="/2026/05/14/JAVA%E5%B9%B6%E5%8F%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JAVA 并发</a>
+          </li>
+        
+          <li>
             <a href="/2026/05/14/JAVA%E9%9B%86%E5%90%88-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JAVA 集合</a>
           </li>
         
           <li>
             <a href="/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JAVA SE</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">计网</a>
           </li>
         
           <li>
