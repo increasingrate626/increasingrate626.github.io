@@ -13,11 +13,13 @@
 <meta property="og:site_name" content="张梓亮的技术博客">
 <meta property="og:description" content="内存模型、类加载、GC 与调优实战1. JVM 整体视图Java 程序从源码到运行，大致经历以下链路： 1Java 源码 -&gt; javac 编译 -&gt; .class 字节码 -&gt; 类加载子系统 -&gt; 运行时数据区 -&gt; 执行引擎  JVM 的核心组成可以按功能拆成四块：    组成 作用    类加载子系统 加载、验证、准备、解析、初始化 class 文件   运行时">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/tech-docs/jvm-core-map.png">
 <meta property="article:published_time" content="2026-05-14T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-14T13:32:41.043Z">
+<meta property="article:modified_time" content="2026-05-14T13:57:14.401Z">
 <meta property="article:author" content="zzl">
 <meta property="article:tag" content="Java，Agent">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/tech-docs/jvm-core-map.png">
   
     <link rel="alternate" href="/atom.xml" title="张梓亮的技术博客" type="application/atom+xml">
   
@@ -130,6 +132,8 @@
 <li>一个对象如何被创建、布局、引用和回收。</li>
 <li>当内存、CPU、GC 出问题时如何定位。</li>
 </ol>
+<h2 id="JVM-核心知识图谱"><a href="#JVM-核心知识图谱" class="headerlink" title="JVM 核心知识图谱"></a>JVM 核心知识图谱</h2><p>下图概括了本文中最核心的几组知识：运行时数据区、对象创建流程、类加载生命周期、可达性分析、GC 算法和 G1 收集器。</p>
+<p><img src="/images/tech-docs/jvm-core-map.png" alt="JVM 核心知识图谱"></p>
 <h2 id="2-运行时数据区"><a href="#2-运行时数据区" class="headerlink" title="2. 运行时数据区"></a>2. 运行时数据区</h2><p>JVM 运行时数据区主要包括程序计数器、Java 虚拟机栈、本地方法栈、堆、方法区。直接内存不是 JVM 规范中的运行时数据区，但在 NIO 和高性能服务中非常重要。</p>
 <h3 id="2-1-程序计数器"><a href="#2-1-程序计数器" class="headerlink" title="2.1 程序计数器"></a>2.1 程序计数器</h3><p>程序计数器也叫 PC Register，用于记录当前线程正在执行的字节码指令地址。</p>
 <p>关键特征：</p>
@@ -1012,7 +1016,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidNnKEEYPEzvLPTEv2eCtT4" data-title="JVM" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuid6lMP0PQjbwNgUN0WKbbX3" data-title="JVM" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -1022,15 +1026,20 @@
     
 <nav id="article-nav">
   
-    <a href="/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前一篇</strong>
       <div class="article-nav-title">
         
-          操作系统
+          JAVA SE
         
       </div>
     </a>
   
+  
+    <a href="/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">计网</div>
+    </a>
   
 </nav>
 
@@ -1075,15 +1084,15 @@
           </li>
         
           <li>
+            <a href="/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JVM</a>
+          </li>
+        
+          <li>
             <a href="/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">计网</a>
           </li>
         
           <li>
             <a href="/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">操作系统</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JVM</a>
           </li>
         
       </ul>
