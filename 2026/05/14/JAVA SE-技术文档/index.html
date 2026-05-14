@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>JAVA SE | 张梓亮的技术博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Java SE 技术文档：类型、面向对象、常用类、IO 与反射1. Java SE 核心知识图谱下图使用 image2 生成，概括了本文中最核心的几组知识：面向对象、equals&#x2F;hashCode、Java IO 模型和反射机制。  2. 类型转换Java 的基本数据类型之间存在自动类型转换和强制类型转换。 2.1 自动类型转换当把范围较小的数值或变量赋给范围较大的变量时，会发生自动类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA SE">
+<meta property="og:url" content="http://example.com/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="张梓亮的技术博客">
+<meta property="og:description" content="Java SE 技术文档：类型、面向对象、常用类、IO 与反射1. Java SE 核心知识图谱下图使用 image2 生成，概括了本文中最核心的几组知识：面向对象、equals&#x2F;hashCode、Java IO 模型和反射机制。  2. 类型转换Java 的基本数据类型之间存在自动类型转换和强制类型转换。 2.1 自动类型转换当把范围较小的数值或变量赋给范围较大的变量时，会发生自动类型">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/tech-docs/javase-core-map.png">
+<meta property="article:published_time" content="2026-05-14T13:20:00.000Z">
+<meta property="article:modified_time" content="2026-05-14T13:32:26.238Z">
+<meta property="article:author" content="zzl">
+<meta property="article:tag" content="Java，Agent">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/tech-docs/javase-core-map.png">
+  
+    <link rel="alternate" href="/atom.xml" title="张梓亮的技术博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">张梓亮的技术博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-JAVA SE-技术文档" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="article-date">
+  <time class="dt-published" datetime="2026-05-14T13:20:00.000Z" itemprop="datePublished">2026-05-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      JAVA SE
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Java-SE-技术文档：类型、面向对象、常用类、IO-与反射"><a href="#Java-SE-技术文档：类型、面向对象、常用类、IO-与反射" class="headerlink" title="Java SE 技术文档：类型、面向对象、常用类、IO 与反射"></a>Java SE 技术文档：类型、面向对象、常用类、IO 与反射</h1><h2 id="1-Java-SE-核心知识图谱"><a href="#1-Java-SE-核心知识图谱" class="headerlink" title="1. Java SE 核心知识图谱"></a>1. Java SE 核心知识图谱</h2><p>下图使用 image2 生成，概括了本文中最核心的几组知识：面向对象、<code>equals</code>&#x2F;<code>hashCode</code>、Java IO 模型和反射机制。</p>
+<p><img src="/images/tech-docs/javase-core-map.png" alt="Java SE 核心知识图谱"></p>
+<h2 id="2-类型转换"><a href="#2-类型转换" class="headerlink" title="2. 类型转换"></a>2. 类型转换</h2><p>Java 的基本数据类型之间存在自动类型转换和强制类型转换。</p>
+<h3 id="2-1-自动类型转换"><a href="#2-1-自动类型转换" class="headerlink" title="2.1 自动类型转换"></a>2.1 自动类型转换</h3><p>当把范围较小的数值或变量赋给范围较大的变量时，会发生自动类型转换。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">long</span> <span class="variable">b</span> <span class="operator">=</span> a;</span><br><span class="line"><span class="type">double</span> <span class="variable">c</span> <span class="operator">=</span> b;</span><br></pre></td></tr></table></figure>
+
+<p>常见方向：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">byte -&gt; short -&gt; int -&gt; long -&gt; float -&gt; double</span><br><span class="line">char -&gt; int -&gt; long -&gt; float -&gt; double</span><br></pre></td></tr></table></figure>
+
+<p>注意，<code>float</code> 的表示范围比 <code>long</code> 大，但精度不一定更高。自动转换不代表完全无损。</p>
+<h3 id="2-2-强制类型转换"><a href="#2-2-强制类型转换" class="headerlink" title="2.2 强制类型转换"></a>2.2 强制类型转换</h3><p>当把范围较大的类型转换为范围较小的类型时，需要强制转换。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="variable">d</span> <span class="operator">=</span> <span class="number">12.8</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> (<span class="type">int</span>) d; <span class="comment">// 12</span></span><br></pre></td></tr></table></figure>
+
+<p>风险：</p>
+<ul>
+<li>可能丢失小数部分。</li>
+<li>可能发生溢出。</li>
+<li>可能损失精度。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">130</span>;</span><br><span class="line"><span class="type">byte</span> <span class="variable">y</span> <span class="operator">=</span> (<span class="type">byte</span>) x;</span><br><span class="line">System.out.println(y); <span class="comment">// -126</span></span><br></pre></td></tr></table></figure>
+
+<p>这是因为 <code>byte</code> 只能表示 <code>-128</code> 到 <code>127</code>，强转后发生了截断。</p>
+<h2 id="3-数值精度与-BigDecimal"><a href="#3-数值精度与-BigDecimal" class="headerlink" title="3. 数值精度与 BigDecimal"></a>3. 数值精度与 BigDecimal</h2><p>浮点数使用二进制表示，很多十进制小数无法被精确表示，因此直接用 <code>double</code> 或 <code>float</code> 做金额计算容易出错。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="number">0.1</span> + <span class="number">0.2</span>); <span class="comment">// 0.30000000000000004</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-如何保证金额精度"><a href="#3-1-如何保证金额精度" class="headerlink" title="3.1 如何保证金额精度"></a>3.1 如何保证金额精度</h3><p>常见方式：</p>
+<ul>
+<li>使用 <code>BigDecimal</code>。</li>
+<li>将金额统一转换为整数单位计算，例如分。</li>
+<li>明确舍入模式。</li>
+<li>避免使用 <code>new BigDecimal(double)</code>。</li>
+</ul>
+<p>推荐写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BigDecimal</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;0.1&quot;</span>);</span><br><span class="line"><span class="type">BigDecimal</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;0.2&quot;</span>);</span><br><span class="line"><span class="type">BigDecimal</span> <span class="variable">result</span> <span class="operator">=</span> a.add(b);</span><br><span class="line">System.out.println(result); <span class="comment">// 0.3</span></span><br></pre></td></tr></table></figure>
+
+<p>不推荐：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BigDecimal</span> <span class="variable">bad</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="number">0.1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>因为 <code>0.1</code> 在传入构造方法前已经是一个不精确的 <code>double</code>。</p>
+<h3 id="3-2-BigDecimal-常见注意点"><a href="#3-2-BigDecimal-常见注意点" class="headerlink" title="3.2 BigDecimal 常见注意点"></a>3.2 BigDecimal 常见注意点</h3><p>除法要指定精度和舍入模式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BigDecimal</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;10&quot;</span>);</span><br><span class="line"><span class="type">BigDecimal</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;3&quot;</span>);</span><br><span class="line"><span class="type">BigDecimal</span> <span class="variable">c</span> <span class="operator">=</span> a.divide(b, <span class="number">2</span>, RoundingMode.HALF_UP);</span><br><span class="line">System.out.println(c); <span class="comment">// 3.33</span></span><br></pre></td></tr></table></figure>
+
+<p>比较大小推荐使用 <code>compareTo</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;1.0&quot;</span>).equals(<span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;1.00&quot;</span>)); <span class="comment">// false</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;1.0&quot;</span>).compareTo(<span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;1.00&quot;</span>)); <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<p><code>equals</code> 会比较数值和精度，<code>compareTo</code> 只比较数值大小。</p>
+<h2 id="4-面向对象与面向过程"><a href="#4-面向对象与面向过程" class="headerlink" title="4. 面向对象与面向过程"></a>4. 面向对象与面向过程</h2><h3 id="4-1-面向过程"><a href="#4-1-面向过程" class="headerlink" title="4.1 面向过程"></a>4.1 面向过程</h3><p>面向过程的核心是过程。程序由函数和步骤组成，强调按顺序完成任务。</p>
+<p>特点：</p>
+<ul>
+<li>以函数为中心。</li>
+<li>适合逻辑简单、流程固定的场景。</li>
+<li>数据和行为通常分离。</li>
+<li>代码复用主要依赖函数。</li>
+</ul>
+<h3 id="4-2-面向对象"><a href="#4-2-面向对象" class="headerlink" title="4.2 面向对象"></a>4.2 面向对象</h3><p>面向对象的核心是对象。对象把数据和行为组织在一起，通过对象之间的交互完成任务。</p>
+<p>特点：</p>
+<ul>
+<li>程序结构由类和对象组成。</li>
+<li>数据和行为封装在对象内部。</li>
+<li>通过继承和多态提升复用与扩展能力。</li>
+<li>更适合复杂业务建模。</li>
+</ul>
+<h3 id="4-3-三大特性"><a href="#4-3-三大特性" class="headerlink" title="4.3 三大特性"></a>4.3 三大特性</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>封装</td>
+<td>把属性和行为放在对象内部，对外暴露受控接口</td>
+</tr>
+<tr>
+<td>继承</td>
+<td>子类复用父类能力，并可以扩展或重写</td>
+</tr>
+<tr>
+<td>多态</td>
+<td>同一接口或父类引用，在运行时表现出不同实现</td>
+</tr>
+</tbody></table>
+<p>多态示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Payment</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">pay</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AliPay</span> <span class="keyword">implements</span> <span class="title class_">Payment</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">pay</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;AliPay&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">WeChatPay</span> <span class="keyword">implements</span> <span class="title class_">Payment</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">pay</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;WeChatPay&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">Payment</span> <span class="variable">payment</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AliPay</span>();</span><br><span class="line">payment.pay();</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-面向对象设计原则"><a href="#5-面向对象设计原则" class="headerlink" title="5. 面向对象设计原则"></a>5. 面向对象设计原则</h2><p>常见原则可以用 SOLID 理解：</p>
+<table>
+<thead>
+<tr>
+<th>原则</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单一职责原则</td>
+<td>一个类只负责一个清晰职责</td>
+</tr>
+<tr>
+<td>开闭原则</td>
+<td>对扩展开放，对修改关闭</td>
+</tr>
+<tr>
+<td>里氏替换原则</td>
+<td>子类应能替换父类而不破坏程序正确性</td>
+</tr>
+<tr>
+<td>接口隔离原则</td>
+<td>不强迫实现类依赖不需要的方法</td>
+</tr>
+<tr>
+<td>依赖倒置原则</td>
+<td>面向抽象编程，高层模块不依赖低层实现</td>
+</tr>
+</tbody></table>
+<p>这些原则不是教条。它们的目的都是降低耦合、提高可维护性和扩展性。</p>
+<h2 id="6-访问修饰符"><a href="#6-访问修饰符" class="headerlink" title="6. 访问修饰符"></a>6. 访问修饰符</h2><p>Java 常见访问修饰符：</p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>同类</th>
+<th>同包</th>
+<th>子类</th>
+<th>任意位置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>private</code></td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>default</td>
+<td>是</td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td><code>protected</code></td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td><code>public</code></td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+</tr>
+</tbody></table>
+<p>说明：</p>
+<ul>
+<li><code>private</code> 可以修饰变量、方法、构造器，不能修饰外部类。</li>
+<li>default 表示不写访问修饰符，同一包内可见。</li>
+<li><code>protected</code> 对同包和子类可见。</li>
+<li><code>public</code> 对所有类可见。</li>
+</ul>
+<h2 id="7-抽象类与接口"><a href="#7-抽象类与接口" class="headerlink" title="7. 抽象类与接口"></a>7. 抽象类与接口</h2><h3 id="7-1-抽象类"><a href="#7-1-抽象类" class="headerlink" title="7.1 抽象类"></a>7.1 抽象类</h3><p>抽象类用于抽取一类对象的公共属性和行为，可以包含抽象方法，也可以包含普通方法。</p>
+<p>特点：</p>
+<ul>
+<li>使用 <code>abstract</code> 修饰。</li>
+<li>不能直接实例化。</li>
+<li>可以有构造方法。</li>
+<li>可以有成员变量。</li>
+<li>一个类只能继承一个抽象类。</li>
+</ul>
+<h3 id="7-2-接口"><a href="#7-2-接口" class="headerlink" title="7.2 接口"></a>7.2 接口</h3><p>接口用于定义行为规范，强调“能做什么”。</p>
+<p>特点：</p>
+<ul>
+<li>一个类可以实现多个接口。</li>
+<li>接口中的方法默认是 <code>public abstract</code>，Java 8 后可以有默认方法和静态方法。</li>
+<li>接口中的变量默认是 <code>public static final</code>。</li>
+<li>接口不能有普通构造方法。</li>
+</ul>
+<h3 id="7-3-对比"><a href="#7-3-对比" class="headerlink" title="7.3 对比"></a>7.3 对比</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>抽象类</th>
+<th>接口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>继承&#x2F;实现数量</td>
+<td>单继承</td>
+<td>多实现</td>
+</tr>
+<tr>
+<td>构造方法</td>
+<td>可以有</td>
+<td>没有普通构造方法</td>
+</tr>
+<tr>
+<td>成员变量</td>
+<td>可以有实例变量</td>
+<td>默认常量</td>
+</tr>
+<tr>
+<td>设计意图</td>
+<td>复用公共状态和行为</td>
+<td>定义能力和规范</td>
+</tr>
+<tr>
+<td>关系表达</td>
+<td>is-a</td>
+<td>can-do</td>
+</tr>
+</tbody></table>
+<p>经验上，如果需要复用状态和基础逻辑，用抽象类；如果只是定义能力边界，用接口。</p>
+<h2 id="8-与-equals"><a href="#8-与-equals" class="headerlink" title="8. == 与 equals"></a>8. <code>==</code> 与 <code>equals</code></h2><p><code>==</code> 和 <code>equals</code> 的区别：</p>
+<ul>
+<li>基本数据类型使用 <code>==</code> 比较值。</li>
+<li>引用类型使用 <code>==</code> 比较引用地址。</li>
+<li><code>Object.equals</code> 默认也是比较引用地址。</li>
+<li>类重写 <code>equals</code> 后，可以按业务含义比较值。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(a == b);      <span class="comment">// false</span></span><br><span class="line">System.out.println(a.equals(b)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="9-为什么重写-equals-必须重写-hashCode"><a href="#9-为什么重写-equals-必须重写-hashCode" class="headerlink" title="9. 为什么重写 equals 必须重写 hashCode"></a>9. 为什么重写 <code>equals</code> 必须重写 <code>hashCode</code></h2><p>哈希容器如 <code>HashMap</code>、<code>HashSet</code> 查找对象时，通常先通过 <code>hashCode</code> 定位桶，再用 <code>equals</code> 比较桶内对象。</p>
+<p>如果两个对象 <code>equals</code> 相等，它们的 <code>hashCode</code> 必须相等。</p>
+<p>错误示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!(obj <span class="keyword">instanceof</span> User other)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Objects.equals(<span class="built_in">this</span>.name, other.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>只重写 <code>equals</code> 不重写 <code>hashCode</code>，逻辑上相等的对象可能落在不同桶中，导致 <code>HashSet</code> 去重失败或 <code>HashMap</code> 查找失败。</p>
+<p>推荐使用 IDE 生成，或使用 <code>Objects.hash</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">hashCode</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> Objects.hash(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-深拷贝与浅拷贝"><a href="#10-深拷贝与浅拷贝" class="headerlink" title="10. 深拷贝与浅拷贝"></a>10. 深拷贝与浅拷贝</h2><p>浅拷贝：</p>
+<ul>
+<li>创建一个新对象。</li>
+<li>基本类型字段复制值。</li>
+<li>引用类型字段复制地址。</li>
+<li>新旧对象会共享引用字段指向的子对象。</li>
+</ul>
+<p>深拷贝：</p>
+<ul>
+<li>创建一个新对象。</li>
+<li>递归复制引用字段指向的子对象。</li>
+<li>新旧对象之间不共享可变子对象。</li>
+</ul>
+<p>示例场景：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    String name;</span><br><span class="line">    Address address;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果浅拷贝 <code>User</code>，两个 <code>User</code> 可能指向同一个 <code>Address</code>。修改其中一个用户的地址对象，另一个也会受到影响。</p>
+<p>深拷贝实现方式：</p>
+<ul>
+<li>手动递归复制。</li>
+<li>拷贝构造方法。</li>
+<li>序列化和反序列化。</li>
+<li>JSON 转换。</li>
+<li>第三方工具。</li>
+</ul>
+<p>工程中优先使用明确的拷贝构造或工厂方法，避免隐式深拷贝带来的性能和语义问题。</p>
+<h2 id="11-String、StringBuilder、StringBuffer"><a href="#11-String、StringBuilder、StringBuffer" class="headerlink" title="11. String、StringBuilder、StringBuffer"></a>11. String、StringBuilder、StringBuffer</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>是否可变</th>
+<th>线程安全</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>String</code></td>
+<td>不可变</td>
+<td>安全</td>
+<td>少量字符串、常量、不可变值</td>
+</tr>
+<tr>
+<td><code>StringBuilder</code></td>
+<td>可变</td>
+<td>不安全</td>
+<td>单线程频繁拼接</td>
+</tr>
+<tr>
+<td><code>StringBuffer</code></td>
+<td>可变</td>
+<td>安全</td>
+<td>多线程共享拼接，较少使用</td>
+</tr>
+</tbody></table>
+<p><code>String</code> 不可变的好处：</p>
+<ul>
+<li>可以安全放入字符串常量池。</li>
+<li>可以缓存 hash 值。</li>
+<li>适合作为 <code>HashMap</code> key。</li>
+<li>线程安全。</li>
+</ul>
+<p>频繁拼接字符串时：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">sb.append(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">sb.append(<span class="string">&quot; &quot;</span>);</span><br><span class="line">sb.append(<span class="string">&quot;java&quot;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> sb.toString();</span><br></pre></td></tr></table></figure>
+
+<h2 id="12-Object-常见方法"><a href="#12-Object-常见方法" class="headerlink" title="12. Object 常见方法"></a>12. Object 常见方法</h2><p><code>Object</code> 是所有 Java 类的根类，常见方法包括：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>equals</code></td>
+<td>判断对象是否相等</td>
+</tr>
+<tr>
+<td><code>hashCode</code></td>
+<td>返回对象哈希码</td>
+</tr>
+<tr>
+<td><code>toString</code></td>
+<td>返回对象字符串表示</td>
+</tr>
+<tr>
+<td><code>clone</code></td>
+<td>创建对象副本</td>
+</tr>
+<tr>
+<td><code>wait</code></td>
+<td>让当前线程等待</td>
+</tr>
+<tr>
+<td><code>notify</code></td>
+<td>唤醒一个等待线程</td>
+</tr>
+<tr>
+<td><code>notifyAll</code></td>
+<td>唤醒所有等待线程</td>
+</tr>
+<tr>
+<td><code>getClass</code></td>
+<td>获取运行时 Class 对象</td>
+</tr>
+<tr>
+<td><code>finalize</code></td>
+<td>对象回收前回调，已不推荐</td>
+</tr>
+</tbody></table>
+<p><code>wait</code>、<code>notify</code>、<code>notifyAll</code> 必须在持有对象监视器锁时调用，通常放在 <code>synchronized</code> 代码块中。</p>
+<h2 id="13-Java-IO-流"><a href="#13-Java-IO-流" class="headerlink" title="13. Java IO 流"></a>13. Java IO 流</h2><p>Java IO 可以按多个维度分类。</p>
+<h3 id="13-1-按数据方向"><a href="#13-1-按数据方向" class="headerlink" title="13.1 按数据方向"></a>13.1 按数据方向</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>输入流</td>
+<td>从外部读取数据到程序</td>
+</tr>
+<tr>
+<td>输出流</td>
+<td>从程序写出数据到外部</td>
+</tr>
+</tbody></table>
+<h3 id="13-2-按数据单位"><a href="#13-2-按数据单位" class="headerlink" title="13.2 按数据单位"></a>13.2 按数据单位</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+<th>常见类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字节流</td>
+<td>以字节为单位</td>
+<td><code>InputStream</code>、<code>OutputStream</code></td>
+</tr>
+<tr>
+<td>字符流</td>
+<td>以字符为单位</td>
+<td><code>Reader</code>、<code>Writer</code></td>
+</tr>
+</tbody></table>
+<p>字符流适合处理文本，字节流适合处理图片、音频、视频、二进制文件。</p>
+<h3 id="13-3-按功能"><a href="#13-3-按功能" class="headerlink" title="13.3 按功能"></a>13.3 按功能</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>节点流</td>
+<td>直接连接数据源</td>
+</tr>
+<tr>
+<td>处理流</td>
+<td>包装其他流，增强功能</td>
+</tr>
+<tr>
+<td>管道流</td>
+<td>用于线程间通信</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">BufferedReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">FileReader</span>(<span class="string">&quot;data.txt&quot;</span>))) &#123;</span><br><span class="line">    String line;</span><br><span class="line">    <span class="keyword">while</span> ((line = reader.readLine()) != <span class="literal">null</span>) &#123;</span><br><span class="line">        System.out.println(line);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>FileReader</code> 是节点流，<code>BufferedReader</code> 是处理流。</p>
+<h2 id="14-BIO、NIO、AIO"><a href="#14-BIO、NIO、AIO" class="headerlink" title="14. BIO、NIO、AIO"></a>14. BIO、NIO、AIO</h2><h3 id="14-1-BIO"><a href="#14-1-BIO" class="headerlink" title="14.1 BIO"></a>14.1 BIO</h3><p>BIO 是同步阻塞 IO。</p>
+<p>特点：</p>
+<ul>
+<li>一个连接通常对应一个线程。</li>
+<li>线程在等待 IO 时不能处理其他任务。</li>
+<li>编程模型简单。</li>
+<li>并发连接很多时线程资源消耗大。</li>
+</ul>
+<h3 id="14-2-NIO"><a href="#14-2-NIO" class="headerlink" title="14.2 NIO"></a>14.2 NIO</h3><p>NIO 是同步非阻塞 IO。</p>
+<p>核心组件：</p>
+<ul>
+<li><code>Buffer</code></li>
+<li><code>Channel</code></li>
+<li><code>Selector</code></li>
+</ul>
+<p>一个线程可以通过 <code>Selector</code> 监听多个 <code>Channel</code> 的事件，适合高并发网络服务。</p>
+<h3 id="14-3-AIO"><a href="#14-3-AIO" class="headerlink" title="14.3 AIO"></a>14.3 AIO</h3><p>AIO 是异步 IO。</p>
+<p>特点：</p>
+<ul>
+<li>线程发起 IO 请求后立即返回。</li>
+<li>IO 操作完成后通过回调或 Future 通知应用。</li>
+<li>更接近真正的异步模型。</li>
+</ul>
+<h3 id="14-4-对比"><a href="#14-4-对比" class="headerlink" title="14.4 对比"></a>14.4 对比</h3><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>等待方式</th>
+<th>线程模型</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BIO</td>
+<td>阻塞等待</td>
+<td>连接多则线程多</td>
+<td>简单低并发</td>
+</tr>
+<tr>
+<td>NIO</td>
+<td>就绪通知后应用读写</td>
+<td>少量线程管理多连接</td>
+<td>高并发网络</td>
+</tr>
+<tr>
+<td>AIO</td>
+<td>完成后通知</td>
+<td>回调或 Future</td>
+<td>异步文件或网络 IO</td>
+</tr>
+</tbody></table>
+<h2 id="15-Java-反射"><a href="#15-Java-反射" class="headerlink" title="15. Java 反射"></a>15. Java 反射</h2><p>反射是指程序在运行时动态获取和操作类结构的能力，包括类、接口、字段、方法、构造器等。</p>
+<p>常见能力：</p>
+<ul>
+<li>获取类信息。</li>
+<li>创建对象。</li>
+<li>访问字段。</li>
+<li>调用方法。</li>
+<li>读取注解。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; clazz = Class.forName(<span class="string">&quot;com.example.User&quot;</span>);</span><br><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> clazz.getDeclaredConstructor().newInstance();</span><br><span class="line"><span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> clazz.getDeclaredMethod(<span class="string">&quot;setName&quot;</span>, String.class);</span><br><span class="line">method.invoke(obj, <span class="string">&quot;Tom&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>典型应用：</p>
+<ul>
+<li>Spring 根据配置或注解创建 Bean。</li>
+<li>AOP 实现方法拦截和增强。</li>
+<li>ORM 框架根据字段映射数据库列。</li>
+<li>单元测试和工具框架动态调用方法。</li>
+</ul>
+<p>反射缺点：</p>
+<ul>
+<li>性能通常低于直接调用。</li>
+<li>破坏封装。</li>
+<li>编译期类型检查能力弱。</li>
+<li>代码可读性和可维护性下降。</li>
+</ul>
+<h2 id="16-成员变量与局部变量"><a href="#16-成员变量与局部变量" class="headerlink" title="16. 成员变量与局部变量"></a>16. 成员变量与局部变量</h2><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>成员变量</th>
+<th>局部变量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定义位置</td>
+<td>类中、方法外</td>
+<td>方法、构造器或代码块内</td>
+</tr>
+<tr>
+<td>所属对象</td>
+<td>属于类或实例</td>
+<td>属于方法调用</td>
+</tr>
+<tr>
+<td>生命周期</td>
+<td>随类加载或对象创建而存在</td>
+<td>随方法调用创建，方法结束销毁</td>
+</tr>
+<tr>
+<td>默认值</td>
+<td>有默认值</td>
+<td>没有默认值，必须先赋值</td>
+</tr>
+<tr>
+<td>修饰符</td>
+<td>可用访问修饰符、<code>static</code>、<code>final</code></td>
+<td>不能用访问修饰符，可用 <code>final</code></td>
+</tr>
+</tbody></table>
+<p>成员变量如果被 <code>static</code> 修饰，则属于类；否则属于实例。</p>
+<h2 id="17-static-关键字"><a href="#17-static-关键字" class="headerlink" title="17. static 关键字"></a>17. static 关键字</h2><p><code>static</code> 表示属于类，而不是属于某个实例。</p>
+<p>可以修饰：</p>
+<ul>
+<li>变量。</li>
+<li>方法。</li>
+<li>代码块。</li>
+<li>内部类。</li>
+</ul>
+<h3 id="17-1-静态变量"><a href="#17-1-静态变量" class="headerlink" title="17.1 静态变量"></a>17.1 静态变量</h3><p>静态变量属于类，所有实例共享一份数据。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Counter</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="17-2-静态方法"><a href="#17-2-静态方法" class="headerlink" title="17.2 静态方法"></a>17.2 静态方法</h3><p>静态方法属于类，可以通过类名调用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Math.max(<span class="number">1</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>静态方法不能直接访问非静态成员，因为它不依赖具体实例。</p>
+<h3 id="17-3-静态代码块"><a href="#17-3-静态代码块" class="headerlink" title="17.3 静态代码块"></a>17.3 静态代码块</h3><p>静态代码块在类加载时执行一次，常用于初始化静态资源。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">    <span class="comment">// 初始化静态资源</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="18-final-关键字"><a href="#18-final-关键字" class="headerlink" title="18. final 关键字"></a>18. final 关键字</h2><p><code>final</code> 表示不可改变，但具体含义取决于修饰目标。</p>
+<table>
+<thead>
+<tr>
+<th>修饰目标</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类</td>
+<td>不能被继承</td>
+</tr>
+<tr>
+<td>方法</td>
+<td>不能被重写</td>
+</tr>
+<tr>
+<td>基本类型变量</td>
+<td>赋值后值不能改变</td>
+</tr>
+<tr>
+<td>引用类型变量</td>
+<td>赋值后不能再指向其他对象</td>
+</tr>
+</tbody></table>
+<p>注意，<code>final</code> 修饰引用变量时，引用不能变，但对象内部状态仍可能改变。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">list.add(<span class="string">&quot;A&quot;</span>); <span class="comment">// 可以</span></span><br><span class="line"><span class="comment">// list = new ArrayList&lt;&gt;(); // 不可以</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="19-泛型擦除"><a href="#19-泛型擦除" class="headerlink" title="19. 泛型擦除"></a>19. 泛型擦除</h2><p>泛型擦除指 Java 编译器在编译期间擦除泛型类型信息，并替换为原始类型或限定类型。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; names = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">List&lt;Integer&gt; ages = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">System.out.println(names.getClass() == ages.getClass()); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>运行时两者都是 <code>ArrayList</code>。</p>
+<p>泛型擦除带来的影响：</p>
+<ul>
+<li>运行时无法直接获取 <code>List&lt;String&gt;</code> 中的 <code>String</code>。</li>
+<li>不能创建泛型数组。</li>
+<li>基本类型不能作为泛型参数，需要使用包装类型。</li>
+<li>方法重载不能只依赖泛型参数区别。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 编译失败：擦除后方法签名相同</span></span><br><span class="line"><span class="comment">// void test(List&lt;String&gt; list) &#123;&#125;</span></span><br><span class="line"><span class="comment">// void test(List&lt;Integer&gt; list) &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>泛型的主要价值在编译期：</p>
+<ul>
+<li>类型检查。</li>
+<li>减少强制类型转换。</li>
+<li>提升代码可读性。</li>
+</ul>
+<h2 id="20-面试速记"><a href="#20-面试速记" class="headerlink" title="20. 面试速记"></a>20. 面试速记</h2><h3 id="20-1-类型转换"><a href="#20-1-类型转换" class="headerlink" title="20.1 类型转换"></a>20.1 类型转换</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">小范围到大范围：自动类型转换。</span><br><span class="line">大范围到小范围：强制类型转换，可能溢出或丢精度。</span><br></pre></td></tr></table></figure>
+
+<h3 id="20-2-BigDecimal"><a href="#20-2-BigDecimal" class="headerlink" title="20.2 BigDecimal"></a>20.2 BigDecimal</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">金额计算用 BigDecimal 或整数单位。</span><br><span class="line">推荐 new BigDecimal(&quot;0.1&quot;)。</span><br><span class="line">除法要指定精度和舍入模式。</span><br><span class="line">比较数值优先用 compareTo。</span><br></pre></td></tr></table></figure>
+
+<h3 id="20-3-OOP-三大特性"><a href="#20-3-OOP-三大特性" class="headerlink" title="20.3 OOP 三大特性"></a>20.3 OOP 三大特性</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">封装、继承、多态。</span><br></pre></td></tr></table></figure>
+
+<h3 id="20-4-抽象类与接口"><a href="#20-4-抽象类与接口" class="headerlink" title="20.4 抽象类与接口"></a>20.4 抽象类与接口</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">抽象类强调公共状态和复用。</span><br><span class="line">接口强调能力规范和多实现。</span><br><span class="line">类只能继承一个抽象类，但可以实现多个接口。</span><br></pre></td></tr></table></figure>
+
+<h3 id="20-5-equals-与-hashCode"><a href="#20-5-equals-与-hashCode" class="headerlink" title="20.5 equals 与 hashCode"></a>20.5 equals 与 hashCode</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">equals 相等，hashCode 必须相等。</span><br><span class="line">hashCode 相等，equals 不一定相等。</span><br><span class="line">重写 equals 必须重写 hashCode。</span><br></pre></td></tr></table></figure>
+
+<h3 id="20-6-String-系列"><a href="#20-6-String-系列" class="headerlink" title="20.6 String 系列"></a>20.6 String 系列</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String 不可变。</span><br><span class="line">StringBuilder 可变，非线程安全。</span><br><span class="line">StringBuffer 可变，线程安全。</span><br></pre></td></tr></table></figure>
+
+<h3 id="20-7-IO-模型"><a href="#20-7-IO-模型" class="headerlink" title="20.7 IO 模型"></a>20.7 IO 模型</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BIO：同步阻塞。</span><br><span class="line">NIO：同步非阻塞，多路复用。</span><br><span class="line">AIO：异步 IO，完成后通知。</span><br></pre></td></tr></table></figure>
+
+<h3 id="20-8-反射"><a href="#20-8-反射" class="headerlink" title="20.8 反射"></a>20.8 反射</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">反射是在运行时动态获取类信息、创建对象、访问字段、调用方法的机制。</span><br><span class="line">Spring、AOP、ORM、测试框架都大量使用反射。</span><br></pre></td></tr></table></figure>
+
+<h3 id="20-9-static-与-final"><a href="#20-9-static-与-final" class="headerlink" title="20.9 static 与 final"></a>20.9 static 与 final</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">static 属于类。</span><br><span class="line">final 表示不可变：类不可继承、方法不可重写、变量不可重新赋值。</span><br></pre></td></tr></table></figure>
+
+<h3 id="20-10-泛型擦除"><a href="#20-10-泛型擦除" class="headerlink" title="20.10 泛型擦除"></a>20.10 泛型擦除</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">泛型主要在编译期生效，运行期类型信息会被擦除为原始类型或限定类型。</span><br></pre></td></tr></table></figure>
+
+<h2 id="21-总结"><a href="#21-总结" class="headerlink" title="21. 总结"></a>21. 总结</h2><p>Java SE 基础可以按五条主线理解：</p>
+<ol>
+<li>类型与数值：类型转换、精度、<code>BigDecimal</code>。</li>
+<li>面向对象：封装、继承、多态、抽象类、接口。</li>
+<li>对象语义：<code>equals</code>、<code>hashCode</code>、拷贝、<code>String</code>。</li>
+<li>基础 API：<code>Object</code>、IO、BIO&#x2F;NIO&#x2F;AIO、反射。</li>
+<li>语言机制：作用域、<code>static</code>、<code>final</code>、泛型擦除。</li>
+</ol>
+<p>这些知识点看起来零散，但都直接影响代码正确性、可维护性和框架理解。面试复习时不要只背结论，最好能用一两个代码例子解释每个点的边界和常见坑。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidC-XQzYZl-j-8-ldHQ6Ibs" data-title="JAVA SE" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2099/12/31/about-me/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          欢迎来到我的技术博客
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">计网</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2099/12/">十二月 2099</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">五月 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2099/12/31/about-me/">欢迎来到我的技术博客</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JAVA SE</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">计网</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">操作系统</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JVM</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 zzl<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

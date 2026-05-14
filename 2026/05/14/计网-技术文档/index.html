@@ -6,15 +6,15 @@
   
   <title>计网 | 张梓亮的技术博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="分层模型、HTTP、HTTPS、TCP 与网络排查1. 网络分层模型网络分层的意义是把复杂通信拆成多个职责清晰的层次。每一层只关心自己的任务，并向上层提供服务。 1.1 OSI 七层模型   层级 名称 核心职责 常见例子    7 应用层 为应用程序提供网络接口 HTTP、FTP、SMTP、DNS   6 表示层 数据格式化、加密解密、压缩解压 TLS、编码转换   5 会话层 建立、维护、管理">
+  <meta name="description" content="计算机网络技术文档：分层模型、HTTP、HTTPS、TCP 与网络排查1. 网络分层模型网络分层的意义是把复杂通信拆成多个职责清晰的层次。每一层只关心自己的任务，并向上层提供服务。 1.1 OSI 七层模型   层级 名称 核心职责 常见例子    7 应用层 为应用程序提供网络接口 HTTP、FTP、SMTP、DNS   6 表示层 数据格式化、加密解密、压缩解压 TLS、编码转换   5 会话">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计网">
 <meta property="og:url" content="http://example.com/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/index.html">
 <meta property="og:site_name" content="张梓亮的技术博客">
-<meta property="og:description" content="分层模型、HTTP、HTTPS、TCP 与网络排查1. 网络分层模型网络分层的意义是把复杂通信拆成多个职责清晰的层次。每一层只关心自己的任务，并向上层提供服务。 1.1 OSI 七层模型   层级 名称 核心职责 常见例子    7 应用层 为应用程序提供网络接口 HTTP、FTP、SMTP、DNS   6 表示层 数据格式化、加密解密、压缩解压 TLS、编码转换   5 会话层 建立、维护、管理">
+<meta property="og:description" content="计算机网络技术文档：分层模型、HTTP、HTTPS、TCP 与网络排查1. 网络分层模型网络分层的意义是把复杂通信拆成多个职责清晰的层次。每一层只关心自己的任务，并向上层提供服务。 1.1 OSI 七层模型   层级 名称 核心职责 常见例子    7 应用层 为应用程序提供网络接口 HTTP、FTP、SMTP、DNS   6 表示层 数据格式化、加密解密、压缩解压 TLS、编码转换   5 会话">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-05-14T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-14T09:28:46.116Z">
+<meta property="article:modified_time" content="2026-05-14T13:32:13.400Z">
 <meta property="article:author" content="zzl">
 <meta property="article:tag" content="Java，Agent">
 <meta name="twitter:card" content="summary">
@@ -96,7 +96,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="分层模型、HTTP、HTTPS、TCP-与网络排查"><a href="#分层模型、HTTP、HTTPS、TCP-与网络排查" class="headerlink" title="分层模型、HTTP、HTTPS、TCP 与网络排查"></a>分层模型、HTTP、HTTPS、TCP 与网络排查</h1><h2 id="1-网络分层模型"><a href="#1-网络分层模型" class="headerlink" title="1. 网络分层模型"></a>1. 网络分层模型</h2><p>网络分层的意义是把复杂通信拆成多个职责清晰的层次。每一层只关心自己的任务，并向上层提供服务。</p>
+        <h1 id="计算机网络技术文档：分层模型、HTTP、HTTPS、TCP-与网络排查"><a href="#计算机网络技术文档：分层模型、HTTP、HTTPS、TCP-与网络排查" class="headerlink" title="计算机网络技术文档：分层模型、HTTP、HTTPS、TCP 与网络排查"></a>计算机网络技术文档：分层模型、HTTP、HTTPS、TCP 与网络排查</h1><h2 id="1-网络分层模型"><a href="#1-网络分层模型" class="headerlink" title="1. 网络分层模型"></a>1. 网络分层模型</h2><p>网络分层的意义是把复杂通信拆成多个职责清晰的层次。每一层只关心自己的任务，并向上层提供服务。</p>
 <h3 id="1-1-OSI-七层模型"><a href="#1-1-OSI-七层模型" class="headerlink" title="1.1 OSI 七层模型"></a>1.1 OSI 七层模型</h3><table>
 <thead>
 <tr>
@@ -182,8 +182,6 @@
 <p>数据发送时从应用层一路向下封装，接收时从网络接口层一路向上解封装。</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">应用数据 -&gt; TCP/UDP 段 -&gt; IP 包 -&gt; 以太网帧 -&gt; 比特流</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">flowchart TB</span><br><span class="line">    A[应用层&lt;br/&gt;HTTP / DNS / SMTP] --&gt; B[传输层&lt;br/&gt;TCP / UDP]</span><br><span class="line">    B --&gt; C[网络层&lt;br/&gt;IP / ICMP]</span><br><span class="line">    C --&gt; D[网络接口层&lt;br/&gt;Ethernet / ARP / Wi-Fi]</span><br><span class="line">    D --&gt; E[物理介质&lt;br/&gt;比特流]</span><br><span class="line">    E -. 接收方逐层解封装 .-&gt; D</span><br><span class="line">    D -. 去掉帧头 .-&gt; C</span><br><span class="line">    C -. 去掉 IP 头 .-&gt; B</span><br><span class="line">    B -. 去掉 TCP/UDP 头 .-&gt; A</span><br></pre></td></tr></table></figure>
-
 <h2 id="2-从输入-URL-到网页显示"><a href="#2-从输入-URL-到网页显示" class="headerlink" title="2. 从输入 URL 到网页显示"></a>2. 从输入 URL 到网页显示</h2><p>在浏览器地址栏输入 URL 到页面展示，典型过程如下：</p>
 <ol>
 <li>浏览器解析 URL，确认协议、域名、端口、路径和参数。</li>
@@ -229,8 +227,6 @@
 <td>HTTP</td>
 </tr>
 </tbody></table>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    participant U as 浏览器</span><br><span class="line">    participant D as DNS</span><br><span class="line">    participant S as Web服务器</span><br><span class="line">    participant A as 应用服务</span><br><span class="line"></span><br><span class="line">    U-&gt;&gt;D: 查询域名对应 IP</span><br><span class="line">    D--&gt;&gt;U: 返回 IP 地址</span><br><span class="line">    U-&gt;&gt;S: TCP 三次握手</span><br><span class="line">    opt HTTPS</span><br><span class="line">        U-&gt;&gt;S: TLS 握手与密钥协商</span><br><span class="line">    end</span><br><span class="line">    U-&gt;&gt;S: 发送 HTTP 请求</span><br><span class="line">    S-&gt;&gt;A: 处理业务逻辑</span><br><span class="line">    A--&gt;&gt;S: 返回业务结果</span><br><span class="line">    S--&gt;&gt;U: HTTP 响应</span><br><span class="line">    U-&gt;&gt;U: 解析资源并渲染页面</span><br></pre></td></tr></table></figure>
-
 <h2 id="3-DNS-解析"><a href="#3-DNS-解析" class="headerlink" title="3. DNS 解析"></a>3. DNS 解析</h2><p>DNS 用于把域名解析成 IP 地址。</p>
 <h3 id="3-1-解析流程"><a href="#3-1-解析流程" class="headerlink" title="3.1 解析流程"></a>3.1 解析流程</h3><p>常见递归解析过程：</p>
 <ol>
@@ -245,8 +241,6 @@
 <li>权威域名服务器返回目标域名的 IP 地址。</li>
 <li>本地 DNS 缓存结果并返回给客户端。</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    participant B as 浏览器/系统</span><br><span class="line">    participant L as 本地DNS</span><br><span class="line">    participant R as 根DNS</span><br><span class="line">    participant T as 顶级域DNS</span><br><span class="line">    participant A as 权威DNS</span><br><span class="line"></span><br><span class="line">    B-&gt;&gt;B: 查浏览器缓存 / hosts / 系统缓存</span><br><span class="line">    B-&gt;&gt;L: 递归查询 example.com</span><br><span class="line">    L-&gt;&gt;R: 查询根域</span><br><span class="line">    R--&gt;&gt;L: 返回顶级域 DNS</span><br><span class="line">    L-&gt;&gt;T: 查询 .com</span><br><span class="line">    T--&gt;&gt;L: 返回权威 DNS</span><br><span class="line">    L-&gt;&gt;A: 查询 example.com</span><br><span class="line">    A--&gt;&gt;L: 返回 IP</span><br><span class="line">    L--&gt;&gt;B: 返回并缓存 IP</span><br></pre></td></tr></table></figure>
-
 <h3 id="3-2-递归查询与迭代查询"><a href="#3-2-递归查询与迭代查询" class="headerlink" title="3.2 递归查询与迭代查询"></a>3.2 递归查询与迭代查询</h3><table>
 <thead>
 <tr>
@@ -499,8 +493,6 @@
 <li>后续数据使用会话密钥进行对称加密传输。</li>
 </ol>
 <p>TLS 1.3 简化了握手流程，减少了往返次数，安全性也更好。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    participant C as 客户端</span><br><span class="line">    participant S as 服务端</span><br><span class="line"></span><br><span class="line">    C-&gt;&gt;S: ClientHello&lt;br/&gt;版本、随机数、加密套件</span><br><span class="line">    S--&gt;&gt;C: ServerHello + 证书&lt;br/&gt;选择套件、服务端随机数</span><br><span class="line">    C-&gt;&gt;C: 验证证书链、域名和有效期</span><br><span class="line">    C-&gt;&gt;S: 密钥交换材料 / Finished</span><br><span class="line">    S--&gt;&gt;C: Finished</span><br><span class="line">    C-&gt;&gt;S: 使用会话密钥加密 HTTP 数据</span><br><span class="line">    S--&gt;&gt;C: 使用会话密钥加密响应数据</span><br></pre></td></tr></table></figure>
-
 <h2 id="7-Cookie-与-Session"><a href="#7-Cookie-与-Session" class="headerlink" title="7. Cookie 与 Session"></a>7. Cookie 与 Session</h2><h3 id="7-1-Cookie"><a href="#7-1-Cookie" class="headerlink" title="7.1 Cookie"></a>7.1 Cookie</h3><p>Cookie 保存在客户端。服务端通过响应头让浏览器保存 Cookie，浏览器后续访问同一站点时会携带 Cookie。</p>
 <p>典型响应头：</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span><span class="punctuation">: </span>sid=abc123; Path=/; HttpOnly; Secure; SameSite=Lax</span><br></pre></td></tr></table></figure>
@@ -577,8 +569,6 @@
 <td>需要共享存储或路由策略</td>
 </tr>
 </tbody></table>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    participant B as 浏览器</span><br><span class="line">    participant S as 应用服务器</span><br><span class="line">    participant R as Session存储</span><br><span class="line"></span><br><span class="line">    B-&gt;&gt;S: 登录请求</span><br><span class="line">    S-&gt;&gt;R: 创建 Session</span><br><span class="line">    R--&gt;&gt;S: 返回 Session ID</span><br><span class="line">    S--&gt;&gt;B: Set-Cookie: sid=...</span><br><span class="line">    B-&gt;&gt;S: 后续请求携带 Cookie: sid=...</span><br><span class="line">    S-&gt;&gt;R: 根据 sid 查询状态</span><br><span class="line">    R--&gt;&gt;S: 返回用户状态</span><br><span class="line">    S--&gt;&gt;B: 返回业务响应</span><br></pre></td></tr></table></figure>
-
 <h2 id="8-TCP-基础"><a href="#8-TCP-基础" class="headerlink" title="8. TCP 基础"></a>8. TCP 基础</h2><p>TCP 是面向连接、可靠、基于字节流的传输层协议。</p>
 <p>核心特征：</p>
 <ul>
@@ -595,8 +585,6 @@
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">客户端 -&gt; 服务端：SYN，seq = x</span><br><span class="line">服务端 -&gt; 客户端：SYN + ACK，seq = y，ack = x + 1</span><br><span class="line">客户端 -&gt; 服务端：ACK，seq = x + 1，ack = y + 1</span><br></pre></td></tr></table></figure>
 
 <p>连接建立后，双方进入 <code>ESTABLISHED</code> 状态。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    participant C as 客户端</span><br><span class="line">    participant S as 服务端</span><br><span class="line"></span><br><span class="line">    C-&gt;&gt;S: SYN, seq=x</span><br><span class="line">    S--&gt;&gt;C: SYN+ACK, seq=y, ack=x+1</span><br><span class="line">    C-&gt;&gt;S: ACK, ack=y+1</span><br><span class="line">    Note over C,S: 进入 ESTABLISHED，开始传输数据</span><br></pre></td></tr></table></figure>
-
 <h3 id="9-1-为什么不能是两次握手"><a href="#9-1-为什么不能是两次握手" class="headerlink" title="9.1 为什么不能是两次握手"></a>9.1 为什么不能是两次握手</h3><p>两次握手的问题：</p>
 <ul>
 <li>无法确认客户端收到了服务端的初始序列号。</li>
@@ -1048,7 +1036,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidwGCVv7upAtKF5KrsNAX2T" data-title="计网" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidtdaKdTpZA9q-Fb_MbC0gN" data-title="计网" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -1058,11 +1046,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前一篇</strong>
       <div class="article-nav-title">
         
-          JVM
+          JAVA SE
         
       </div>
     </a>
@@ -1112,7 +1100,7 @@
           </li>
         
           <li>
-            <a href="/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JVM</a>
+            <a href="/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JAVA SE</a>
           </li>
         
           <li>
@@ -1121,6 +1109,10 @@
         
           <li>
             <a href="/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">操作系统</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JVM</a>
           </li>
         
       </ul>
