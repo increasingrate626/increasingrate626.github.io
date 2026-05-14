@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>JAVA 集合 | 张梓亮的技术博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Java 集合技术文档：Collection、Map、HashMap、并发集合与常见面试点1. Java 集合核心知识图谱Java 集合框架可以先按两条主线理解：一条是 Collection，负责存放单个元素；另一条是 Map，负责存放键值对。常见面试题基本都围绕存储结构、扩容、哈希冲突、线程安全和遍历一致性展开。  2. 集合框架整体结构Java 集合框架主要位于 java.util 包下，并在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA 集合">
+<meta property="og:url" content="http://example.com/2026/05/14/JAVA%E9%9B%86%E5%90%88-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="张梓亮的技术博客">
+<meta property="og:description" content="Java 集合技术文档：Collection、Map、HashMap、并发集合与常见面试点1. Java 集合核心知识图谱Java 集合框架可以先按两条主线理解：一条是 Collection，负责存放单个元素；另一条是 Map，负责存放键值对。常见面试题基本都围绕存储结构、扩容、哈希冲突、线程安全和遍历一致性展开。  2. 集合框架整体结构Java 集合框架主要位于 java.util 包下，并在">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/tech-docs/java-collections-core-map.png">
+<meta property="og:image" content="http://example.com/images/tech-docs/java-collections-arraylist-copy.png">
+<meta property="og:image" content="http://example.com/images/tech-docs/java-collections-hashmap-put-flow.jpeg">
+<meta property="article:published_time" content="2026-05-14T14:08:00.000Z">
+<meta property="article:modified_time" content="2026-05-14T14:14:25.344Z">
+<meta property="article:author" content="zzl">
+<meta property="article:tag" content="Java，Agent">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/tech-docs/java-collections-core-map.png">
+  
+    <link rel="alternate" href="/atom.xml" title="张梓亮的技术博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">张梓亮的技术博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-JAVA集合-技术文档" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/14/JAVA%E9%9B%86%E5%90%88-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="article-date">
+  <time class="dt-published" datetime="2026-05-14T14:08:00.000Z" itemprop="datePublished">2026-05-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      JAVA 集合
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Java-集合技术文档：Collection、Map、HashMap、并发集合与常见面试点"><a href="#Java-集合技术文档：Collection、Map、HashMap、并发集合与常见面试点" class="headerlink" title="Java 集合技术文档：Collection、Map、HashMap、并发集合与常见面试点"></a>Java 集合技术文档：Collection、Map、HashMap、并发集合与常见面试点</h1><h2 id="1-Java-集合核心知识图谱"><a href="#1-Java-集合核心知识图谱" class="headerlink" title="1. Java 集合核心知识图谱"></a>1. Java 集合核心知识图谱</h2><p>Java 集合框架可以先按两条主线理解：一条是 <code>Collection</code>，负责存放单个元素；另一条是 <code>Map</code>，负责存放键值对。常见面试题基本都围绕存储结构、扩容、哈希冲突、线程安全和遍历一致性展开。</p>
+<p><img src="/images/tech-docs/java-collections-core-map.png" alt="Java 集合框架核心图谱"></p>
+<h2 id="2-集合框架整体结构"><a href="#2-集合框架整体结构" class="headerlink" title="2. 集合框架整体结构"></a>2. 集合框架整体结构</h2><p>Java 集合框架主要位于 <code>java.util</code> 包下，并在 <code>java.util.concurrent</code> 中提供并发容器。</p>
+<p>常见分类：</p>
+<ul>
+<li><code>List</code>：有序、可重复，典型实现有 <code>ArrayList</code>、<code>LinkedList</code>。</li>
+<li><code>Set</code>：不允许重复，典型实现有 <code>HashSet</code>、<code>LinkedHashSet</code>、<code>TreeSet</code>。</li>
+<li><code>Queue</code>：队列语义，典型实现有 <code>ArrayDeque</code>、<code>PriorityQueue</code>、<code>BlockingQueue</code>。</li>
+<li><code>Map</code>：键值对映射，典型实现有 <code>HashMap</code>、<code>LinkedHashMap</code>、<code>TreeMap</code>、<code>ConcurrentHashMap</code>。</li>
+</ul>
+<p>注意，<code>Map</code> 不继承 <code>Collection</code>，它是集合框架里的另一条独立接口体系。</p>
+<h2 id="3-List：ArrayList-与-LinkedList"><a href="#3-List：ArrayList-与-LinkedList" class="headerlink" title="3. List：ArrayList 与 LinkedList"></a>3. List：ArrayList 与 LinkedList</h2><h3 id="3-1-ArrayList-的底层结构"><a href="#3-1-ArrayList-的底层结构" class="headerlink" title="3.1 ArrayList 的底层结构"></a>3.1 ArrayList 的底层结构</h3><p><code>ArrayList</code> 底层是动态数组，本质上通过 <code>Object[]</code> 保存元素。</p>
+<p>核心特点：</p>
+<ul>
+<li>支持随机访问，<code>get(index)</code> 时间复杂度为 <code>O(1)</code>。</li>
+<li>尾部追加元素通常很快，均摊时间复杂度为 <code>O(1)</code>。</li>
+<li>在中间插入或删除元素时，需要移动后续元素，时间复杂度为 <code>O(n)</code>。</li>
+<li>扩容时会创建新数组，并通过 <code>System.arraycopy()</code> 或 <code>Arrays.copyOf()</code> 迁移元素。</li>
+</ul>
+<p>当新增元素前发现容量不足时，<code>ArrayList</code> 会扩容。常见实现中，新容量大约为旧容量的 <code>1.5</code> 倍。</p>
+<p>下面的图示说明了数组型集合在插入元素时为什么需要移动元素。</p>
+<p><img src="/images/tech-docs/java-collections-arraylist-copy.png" alt="ArrayList 插入元素时的数据迁移"></p>
+<h3 id="3-2-LinkedList-的底层结构"><a href="#3-2-LinkedList-的底层结构" class="headerlink" title="3.2 LinkedList 的底层结构"></a>3.2 LinkedList 的底层结构</h3><p><code>LinkedList</code> 底层是双向链表，每个节点保存当前元素、前驱节点和后继节点。</p>
+<p>核心特点：</p>
+<ul>
+<li>不支持真正的随机访问，按索引查找需要从头或尾遍历，时间复杂度为 <code>O(n)</code>。</li>
+<li>在已定位到节点的情况下，插入和删除节点只需要改指针，时间复杂度为 <code>O(1)</code>。</li>
+<li>每个节点都要额外保存前后指针，内存开销更高。</li>
+<li>同时实现了 <code>List</code> 和 <code>Deque</code>，因此既可以当列表使用，也可以当双端队列使用。</li>
+</ul>
+<p>很多人会简单认为 <code>LinkedList</code> 增删一定比 <code>ArrayList</code> 快，这个结论不完整。实际业务中，如果先要按下标定位元素，<code>LinkedList</code> 的定位成本往往会抵消它改指针的优势。</p>
+<h3 id="3-3-ArrayList-和-LinkedList-对比"><a href="#3-3-ArrayList-和-LinkedList-对比" class="headerlink" title="3.3 ArrayList 和 LinkedList 对比"></a>3.3 ArrayList 和 LinkedList 对比</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>ArrayList</th>
+<th>LinkedList</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>底层结构</td>
+<td>动态数组</td>
+<td>双向链表</td>
+</tr>
+<tr>
+<td>随机访问</td>
+<td>快，<code>O(1)</code></td>
+<td>慢，<code>O(n)</code></td>
+</tr>
+<tr>
+<td>尾部追加</td>
+<td>快，均摊 <code>O(1)</code></td>
+<td>快，<code>O(1)</code></td>
+</tr>
+<tr>
+<td>中间插入删除</td>
+<td>需要移动元素，<code>O(n)</code></td>
+<td>定位后改指针，定位本身 <code>O(n)</code></td>
+</tr>
+<tr>
+<td>内存占用</td>
+<td>较低</td>
+<td>较高</td>
+</tr>
+<tr>
+<td>典型场景</td>
+<td>查询多、遍历多</td>
+<td>队列、双端队列、已定位节点的插删</td>
+</tr>
+</tbody></table>
+<h2 id="4-Set：去重集合"><a href="#4-Set：去重集合" class="headerlink" title="4. Set：去重集合"></a>4. Set：去重集合</h2><p><code>Set</code> 的核心语义是不允许重复元素。不同实现的区别主要在于是否有序、是否排序，以及底层结构是什么。</p>
+<h3 id="4-1-HashSet"><a href="#4-1-HashSet" class="headerlink" title="4.1 HashSet"></a>4.1 HashSet</h3><p><code>HashSet</code> 底层由 <code>HashMap</code> 实现。向 <code>HashSet</code> 添加元素时，本质上是把元素作为 <code>HashMap</code> 的 key，value 则使用一个固定的占位对象。</p>
+<p>因此，<code>HashSet</code> 判断元素是否重复依赖两个方法：</p>
+<ul>
+<li><code>hashCode()</code>：先判断哈希值是否可能相同。</li>
+<li><code>equals()</code>：当哈希值相同且不是同一个对象时，继续判断逻辑相等。</li>
+</ul>
+<p><code>HashSet.add()</code> 的核心逻辑可以简化理解为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> map.put(e, PRESENT) == <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果自定义对象要放入 <code>HashSet</code> 或作为 <code>HashMap</code> 的 key，一定要同时重写 <code>equals()</code> 和 <code>hashCode()</code>，并保证相等对象的哈希值也相等。</p>
+<h3 id="4-2-LinkedHashSet"><a href="#4-2-LinkedHashSet" class="headerlink" title="4.2 LinkedHashSet"></a>4.2 LinkedHashSet</h3><p><code>LinkedHashSet</code> 在 <code>HashSet</code> 的基础上维护插入顺序。它底层通常依赖 <code>LinkedHashMap</code>，既能利用哈希表提升查找速度，又能通过链表记录顺序。</p>
+<p>适用场景：</p>
+<ul>
+<li>既要去重，又要保留插入顺序。</li>
+<li>需要稳定输出顺序的缓存、去重列表、日志处理等场景。</li>
+</ul>
+<h3 id="4-3-TreeSet"><a href="#4-3-TreeSet" class="headerlink" title="4.3 TreeSet"></a>4.3 TreeSet</h3><p><code>TreeSet</code> 底层基于红黑树，元素会按照自然顺序或自定义比较器排序。</p>
+<p>适用场景：</p>
+<ul>
+<li>需要有序去重。</li>
+<li>需要范围查询，例如 <code>subSet()</code>、<code>headSet()</code>、<code>tailSet()</code>。</li>
+</ul>
+<p>注意，<code>TreeSet</code> 判断重复依赖比较结果是否为 <code>0</code>，而不是只看 <code>equals()</code>。如果比较器设计不合理，可能出现看似不同的对象被当成重复元素的问题。</p>
+<h2 id="5-Map：键值对集合"><a href="#5-Map：键值对集合" class="headerlink" title="5. Map：键值对集合"></a>5. Map：键值对集合</h2><p><code>Map</code> 保存的是 key-value 映射。常见实现的选择通常取决于是否需要排序、顺序、并发安全以及查询效率。</p>
+<table>
+<thead>
+<tr>
+<th>实现</th>
+<th>底层结构</th>
+<th>是否有序</th>
+<th>典型复杂度</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>HashMap</code></td>
+<td>数组 + 链表 + 红黑树</td>
+<td>无序</td>
+<td>平均 <code>O(1)</code></td>
+<td>通用键值存储</td>
+</tr>
+<tr>
+<td><code>LinkedHashMap</code></td>
+<td>哈希表 + 双向链表</td>
+<td>插入顺序或访问顺序</td>
+<td>平均 <code>O(1)</code></td>
+<td>LRU、顺序遍历</td>
+</tr>
+<tr>
+<td><code>TreeMap</code></td>
+<td>红黑树</td>
+<td>按 key 排序</td>
+<td><code>O(log n)</code></td>
+<td>有序映射、范围查询</td>
+</tr>
+<tr>
+<td><code>Hashtable</code></td>
+<td>哈希表</td>
+<td>无序</td>
+<td>平均 <code>O(1)</code></td>
+<td>旧式同步容器，不推荐新代码使用</td>
+</tr>
+<tr>
+<td><code>ConcurrentHashMap</code></td>
+<td>数组 + 链表 + 红黑树 + CAS&#x2F;锁</td>
+<td>无序</td>
+<td>平均 <code>O(1)</code></td>
+<td>高并发键值存储</td>
+</tr>
+</tbody></table>
+<h2 id="6-HashMap-底层原理"><a href="#6-HashMap-底层原理" class="headerlink" title="6. HashMap 底层原理"></a>6. HashMap 底层原理</h2><h3 id="6-1-JDK-7-与-JDK-8-的结构差异"><a href="#6-1-JDK-7-与-JDK-8-的结构差异" class="headerlink" title="6.1 JDK 7 与 JDK 8 的结构差异"></a>6.1 JDK 7 与 JDK 8 的结构差异</h3><p><code>HashMap</code> 的经典面试点是底层结构变化：</p>
+<ul>
+<li>JDK 7：数组 + 链表。</li>
+<li>JDK 8：数组 + 链表 + 红黑树。</li>
+</ul>
+<p>JDK 8 引入红黑树的主要目的是降低哈希冲突严重时的查询成本。当某个桶中的链表过长时，查询会从 <code>O(n)</code> 退化得很明显；树化后可以优化到 <code>O(log n)</code>。</p>
+<h3 id="6-2-HashMap-put-流程"><a href="#6-2-HashMap-put-流程" class="headerlink" title="6.2 HashMap put 流程"></a>6.2 HashMap put 流程</h3><p><code>HashMap</code> 写入元素时，大致会经过计算哈希、定位数组下标、处理哈希冲突、必要时扩容等步骤。</p>
+<p><img src="/images/tech-docs/java-collections-hashmap-put-flow.jpeg" alt="HashMap put 流程图"></p>
+<p>简化流程：</p>
+<ol>
+<li>根据 key 计算扰动后的 hash。</li>
+<li>如果 table 未初始化，则先初始化数组。</li>
+<li>使用 <code>(n - 1) &amp; hash</code> 计算数组下标。</li>
+<li>如果桶为空，直接创建节点。</li>
+<li>如果桶不为空，判断 key 是否相同。</li>
+<li>如果是链表，尾插新节点；如果是红黑树，则按树节点插入。</li>
+<li>插入后检查是否需要树化或扩容。</li>
+</ol>
+<h3 id="6-3-hash-函数为什么要高低位异或"><a href="#6-3-hash-函数为什么要高低位异或" class="headerlink" title="6.3 hash 函数为什么要高低位异或"></a>6.3 hash 函数为什么要高低位异或</h3><p>JDK 8 中常见的 hash 扰动逻辑如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="title function_">hash</span><span class="params">(Object key)</span> &#123;</span><br><span class="line">    <span class="type">int</span> h;</span><br><span class="line">    <span class="keyword">return</span> (key == <span class="literal">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>HashMap</code> 的数组长度通常是 <code>2</code> 的幂，定位下标时会使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index = (n - <span class="number">1</span>) &amp; hash;</span><br></pre></td></tr></table></figure>
+
+<p>如果只使用低位参与计算，而某些 key 的低位分布不好，就容易集中到同一个桶。高 16 位和低 16 位异或后，高位信息也会参与到低位计算中，能让哈希分布更均匀。</p>
+<p>判断两个 key 是否相等时，<code>HashMap</code> 通常会先比较 hash 值；如果 hash 值不同，可以直接认为 key 不相等。如果 hash 值相同，再比较引用地址或调用 <code>equals()</code> 做最终判断。</p>
+<h3 id="6-4-哈希冲突解决方式"><a href="#6-4-哈希冲突解决方式" class="headerlink" title="6.4 哈希冲突解决方式"></a>6.4 哈希冲突解决方式</h3><p>常见的哈希冲突解决方式有：</p>
+<ul>
+<li>开放定址法：发生冲突时继续探测其他空位。</li>
+<li>再哈希法：使用另一个哈希函数重新计算位置。</li>
+<li>拉链法：数组桶中挂链表或其他结构。</li>
+</ul>
+<p><code>HashMap</code> 使用的是拉链法。JDK 8 中，当桶内链表足够长且数组容量达到要求时，会把链表转换成红黑树。</p>
+<h3 id="6-5-树化与退化阈值"><a href="#6-5-树化与退化阈值" class="headerlink" title="6.5 树化与退化阈值"></a>6.5 树化与退化阈值</h3><p>常见阈值：</p>
+<ul>
+<li>链表节点数大于 <code>8</code>，且数组长度大于等于 <code>64</code> 时，链表会树化。</li>
+<li>红黑树节点数小于 <code>6</code> 时，会退化为链表。</li>
+<li>如果链表长度超过阈值但数组长度还小于 <code>64</code>，优先扩容，而不是立即树化。</li>
+</ul>
+<p>这样设计是因为：数组太小时，冲突可能主要来自容量不足，扩容比树化更直接；数组已经足够大时，冲突更可能来自 key 的哈希分布问题，此时树化更有价值。</p>
+<h2 id="7-HashMap-扩容机制"><a href="#7-HashMap-扩容机制" class="headerlink" title="7. HashMap 扩容机制"></a>7. HashMap 扩容机制</h2><p><code>HashMap</code> 的默认负载因子是 <code>0.75</code>。当元素数量超过 <code>capacity * loadFactor</code> 时，会触发扩容。</p>
+<p>默认规则：</p>
+<ul>
+<li>默认初始容量通常为 <code>16</code>。</li>
+<li>默认负载因子为 <code>0.75</code>。</li>
+<li>扩容后容量变为原来的 <code>2</code> 倍。</li>
+<li>容量保持为 <code>2</code> 的幂，便于通过位运算计算下标。</li>
+</ul>
+<p><code>resize()</code> 的核心流程可以概括为：创建新数组、更新阈值、遍历旧数组、迁移节点。如果桶为空则跳过；如果桶里只有一个节点，直接计算新位置；如果桶里是红黑树，则拆分树节点；如果桶里是链表，则按低位链表和高位链表拆分。</p>
+<p>JDK 8 扩容迁移时有一个重要优化：由于新容量是旧容量的两倍，一个节点在新数组中的位置只有两种可能：</p>
+<ul>
+<li>保留在原索引 <code>j</code>。</li>
+<li>移动到 <code>j + oldCap</code>。</li>
+</ul>
+<p>判断依据是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(e.hash &amp; oldCap) == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>如果结果为 <code>0</code>，节点留在原索引；否则移动到原索引加旧容量的位置。这样不需要对每个节点重新完整计算哈希下标。</p>
+<h2 id="8-HashMap-是否线程安全"><a href="#8-HashMap-是否线程安全" class="headerlink" title="8. HashMap 是否线程安全"></a>8. HashMap 是否线程安全</h2><p><code>HashMap</code> 不是线程安全的。多线程环境下并发读写可能出现以下问题：</p>
+<ul>
+<li>多个线程同时 <code>put</code>，可能造成数据覆盖或丢失。</li>
+<li>一个线程 <code>put</code>，另一个线程 <code>get</code>，可能读到中间状态。</li>
+<li>JDK 7 中并发扩容可能形成环形链表，导致查询时死循环。</li>
+</ul>
+<p>解决方式：</p>
+<ul>
+<li>使用 <code>Collections.synchronizedMap()</code> 包装。</li>
+<li>使用 <code>ConcurrentHashMap</code>。</li>
+<li>在业务层使用外部锁保护。</li>
+<li>如果读多写少且数据量不大，可以考虑复制快照或不可变 Map。</li>
+</ul>
+<p>新代码中，面向高并发场景通常优先考虑 <code>ConcurrentHashMap</code>，而不是 <code>Hashtable</code>。</p>
+<h2 id="9-ConcurrentHashMap"><a href="#9-ConcurrentHashMap" class="headerlink" title="9. ConcurrentHashMap"></a>9. ConcurrentHashMap</h2><p><code>ConcurrentHashMap</code> 是并发场景下最常用的 Map 实现。</p>
+<h3 id="9-1-JDK-7-与-JDK-8-的实现差异"><a href="#9-1-JDK-7-与-JDK-8-的实现差异" class="headerlink" title="9.1 JDK 7 与 JDK 8 的实现差异"></a>9.1 JDK 7 与 JDK 8 的实现差异</h3><p>JDK 7 中，<code>ConcurrentHashMap</code> 采用分段锁思想，底层由多个 <code>Segment</code> 组成，每个 <code>Segment</code> 类似一个小型哈希表，写操作锁住对应分段。</p>
+<p>JDK 8 中，<code>ConcurrentHashMap</code> 取消了 <code>Segment</code> 数组结构，整体结构更接近 <code>HashMap</code>：</p>
+<ul>
+<li>数组 + 链表 + 红黑树。</li>
+<li>通过 CAS 初始化或插入空桶。</li>
+<li>对非空桶的写操作使用 <code>synchronized</code> 锁住桶头节点。</li>
+<li>读操作多数情况下不加锁，依赖 <code>volatile</code> 和内存可见性保证。</li>
+</ul>
+<h3 id="9-2-ConcurrentHashMap-的特点"><a href="#9-2-ConcurrentHashMap-的特点" class="headerlink" title="9.2 ConcurrentHashMap 的特点"></a>9.2 ConcurrentHashMap 的特点</h3><p>核心特点：</p>
+<ul>
+<li>不允许 key 或 value 为 <code>null</code>。</li>
+<li>迭代器是弱一致性的，不会像 fail-fast 迭代器那样因为并发修改立刻抛异常。</li>
+<li>适合高并发读写，但不代表复合操作天然原子。</li>
+</ul>
+<p>例如下面的写法不是严格原子的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!map.containsKey(key)) &#123;</span><br><span class="line">    map.put(key, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>应优先使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map.putIfAbsent(key, value);</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-fail-fast-与-fail-safe"><a href="#10-fail-fast-与-fail-safe" class="headerlink" title="10. fail-fast 与 fail-safe"></a>10. fail-fast 与 fail-safe</h2><h3 id="10-1-fail-fast"><a href="#10-1-fail-fast" class="headerlink" title="10.1 fail-fast"></a>10.1 fail-fast</h3><p>fail-fast 是快速失败机制。遍历集合时，迭代器会记录一个期望修改次数 <code>expectedModCount</code>。如果遍历过程中集合结构被外部修改，实际的 <code>modCount</code> 与期望值不一致，就会抛出 <code>ConcurrentModificationException</code>。</p>
+<p>典型容器：</p>
+<ul>
+<li><code>ArrayList</code></li>
+<li><code>HashMap</code></li>
+<li><code>HashSet</code></li>
+<li>大部分 <code>java.util</code> 包下的非并发集合</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">list.add(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;b&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (String item : list) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&quot;a&quot;</span>.equals(item)) &#123;</span><br><span class="line">        list.remove(item); <span class="comment">// 可能触发 ConcurrentModificationException</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>正确方式可以使用迭代器自身的 <code>remove()</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;String&gt; iterator = list.iterator();</span><br><span class="line"><span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">item</span> <span class="operator">=</span> iterator.next();</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&quot;a&quot;</span>.equals(item)) &#123;</span><br><span class="line">        iterator.remove();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-2-fail-safe"><a href="#10-2-fail-safe" class="headerlink" title="10.2 fail-safe"></a>10.2 fail-safe</h3><p>fail-safe 通常指遍历时不直接在原集合结构上迭代，而是在副本或弱一致视图上迭代，因此不会因为并发修改立即抛出 <code>ConcurrentModificationException</code>。</p>
+<p>典型容器：</p>
+<ul>
+<li><code>CopyOnWriteArrayList</code></li>
+<li><code>ConcurrentHashMap</code></li>
+<li><code>BlockingQueue</code> 的一些实现</li>
+</ul>
+<p>需要注意，fail-safe 不等于一定能看到最新数据。比如 <code>CopyOnWriteArrayList</code> 的迭代器遍历的是创建迭代器那一刻的数组快照。</p>
+<h2 id="11-线程安全的-List-实现方案"><a href="#11-线程安全的-List-实现方案" class="headerlink" title="11. 线程安全的 List 实现方案"></a>11. 线程安全的 List 实现方案</h2><p>常见方案：</p>
+<ul>
+<li><code>Collections.synchronizedList(new ArrayList&lt;&gt;())</code></li>
+<li><code>CopyOnWriteArrayList</code></li>
+<li>外部加锁</li>
+<li>使用不可变集合</li>
+</ul>
+<p><code>Collections.synchronizedList()</code> 会为方法调用加同步，但复合操作仍然需要额外同步。例如边遍历边修改时，应手动对列表对象加锁。</p>
+<p><code>CopyOnWriteArrayList</code> 适合读多写少场景。它的写操作会复制底层数组，因此写入成本高；但读操作不加锁，迭代也稳定。</p>
+<h2 id="12-Queue-与-Deque"><a href="#12-Queue-与-Deque" class="headerlink" title="12. Queue 与 Deque"></a>12. Queue 与 Deque</h2><p><code>Queue</code> 表示队列，典型语义是先进先出。常见实现包括：</p>
+<ul>
+<li><code>LinkedList</code>：可作为队列或双端队列使用。</li>
+<li><code>ArrayDeque</code>：数组实现的双端队列，通常比 <code>Stack</code> 更推荐用于栈和队列场景。</li>
+<li><code>PriorityQueue</code>：优先队列，底层通常是堆，不保证整体有序，只保证队头元素优先级最高。</li>
+<li><code>BlockingQueue</code>：阻塞队列，常用于生产者-消费者模型。</li>
+</ul>
+<p>常见方法对比：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>抛异常方法</th>
+<th>返回特殊值方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>入队</td>
+<td><code>add(e)</code></td>
+<td><code>offer(e)</code></td>
+</tr>
+<tr>
+<td>出队</td>
+<td><code>remove()</code></td>
+<td><code>poll()</code></td>
+</tr>
+<tr>
+<td>查看队头</td>
+<td><code>element()</code></td>
+<td><code>peek()</code></td>
+</tr>
+</tbody></table>
+<p>一般业务代码更推荐使用 <code>offer()</code>、<code>poll()</code>、<code>peek()</code>，因为它们在失败时通过返回值表达结果，不会直接抛异常。</p>
+<h2 id="13-TreeMap-与红黑树"><a href="#13-TreeMap-与红黑树" class="headerlink" title="13. TreeMap 与红黑树"></a>13. TreeMap 与红黑树</h2><p><code>TreeMap</code> 底层是红黑树，key 会按照自然顺序或比较器顺序排列。</p>
+<p>特点：</p>
+<ul>
+<li>查找、插入、删除时间复杂度为 <code>O(log n)</code>。</li>
+<li>支持有序遍历。</li>
+<li>支持范围查询。</li>
+<li>key 必须可比较，或者构造 <code>TreeMap</code> 时传入 <code>Comparator</code>。</li>
+</ul>
+<p>与 <code>HashMap</code> 对比：</p>
+<ul>
+<li><code>HashMap</code> 在哈希分布良好时查询效率更高，平均 <code>O(1)</code>。</li>
+<li><code>TreeMap</code> 查询是 <code>O(log n)</code>，但能维护 key 的排序。</li>
+<li>如果需要按 key 排序输出，<code>TreeMap</code> 比先放入 <code>HashMap</code> 再排序更自然。</li>
+</ul>
+<h2 id="14-Collections-与-Arrays-工具类"><a href="#14-Collections-与-Arrays-工具类" class="headerlink" title="14. Collections 与 Arrays 工具类"></a>14. Collections 与 Arrays 工具类</h2><p>集合框架还提供了两个常用工具类：<code>Collections</code> 和 <code>Arrays</code>。</p>
+<p>常见能力：</p>
+<ul>
+<li><code>Collections.sort()</code>：对 List 排序。</li>
+<li><code>Collections.binarySearch()</code>：二分查找。</li>
+<li><code>Collections.synchronizedList()</code>：生成同步包装集合。</li>
+<li><code>Collections.unmodifiableList()</code>：生成不可修改视图。</li>
+<li><code>Arrays.sort()</code>：数组排序。</li>
+<li><code>Arrays.asList()</code>：数组转固定大小 List。</li>
+</ul>
+<p><code>Arrays.asList()</code> 有一个常见坑：它返回的是数组的固定大小视图，不能执行 <code>add()</code> 或 <code>remove()</code>，否则会抛出 <code>UnsupportedOperationException</code>。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = Arrays.asList(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;c&quot;</span>); <span class="comment">// UnsupportedOperationException</span></span><br></pre></td></tr></table></figure>
+
+<p>如果需要可变列表，应写成：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(Arrays.asList(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>));</span><br><span class="line">list.add(<span class="string">&quot;c&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="15-常见集合选择建议"><a href="#15-常见集合选择建议" class="headerlink" title="15. 常见集合选择建议"></a>15. 常见集合选择建议</h2><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐选择</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>需要按索引快速查询</td>
+<td><code>ArrayList</code></td>
+</tr>
+<tr>
+<td>需要双端队列</td>
+<td><code>ArrayDeque</code></td>
+</tr>
+<tr>
+<td>需要去重，不关心顺序</td>
+<td><code>HashSet</code></td>
+</tr>
+<tr>
+<td>需要去重并保留插入顺序</td>
+<td><code>LinkedHashSet</code></td>
+</tr>
+<tr>
+<td>需要有序去重</td>
+<td><code>TreeSet</code></td>
+</tr>
+<tr>
+<td>普通键值存储</td>
+<td><code>HashMap</code></td>
+</tr>
+<tr>
+<td>保留插入顺序或实现 LRU</td>
+<td><code>LinkedHashMap</code></td>
+</tr>
+<tr>
+<td>按 key 排序</td>
+<td><code>TreeMap</code></td>
+</tr>
+<tr>
+<td>高并发 Map</td>
+<td><code>ConcurrentHashMap</code></td>
+</tr>
+<tr>
+<td>读多写少 List</td>
+<td><code>CopyOnWriteArrayList</code></td>
+</tr>
+<tr>
+<td>生产者-消费者模型</td>
+<td><code>BlockingQueue</code></td>
+</tr>
+</tbody></table>
+<h2 id="16-高频面试题速记"><a href="#16-高频面试题速记" class="headerlink" title="16. 高频面试题速记"></a>16. 高频面试题速记</h2><h3 id="16-1-ArrayList-和-LinkedList-有什么区别"><a href="#16-1-ArrayList-和-LinkedList-有什么区别" class="headerlink" title="16.1 ArrayList 和 LinkedList 有什么区别"></a>16.1 ArrayList 和 LinkedList 有什么区别</h3><p>答题思路：</p>
+<ul>
+<li>先说底层结构：<code>ArrayList</code> 是动态数组，<code>LinkedList</code> 是双向链表。</li>
+<li>再说访问效率：<code>ArrayList</code> 支持随机访问，<code>LinkedList</code> 不支持。</li>
+<li>再说增删：<code>ArrayList</code> 中间增删要移动元素，<code>LinkedList</code> 定位后改指针即可。</li>
+<li>最后补充实际选择：大多数普通列表场景优先使用 <code>ArrayList</code>；队列场景优先考虑 <code>ArrayDeque</code>。</li>
+</ul>
+<h3 id="16-2-HashMap-为什么容量是-2-的幂"><a href="#16-2-HashMap-为什么容量是-2-的幂" class="headerlink" title="16.2 HashMap 为什么容量是 2 的幂"></a>16.2 HashMap 为什么容量是 2 的幂</h3><p>原因：</p>
+<ul>
+<li>可以用 <code>(n - 1) &amp; hash</code> 替代取模，效率更高。</li>
+<li>当容量为 <code>2</code> 的幂时，<code>n - 1</code> 的二进制低位全是 <code>1</code>，能更好地利用 hash 的低位。</li>
+<li>扩容为两倍后，元素迁移只需要判断一个新增高位，位置要么不变，要么移动到 <code>原索引 + oldCap</code>。</li>
+</ul>
+<h3 id="16-3-HashMap-什么时候树化"><a href="#16-3-HashMap-什么时候树化" class="headerlink" title="16.3 HashMap 什么时候树化"></a>16.3 HashMap 什么时候树化</h3><p>桶内链表节点数超过阈值后，且数组容量达到 <code>64</code>，才会树化。否则优先扩容。</p>
+<p>树化不是越早越好。红黑树节点更重，维护成本也更高；在数据量较小时，扩容通常更划算。</p>
+<h3 id="16-4-HashMap-为什么不是线程安全的"><a href="#16-4-HashMap-为什么不是线程安全的" class="headerlink" title="16.4 HashMap 为什么不是线程安全的"></a>16.4 HashMap 为什么不是线程安全的</h3><p>因为它没有对并发写做同步保护。多个线程同时修改底层数组、链表或红黑树时，可能出现数据覆盖、结构异常或读取中间状态。</p>
+<h3 id="16-5-HashSet-如何判断元素重复"><a href="#16-5-HashSet-如何判断元素重复" class="headerlink" title="16.5 HashSet 如何判断元素重复"></a>16.5 HashSet 如何判断元素重复</h3><p><code>HashSet</code> 本质上调用 <code>HashMap.put()</code>。判断重复时先看 hash，再看 key 是否相等。自定义对象要正确重写 <code>equals()</code> 和 <code>hashCode()</code>。</p>
+<h3 id="16-6-ConcurrentHashMap-读操作为什么通常不加锁"><a href="#16-6-ConcurrentHashMap-读操作为什么通常不加锁" class="headerlink" title="16.6 ConcurrentHashMap 读操作为什么通常不加锁"></a>16.6 ConcurrentHashMap 读操作为什么通常不加锁</h3><p>它通过 <code>volatile</code>、CAS 和节点结构设计保证可见性。读操作大多只需要读取当前可见的数组和节点，不必像写操作一样加锁。</p>
+<p>但这不意味着所有组合逻辑都是原子的。涉及“先判断再修改”的场景，应使用 <code>putIfAbsent()</code>、<code>computeIfAbsent()</code> 等原子方法。</p>
+<h2 id="17-复习总结"><a href="#17-复习总结" class="headerlink" title="17. 复习总结"></a>17. 复习总结</h2><p>Java 集合的主线可以压缩成几句话：</p>
+<ul>
+<li><code>List</code> 关注顺序和重复，<code>ArrayList</code> 查询快，<code>LinkedList</code> 更偏链表和双端队列语义。</li>
+<li><code>Set</code> 关注去重，<code>HashSet</code> 依赖 <code>HashMap</code>，<code>TreeSet</code> 依赖红黑树排序。</li>
+<li><code>Map</code> 关注 key-value，<code>HashMap</code> 是最常用实现，<code>TreeMap</code> 适合排序，<code>ConcurrentHashMap</code> 适合并发。</li>
+<li><code>HashMap</code> 的核心是哈希扰动、数组下标定位、冲突链表、红黑树、负载因子和扩容迁移。</li>
+<li>fail-fast 代表快速发现并发修改，fail-safe 代表遍历过程对并发修改更宽容，但不保证总能看到最新数据。</li>
+</ul>
+<p>掌握这些结构和权衡后，集合相关问题基本都能从“底层结构 -&gt; 时间复杂度 -&gt; 线程安全 -&gt; 使用场景”这条链路回答。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/14/JAVA%E9%9B%86%E5%90%88-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidN2OGDzv8lq-RJznM-gHsN" data-title="JAVA 集合" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2099/12/31/about-me/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          欢迎来到我的技术博客
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">JAVA SE</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2099/12/">十二月 2099</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">五月 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2099/12/31/about-me/">欢迎来到我的技术博客</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/JAVA%E9%9B%86%E5%90%88-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JAVA 集合</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JAVA SE</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">计网</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JVM</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 zzl<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
