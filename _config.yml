@@ -104,6 +104,8 @@ theme: landscape
 # can be viewed in Google Analytics.
 theme_config:
   google_analytics:
+  # Baidu Analytics
+  baidu_analytics: 1bc42b3fb614b9b459c79c2307873f9a
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
