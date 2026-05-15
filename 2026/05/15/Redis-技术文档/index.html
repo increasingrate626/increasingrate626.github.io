@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1bc42b3fb614b9b459c79c2307873f9a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  
+  <title>Redis | 张梓亮的技术博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Redis 技术文档：数据结构、持久化、缓存问题、分布式锁与高可用1. Redis 核心知识图谱Redis 是一个以内存为核心的高性能键值数据库，常用于缓存、分布式锁、排行榜、计数器、消息队列、共享 Session、限流和实时数据场景。学习 Redis 可以围绕六条主线展开：基础与应用、数据类型、高性能原因、持久化、缓存问题、高可用与集群。  2. Redis 与 MySQL 的区别   维度 R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="https://increasingrate626.github.io/2026/05/15/Redis-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="张梓亮的技术博客">
+<meta property="og:description" content="Redis 技术文档：数据结构、持久化、缓存问题、分布式锁与高可用1. Redis 核心知识图谱Redis 是一个以内存为核心的高性能键值数据库，常用于缓存、分布式锁、排行榜、计数器、消息队列、共享 Session、限流和实时数据场景。学习 Redis 可以围绕六条主线展开：基础与应用、数据类型、高性能原因、持久化、缓存问题、高可用与集群。  2. Redis 与 MySQL 的区别   维度 R">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://increasingrate626.github.io/images/tech-docs/redis-core-map.png">
+<meta property="og:image" content="https://increasingrate626.github.io/images/tech-docs/redis-io-multiplexing.png">
+<meta property="og:image" content="https://increasingrate626.github.io/images/tech-docs/redis-data-structures.png">
+<meta property="og:image" content="https://increasingrate626.github.io/images/tech-docs/redis-persistence.png">
+<meta property="og:image" content="https://increasingrate626.github.io/images/tech-docs/redis-cache-locks.png">
+<meta property="og:image" content="https://increasingrate626.github.io/images/tech-docs/redis-ha-cluster.png">
+<meta property="article:published_time" content="2026-05-15T08:12:00.000Z">
+<meta property="article:modified_time" content="2026-05-15T08:15:21.506Z">
+<meta property="article:author" content="zzl">
+<meta property="article:tag" content="Java，Agent">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://increasingrate626.github.io/images/tech-docs/redis-core-map.png">
+  
+    <link rel="alternate" href="/atom.xml" title="张梓亮的技术博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/fork-awesome/1.2.0/css/fork-awesome.min.css">
+
+<!-- hexo injector head_end start --><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">张梓亮的技术博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/s" method="get" accept-charset="UTF-8" class="search-form" onsubmit="this.wd.value='site:increasingrate626.github.io '+this.wd.value">
+          <input type="search" name="wd" class="search-form-input" placeholder="搜索">
+          <button type="submit" class="search-form-submit">&#xF002;</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Redis-技术文档" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/15/Redis-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="article-date">
+  <time class="dt-published" datetime="2026-05-15T08:12:00.000Z" itemprop="datePublished">2026-05-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Redis
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Redis-技术文档：数据结构、持久化、缓存问题、分布式锁与高可用"><a href="#Redis-技术文档：数据结构、持久化、缓存问题、分布式锁与高可用" class="headerlink" title="Redis 技术文档：数据结构、持久化、缓存问题、分布式锁与高可用"></a>Redis 技术文档：数据结构、持久化、缓存问题、分布式锁与高可用</h1><h2 id="1-Redis-核心知识图谱"><a href="#1-Redis-核心知识图谱" class="headerlink" title="1. Redis 核心知识图谱"></a>1. Redis 核心知识图谱</h2><p>Redis 是一个以内存为核心的高性能键值数据库，常用于缓存、分布式锁、排行榜、计数器、消息队列、共享 Session、限流和实时数据场景。学习 Redis 可以围绕六条主线展开：基础与应用、数据类型、高性能原因、持久化、缓存问题、高可用与集群。</p>
+<p><img src="/images/tech-docs/redis-core-map.png" alt="Redis 核心知识图谱"></p>
+<h2 id="2-Redis-与-MySQL-的区别"><a href="#2-Redis-与-MySQL-的区别" class="headerlink" title="2. Redis 与 MySQL 的区别"></a>2. Redis 与 MySQL 的区别</h2><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Redis</th>
+<th>MySQL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据模型</td>
+<td>键值数据库，支持多种内存数据结构</td>
+<td>关系型数据库，表、行、列模型</td>
+</tr>
+<tr>
+<td>存储位置</td>
+<td>主要存储在内存中，可持久化到磁盘</td>
+<td>主要存储在磁盘中，通过 Buffer Pool 加速</td>
+</tr>
+<tr>
+<td>性能特点</td>
+<td>读写极快，适合高频访问</td>
+<td>支持复杂查询、事务和持久化一致性</td>
+</tr>
+<tr>
+<td>查询能力</td>
+<td>以 key 访问为主，不擅长复杂关系查询</td>
+<td>支持 SQL、Join、事务、索引优化</td>
+</tr>
+<tr>
+<td>典型场景</td>
+<td>缓存、计数、排行榜、分布式锁、消息队列</td>
+<td>业务主库、订单、账户、事务数据</td>
+</tr>
+</tbody></table>
+<p>Redis 不是 MySQL 的替代品。更常见的架构是：MySQL 作为主数据源，Redis 作为高性能缓存或辅助数据结构。</p>
+<h2 id="3-Redis-常见应用场景"><a href="#3-Redis-常见应用场景" class="headerlink" title="3. Redis 常见应用场景"></a>3. Redis 常见应用场景</h2><p>常见场景：</p>
+<ul>
+<li>缓存热点数据，降低数据库压力。</li>
+<li>计数器，例如点赞数、阅读量、库存预扣。</li>
+<li>排行榜，例如使用 <code>ZSET</code> 维护分数排名。</li>
+<li>分布式锁，例如 <code>SET key value NX PX</code>。</li>
+<li>共享 Session。</li>
+<li>白名单、黑名单、去重集合。</li>
+<li>消息队列，例如 <code>List</code>、<code>Stream</code>。</li>
+<li>限流，例如固定窗口、滑动窗口、令牌桶。</li>
+</ul>
+<p>选择 Redis 时要记住：它快，但不是无限快；它在内存中工作，所以大 key、热 key、缓存雪崩和持久化策略都会影响稳定性。</p>
+<h2 id="4-Redis-为什么快"><a href="#4-Redis-为什么快" class="headerlink" title="4. Redis 为什么快"></a>4. Redis 为什么快</h2><p>Redis 快主要来自几个方面：</p>
+<p><img src="/images/tech-docs/redis-io-multiplexing.png" alt="Redis 高性能原因与 I&#x2F;O 多路复用"></p>
+<h3 id="4-1-基于内存"><a href="#4-1-基于内存" class="headerlink" title="4.1 基于内存"></a>4.1 基于内存</h3><p>Redis 的主要数据存储在内存中，避免了传统磁盘随机 I&#x2F;O 的高延迟。</p>
+<h3 id="4-2-单线程执行命令"><a href="#4-2-单线程执行命令" class="headerlink" title="4.2 单线程执行命令"></a>4.2 单线程执行命令</h3><p>Redis 的核心命令执行模型长期以单线程为主，避免了多线程竞争锁和上下文切换成本。</p>
+<p>需要注意，Redis 的“单线程”主要指网络 I&#x2F;O 事件处理和键值读写命令执行的主流程。持久化、异步删除、集群同步等能力可能由后台线程或子进程协助完成。</p>
+<h3 id="4-3-高效数据结构"><a href="#4-3-高效数据结构" class="headerlink" title="4.3 高效数据结构"></a>4.3 高效数据结构</h3><p>Redis 为不同数据类型设计了紧凑且高效的底层结构，例如 SDS、listpack、quicklist、hashtable、skiplist 等。</p>
+<h3 id="4-4-I-O-多路复用"><a href="#4-4-I-O-多路复用" class="headerlink" title="4.4 I&#x2F;O 多路复用"></a>4.4 I&#x2F;O 多路复用</h3><p>Redis 使用 I&#x2F;O 多路复用处理大量客户端连接。</p>
+<p>常见模型对比：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>select</code></td>
+<td>每次调用都要复制 fd 集合，并遍历查找就绪 fd，有数量限制</td>
+</tr>
+<tr>
+<td><code>poll</code></td>
+<td>没有最大 fd 数量限制，但仍要复制并遍历 fd 集合</td>
+</tr>
+<tr>
+<td><code>epoll</code></td>
+<td>内核维护监听集合，只返回就绪 fd，适合大量连接</td>
+</tr>
+</tbody></table>
+<p><code>epoll</code> 的核心接口：</p>
+<ul>
+<li><code>epoll_create</code>：创建 epoll 实例。</li>
+<li><code>epoll_ctl</code>：添加、修改或删除监听 fd。</li>
+<li><code>epoll_wait</code>：等待并返回就绪事件。</li>
+</ul>
+<h2 id="5-Redis-数据类型与底层结构"><a href="#5-Redis-数据类型与底层结构" class="headerlink" title="5. Redis 数据类型与底层结构"></a>5. Redis 数据类型与底层结构</h2><p>Redis 对外提供逻辑数据类型，对内会根据数据规模和版本选择不同编码。</p>
+<p><img src="/images/tech-docs/redis-data-structures.png" alt="Redis 数据类型与底层结构"></p>
+<h3 id="5-1-String"><a href="#5-1-String" class="headerlink" title="5.1 String"></a>5.1 String</h3><p><code>String</code> 是最基础的数据类型，可以存储字符串、整数、浮点数、JSON、序列化内容等。</p>
+<p>常见命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SET user:1:name Alice</span><br><span class="line">GET user:1:name</span><br><span class="line">INCR article:1:view_count</span><br><span class="line">SETEX token:1 3600 abc</span><br></pre></td></tr></table></figure>
+
+<p>典型场景：</p>
+<ul>
+<li>缓存对象 JSON。</li>
+<li>计数器。</li>
+<li>分布式锁。</li>
+<li>简单配置。</li>
+</ul>
+<h3 id="5-2-List"><a href="#5-2-List" class="headerlink" title="5.2 List"></a>5.2 List</h3><p><code>List</code> 是有序列表，常用于消息列表和简单队列。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LPUSH queue:order order-1</span><br><span class="line">RPOP queue:order</span><br></pre></td></tr></table></figure>
+
+<p>Redis 新版本中，List 底层通常使用 <code>quicklist</code>，可以理解为多个紧凑列表节点组成的双向链表。</p>
+<h3 id="5-3-Hash"><a href="#5-3-Hash" class="headerlink" title="5.3 Hash"></a>5.3 Hash</h3><p><code>Hash</code> 适合保存对象的多个字段。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HSET user:1 name Alice age 18</span><br><span class="line">HGET user:1 name</span><br><span class="line">HMGET user:1 name age</span><br></pre></td></tr></table></figure>
+
+<p>适合场景：</p>
+<ul>
+<li>用户信息。</li>
+<li>商品属性。</li>
+<li>对象局部字段更新。</li>
+</ul>
+<p>当对象很大但每次只读写部分字段时，Hash 往往比把整个 JSON 放进 String 更合适。</p>
+<h3 id="5-4-Set"><a href="#5-4-Set" class="headerlink" title="5.4 Set"></a>5.4 Set</h3><p><code>Set</code> 是无序不重复集合。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SADD article:1:likes user:1 user:2</span><br><span class="line">SISMEMBER article:1:likes user:1</span><br><span class="line">SCARD article:1:likes</span><br></pre></td></tr></table></figure>
+
+<p>典型场景：</p>
+<ul>
+<li>去重。</li>
+<li>白名单、黑名单。</li>
+<li>共同关注、交集并集差集。</li>
+</ul>
+<h3 id="5-5-ZSet"><a href="#5-5-ZSet" class="headerlink" title="5.5 ZSet"></a>5.5 ZSet</h3><p><code>ZSet</code> 是有序集合，每个元素都有一个 score。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ZADD rank:score 100 user:1</span><br><span class="line">ZREVRANGE rank:score 0 9 WITHSCORES</span><br></pre></td></tr></table></figure>
+
+<p>典型场景：</p>
+<ul>
+<li>排行榜。</li>
+<li>延迟队列。</li>
+<li>按权重排序的数据。</li>
+</ul>
+<p><code>ZSet</code> 常见底层结构包括 listpack 和 skiplist。元素较少且体积较小时使用紧凑结构；数据规模变大后会使用跳表和字典。</p>
+<p>跳表节点中通常包含：</p>
+<ul>
+<li><code>score</code>：排序分值。</li>
+<li><code>member</code>：元素值。</li>
+<li>多层 forward 指针。</li>
+<li>span 跨度，用于排名计算。</li>
+</ul>
+<h3 id="5-6-Bitmap、HyperLogLog-与-Stream"><a href="#5-6-Bitmap、HyperLogLog-与-Stream" class="headerlink" title="5.6 Bitmap、HyperLogLog 与 Stream"></a>5.6 Bitmap、HyperLogLog 与 Stream</h3><p><code>Bitmap</code> 适合按位统计：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SETBIT sign:2026-05 user_id 1</span><br><span class="line">GETBIT sign:2026-05 user_id</span><br></pre></td></tr></table></figure>
+
+<p><code>HyperLogLog</code> 适合估算 UV，内存占用小，但结果是近似值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PFADD uv:home user:1 user:2</span><br><span class="line">PFCOUNT uv:home</span><br></pre></td></tr></table></figure>
+
+<p><code>Stream</code> 是 Redis 5.0 引入的消息流结构，支持消息 ID、消费者组、ACK 等机制，更适合消息队列场景。</p>
+<h2 id="6-渐进式-rehash"><a href="#6-渐进式-rehash" class="headerlink" title="6. 渐进式 rehash"></a>6. 渐进式 rehash</h2><p>Redis 的字典底层使用哈希表。扩容时，如果一次性迁移所有数据，会造成明显阻塞，因此 Redis 使用渐进式 rehash。</p>
+<p>核心思路：</p>
+<ol>
+<li>准备两个哈希表：<code>ht[0]</code> 和 <code>ht[1]</code>。</li>
+<li>平时数据在 <code>ht[0]</code>。</li>
+<li>扩容时为 <code>ht[1]</code> 分配更大的空间。</li>
+<li>新写入的数据直接放入 <code>ht[1]</code>。</li>
+<li>每次查询、插入、删除时，顺带把 <code>ht[0]</code> 的一部分数据迁移到 <code>ht[1]</code>。</li>
+<li>迁移完成后释放 <code>ht[0]</code>，把 <code>ht[1]</code> 设置为新的 <code>ht[0]</code>。</li>
+</ol>
+<p>这样可以把一次大迁移拆成多次小迁移，降低阻塞风险。</p>
+<h2 id="7-Redis-持久化"><a href="#7-Redis-持久化" class="headerlink" title="7. Redis 持久化"></a>7. Redis 持久化</h2><p>Redis 主要有 RDB、AOF 和混合持久化。</p>
+<p><img src="/images/tech-docs/redis-persistence.png" alt="Redis 持久化：RDB、AOF 与混合持久化"></p>
+<h3 id="7-1-RDB"><a href="#7-1-RDB" class="headerlink" title="7.1 RDB"></a>7.1 RDB</h3><p>RDB 是快照持久化，会把某一时刻的内存数据保存为 RDB 文件。</p>
+<p>特点：</p>
+<ul>
+<li>文件紧凑。</li>
+<li>恢复速度快。</li>
+<li>适合备份和全量复制。</li>
+<li>可能丢失最近一次快照之后的数据。</li>
+</ul>
+<p>常见触发方式：</p>
+<ul>
+<li><code>SAVE</code>：阻塞主线程生成快照。</li>
+<li><code>BGSAVE</code>：fork 子进程生成快照，主进程继续处理请求。</li>
+</ul>
+<h3 id="7-2-AOF"><a href="#7-2-AOF" class="headerlink" title="7.2 AOF"></a>7.2 AOF</h3><p>AOF 是追加日志持久化，会记录写命令。</p>
+<p>特点：</p>
+<ul>
+<li>数据完整性通常比 RDB 更好。</li>
+<li>文件可能更大。</li>
+<li>恢复时需要重放命令，速度可能慢于 RDB。</li>
+</ul>
+<p>AOF 写回策略：</p>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>含义</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>always</code></td>
+<td>每次写命令后都同步刷盘</td>
+<td>可靠性高，性能低</td>
+</tr>
+<tr>
+<td><code>everysec</code></td>
+<td>每秒刷盘一次</td>
+<td>性能和可靠性折中，常用</td>
+</tr>
+<tr>
+<td><code>no</code></td>
+<td>交给操作系统决定刷盘时机</td>
+<td>性能高，丢失风险更大</td>
+</tr>
+</tbody></table>
+<h3 id="7-3-AOF-重写"><a href="#7-3-AOF-重写" class="headerlink" title="7.3 AOF 重写"></a>7.3 AOF 重写</h3><p>AOF 长期追加会变大。Redis 可以通过 <code>BGREWRITEAOF</code> 重写 AOF。</p>
+<p>重写不是简单压缩旧文件，而是根据当前内存状态生成一份更短的新 AOF。例如一个 key 被连续修改 100 次，新 AOF 只需要记录最终状态。</p>
+<h3 id="7-4-混合持久化"><a href="#7-4-混合持久化" class="headerlink" title="7.4 混合持久化"></a>7.4 混合持久化</h3><p>混合持久化在 AOF 重写过程中生效：</p>
+<ol>
+<li>子进程先把当前内存数据以 RDB 格式写入新 AOF 文件。</li>
+<li>主进程继续处理写命令，并写入重写缓冲区。</li>
+<li>子进程完成全量写入后，把增量命令以 AOF 格式追加进去。</li>
+<li>新文件替换旧 AOF。</li>
+</ol>
+<p>混合持久化兼顾 RDB 的恢复速度和 AOF 的数据完整性。</p>
+<h2 id="8-Redis-事务与-Lua"><a href="#8-Redis-事务与-Lua" class="headerlink" title="8. Redis 事务与 Lua"></a>8. Redis 事务与 Lua</h2><p>Redis 事务通过 <code>MULTI</code>、<code>EXEC</code>、<code>DISCARD</code>、<code>WATCH</code> 等命令实现。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MULTI</span><br><span class="line">INCR stock:1</span><br><span class="line">DECR balance:1</span><br><span class="line">EXEC</span><br></pre></td></tr></table></figure>
+
+<p>Redis 事务特点：</p>
+<ul>
+<li>命令会按顺序执行。</li>
+<li>执行期间不会被其他客户端命令插入。</li>
+<li>不支持传统关系型数据库那样的自动回滚。</li>
+</ul>
+<p>从 ACID 角度看：</p>
+<ul>
+<li>原子性：Redis 事务不完全等同数据库事务；Lua 脚本可以保证脚本执行过程的原子性。</li>
+<li>隔离性：单线程执行命令，脚本执行期间不会被打断。</li>
+<li>持久性：取决于 RDB&#x2F;AOF 配置。</li>
+<li>一致性：需要业务和命令设计共同保证。</li>
+</ul>
+<p>Lua 脚本适合把多个 Redis 命令打包为原子操作。</p>
+<h2 id="9-Redis-分布式锁"><a href="#9-Redis-分布式锁" class="headerlink" title="9. Redis 分布式锁"></a>9. Redis 分布式锁</h2><p>Redis 分布式锁的常见写法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET lock_key unique_value NX PX 30000</span><br></pre></td></tr></table></figure>
+
+<p>含义：</p>
+<ul>
+<li><code>NX</code>：只有 key 不存在时才设置成功。</li>
+<li><code>PX 30000</code>：设置 30 秒过期时间，避免死锁。</li>
+<li><code>unique_value</code>：锁持有者标识，避免误删别人的锁。</li>
+</ul>
+<p>释放锁时不能简单 <code>DEL lock_key</code>，应使用 Lua 脚本保证“校验锁持有者 + 删除锁”的原子性。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> redis.call(<span class="string">&quot;get&quot;</span>, KEYS[<span class="number">1</span>]) == ARGV[<span class="number">1</span>] <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">return</span> redis.call(<span class="string">&quot;del&quot;</span>, KEYS[<span class="number">1</span>])</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>如果业务执行时间可能超过锁过期时间，需要续期机制，例如 WatchDog。续期也要谨慎，避免锁长期不释放。</p>
+<h2 id="10-缓存问题与解决方案"><a href="#10-缓存问题与解决方案" class="headerlink" title="10. 缓存问题与解决方案"></a>10. 缓存问题与解决方案</h2><p>Redis 缓存问题主要包括缓存穿透、缓存击穿、缓存雪崩、热 key、大 key 和缓存一致性。</p>
+<p><img src="/images/tech-docs/redis-cache-locks.png" alt="Redis 缓存问题与分布式锁"></p>
+<h3 id="10-1-缓存穿透"><a href="#10-1-缓存穿透" class="headerlink" title="10.1 缓存穿透"></a>10.1 缓存穿透</h3><p>缓存穿透是指请求的数据在缓存和数据库中都不存在，请求绕过缓存直接打到数据库。</p>
+<p>解决方式：</p>
+<ul>
+<li>缓存空值，并设置较短过期时间。</li>
+<li>使用布隆过滤器拦截一定不存在的 key。</li>
+<li>做参数校验，过滤非法请求。</li>
+</ul>
+<p>布隆过滤器优点：</p>
+<ul>
+<li>内存效率高。</li>
+<li>查询速度快。</li>
+</ul>
+<p>缺点是可能误判存在，但不会误判不存在。</p>
+<h3 id="10-2-缓存击穿"><a href="#10-2-缓存击穿" class="headerlink" title="10.2 缓存击穿"></a>10.2 缓存击穿</h3><p>缓存击穿是指某个热点 key 过期瞬间，大量请求同时打到数据库。</p>
+<p>解决方式：</p>
+<ul>
+<li>互斥锁：同一时间只允许一个线程回源加载缓存。</li>
+<li>逻辑过期：缓存不物理过期，由后台异步刷新。</li>
+<li>热点 key 不设置过期时间，后台更新。</li>
+</ul>
+<h3 id="10-3-缓存雪崩"><a href="#10-3-缓存雪崩" class="headerlink" title="10.3 缓存雪崩"></a>10.3 缓存雪崩</h3><p>缓存雪崩是指大量 key 同时过期，或 Redis 实例不可用，导致请求大量打到数据库。</p>
+<p>解决方式：</p>
+<ul>
+<li>过期时间增加随机值。</li>
+<li>核心数据不设置统一过期时间，采用后台刷新。</li>
+<li>限流、熔断、降级。</li>
+<li>构建 Redis 高可用集群。</li>
+<li>多级缓存兜底。</li>
+</ul>
+<h3 id="10-4-缓存一致性"><a href="#10-4-缓存一致性" class="headerlink" title="10.4 缓存一致性"></a>10.4 缓存一致性</h3><p>常见策略：</p>
+<ul>
+<li>先更新数据库，再删除缓存。</li>
+<li>删除缓存失败时通过消息队列重试。</li>
+<li>设置过期时间作为兜底。</li>
+<li>延迟双删降低并发读写导致的不一致窗口。</li>
+</ul>
+<p>典型流程：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">更新数据库 -&gt; 删除缓存 -&gt; 如果删除失败，投递 MQ 重试 -&gt; 依赖过期时间兜底</span><br></pre></td></tr></table></figure>
+
+<p>不建议先更新缓存再更新数据库，因为数据库失败会让缓存保存脏数据。</p>
+<h3 id="10-5-热-key"><a href="#10-5-热-key" class="headerlink" title="10.5 热 key"></a>10.5 热 key</h3><p>热 key 是指访问频率非常高的 key。</p>
+<p>解决方式：</p>
+<ul>
+<li>本地缓存。</li>
+<li>读写分离，将读请求分流到从节点。</li>
+<li>热 key 多副本，分散到不同 Redis 分片。</li>
+<li>对热点接口限流。</li>
+</ul>
+<h3 id="10-6-大-key"><a href="#10-6-大-key" class="headerlink" title="10.6 大 key"></a>10.6 大 key</h3><p>大 key 可能导致网络阻塞、内存分布不均、删除阻塞、迁移困难。</p>
+<p>常见标准：</p>
+<ul>
+<li>String 类型 value 大于 1MB。</li>
+<li>Hash、List、Set、ZSet 等集合元素数量超过 1 万。</li>
+</ul>
+<p>解决方式：</p>
+<ul>
+<li>拆分大对象为多个 key。</li>
+<li>对对象部分字段访问时，使用 Hash 拆分字段。</li>
+<li>使用 <code>UNLINK</code> 异步删除，避免 <code>DEL</code> 阻塞。</li>
+<li>使用 <code>SCAN</code> 分批处理，避免一次性遍历大量 key。</li>
+<li>对大量相似 String key，可以按桶拆成多个 Hash。</li>
+</ul>
+<h2 id="11-过期删除与内存淘汰"><a href="#11-过期删除与内存淘汰" class="headerlink" title="11. 过期删除与内存淘汰"></a>11. 过期删除与内存淘汰</h2><h3 id="11-1-过期删除策略"><a href="#11-1-过期删除策略" class="headerlink" title="11.1 过期删除策略"></a>11.1 过期删除策略</h3><p>Redis 常见过期删除策略：</p>
+<ul>
+<li>定时删除：设置过期时间时创建定时事件，到期立即删除。</li>
+<li>惰性删除：访问 key 时检查是否过期，过期则删除。</li>
+<li>定期删除：周期性随机抽取一部分 key 检查并删除过期 key。</li>
+</ul>
+<p>Redis 采用“惰性删除 + 定期删除”的组合，在 CPU 消耗和内存释放之间取得平衡。</p>
+<h3 id="11-2-内存淘汰策略"><a href="#11-2-内存淘汰策略" class="headerlink" title="11.2 内存淘汰策略"></a>11.2 内存淘汰策略</h3><p>当 Redis 使用内存超过 <code>maxmemory</code> 后，会根据配置的淘汰策略删除 key。</p>
+<p>常见策略：</p>
+<ul>
+<li><code>noeviction</code>：不淘汰，写入时报错。</li>
+<li><code>allkeys-lru</code>：在所有 key 中淘汰最近最少使用的 key。</li>
+<li><code>volatile-lru</code>：在设置了过期时间的 key 中淘汰最近最少使用的 key。</li>
+<li><code>allkeys-random</code>：在所有 key 中随机淘汰。</li>
+<li><code>volatile-random</code>：在设置了过期时间的 key 中随机淘汰。</li>
+<li><code>volatile-ttl</code>：优先淘汰剩余 TTL 更短的 key。</li>
+<li><code>allkeys-lfu</code>：在所有 key 中淘汰访问频率低的 key。</li>
+<li><code>volatile-lfu</code>：在设置了过期时间的 key 中淘汰访问频率低的 key。</li>
+</ul>
+<p>缓存场景常见选择是 <code>allkeys-lru</code> 或 <code>allkeys-lfu</code>，具体要看访问模式。</p>
+<h2 id="12-主从复制、哨兵与-Cluster"><a href="#12-主从复制、哨兵与-Cluster" class="headerlink" title="12. 主从复制、哨兵与 Cluster"></a>12. 主从复制、哨兵与 Cluster</h2><p>Redis 的高可用体系主要包括主从复制、Sentinel 和 Redis Cluster。</p>
+<p><img src="/images/tech-docs/redis-ha-cluster.png" alt="Redis 高可用：主从复制、Sentinel 与 Cluster"></p>
+<h3 id="12-1-主从复制"><a href="#12-1-主从复制" class="headerlink" title="12.1 主从复制"></a>12.1 主从复制</h3><p>主从复制的作用：</p>
+<ul>
+<li>数据冗余。</li>
+<li>故障恢复。</li>
+<li>读写分离。</li>
+<li>高可用基础。</li>
+</ul>
+<p>第一次同步通常包含三个阶段：</p>
+<ol>
+<li>建立连接、协商同步。</li>
+<li>主库生成 RDB 并发送给从库，完成全量复制。</li>
+<li>主库把同步期间的新写命令发送给从库。</li>
+</ol>
+<p>完成第一次同步后，主从之间基于长连接进行命令传播。</p>
+<p>网络断开后，如果从库重新连接时所需数据还在 <code>repl_backlog_buffer</code> 中，可以进行增量复制；如果已经不在缓冲区中，则需要重新全量复制。</p>
+<p>主从复制的问题：</p>
+<ul>
+<li>不能分担主节点写压力。</li>
+<li>异步复制可能丢数据。</li>
+<li>主从延迟会影响读一致性。</li>
+<li>网络异常时可能发生脑裂。</li>
+</ul>
+<h3 id="12-2-Sentinel"><a href="#12-2-Sentinel" class="headerlink" title="12.2 Sentinel"></a>12.2 Sentinel</h3><p>Sentinel 是哨兵，用于监控主从节点并执行故障转移。</p>
+<p>核心职责：</p>
+<ul>
+<li>监控：检查主从节点是否存活。</li>
+<li>选主：主节点故障后，从从节点中选出新主节点。</li>
+<li>通知：把新主节点信息通知客户端和其他节点。</li>
+</ul>
+<p>搭建哨兵时常配置主节点名称、主节点 IP、端口以及 <code>quorum</code>。</p>
+<p>哨兵节点之间通过 Redis 发布订阅机制相互发现。</p>
+<p>故障转移过程：</p>
+<ol>
+<li>判断主节点主观下线。</li>
+<li>多个哨兵投票确认客观下线。</li>
+<li>选出一个从节点作为新主节点。</li>
+<li>让其他从节点复制新主节点。</li>
+<li>通知客户端。</li>
+<li>旧主节点恢复后降级为从节点。</li>
+</ol>
+<h3 id="12-3-脑裂"><a href="#12-3-脑裂" class="headerlink" title="12.3 脑裂"></a>12.3 脑裂</h3><p>脑裂是指原主节点与哨兵、从节点网络断开，但仍能和部分客户端通信。哨兵可能选出新主节点，导致短时间内两个主节点都对外提供服务。</p>
+<p>当原主节点恢复后，会被降级为从节点，并与新主节点全量同步。原主节点在隔离期间接收的写入可能丢失。</p>
+<p>缓解方式：</p>
+<ul>
+<li>配置 <code>min-replicas-to-write</code>。</li>
+<li>配置 <code>min-replicas-max-lag</code>。</li>
+<li>让主节点在无法连接足够从节点时拒绝写入。</li>
+<li>缩短故障检测和客户端重连时间。</li>
+</ul>
+<h3 id="12-4-Redis-Cluster"><a href="#12-4-Redis-Cluster" class="headerlink" title="12.4 Redis Cluster"></a>12.4 Redis Cluster</h3><p>Redis Cluster 使用哈希槽管理数据分布。</p>
+<p>核心规则：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slot = CRC16(key) % 16384</span><br></pre></td></tr></table></figure>
+
+<p>Redis Cluster 一共有 16384 个槽，每个 key 根据哈希结果映射到某个槽，槽再分配给具体节点。</p>
+<p>常见重定向：</p>
+<ul>
+<li><code>MOVED</code>：客户端访问的槽不在当前节点，节点返回正确节点地址，客户端更新路由。</li>
+<li><code>ASK</code>：槽迁移过程中临时重定向，客户端只对本次请求访问目标节点。</li>
+</ul>
+<p>Redis Cluster 可以分担读写和存储压力，但跨槽多 key 操作会受限制。需要让相关 key 落在同一槽时，可以使用 hash tag，例如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user:&#123;1001&#125;:profile</span><br><span class="line">user:&#123;1001&#125;:orders</span><br></pre></td></tr></table></figure>
+
+<h2 id="13-Redis-常见命令速查"><a href="#13-Redis-常见命令速查" class="headerlink" title="13. Redis 常见命令速查"></a>13. Redis 常见命令速查</h2><p>String：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SET key value</span><br><span class="line">GET key</span><br><span class="line">INCR counter</span><br><span class="line">EXPIRE key 60</span><br></pre></td></tr></table></figure>
+
+<p>Hash：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HSET user:1 name Alice age 18</span><br><span class="line">HGET user:1 name</span><br><span class="line">HGETALL user:1</span><br></pre></td></tr></table></figure>
+
+<p>Set：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SADD tags redis mysql</span><br><span class="line">SISMEMBER tags redis</span><br><span class="line">SMEMBERS tags</span><br></pre></td></tr></table></figure>
+
+<p>ZSet：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ZADD rank 100 user:1</span><br><span class="line">ZRANGE rank 0 9 WITHSCORES</span><br><span class="line">ZREVRANGE rank 0 9 WITHSCORES</span><br></pre></td></tr></table></figure>
+
+<p>List：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LPUSH queue task1</span><br><span class="line">RPOP queue</span><br><span class="line">BRPOP queue 5</span><br></pre></td></tr></table></figure>
+
+<p>安全扫描：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SCAN 0 MATCH user:* COUNT 100</span><br></pre></td></tr></table></figure>
+
+<h2 id="14-高频面试题速记"><a href="#14-高频面试题速记" class="headerlink" title="14. 高频面试题速记"></a>14. 高频面试题速记</h2><h3 id="14-1-Redis-为什么快"><a href="#14-1-Redis-为什么快" class="headerlink" title="14.1 Redis 为什么快"></a>14.1 Redis 为什么快</h3><p>可以从四点回答：</p>
+<ul>
+<li>数据主要在内存中。</li>
+<li>核心命令执行是单线程，避免锁竞争。</li>
+<li>数据结构高效。</li>
+<li>使用 I&#x2F;O 多路复用处理大量连接。</li>
+</ul>
+<h3 id="14-2-RDB-和-AOF-有什么区别"><a href="#14-2-RDB-和-AOF-有什么区别" class="headerlink" title="14.2 RDB 和 AOF 有什么区别"></a>14.2 RDB 和 AOF 有什么区别</h3><p>RDB 是快照，文件紧凑、恢复快，但可能丢失最后一次快照后的数据。AOF 是追加写命令，数据完整性更好，但文件更大，恢复可能更慢。</p>
+<h3 id="14-3-缓存穿透、击穿、雪崩区别"><a href="#14-3-缓存穿透、击穿、雪崩区别" class="headerlink" title="14.3 缓存穿透、击穿、雪崩区别"></a>14.3 缓存穿透、击穿、雪崩区别</h3><ul>
+<li>穿透：查不存在的数据，缓存和数据库都没有。</li>
+<li>击穿：热点 key 过期，大量请求同时打到数据库。</li>
+<li>雪崩：大量 key 同时过期或 Redis 整体不可用。</li>
+</ul>
+<h3 id="14-4-Redis-分布式锁如何保证安全"><a href="#14-4-Redis-分布式锁如何保证安全" class="headerlink" title="14.4 Redis 分布式锁如何保证安全"></a>14.4 Redis 分布式锁如何保证安全</h3><p>加锁使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET lock_key unique_value NX PX 30000</span><br></pre></td></tr></table></figure>
+
+<p>解锁使用 Lua 脚本校验 value 后删除，避免误删其他线程持有的锁。</p>
+<h3 id="14-5-ZSet-底层如何实现"><a href="#14-5-ZSet-底层如何实现" class="headerlink" title="14.5 ZSet 底层如何实现"></a>14.5 ZSet 底层如何实现</h3><p>数据较小时使用紧凑结构；数据变大后通常使用跳表和字典。跳表按 score 排序，支持范围查询和排名计算。</p>
+<h3 id="14-6-Redis-Cluster-为什么是-16384-个槽"><a href="#14-6-Redis-Cluster-为什么是-16384-个槽" class="headerlink" title="14.6 Redis Cluster 为什么是 16384 个槽"></a>14.6 Redis Cluster 为什么是 16384 个槽</h3><p>Redis Cluster 通过固定数量的槽把 key 和节点解耦。节点扩容或缩容时迁移槽即可，不需要对所有 key 重新映射。16384 个槽在路由表大小、迁移粒度和管理成本之间取得平衡。</p>
+<h2 id="15-复习总结"><a href="#15-复习总结" class="headerlink" title="15. 复习总结"></a>15. 复习总结</h2><p>Redis 的核心可以压缩成几句话：</p>
+<ul>
+<li>Redis 快，主要因为内存、单线程命令执行、高效数据结构和 I&#x2F;O 多路复用。</li>
+<li>Redis 的逻辑类型背后有不同编码，数据规模变化会影响底层结构。</li>
+<li>RDB 适合快照备份和快速恢复，AOF 适合更好的数据完整性，混合持久化兼顾两者。</li>
+<li>缓存穿透、击穿、雪崩、热 key 和大 key 都是稳定性问题，不只是性能问题。</li>
+<li>分布式锁要保证加锁原子性、锁值唯一、过期时间和 Lua 安全解锁。</li>
+<li>主从复制解决冗余和读扩展，Sentinel 解决故障转移，Cluster 解决水平扩展。</li>
+</ul>
+<p>排查 Redis 问题时，可以按“请求模式 -&gt; key 规模 -&gt; 数据结构 -&gt; 持久化策略 -&gt; 复制延迟 -&gt; 集群路由”这条链路逐层定位。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://increasingrate626.github.io/2026/05/15/Redis-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidshxcdcMRZ_sa6D1p-Jyug" data-title="Redis" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2099/12/31/about-me/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          欢迎来到我的技术博客
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/05/15/MySQL-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">MySQL</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2099/12/31/about-me/">欢迎来到我的技术博客</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/15/Redis-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">Redis</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/15/MySQL-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">MySQL</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/JAVA%E5%B9%B6%E5%8F%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JAVA 并发</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/JAVA%E9%9B%86%E5%90%88-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JAVA 集合</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JAVA SE</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">JVM</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">操作系统</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">计网</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 zzl<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
