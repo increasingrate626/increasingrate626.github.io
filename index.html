@@ -139,14 +139,766 @@ var _hmt = _hmt || [];
 <li><strong>实验突破</strong>：在 OrganAMNIST 医疗数据集上进行对抗测试，在高达 30% 恶意客户端（Label-Flipping 攻击）的极端场景下，成功将模型准确率恢复至约 82%。</li>
 </ul>
 <h2 id="📬-联系我"><a href="#📬-联系我" class="headerlink" title="📬 联系我"></a>📬 联系我</h2><ul>
-<li><strong>Email</strong>: <a href="mailto:&#x31;&#56;&#x35;&#x37;&#55;&#x33;&#x32;&#49;&#49;&#54;&#x39;&#x40;&#x31;&#x36;&#x33;&#x2e;&#x63;&#111;&#109;">18577321169@163.com</a></li>
+<li><strong>Email</strong>: <a href="mailto:&#x31;&#56;&#x35;&#55;&#x37;&#51;&#50;&#x31;&#49;&#x36;&#x39;&#x40;&#49;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;">18577321169@163.com</a></li>
 <li><strong>WeChat</strong>: Struggletofree</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://increasingrate626.github.io/2099/12/31/about-me/" data-id="cuidxuoVSfSSU5gnhWWBKg5vE" data-title="欢迎来到我的技术博客" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://increasingrate626.github.io/2099/12/31/about-me/" data-id="cuidr9xsQ1qLX0cpqApojvyOi" data-title="欢迎来到我的技术博客" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Spring-技术文档" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/16/Spring-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="article-date">
+  <time class="dt-published" datetime="2026-05-16T06:40:00.000Z" itemprop="datePublished">2026-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/16/Spring-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">Spring</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Spring-技术文档：IoC、Bean-生命周期、AOP、事务、Spring-MVC-与自动配置"><a href="#Spring-技术文档：IoC、Bean-生命周期、AOP、事务、Spring-MVC-与自动配置" class="headerlink" title="Spring 技术文档：IoC、Bean 生命周期、AOP、事务、Spring MVC 与自动配置"></a>Spring 技术文档：IoC、Bean 生命周期、AOP、事务、Spring MVC 与自动配置</h1><h2 id="1-Spring-核心知识图谱"><a href="#1-Spring-核心知识图谱" class="headerlink" title="1. Spring 核心知识图谱"></a>1. Spring 核心知识图谱</h2><p>Spring 是一个轻量级、非侵入式的 Java 应用开发框架，核心目标是降低对象创建、依赖管理、横切逻辑和企业级开发的复杂度。学习 Spring 可以围绕几条主线展开：IoC 容器、Bean 生命周期、依赖注入、AOP、事务管理、Spring MVC、Spring Boot 自动配置以及常见扩展点。</p>
+<p>核心关键词：</p>
+<ul>
+<li>IoC：控制反转，把对象创建和依赖管理交给容器。</li>
+<li>DI：依赖注入，容器把 Bean 需要的依赖注入进去。</li>
+<li>AOP：面向切面编程，把日志、事务、权限、监控等横切逻辑从业务代码中抽离。</li>
+<li>Bean：被 Spring 容器管理的对象。</li>
+<li>ApplicationContext：Spring 的高级容器接口，负责 Bean 管理、事件发布、国际化、资源加载等能力。</li>
+<li>BeanPostProcessor：Bean 生命周期中的重要扩展点，AOP 代理也依赖它完成增强。</li>
+<li>Transaction：声明式事务通过 AOP 拦截方法调用，在方法前后开启、提交或回滚事务。</li>
+</ul>
+<p>一句话理解 Spring：它用 IoC 管对象，用 AOP 管增强，用事务抽象管一致性，用 MVC 管 Web 请求，用 Boot 自动配置降低工程搭建成本。</p>
+<h2 id="2-Spring-是什么"><a href="#2-Spring-是什么" class="headerlink" title="2. Spring 是什么"></a>2. Spring 是什么</h2><p>Spring 是轻量级、非侵入式、以 IoC 和 AOP 为核心的企业级开发框架。</p>
+<p>“轻量级”不是指功能少，而是指使用成本和侵入成本低。普通 Java 类不需要继承 Spring 的基类，也不需要强绑定 Spring API，就可以被容器管理。</p>
+<p>“非侵入式”意味着业务对象可以保持 POJO 形态：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> OrderRepository orderRepository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">OrderService</span><span class="params">(OrderRepository orderRepository)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.orderRepository = orderRepository;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码的核心仍然是普通 Java 对象，只是通过注解告诉 Spring：这个类需要交给容器管理，并由容器注入依赖。</p>
+<p>Spring 的核心价值主要体现在：</p>
+<ul>
+<li>降低对象之间的耦合。</li>
+<li>统一管理 Bean 的创建、依赖、初始化和销毁。</li>
+<li>用 AOP 处理事务、日志、权限、监控等横切逻辑。</li>
+<li>为 JDBC、事务、Web、缓存、消息队列等企业级能力提供统一抽象。</li>
+<li>与 Spring Boot 配合，通过自动配置快速搭建应用。</li>
+</ul>
+<h2 id="3-IoC-与-DI"><a href="#3-IoC-与-DI" class="headerlink" title="3. IoC 与 DI"></a>3. IoC 与 DI</h2><h3 id="3-1-IoC-控制反转"><a href="#3-1-IoC-控制反转" class="headerlink" title="3.1 IoC 控制反转"></a>3.1 IoC 控制反转</h3><p>传统写法中，对象主动创建自己的依赖：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">OrderRepository</span> <span class="variable">orderRepository</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OrderRepository</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种方式的问题是对象之间强耦合，不利于测试和替换实现。</p>
+<p>Spring 的 IoC 思想是：对象不再自己创建依赖，而是把依赖交给容器创建和组装。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> OrderRepository orderRepository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">OrderService</span><span class="params">(OrderRepository orderRepository)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.orderRepository = orderRepository;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时 <code>OrderService</code> 只声明自己需要 <code>OrderRepository</code>，具体创建和注入由 Spring 容器完成。</p>
+<h3 id="3-2-DI-依赖注入"><a href="#3-2-DI-依赖注入" class="headerlink" title="3.2 DI 依赖注入"></a>3.2 DI 依赖注入</h3><p>DI 是 IoC 的具体实现方式。常见注入方式有三种。</p>
+<p>构造器注入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> UserRepository userRepository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UserService</span><span class="params">(UserRepository userRepository)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.userRepository = userRepository;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>构造器注入要求在创建对象时必须提供依赖，适合必需依赖，也有利于不可变对象和单元测试。</p>
+<p>Setter 注入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> UserRepository userRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setUserRepository</span><span class="params">(UserRepository userRepository)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.userRepository = userRepository;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Setter 注入适合可选依赖或运行期需要替换的依赖。</p>
+<p>字段注入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserRepository userRepository;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>字段注入写起来简单，但不利于测试，也不利于显式表达依赖关系。实际项目中更推荐构造器注入。</p>
+<h2 id="4-Bean-与作用域"><a href="#4-Bean-与作用域" class="headerlink" title="4. Bean 与作用域"></a>4. Bean 与作用域</h2><h3 id="4-1-什么是-Bean"><a href="#4-1-什么是-Bean" class="headerlink" title="4.1 什么是 Bean"></a>4.1 什么是 Bean</h3><p>Bean 是由 Spring 容器创建、装配、初始化和管理的对象。通过 XML、注解或 Java 配置都可以把对象注册为 Bean。</p>
+<p>常见注册方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PaymentClient</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> PaymentClient <span class="title function_">paymentClient</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">PaymentClient</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-Bean-的常见作用域"><a href="#4-2-Bean-的常见作用域" class="headerlink" title="4.2 Bean 的常见作用域"></a>4.2 Bean 的常见作用域</h3><table>
+<thead>
+<tr>
+<th>作用域</th>
+<th>含义</th>
+<th>典型场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>singleton</code></td>
+<td>容器中只有一个 Bean 实例，默认作用域</td>
+<td>大多数无状态 Service、Repository</td>
+</tr>
+<tr>
+<td><code>prototype</code></td>
+<td>每次获取 Bean 都创建新实例</td>
+<td>有状态对象、临时对象</td>
+</tr>
+<tr>
+<td><code>request</code></td>
+<td>每个 HTTP 请求一个实例</td>
+<td>Web 请求级状态</td>
+</tr>
+<tr>
+<td><code>session</code></td>
+<td>每个 HTTP Session 一个实例</td>
+<td>用户会话级状态</td>
+</tr>
+<tr>
+<td><code>application</code></td>
+<td>ServletContext 级别一个实例</td>
+<td>Web 应用级共享对象</td>
+</tr>
+</tbody></table>
+<p>默认情况下，Spring Bean 是单例的。</p>
+<h2 id="5-Spring-单例-Bean-是线程安全的吗"><a href="#5-Spring-单例-Bean-是线程安全的吗" class="headerlink" title="5. Spring 单例 Bean 是线程安全的吗"></a>5. Spring 单例 Bean 是线程安全的吗</h2><p>Spring 单例 Bean 本身不保证线程安全。单例只表示容器中只有一个实例，不表示多线程访问时自动加锁。</p>
+<p>所有线程共享同一个单例 Bean 实例，如果 Bean 内部有可变成员变量，就可能发生数据竞争。</p>
+<p>线程安全情况：</p>
+<ul>
+<li>Bean 没有成员变量，只依赖局部变量。</li>
+<li>Bean 的成员变量是不可变对象。</li>
+<li>Bean 的共享状态使用了线程安全结构或同步控制。</li>
+<li>Bean 只依赖数据库、Redis、消息队列等外部存储，不在内存里保存请求状态。</li>
+</ul>
+<p>线程不安全情况：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CounterService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">increment</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> ++count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>count</code> 被所有线程共享，<code>++count</code> 不是原子操作，可能出现并发问题。</p>
+<p>更合理的写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CounterService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">AtomicInteger</span> <span class="variable">count</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">increment</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> count.incrementAndGet();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际业务中，Service 层通常应该设计成无状态对象。请求级数据放在方法参数、局部变量、数据库、缓存或上下文对象中，不要放在单例 Bean 的普通成员变量里。</p>
+<h2 id="6-Bean-生命周期"><a href="#6-Bean-生命周期" class="headerlink" title="6. Bean 生命周期"></a>6. Bean 生命周期</h2><p>Spring Bean 的生命周期可以分为八个阶段。</p>
+<h3 id="6-1-解析-BeanDefinition"><a href="#6-1-解析-BeanDefinition" class="headerlink" title="6.1 解析 BeanDefinition"></a>6.1 解析 BeanDefinition</h3><p>容器启动时会扫描配置文件、注解或 Java 配置，把 Bean 信息解析成 <code>BeanDefinition</code>。<code>BeanDefinition</code> 描述了 Bean 的类名、作用域、构造参数、属性依赖、初始化方法、销毁方法等元数据。</p>
+<h3 id="6-2-实例化"><a href="#6-2-实例化" class="headerlink" title="6.2 实例化"></a>6.2 实例化</h3><p>容器通过构造函数或工厂方法创建 Bean 实例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">UserService</span> <span class="variable">userService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserService</span>();</span><br></pre></td></tr></table></figure>
+
+<p>此时对象已经被创建，但依赖属性通常还没有完全注入。</p>
+<h3 id="6-3-属性赋值"><a href="#6-3-属性赋值" class="headerlink" title="6.3 属性赋值"></a>6.3 属性赋值</h3><p>容器为 Bean 注入依赖属性，包括构造器依赖、Setter 依赖、字段依赖等。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> UserRepository userRepository;</span><br></pre></td></tr></table></figure>
+
+<p>这一阶段会完成依赖装配，也是循环依赖处理的关键阶段。</p>
+<h3 id="6-4-Aware-接口回调"><a href="#6-4-Aware-接口回调" class="headerlink" title="6.4 Aware 接口回调"></a>6.4 Aware 接口回调</h3><p>如果 Bean 实现了 Spring 的 Aware 接口，容器会把相关上下文信息回调给 Bean。</p>
+<p>常见 Aware 接口：</p>
+<ul>
+<li><code>BeanNameAware</code>：获取当前 Bean 名称。</li>
+<li><code>BeanFactoryAware</code>：获取 <code>BeanFactory</code>。</li>
+<li><code>ApplicationContextAware</code>：获取 <code>ApplicationContext</code>。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DemoBean</span> <span class="keyword">implements</span> <span class="title class_">ApplicationContextAware</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> ApplicationContext applicationContext;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setApplicationContext</span><span class="params">(ApplicationContext applicationContext)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.applicationContext = applicationContext;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-5-BeanPostProcessor-前置处理"><a href="#6-5-BeanPostProcessor-前置处理" class="headerlink" title="6.5 BeanPostProcessor 前置处理"></a>6.5 BeanPostProcessor 前置处理</h3><p>容器调用所有 <code>BeanPostProcessor</code> 的 <code>postProcessBeforeInitialization()</code> 方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object <span class="title function_">postProcessBeforeInitialization</span><span class="params">(Object bean, String beanName)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> bean;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个阶段可以在初始化前对 Bean 进行扩展处理。</p>
+<h3 id="6-6-初始化"><a href="#6-6-初始化" class="headerlink" title="6.6 初始化"></a>6.6 初始化</h3><p>初始化方法有三类常见方式：</p>
+<ul>
+<li><code>@PostConstruct</code></li>
+<li>实现 <code>InitializingBean</code> 的 <code>afterPropertiesSet()</code> 方法</li>
+<li>XML 或 <code>@Bean(initMethod = &quot;...&quot;)</code> 指定初始化方法</li>
+</ul>
+<p>执行顺序通常是：</p>
+<ol>
+<li><code>@PostConstruct</code></li>
+<li><code>afterPropertiesSet()</code></li>
+<li>自定义 <code>init-method</code></li>
+</ol>
+<h3 id="6-7-BeanPostProcessor-后置处理"><a href="#6-7-BeanPostProcessor-后置处理" class="headerlink" title="6.7 BeanPostProcessor 后置处理"></a>6.7 BeanPostProcessor 后置处理</h3><p>容器调用 <code>BeanPostProcessor</code> 的 <code>postProcessAfterInitialization()</code> 方法。</p>
+<p>AOP 代理通常在这个阶段生成。也就是说，业务代码里注入到的对象可能已经不是原始 Bean，而是被增强后的代理对象。</p>
+<h3 id="6-8-Bean-就绪与销毁"><a href="#6-8-Bean-就绪与销毁" class="headerlink" title="6.8 Bean 就绪与销毁"></a>6.8 Bean 就绪与销毁</h3><p>初始化完成后，Bean 进入可用状态，可以被其他对象获取和调用。</p>
+<p>容器关闭时会触发销毁逻辑，常见方式：</p>
+<ul>
+<li><code>@PreDestroy</code></li>
+<li>实现 <code>DisposableBean</code> 的 <code>destroy()</code> 方法</li>
+<li>XML 或 <code>@Bean(destroyMethod = &quot;...&quot;)</code> 指定销毁方法</li>
+</ul>
+<p>Bean 生命周期顺序可以简化为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BeanDefinition -&gt; 实例化 -&gt; 属性赋值 -&gt; Aware 回调</span><br><span class="line">-&gt; BeanPostProcessor 前置处理 -&gt; 初始化</span><br><span class="line">-&gt; BeanPostProcessor 后置处理 -&gt; 使用</span><br><span class="line">-&gt; 销毁</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-Spring-解决循环依赖"><a href="#7-Spring-解决循环依赖" class="headerlink" title="7. Spring 解决循环依赖"></a>7. Spring 解决循环依赖</h2><p>循环依赖指两个或多个 Bean 相互依赖。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> BService bService;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AService aService;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Spring 默认只能解决单例 Bean 的部分循环依赖，主要依赖三级缓存。</p>
+<p>三级缓存：</p>
+<table>
+<thead>
+<tr>
+<th>缓存</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>singletonObjects</code></td>
+<td>一级缓存，保存已经完全初始化的单例 Bean</td>
+</tr>
+<tr>
+<td><code>earlySingletonObjects</code></td>
+<td>二级缓存，保存提前暴露的早期 Bean</td>
+</tr>
+<tr>
+<td><code>singletonFactories</code></td>
+<td>三级缓存，保存可以生成早期 Bean 引用的工厂</td>
+</tr>
+</tbody></table>
+<p>简化流程：</p>
+<ol>
+<li>创建 A，实例化后还没完成属性注入。</li>
+<li>A 提前把自己的对象工厂放入三级缓存。</li>
+<li>A 注入 B，开始创建 B。</li>
+<li>B 注入 A 时，从三级缓存中拿到 A 的早期引用。</li>
+<li>B 初始化完成后，A 继续完成属性注入和初始化。</li>
+</ol>
+<p>为什么需要三级缓存？</p>
+<p>因为 AOP 场景下，提前暴露的可能不是原始对象，而是代理对象。三级缓存通过工厂延迟生成早期引用，可以兼容普通 Bean 和代理 Bean。</p>
+<p>不能解决的典型情况：</p>
+<ul>
+<li>构造器循环依赖。</li>
+<li><code>prototype</code> 作用域循环依赖。</li>
+<li>某些复杂 AOP 场景下的循环依赖。</li>
+</ul>
+<p>实际项目中，不建议依赖循环依赖机制。更好的方式是重新拆分职责，或者引入事件、懒加载、接口解耦。</p>
+<h2 id="8-AOP-面向切面编程"><a href="#8-AOP-面向切面编程" class="headerlink" title="8. AOP 面向切面编程"></a>8. AOP 面向切面编程</h2><h3 id="8-1-AOP-解决什么问题"><a href="#8-1-AOP-解决什么问题" class="headerlink" title="8.1 AOP 解决什么问题"></a>8.1 AOP 解决什么问题</h3><p>AOP 用来处理横切关注点。横切关注点不是某一个业务模块独有，而是很多模块都会用到。</p>
+<p>常见场景：</p>
+<ul>
+<li>事务管理。</li>
+<li>日志记录。</li>
+<li>权限校验。</li>
+<li>接口限流。</li>
+<li>性能监控。</li>
+<li>参数校验。</li>
+<li>缓存处理。</li>
+</ul>
+<p>如果没有 AOP，这些逻辑会散落在业务方法里。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createOrder</span><span class="params">()</span> &#123;</span><br><span class="line">    beginTransaction();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 业务逻辑</span></span><br><span class="line">        commit();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        rollback();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有了 AOP 后，业务方法只关注业务本身，事务、日志等由切面统一处理。</p>
+<h3 id="8-2-AOP-核心概念"><a href="#8-2-AOP-核心概念" class="headerlink" title="8.2 AOP 核心概念"></a>8.2 AOP 核心概念</h3><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Join Point</td>
+<td>连接点，可以被增强的位置，Spring AOP 中主要是方法调用</td>
+</tr>
+<tr>
+<td>Pointcut</td>
+<td>切点，匹配哪些连接点需要增强</td>
+</tr>
+<tr>
+<td>Advice</td>
+<td>通知，增强逻辑</td>
+</tr>
+<tr>
+<td>Aspect</td>
+<td>切面，切点和通知的组合</td>
+</tr>
+<tr>
+<td>Target</td>
+<td>目标对象，被代理的原始对象</td>
+</tr>
+<tr>
+<td>Proxy</td>
+<td>代理对象，对目标对象进行增强</td>
+</tr>
+<tr>
+<td>Weaving</td>
+<td>织入，把增强逻辑应用到目标对象的过程</td>
+</tr>
+</tbody></table>
+<h3 id="8-3-通知类型"><a href="#8-3-通知类型" class="headerlink" title="8.3 通知类型"></a>8.3 通知类型</h3><table>
+<thead>
+<tr>
+<th>通知</th>
+<th>执行时机</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@Before</code></td>
+<td>方法执行前</td>
+</tr>
+<tr>
+<td><code>@After</code></td>
+<td>方法执行后，无论是否异常</td>
+</tr>
+<tr>
+<td><code>@AfterReturning</code></td>
+<td>方法正常返回后</td>
+</tr>
+<tr>
+<td><code>@AfterThrowing</code></td>
+<td>方法抛出异常后</td>
+</tr>
+<tr>
+<td><code>@Around</code></td>
+<td>环绕方法执行，功能最强</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogAspect</span> &#123;</span><br><span class="line">    <span class="meta">@Around(&quot;execution(* com.example.service..*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">log</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">start</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> joinPoint.proceed();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="type">long</span> <span class="variable">cost</span> <span class="operator">=</span> System.currentTimeMillis() - start;</span><br><span class="line">            System.out.println(joinPoint.getSignature() + <span class="string">&quot; cost &quot;</span> + cost + <span class="string">&quot; ms&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-4-JDK-动态代理与-CGLIB"><a href="#8-4-JDK-动态代理与-CGLIB" class="headerlink" title="8.4 JDK 动态代理与 CGLIB"></a>8.4 JDK 动态代理与 CGLIB</h3><p>Spring AOP 底层主要使用两类代理。</p>
+<table>
+<thead>
+<tr>
+<th>代理方式</th>
+<th>条件</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JDK 动态代理</td>
+<td>目标类实现了接口</td>
+<td>基于接口生成代理类</td>
+</tr>
+<tr>
+<td>CGLIB</td>
+<td>目标类没有接口</td>
+<td>通过继承目标类生成子类代理</td>
+</tr>
+</tbody></table>
+<p>注意点：</p>
+<ul>
+<li><code>final</code> 类不能被 CGLIB 代理。</li>
+<li><code>final</code> 方法不能被 CGLIB 重写增强。</li>
+<li>Spring AOP 主要增强方法调用，不是完整的编译期织入。</li>
+<li>同类内部方法调用通常不会经过代理，因此事务和切面可能不生效。</li>
+</ul>
+<h2 id="9-Spring-事务"><a href="#9-Spring-事务" class="headerlink" title="9. Spring 事务"></a>9. Spring 事务</h2><h3 id="9-1-声明式事务"><a href="#9-1-声明式事务" class="headerlink" title="9.1 声明式事务"></a>9.1 声明式事务</h3><p>Spring 最常用的是声明式事务，通过 <code>@Transactional</code> 标记方法或类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createOrder</span><span class="params">(CreateOrderCommand command)</span> &#123;</span><br><span class="line">        <span class="comment">// 保存订单</span></span><br><span class="line">        <span class="comment">// 扣减库存</span></span><br><span class="line">        <span class="comment">// 写入流水</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>@Transactional</code> 本质上依赖 AOP。Spring 为目标对象生成代理，方法调用进入代理后，事务拦截器会在方法前开启事务，在方法正常结束时提交事务，在方法异常时回滚事务。</p>
+<h3 id="9-2-事务传播行为"><a href="#9-2-事务传播行为" class="headerlink" title="9.2 事务传播行为"></a>9.2 事务传播行为</h3><table>
+<thead>
+<tr>
+<th>传播行为</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>REQUIRED</code></td>
+<td>默认值，有事务就加入，没有就新建</td>
+</tr>
+<tr>
+<td><code>REQUIRES_NEW</code></td>
+<td>挂起当前事务，创建新事务</td>
+</tr>
+<tr>
+<td><code>NESTED</code></td>
+<td>嵌套事务，依赖保存点</td>
+</tr>
+<tr>
+<td><code>SUPPORTS</code></td>
+<td>有事务就加入，没有事务就非事务执行</td>
+</tr>
+<tr>
+<td><code>NOT_SUPPORTED</code></td>
+<td>以非事务方式执行，如果当前有事务则挂起</td>
+</tr>
+<tr>
+<td><code>MANDATORY</code></td>
+<td>必须在事务中执行，没有事务则报错</td>
+</tr>
+<tr>
+<td><code>NEVER</code></td>
+<td>必须非事务执行，有事务则报错</td>
+</tr>
+</tbody></table>
+<p>日常业务最常见的是 <code>REQUIRED</code> 和 <code>REQUIRES_NEW</code>。</p>
+<h3 id="9-3-事务隔离级别"><a href="#9-3-事务隔离级别" class="headerlink" title="9.3 事务隔离级别"></a>9.3 事务隔离级别</h3><table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>能解决的问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>READ_UNCOMMITTED</code></td>
+<td>基本不解决并发读问题，可能脏读</td>
+</tr>
+<tr>
+<td><code>READ_COMMITTED</code></td>
+<td>解决脏读</td>
+</tr>
+<tr>
+<td><code>REPEATABLE_READ</code></td>
+<td>解决脏读、不可重复读，MySQL 默认级别</td>
+</tr>
+<tr>
+<td><code>SERIALIZABLE</code></td>
+<td>串行化，隔离性最强，并发性能最低</td>
+</tr>
+</tbody></table>
+<p>Spring 的隔离级别最终要落到数据库能力上。Spring 只负责传递事务语义，真正的并发控制由数据库实现。</p>
+<h3 id="9-4-事务失效场景"><a href="#9-4-事务失效场景" class="headerlink" title="9.4 事务失效场景"></a>9.4 事务失效场景</h3><p>常见事务失效原因：</p>
+<ul>
+<li>方法不是 <code>public</code>。</li>
+<li>同类内部方法调用，没有经过代理对象。</li>
+<li>异常被捕获后没有继续抛出。</li>
+<li>默认只回滚 <code>RuntimeException</code> 和 <code>Error</code>，受检异常需要配置 <code>rollbackFor</code>。</li>
+<li>数据库表不支持事务，例如 MyISAM。</li>
+<li>没有被 Spring 管理，自己 <code>new</code> 出来的对象不会被代理。</li>
+<li><code>@Transactional</code> 标在了不合适的位置。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createOrder</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="comment">// 受检异常也回滚</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果在同一个类中调用事务方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">outer</span><span class="params">()</span> &#123;</span><br><span class="line">    inner();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">inner</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 这里可能不走代理，事务不生效</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解决思路是通过代理对象调用，或者把事务方法拆到另一个 Spring Bean 中。</p>
+<h2 id="10-Spring-常用注解"><a href="#10-Spring-常用注解" class="headerlink" title="10. Spring 常用注解"></a>10. Spring 常用注解</h2><h3 id="10-1-Bean-注册注解"><a href="#10-1-Bean-注册注解" class="headerlink" title="10.1 Bean 注册注解"></a>10.1 Bean 注册注解</h3><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@Component</code></td>
+<td>通用组件</td>
+</tr>
+<tr>
+<td><code>@Service</code></td>
+<td>业务服务层组件</td>
+</tr>
+<tr>
+<td><code>@Repository</code></td>
+<td>持久层组件</td>
+</tr>
+<tr>
+<td><code>@Controller</code></td>
+<td>MVC 控制器</td>
+</tr>
+<tr>
+<td><code>@RestController</code></td>
+<td><code>@Controller</code> + <code>@ResponseBody</code></td>
+</tr>
+<tr>
+<td><code>@Configuration</code></td>
+<td>配置类</td>
+</tr>
+<tr>
+<td><code>@Bean</code></td>
+<td>在配置类中注册 Bean</td>
+</tr>
+</tbody></table>
+<p><code>@Service</code>、<code>@Repository</code>、<code>@Controller</code> 本质上都是特殊语义的 <code>@Component</code>，用于提升代码可读性和分层表达。</p>
+<h3 id="10-2-依赖注入注解"><a href="#10-2-依赖注入注解" class="headerlink" title="10.2 依赖注入注解"></a>10.2 依赖注入注解</h3><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@Autowired</code></td>
+<td>按类型注入，Spring 提供</td>
+</tr>
+<tr>
+<td><code>@Qualifier</code></td>
+<td>配合 <code>@Autowired</code> 指定 Bean 名称</td>
+</tr>
+<tr>
+<td><code>@Resource</code></td>
+<td>JSR-250 注解，默认按名称注入</td>
+</tr>
+<tr>
+<td><code>@Value</code></td>
+<td>注入配置值</td>
+</tr>
+</tbody></table>
+<p>如果同一类型有多个 Bean，可以使用 <code>@Qualifier</code> 指定具体 Bean。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">PayService</span><span class="params">(<span class="meta">@Qualifier(&quot;wechatPayClient&quot;)</span> PayClient payClient)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.payClient = payClient;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-3-Web-注解"><a href="#10-3-Web-注解" class="headerlink" title="10.3 Web 注解"></a>10.3 Web 注解</h3><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@RequestMapping</code></td>
+<td>映射请求路径</td>
+</tr>
+<tr>
+<td><code>@GetMapping</code></td>
+<td>GET 请求</td>
+</tr>
+<tr>
+<td><code>@PostMapping</code></td>
+<td>POST 请求</td>
+</tr>
+<tr>
+<td><code>@PutMapping</code></td>
+<td>PUT 请求</td>
+</tr>
+<tr>
+<td><code>@DeleteMapping</code></td>
+<td>DELETE 请求</td>
+</tr>
+<tr>
+<td><code>@PathVariable</code></td>
+<td>获取路径变量</td>
+</tr>
+<tr>
+<td><code>@RequestParam</code></td>
+<td>获取请求参数</td>
+</tr>
+<tr>
+<td><code>@RequestBody</code></td>
+<td>读取请求体并反序列化</td>
+</tr>
+<tr>
+<td><code>@ResponseBody</code></td>
+<td>返回值写入响应体</td>
+</tr>
+</tbody></table>
+<h3 id="10-4-事务与-AOP-注解"><a href="#10-4-事务与-AOP-注解" class="headerlink" title="10.4 事务与 AOP 注解"></a>10.4 事务与 AOP 注解</h3><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@Transactional</code></td>
+<td>声明式事务</td>
+</tr>
+<tr>
+<td><code>@Aspect</code></td>
+<td>声明切面</td>
+</tr>
+<tr>
+<td><code>@Pointcut</code></td>
+<td>声明切点</td>
+</tr>
+<tr>
+<td><code>@Before</code></td>
+<td>前置通知</td>
+</tr>
+<tr>
+<td><code>@Around</code></td>
+<td>环绕通知</td>
+</tr>
+</tbody></table>
+<h3 id="10-5-Spring-Boot-注解"><a href="#10-5-Spring-Boot-注解" class="headerlink" title="10.5 Spring Boot 注解"></a>10.5 Spring Boot 注解</h3><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@SpringBootApplication</code></td>
+<td>启动类核心注解</td>
+</tr>
+<tr>
+<td><code>@EnableAutoConfiguration</code></td>
+<td>开启自动配置</td>
+</tr>
+<tr>
+<td><code>@ConfigurationProperties</code></td>
+<td>绑定配置属性</td>
+</tr>
+<tr>
+<td><code>@ConditionalOnClass</code></td>
+<td>类路径存在某类时生效</td>
+</tr>
+<tr>
+<td><code>@ConditionalOnMissingBean</code></td>
+<td>容器不存在某 Bean 时生效</td>
+</tr>
+<tr>
+<td><code>@ConditionalOnProperty</code></td>
+<td>指定配置满足条件时生效</td>
+</tr>
+</tbody></table>
+<p><code>@SpringBootApplication</code> 是组合注解，包含：</p>
+<ul>
+<li><code>@SpringBootConfiguration</code></li>
+<li><code>@EnableAutoConfiguration</code></li>
+<li><code>@ComponentScan</code></li>
+</ul>
+<h2 id="11-Spring-Boot-自动配置"><a href="#11-Spring-Boot-自动配置" class="headerlink" title="11. Spring Boot 自动配置"></a>11. Spring Boot 自动配置</h2><p>Spring Boot 自动配置的核心目标是根据依赖、配置和条件自动创建 Bean，减少手写配置。</p>
+<p><code>@EnableAutoConfiguration</code> 会通过 <code>@Import</code> 导入 <code>AutoConfigurationImportSelector</code>。</p>
+<p>自动配置大致流程：</p>
+<ol>
+<li>启动类标注 <code>@SpringBootApplication</code>。</li>
+<li><code>@EnableAutoConfiguration</code> 生效。</li>
+<li>通过 <code>AutoConfigurationImportSelector</code> 加载自动配置类。</li>
+<li>Spring Boot 扫描依赖包中的自动配置元数据。</li>
+<li>自动配置类结合 <code>@Conditional</code> 系列注解判断是否生效。</li>
+<li>满足条件时，把配置类中的 Bean 注入容器。</li>
+</ol>
+<p>早期 Spring Boot 主要通过 <code>META-INF/spring.factories</code> 声明自动配置类；新版本中更多使用 <code>META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports</code>。</p>
+<p>典型条件注解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(DataSource.class)</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean(DataSource.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DataSourceAutoConfiguration</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>含义是：当类路径下存在 <code>DataSource</code>，且容器中还没有自定义 <code>DataSource</code> Bean 时，自动配置才会生效。</p>
+<p>自动配置不是强行替你配置一切，而是“有条件地提供默认配置”。当用户自己声明了 Bean，Spring Boot 通常会让用户配置优先。</p>
+<h2 id="12-Spring-MVC-请求流程"><a href="#12-Spring-MVC-请求流程" class="headerlink" title="12. Spring MVC 请求流程"></a>12. Spring MVC 请求流程</h2><p>Spring MVC 的核心入口是 <code>DispatcherServlet</code>，它是前端控制器，负责接收请求并协调后续组件。</p>
+<p>请求处理流程：</p>
+<ol>
+<li>浏览器发送 HTTP 请求。</li>
+<li><code>DispatcherServlet</code> 接收请求。</li>
+<li><code>HandlerMapping</code> 根据 URL 找到对应的 Handler。</li>
+<li><code>HandlerAdapter</code> 调用 Controller 方法。</li>
+<li>参数解析器把请求参数绑定到方法参数。</li>
+<li>Controller 执行业务逻辑。</li>
+<li>返回 <code>ModelAndView</code> 或响应体。</li>
+<li>如果是页面渲染，<code>ViewResolver</code> 解析视图。</li>
+<li>如果是 REST 接口，<code>HttpMessageConverter</code> 把返回值序列化为 JSON。</li>
+<li>响应返回客户端。</li>
+</ol>
+<p>REST 接口示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/users&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UserController</span><span class="params">(UserService userService)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.userService = userService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> UserVO <span class="title function_">getUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> userService.getUser(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>@RestController</code> 会让返回值直接写入 HTTP 响应体，而不是走视图解析。</p>
+<h2 id="13-ApplicationContext-与-BeanFactory"><a href="#13-ApplicationContext-与-BeanFactory" class="headerlink" title="13. ApplicationContext 与 BeanFactory"></a>13. ApplicationContext 与 BeanFactory</h2><p><code>BeanFactory</code> 是 Spring 最基础的容器接口，提供 Bean 创建、获取和依赖注入能力。</p>
+<p><code>ApplicationContext</code> 是更高级的容器接口，继承并扩展了 <code>BeanFactory</code>，常用功能更多。</p>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>BeanFactory</th>
+<th>ApplicationContext</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定位</td>
+<td>基础 IoC 容器</td>
+<td>应用级容器</td>
+</tr>
+<tr>
+<td>Bean 创建</td>
+<td>默认懒加载</td>
+<td>默认预实例化单例 Bean</td>
+</tr>
+<tr>
+<td>国际化</td>
+<td>不直接提供</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>事件发布</td>
+<td>不直接提供</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>资源加载</td>
+<td>能力较弱</td>
+<td>支持统一资源访问</td>
+</tr>
+<tr>
+<td>使用场景</td>
+<td>底层容器</td>
+<td>日常开发主入口</td>
+</tr>
+</tbody></table>
+<p>实际开发中几乎都使用 <code>ApplicationContext</code>。</p>
+<h2 id="14-Spring-扩展点"><a href="#14-Spring-扩展点" class="headerlink" title="14. Spring 扩展点"></a>14. Spring 扩展点</h2><p>Spring 强大的一部分原因是扩展点非常丰富。</p>
+<h3 id="14-1-BeanFactoryPostProcessor"><a href="#14-1-BeanFactoryPostProcessor" class="headerlink" title="14.1 BeanFactoryPostProcessor"></a>14.1 BeanFactoryPostProcessor</h3><p><code>BeanFactoryPostProcessor</code> 可以在 Bean 实例化之前修改 <code>BeanDefinition</code>。</p>
+<p>典型用途：</p>
+<ul>
+<li>修改 Bean 的属性定义。</li>
+<li>解析占位符。</li>
+<li>扩展配置元数据。</li>
+</ul>
+<h3 id="14-2-BeanPostProcessor"><a href="#14-2-BeanPostProcessor" class="headerlink" title="14.2 BeanPostProcessor"></a>14.2 BeanPostProcessor</h3><p><code>BeanPostProcessor</code> 可以在 Bean 初始化前后增强 Bean。</p>
+<p>典型用途：</p>
+<ul>
+<li>AOP 代理创建。</li>
+<li>注解处理。</li>
+<li>初始化增强。</li>
+<li>对特殊 Bean 做包装。</li>
+</ul>
+<h3 id="14-3-ImportSelector"><a href="#14-3-ImportSelector" class="headerlink" title="14.3 ImportSelector"></a>14.3 ImportSelector</h3><p><code>ImportSelector</code> 可以根据条件动态导入配置类。Spring Boot 自动配置中的 <code>AutoConfigurationImportSelector</code> 就是重要代表。</p>
+<h3 id="14-4-FactoryBean"><a href="#14-4-FactoryBean" class="headerlink" title="14.4 FactoryBean"></a>14.4 FactoryBean</h3><p><code>FactoryBean</code> 本身是一个 Bean，但它生产的对象才是真正暴露给容器使用的对象。</p>
+<p>典型场景：</p>
+<ul>
+<li>MyBatis 的 Mapper 代理对象。</li>
+<li>复杂对象创建。</li>
+<li>框架级代理对象封装。</li>
+</ul>
+<h2 id="15-Spring-常见面试题"><a href="#15-Spring-常见面试题" class="headerlink" title="15. Spring 常见面试题"></a>15. Spring 常见面试题</h2><h3 id="15-1-Spring-单例-Bean-是否线程安全"><a href="#15-1-Spring-单例-Bean-是否线程安全" class="headerlink" title="15.1 Spring 单例 Bean 是否线程安全"></a>15.1 Spring 单例 Bean 是否线程安全</h3><p>不一定。单例只表示一个实例被多个线程共享，不表示自动线程安全。如果 Bean 是无状态的，一般线程安全；如果有可变成员变量且没有同步控制，就不安全。</p>
+<h3 id="15-2-构造器注入和字段注入怎么选"><a href="#15-2-构造器注入和字段注入怎么选" class="headerlink" title="15.2 构造器注入和字段注入怎么选"></a>15.2 构造器注入和字段注入怎么选</h3><p>优先构造器注入。构造器注入可以明确表达必需依赖，支持 <code>final</code> 字段，更利于测试，也能更早暴露循环依赖问题。</p>
+<p>字段注入虽然简洁，但依赖关系不够显式，单元测试时也不方便手动构造对象。</p>
+<h3 id="15-3-Bean-生命周期有哪些步骤"><a href="#15-3-Bean-生命周期有哪些步骤" class="headerlink" title="15.3 Bean 生命周期有哪些步骤"></a>15.3 Bean 生命周期有哪些步骤</h3><p>简化回答：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">解析 BeanDefinition -&gt; 实例化 -&gt; 属性注入 -&gt; Aware 回调</span><br><span class="line">-&gt; BeanPostProcessor 前置处理 -&gt; 初始化方法</span><br><span class="line">-&gt; BeanPostProcessor 后置处理 -&gt; 使用 -&gt; 销毁</span><br></pre></td></tr></table></figure>
+
+<p>初始化阶段包括 <code>@PostConstruct</code>、<code>afterPropertiesSet()</code> 和自定义 <code>init-method</code>。</p>
+<p>销毁阶段包括 <code>@PreDestroy</code>、<code>destroy()</code> 和自定义 <code>destroy-method</code>。</p>
+<h3 id="15-4-Spring-AOP-为什么同类内部调用会失效"><a href="#15-4-Spring-AOP-为什么同类内部调用会失效" class="headerlink" title="15.4 Spring AOP 为什么同类内部调用会失效"></a>15.4 Spring AOP 为什么同类内部调用会失效</h3><p>Spring AOP 基于代理对象增强方法调用。同类内部方法调用使用的是 <code>this.inner()</code>，不会经过代理对象，因此事务、日志等切面可能不会生效。</p>
+<p>解决方式：</p>
+<ul>
+<li>把被增强方法拆到另一个 Bean。</li>
+<li>通过代理对象调用。</li>
+<li>使用 AspectJ 编译期或加载期织入。</li>
+</ul>
+<h3 id="15-5-Spring-事务什么时候会回滚"><a href="#15-5-Spring-事务什么时候会回滚" class="headerlink" title="15.5 Spring 事务什么时候会回滚"></a>15.5 Spring 事务什么时候会回滚</h3><p>默认情况下，Spring 事务遇到 <code>RuntimeException</code> 或 <code>Error</code> 会回滚，遇到受检异常不会自动回滚。</p>
+<p>如果希望受检异常也回滚，需要配置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="15-6-Autowired-和-Resource-的区别"><a href="#15-6-Autowired-和-Resource-的区别" class="headerlink" title="15.6 @Autowired 和 @Resource 的区别"></a>15.6 <code>@Autowired</code> 和 <code>@Resource</code> 的区别</h3><p><code>@Autowired</code> 是 Spring 提供的注解，默认按类型注入；如果同类型有多个 Bean，可以配合 <code>@Qualifier</code> 指定名称。</p>
+<p><code>@Resource</code> 是 JSR-250 注解，默认按名称注入，找不到名称时再按类型匹配。</p>
+<h3 id="15-7-Controller-和-RestController-的区别"><a href="#15-7-Controller-和-RestController-的区别" class="headerlink" title="15.7 @Controller 和 @RestController 的区别"></a>15.7 <code>@Controller</code> 和 <code>@RestController</code> 的区别</h3><p><code>@RestController</code> 等价于 <code>@Controller</code> 加 <code>@ResponseBody</code>。它适合 REST API，方法返回值会直接序列化到响应体中。</p>
+<p><code>@Controller</code> 更常用于返回页面视图。</p>
+<h3 id="15-8-Spring-Boot-自动配置原理"><a href="#15-8-Spring-Boot-自动配置原理" class="headerlink" title="15.8 Spring Boot 自动配置原理"></a>15.8 Spring Boot 自动配置原理</h3><p><code>@SpringBootApplication</code> 中包含 <code>@EnableAutoConfiguration</code>。<code>@EnableAutoConfiguration</code> 通过 <code>@Import</code> 导入 <code>AutoConfigurationImportSelector</code>，再加载自动配置类，并通过 <code>@Conditional</code> 系列注解判断是否把对应 Bean 注册到容器。</p>
+<p>核心思想是：根据 classpath、配置项和已有 Bean 自动提供默认配置，同时允许用户自定义 Bean 覆盖默认行为。</p>
+<h2 id="16-项目实践建议"><a href="#16-项目实践建议" class="headerlink" title="16. 项目实践建议"></a>16. 项目实践建议</h2><h3 id="16-1-Service-尽量无状态"><a href="#16-1-Service-尽量无状态" class="headerlink" title="16.1 Service 尽量无状态"></a>16.1 Service 尽量无状态</h3><p>不要在单例 Service 中保存请求级状态。</p>
+<p>推荐：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> OrderDTO <span class="title function_">getOrder</span><span class="params">(Long orderId)</span> &#123;</span><br><span class="line">    <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> orderRepository.findById(orderId);</span><br><span class="line">    <span class="keyword">return</span> converter.toDTO(order);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不推荐：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Long currentOrderId;</span><br></pre></td></tr></table></figure>
+
+<h3 id="16-2-优先使用构造器注入"><a href="#16-2-优先使用构造器注入" class="headerlink" title="16.2 优先使用构造器注入"></a>16.2 优先使用构造器注入</h3><p>构造器注入更适合表达必需依赖，也方便写测试。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> OrderRepository orderRepository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">OrderService</span><span class="params">(OrderRepository orderRepository)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.orderRepository = orderRepository;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="16-3-事务边界放在业务用例层"><a href="#16-3-事务边界放在业务用例层" class="headerlink" title="16.3 事务边界放在业务用例层"></a>16.3 事务边界放在业务用例层</h3><p>事务不宜过大，也不宜过小。通常把事务放在 Service 层的业务用例方法上。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">payOrder</span><span class="params">(Long orderId)</span> &#123;</span><br><span class="line">    <span class="comment">// 查询订单</span></span><br><span class="line">    <span class="comment">// 扣减余额</span></span><br><span class="line">    <span class="comment">// 更新订单状态</span></span><br><span class="line">    <span class="comment">// 写交易流水</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="16-4-避免在事务中做慢操作"><a href="#16-4-避免在事务中做慢操作" class="headerlink" title="16.4 避免在事务中做慢操作"></a>16.4 避免在事务中做慢操作</h3><p>事务中不建议执行耗时外部调用，例如远程 HTTP、发送大文件、复杂 IO 等。事务时间越长，数据库锁持有时间越长，并发性能越差。</p>
+<h3 id="16-5-明确异常与回滚规则"><a href="#16-5-明确异常与回滚规则" class="headerlink" title="16.5 明确异常与回滚规则"></a>16.5 明确异常与回滚规则</h3><p>业务异常如果需要回滚，要么设计为运行时异常，要么在 <code>@Transactional</code> 中配置 <code>rollbackFor</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(rollbackFor = BusinessException.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createOrder</span><span class="params">()</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="17-总结"><a href="#17-总结" class="headerlink" title="17. 总结"></a>17. 总结</h2><p>Spring 的核心不是某几个注解，而是一套围绕对象管理和横切增强建立起来的应用开发模型。</p>
+<p>学习顺序建议：</p>
+<ol>
+<li>先理解 IoC、DI、Bean 和 ApplicationContext。</li>
+<li>再掌握 Bean 生命周期、作用域和线程安全。</li>
+<li>继续学习 AOP、事务传播、事务失效场景。</li>
+<li>然后理解 Spring MVC 请求流程。</li>
+<li>最后看 Spring Boot 自动配置和常见扩展点。</li>
+</ol>
+<p>面试中遇到 Spring 问题时，可以抓住三个关键词展开：容器、代理、扩展点。容器负责创建和管理 Bean，代理负责 AOP 和事务增强，扩展点负责让框架能力可以被不断增强。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://increasingrate626.github.io/2026/05/16/Spring-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidqL9C4rxDyk6qtIg9P5BJY" data-title="Spring" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -620,7 +1372,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://increasingrate626.github.io/2026/05/15/Redis-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidshxcdcMRZ_sa6D1p-Jyug" data-title="Redis" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://increasingrate626.github.io/2026/05/15/Redis-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidB9dY903FdvWEJCQJRQOtK" data-title="Redis" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -1299,7 +2051,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://increasingrate626.github.io/2026/05/15/MySQL-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidTy4dPCx4-zMvgU3tYHpJp" data-title="MySQL" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://increasingrate626.github.io/2026/05/15/MySQL-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidGDv8rBdzKLPYoZVwkKcbL" data-title="MySQL" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -1809,7 +2561,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://increasingrate626.github.io/2026/05/14/JAVA%E5%B9%B6%E5%8F%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidT-jxxust3J3SKYS7qi15J" data-title="JAVA 并发" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://increasingrate626.github.io/2026/05/14/JAVA%E5%B9%B6%E5%8F%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuideLSWC4xc_WFY8ad3rEowT" data-title="JAVA 并发" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -2256,7 +3008,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://increasingrate626.github.io/2026/05/14/JAVA%E9%9B%86%E5%90%88-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidNd0xg5Ws_tU04x27njVnw" data-title="JAVA 集合" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://increasingrate626.github.io/2026/05/14/JAVA%E9%9B%86%E5%90%88-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidNw2u5siozt8lZB0vlucGm" data-title="JAVA 集合" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -2909,7 +3661,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://increasingrate626.github.io/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidxMpyVATR8EF_HNJ3jYBRP" data-title="JAVA SE" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://increasingrate626.github.io/2026/05/14/JAVA%20SE-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidqvbGkaBhu74lttJ8RWds3" data-title="JAVA SE" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -3861,765 +4613,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://increasingrate626.github.io/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidr5LVyrJDX_sAXO8OmgLTt" data-title="JVM" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-操作系统-技术文档" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="article-date">
-  <time class="dt-published" datetime="2026-05-14T02:00:00.000Z" itemprop="datePublished">2026-05-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">操作系统</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="进程、内存、I-O、文件系统与零拷贝"><a href="#进程、内存、I-O、文件系统与零拷贝" class="headerlink" title="进程、内存、I&#x2F;O、文件系统与零拷贝"></a>进程、内存、I&#x2F;O、文件系统与零拷贝</h1><h2 id="1-操作系统整体视图"><a href="#1-操作系统整体视图" class="headerlink" title="1. 操作系统整体视图"></a>1. 操作系统整体视图</h2><p>操作系统是应用程序和硬件之间的中间层，主要负责资源管理和抽象封装。</p>
-<p>常见职责：</p>
-<table>
-<thead>
-<tr>
-<th>模块</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>进程管理</td>
-<td>创建、调度、切换、终止进程和线程</td>
-</tr>
-<tr>
-<td>内存管理</td>
-<td>虚拟内存、页表、缺页中断、内存隔离</td>
-</tr>
-<tr>
-<td>文件系统</td>
-<td>文件、目录、权限、硬链接、软链接</td>
-</tr>
-<tr>
-<td>I&#x2F;O 管理</td>
-<td>缓冲、设备驱动、中断、DMA、I&#x2F;O 多路复用</td>
-</tr>
-<tr>
-<td>网络管理</td>
-<td>Socket、协议栈、收发缓冲区</td>
-</tr>
-<tr>
-<td>并发同步</td>
-<td>锁、信号量、条件变量、死锁处理</td>
-</tr>
-</tbody></table>
-<p>从应用程序角度看，操作系统提供的是一组抽象：</p>
-<ul>
-<li>进程：运行中的程序实例。</li>
-<li>线程：CPU 调度的基本单位。</li>
-<li>虚拟内存：每个进程看到的独立地址空间。</li>
-<li>文件：对磁盘、设备、管道、Socket 等资源的统一抽象。</li>
-<li>系统调用：用户态进入内核态请求服务的接口。</li>
-</ul>
-<h2 id="操作系统核心知识图谱"><a href="#操作系统核心知识图谱" class="headerlink" title="操作系统核心知识图谱"></a>操作系统核心知识图谱</h2><p>下图概括了本文中最核心的几组知识：进程与线程、IPC、死锁、虚拟内存、页面置换和零拷贝。</p>
-<p><img src="/images/tech-docs/os-core-map.png" alt="操作系统核心知识图谱"></p>
-<h2 id="2-进程与线程"><a href="#2-进程与线程" class="headerlink" title="2. 进程与线程"></a>2. 进程与线程</h2><h3 id="2-1-进程"><a href="#2-1-进程" class="headerlink" title="2.1 进程"></a>2.1 进程</h3><p>进程是资源分配的基本单位。一个进程通常拥有独立的虚拟地址空间、文件描述符表、信号处理方式、当前工作目录等资源。</p>
-<p>进程的典型组成：</p>
-<table>
-<thead>
-<tr>
-<th>组成</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>代码段</td>
-<td>程序指令</td>
-</tr>
-<tr>
-<td>数据段</td>
-<td>全局变量、静态变量</td>
-</tr>
-<tr>
-<td>堆</td>
-<td>动态分配内存</td>
-</tr>
-<tr>
-<td>栈</td>
-<td>函数调用、局部变量</td>
-</tr>
-<tr>
-<td>文件描述符表</td>
-<td>打开的文件、Socket、管道等</td>
-</tr>
-<tr>
-<td>进程控制块 PCB</td>
-<td>内核维护的进程状态信息</td>
-</tr>
-</tbody></table>
-<p>进程状态常见模型：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">创建 -&gt; 就绪 -&gt; 运行 -&gt; 阻塞 -&gt; 就绪 -&gt; 运行 -&gt; 终止</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-线程"><a href="#2-2-线程" class="headerlink" title="2.2 线程"></a>2.2 线程</h3><p>线程是 CPU 调度的基本单位。同一个进程内的多个线程共享进程资源，例如地址空间、打开文件、全局变量，但每个线程拥有自己的栈、寄存器上下文和线程局部存储。</p>
-<p>线程优点：</p>
-<ul>
-<li>创建和切换成本通常低于进程。</li>
-<li>线程间共享数据方便。</li>
-<li>适合并发处理 I&#x2F;O 或多核并行计算。</li>
-</ul>
-<p>线程风险：</p>
-<ul>
-<li>共享内存带来数据竞争。</li>
-<li>锁使用不当会产生死锁、活锁、饥饿。</li>
-<li>单个线程崩溃可能影响整个进程。</li>
-</ul>
-<h3 id="2-3-进程与线程对比"><a href="#2-3-进程与线程对比" class="headerlink" title="2.3 进程与线程对比"></a>2.3 进程与线程对比</h3><table>
-<thead>
-<tr>
-<th>维度</th>
-<th>进程</th>
-<th>线程</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>基本定位</td>
-<td>资源分配单位</td>
-<td>CPU 调度单位</td>
-</tr>
-<tr>
-<td>地址空间</td>
-<td>默认相互隔离</td>
-<td>同进程内共享</td>
-</tr>
-<tr>
-<td>通信成本</td>
-<td>较高，需要 IPC</td>
-<td>较低，可共享内存</td>
-</tr>
-<tr>
-<td>创建切换成本</td>
-<td>较高</td>
-<td>较低</td>
-</tr>
-<tr>
-<td>故障影响</td>
-<td>一个进程崩溃通常不影响其他进程</td>
-<td>一个线程崩溃可能导致整个进程异常</td>
-</tr>
-</tbody></table>
-<h2 id="3-进程间通信"><a href="#3-进程间通信" class="headerlink" title="3. 进程间通信"></a>3. 进程间通信</h2><p>进程间通信 IPC 用于让不同进程交换数据、同步状态或协作完成任务。</p>
-<h3 id="3-1-管道"><a href="#3-1-管道" class="headerlink" title="3.1 管道"></a>3.1 管道</h3><p>管道是单向字节流，常用于具有亲缘关系的进程之间通信，例如父子进程。</p>
-<p>特点：</p>
-<ul>
-<li>半双工，普通管道通常只能单向传输。</li>
-<li>数据按字节流传输，没有消息边界。</li>
-<li>适合简单的数据流转。</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep java</span><br></pre></td></tr></table></figure>
-
-<p>这里 <code>ps</code> 的输出通过管道成为 <code>grep</code> 的输入。</p>
-<h3 id="3-2-命名管道"><a href="#3-2-命名管道" class="headerlink" title="3.2 命名管道"></a>3.2 命名管道</h3><p>命名管道 FIFO 有文件系统路径，不要求通信双方一定具有父子关系。</p>
-<p>特点：</p>
-<ul>
-<li>仍然是字节流。</li>
-<li>可以被无亲缘关系的进程打开。</li>
-<li>适合本机简单 IPC。</li>
-</ul>
-<h3 id="3-3-信号量"><a href="#3-3-信号量" class="headerlink" title="3.3 信号量"></a>3.3 信号量</h3><p>信号量主要用于控制多个进程或线程对共享资源的访问。</p>
-<p>常见用途：</p>
-<ul>
-<li>限制并发访问数量。</li>
-<li>实现互斥。</li>
-<li>实现生产者消费者同步。</li>
-</ul>
-<p>信号量不是用来传输大量数据的，它更适合做同步和资源计数。</p>
-<h3 id="3-4-消息队列"><a href="#3-4-消息队列" class="headerlink" title="3.4 消息队列"></a>3.4 消息队列</h3><p>消息队列以消息为单位进行通信，保留消息边界。</p>
-<p>特点：</p>
-<ul>
-<li>发送方和接收方通过内核维护的队列通信。</li>
-<li>相比管道，更适合结构化消息。</li>
-<li>可能存在消息大小和队列容量限制。</li>
-</ul>
-<h3 id="3-5-共享内存"><a href="#3-5-共享内存" class="headerlink" title="3.5 共享内存"></a>3.5 共享内存</h3><p>共享内存允许多个进程映射同一块物理内存，是速度最快的 IPC 方式之一。</p>
-<p>优点：</p>
-<ul>
-<li>减少内核和用户态之间的数据拷贝。</li>
-<li>适合大数据量、高频通信。</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>本身不提供同步机制。</li>
-<li>需要配合信号量、互斥锁、条件变量等保证并发安全。</li>
-</ul>
-<h3 id="3-6-Socket"><a href="#3-6-Socket" class="headerlink" title="3.6 Socket"></a>3.6 Socket</h3><p>Socket 可用于同机进程通信，也可用于跨机器网络通信。</p>
-<p>常见类型：</p>
-<ul>
-<li>TCP Socket：可靠、有序、面向连接。</li>
-<li>UDP Socket：无连接、尽力而为、低开销。</li>
-<li>Unix Domain Socket：同机 IPC，性能通常优于 TCP Socket。</li>
-</ul>
-<p>Socket 是分布式系统和网络服务的基础抽象。</p>
-<h2 id="4-进程调度"><a href="#4-进程调度" class="headerlink" title="4. 进程调度"></a>4. 进程调度</h2><p>调度器决定哪个进程或线程获得 CPU 时间片。</p>
-<h3 id="4-1-常见调度算法"><a href="#4-1-常见调度算法" class="headerlink" title="4.1 常见调度算法"></a>4.1 常见调度算法</h3><table>
-<thead>
-<tr>
-<th>算法</th>
-<th>思想</th>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>先来先服务 FCFS</td>
-<td>按到达顺序执行</td>
-<td>简单</td>
-<td>短任务可能被长任务阻塞</td>
-</tr>
-<tr>
-<td>短作业优先 SJF</td>
-<td>优先执行预计时间短的任务</td>
-<td>平均等待时间低</td>
-<td>长任务可能饥饿，执行时间难预测</td>
-</tr>
-<tr>
-<td>优先级调度</td>
-<td>优先级高的先执行</td>
-<td>可体现业务重要性</td>
-<td>低优先级任务可能饥饿</td>
-</tr>
-<tr>
-<td>时间片轮转 RR</td>
-<td>每个任务轮流获得时间片</td>
-<td>公平，适合分时系统</td>
-<td>时间片过短会增加切换开销</td>
-</tr>
-<tr>
-<td>最短剩余时间优先 SRTF</td>
-<td>剩余时间短的任务优先</td>
-<td>响应快</td>
-<td>需要预估剩余时间</td>
-</tr>
-<tr>
-<td>多级反馈队列 MLFQ</td>
-<td>根据行为动态调整队列</td>
-<td>兼顾响应和吞吐</td>
-<td>实现复杂</td>
-</tr>
-</tbody></table>
-<h3 id="4-2-上下文切换"><a href="#4-2-上下文切换" class="headerlink" title="4.2 上下文切换"></a>4.2 上下文切换</h3><p>上下文切换是 CPU 从一个任务切换到另一个任务时保存和恢复执行上下文的过程。</p>
-<p>需要保存和恢复的内容包括：</p>
-<ul>
-<li>寄存器。</li>
-<li>程序计数器。</li>
-<li>栈指针。</li>
-<li>虚拟内存相关上下文。</li>
-<li>调度统计信息。</li>
-</ul>
-<p>上下文切换不是免费操作。线程过多、锁竞争严重、I&#x2F;O 阻塞频繁都可能导致上下文切换开销升高。</p>
-<h2 id="5-死锁"><a href="#5-死锁" class="headerlink" title="5. 死锁"></a>5. 死锁</h2><p>死锁是多个进程或线程相互等待对方持有的资源，导致都无法继续执行。</p>
-<h3 id="5-1-死锁四个必要条件"><a href="#5-1-死锁四个必要条件" class="headerlink" title="5.1 死锁四个必要条件"></a>5.1 死锁四个必要条件</h3><table>
-<thead>
-<tr>
-<th>条件</th>
-<th>含义</th>
-<th>是否容易破坏</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>互斥</td>
-<td>资源一次只能被一个线程或进程占有</td>
-<td>通常无法消除</td>
-</tr>
-<tr>
-<td>请求和保持</td>
-<td>持有资源的同时继续请求其他资源</td>
-<td>可以破坏</td>
-</tr>
-<tr>
-<td>不可剥夺</td>
-<td>已持有资源不能被强制抢占</td>
-<td>可以设计超时释放</td>
-</tr>
-<tr>
-<td>循环等待</td>
-<td>多个任务形成环形等待链</td>
-<td>可以通过资源排序破坏</td>
-</tr>
-</tbody></table>
-<h3 id="5-2-避免死锁的方法"><a href="#5-2-避免死锁的方法" class="headerlink" title="5.2 避免死锁的方法"></a>5.2 避免死锁的方法</h3><p>常见策略：</p>
-<ul>
-<li>一次性申请所有资源，破坏请求和保持条件。</li>
-<li>按固定顺序申请资源，破坏循环等待条件。</li>
-<li>加锁设置超时，获取失败时释放已持有资源。</li>
-<li>减小锁粒度和锁持有时间。</li>
-<li>避免在持锁期间执行阻塞 I&#x2F;O、远程调用或复杂回调。</li>
-</ul>
-<p>资源排序示例：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">所有线程都必须先申请资源 A，再申请资源 B。</span><br><span class="line">不能有的线程先 A 后 B，有的线程先 B 后 A。</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-3-工程中的死锁排查"><a href="#5-3-工程中的死锁排查" class="headerlink" title="5.3 工程中的死锁排查"></a>5.3 工程中的死锁排查</h3><p>Java 服务可以用：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jstack -l &lt;pid&gt;</span><br><span class="line">jcmd &lt;pid&gt; Thread.<span class="built_in">print</span></span><br></pre></td></tr></table></figure>
-
-<p>Linux 原生程序可以结合：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pstack &lt;pid&gt;</span><br><span class="line">strace -p &lt;pid&gt;</span><br><span class="line">gdb -p &lt;pid&gt;</span><br></pre></td></tr></table></figure>
-
-<p>排查重点：</p>
-<ul>
-<li>哪些线程在等待锁。</li>
-<li>锁由哪个线程持有。</li>
-<li>是否存在环形等待。</li>
-<li>是否在持锁期间调用了外部依赖。</li>
-</ul>
-<h2 id="6-僵尸进程与孤儿进程"><a href="#6-僵尸进程与孤儿进程" class="headerlink" title="6. 僵尸进程与孤儿进程"></a>6. 僵尸进程与孤儿进程</h2><h3 id="6-1-僵尸进程"><a href="#6-1-僵尸进程" class="headerlink" title="6.1 僵尸进程"></a>6.1 僵尸进程</h3><p>僵尸进程是已经退出，但父进程还没有回收其退出状态的进程。它在进程表中仍保留一条记录。</p>
-<p>产生原因：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">子进程退出 -&gt; 父进程未调用 wait/waitpid -&gt; 子进程状态保留 -&gt; 僵尸进程</span><br></pre></td></tr></table></figure>
-
-<p>危害：</p>
-<ul>
-<li>僵尸进程不占用大量内存和 CPU。</li>
-<li>但会占用进程号和进程表项。</li>
-<li>大量僵尸进程可能导致系统无法创建新进程。</li>
-</ul>
-<p>处理方式：</p>
-<ul>
-<li>父进程调用 <code>wait()</code> 或 <code>waitpid()</code> 回收。</li>
-<li>正确处理 <code>SIGCHLD</code> 信号。</li>
-<li>如果父进程异常退出，僵尸进程会被 init 或 systemd 接管并回收。</li>
-</ul>
-<p>查看命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep Z</span><br><span class="line">ps -eo pid,ppid,state,cmd | grep <span class="string">&#x27; Z &#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="6-2-孤儿进程"><a href="#6-2-孤儿进程" class="headerlink" title="6.2 孤儿进程"></a>6.2 孤儿进程</h3><p>孤儿进程是父进程已经退出，但子进程仍在运行的进程。</p>
-<p>特点：</p>
-<ul>
-<li>孤儿进程会被 init 或 systemd 接管。</li>
-<li>接管后由 init&#x2F;systemd 负责回收其退出状态。</li>
-<li>孤儿进程本身不一定是问题，守护进程历史上就常利用这种机制。</li>
-</ul>
-<p>僵尸进程和孤儿进程区别：</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>子进程状态</th>
-<th>父进程状态</th>
-<th>是否仍运行</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>僵尸进程</td>
-<td>已退出</td>
-<td>父进程未回收</td>
-<td>否</td>
-</tr>
-<tr>
-<td>孤儿进程</td>
-<td>仍运行</td>
-<td>父进程已退出</td>
-<td>是</td>
-</tr>
-</tbody></table>
-<h2 id="7-虚拟内存"><a href="#7-虚拟内存" class="headerlink" title="7. 虚拟内存"></a>7. 虚拟内存</h2><p>虚拟内存是操作系统提供的一种内存管理技术。它让每个进程看到一个独立、连续、巨大的逻辑地址空间，而不直接暴露真实物理内存。</p>
-<h3 id="7-1-为什么需要虚拟内存"><a href="#7-1-为什么需要虚拟内存" class="headerlink" title="7.1 为什么需要虚拟内存"></a>7.1 为什么需要虚拟内存</h3><p>虚拟内存解决了三个核心问题：</p>
-<ul>
-<li>地址抽象：程序使用虚拟地址，不需要关心物理内存位置。</li>
-<li>内存隔离：每个进程有自己的页表，不能随意访问其他进程内存。</li>
-<li>容量扩展：通过换页机制，让程序可用地址空间大于实际物理内存。</li>
-</ul>
-<h3 id="7-2-地址转换"><a href="#7-2-地址转换" class="headerlink" title="7.2 地址转换"></a>7.2 地址转换</h3><p>CPU 访问内存时使用虚拟地址，硬件 MMU 会借助页表把虚拟地址转换为物理地址。</p>
-<p>简化流程：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CPU 产生虚拟地址 -&gt; MMU 查询页表 -&gt; 得到物理地址 -&gt; 访问内存</span><br></pre></td></tr></table></figure>
-
-<p>为了加速地址转换，CPU 内部通常有 TLB。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TLB = Translation Lookaside Buffer</span><br></pre></td></tr></table></figure>
-
-<p>TLB 可以理解为页表缓存。命中 TLB 时，不需要完整查询页表；未命中时才进行页表遍历。</p>
-<h3 id="7-3-页表"><a href="#7-3-页表" class="headerlink" title="7.3 页表"></a>7.3 页表</h3><p>页表记录虚拟页到物理页框的映射关系。</p>
-<p>页表项通常包含：</p>
-<ul>
-<li>物理页框号。</li>
-<li>是否存在于内存。</li>
-<li>读写执行权限。</li>
-<li>用户态&#x2F;内核态访问权限。</li>
-<li>脏页标记。</li>
-<li>访问标记。</li>
-</ul>
-<p>现代系统通常使用多级页表，以减少页表占用空间。</p>
-<h3 id="7-4-缺页中断"><a href="#7-4-缺页中断" class="headerlink" title="7.4 缺页中断"></a>7.4 缺页中断</h3><p>当进程访问的虚拟页不在物理内存中时，会触发缺页中断 Page Fault。</p>
-<p>处理流程：</p>
-<ol>
-<li>CPU 发现页表项无效或页面不在内存。</li>
-<li>触发异常，陷入内核。</li>
-<li>操作系统判断访问是否合法。</li>
-<li>如果合法，从磁盘、交换区或文件映射中加载页面。</li>
-<li>更新页表。</li>
-<li>恢复用户程序继续执行。</li>
-</ol>
-<p>缺页不一定是错误。例如按需分页、内存映射文件、Copy-on-Write 都可能触发正常缺页。</p>
-<p>真正的非法访问通常会导致段错误：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Segmentation fault</span><br></pre></td></tr></table></figure>
-
-<h2 id="8-页面置换算法"><a href="#8-页面置换算法" class="headerlink" title="8. 页面置换算法"></a>8. 页面置换算法</h2><p>当物理内存不足，需要把某些页面换出内存时，操作系统会使用页面置换算法选择淘汰页面。</p>
-<h3 id="8-1-最佳置换算法-OPT"><a href="#8-1-最佳置换算法-OPT" class="headerlink" title="8.1 最佳置换算法 OPT"></a>8.1 最佳置换算法 OPT</h3><p>最佳置换算法淘汰未来最长时间不会被使用的页面。</p>
-<p>优点：</p>
-<ul>
-<li>理论上缺页率最低。</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>需要知道未来访问序列，现实中无法实现。</li>
-<li>通常用于理论比较基准。</li>
-</ul>
-<h3 id="8-2-先进先出-FIFO"><a href="#8-2-先进先出-FIFO" class="headerlink" title="8.2 先进先出 FIFO"></a>8.2 先进先出 FIFO</h3><p>FIFO 淘汰最早进入内存的页面。</p>
-<p>优点：</p>
-<ul>
-<li>实现简单。</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>可能淘汰经常使用的老页面。</li>
-<li>可能出现 Belady 异常，即分配更多页框反而缺页更多。</li>
-</ul>
-<h3 id="8-3-LRU"><a href="#8-3-LRU" class="headerlink" title="8.3 LRU"></a>8.3 LRU</h3><p>LRU 淘汰最近最少使用的页面。</p>
-<p>思想：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最近长期没被访问的页面，未来也更可能暂时不用。</span><br></pre></td></tr></table></figure>
-
-<p>优点：</p>
-<ul>
-<li>比 FIFO 更贴近局部性原理。</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>精确实现成本较高。</li>
-<li>需要维护访问时间或链表顺序。</li>
-</ul>
-<p>工程中常使用近似 LRU。</p>
-<h3 id="8-4-LFU"><a href="#8-4-LFU" class="headerlink" title="8.4 LFU"></a>8.4 LFU</h3><p>LFU 淘汰访问频率最低的页面。</p>
-<p>优点：</p>
-<ul>
-<li>能保留高频页面。</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>历史热点可能长期占据内存。</li>
-<li>对突发访问和阶段性访问适应较差。</li>
-<li>需要衰减机制才更实用。</li>
-</ul>
-<h3 id="8-5-时钟置换算法"><a href="#8-5-时钟置换算法" class="headerlink" title="8.5 时钟置换算法"></a>8.5 时钟置换算法</h3><p>时钟算法 Clock 是一种近似 LRU 算法。</p>
-<p>核心思想：</p>
-<ul>
-<li>每个页面有访问位。</li>
-<li>指针像钟表一样扫描页面。</li>
-<li>如果访问位为 1，清零并跳过。</li>
-<li>如果访问位为 0，选择淘汰。</li>
-</ul>
-<p>优点：</p>
-<ul>
-<li>成本低。</li>
-<li>效果接近 LRU。</li>
-<li>常用于实际系统。</li>
-</ul>
-<h2 id="9-文件系统：硬链接与软链接"><a href="#9-文件系统：硬链接与软链接" class="headerlink" title="9. 文件系统：硬链接与软链接"></a>9. 文件系统：硬链接与软链接</h2><h3 id="9-1-硬链接"><a href="#9-1-硬链接" class="headerlink" title="9.1 硬链接"></a>9.1 硬链接</h3><p>硬链接可以理解为同一个 inode 的多个目录项。多个文件名指向同一份文件数据。</p>
-<p>特点：</p>
-<ul>
-<li>删除一个硬链接，只是减少 inode 引用计数。</li>
-<li>只有引用计数为 0，且没有进程打开该文件时，文件数据才会被释放。</li>
-<li>通常不能跨文件系统。</li>
-<li>通常不能直接给目录创建硬链接，避免目录结构成环。</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> source.txt hard_link.txt</span><br></pre></td></tr></table></figure>
-
-<h3 id="9-2-软链接"><a href="#9-2-软链接" class="headerlink" title="9.2 软链接"></a>9.2 软链接</h3><p>软链接也叫符号链接，是一个独立文件，内容是目标路径。</p>
-<p>特点：</p>
-<ul>
-<li>可以跨文件系统。</li>
-<li>可以指向目录。</li>
-<li>如果目标文件被删除，软链接会变成悬空链接。</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s source.txt soft_link.txt</span><br></pre></td></tr></table></figure>
-
-<h3 id="9-3-对比"><a href="#9-3-对比" class="headerlink" title="9.3 对比"></a>9.3 对比</h3><table>
-<thead>
-<tr>
-<th>维度</th>
-<th>硬链接</th>
-<th>软链接</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>本质</td>
-<td>同一 inode 的多个名字</td>
-<td>独立文件，保存目标路径</td>
-</tr>
-<tr>
-<td>删除源文件影响</td>
-<td>不影响其他硬链接访问</td>
-<td>软链接可能失效</td>
-</tr>
-<tr>
-<td>是否可跨文件系统</td>
-<td>通常不可以</td>
-<td>可以</td>
-</tr>
-<tr>
-<td>是否可链接目录</td>
-<td>通常不可以</td>
-<td>可以</td>
-</tr>
-</tbody></table>
-<h2 id="10-I-O-基础"><a href="#10-I-O-基础" class="headerlink" title="10. I&#x2F;O 基础"></a>10. I&#x2F;O 基础</h2><h3 id="10-1-用户态与内核态"><a href="#10-1-用户态与内核态" class="headerlink" title="10.1 用户态与内核态"></a>10.1 用户态与内核态</h3><p>应用程序运行在用户态，不能直接操作硬件。涉及磁盘、网络、进程管理等敏感操作时，需要通过系统调用进入内核态。</p>
-<p>系统调用会带来上下文切换：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户态 -&gt; 内核态 -&gt; 用户态</span><br></pre></td></tr></table></figure>
-
-<p>频繁系统调用和频繁数据拷贝会影响 I&#x2F;O 性能。</p>
-<h3 id="10-2-缓冲区"><a href="#10-2-缓冲区" class="headerlink" title="10.2 缓冲区"></a>10.2 缓冲区</h3><p>典型文件发送过程涉及多个缓冲区：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">磁盘文件 -&gt; 内核 PageCache -&gt; 用户缓冲区 -&gt; Socket 缓冲区 -&gt; 网卡</span><br></pre></td></tr></table></figure>
-
-<p>缓冲区存在的意义：</p>
-<ul>
-<li>平滑生产者和消费者速度差异。</li>
-<li>减少真实设备访问次数。</li>
-<li>支持批量读写。</li>
-<li>提高吞吐。</li>
-</ul>
-<p>但缓冲区也可能引入额外拷贝和延迟。</p>
-<h3 id="10-3-DMA"><a href="#10-3-DMA" class="headerlink" title="10.3 DMA"></a>10.3 DMA</h3><p>DMA 全称 Direct Memory Access。它允许设备直接和内存交换数据，不需要 CPU 逐字节搬运。</p>
-<p>典型读取流程：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">磁盘 -&gt; DMA 拷贝 -&gt; 内核缓冲区</span><br></pre></td></tr></table></figure>
-
-<p>CPU 仍然负责发起 I&#x2F;O、处理中断、维护页表和内核数据结构，但大块数据搬运可以交给 DMA。</p>
-<h2 id="11-I-O-模型"><a href="#11-I-O-模型" class="headerlink" title="11. I&#x2F;O 模型"></a>11. I&#x2F;O 模型</h2><h3 id="11-1-阻塞-I-O"><a href="#11-1-阻塞-I-O" class="headerlink" title="11.1 阻塞 I&#x2F;O"></a>11.1 阻塞 I&#x2F;O</h3><p>阻塞 I&#x2F;O 中，调用线程发起读写后会一直等待，直到数据准备好并完成拷贝。</p>
-<p>特点：</p>
-<ul>
-<li>编程简单。</li>
-<li>每个连接通常需要一个线程或进程。</li>
-<li>大量连接时线程成本较高。</li>
-</ul>
-<h3 id="11-2-非阻塞-I-O"><a href="#11-2-非阻塞-I-O" class="headerlink" title="11.2 非阻塞 I&#x2F;O"></a>11.2 非阻塞 I&#x2F;O</h3><p>非阻塞 I&#x2F;O 中，系统调用如果无法立即完成，会直接返回错误码，例如 <code>EAGAIN</code>。</p>
-<p>特点：</p>
-<ul>
-<li>线程不会被单个 I&#x2F;O 阻塞。</li>
-<li>需要应用层不断轮询。</li>
-<li>单纯轮询会浪费 CPU。</li>
-</ul>
-<h3 id="11-3-I-O-多路复用"><a href="#11-3-I-O-多路复用" class="headerlink" title="11.3 I&#x2F;O 多路复用"></a>11.3 I&#x2F;O 多路复用</h3><p>I&#x2F;O 多路复用允许一个线程监听多个文件描述符，当某个 fd 就绪时再进行读写。</p>
-<p>常见机制：</p>
-<table>
-<thead>
-<tr>
-<th>机制</th>
-<th>特点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>select</td>
-<td>跨平台较好，fd 数量有限，每次需要传入 fd 集合</td>
-</tr>
-<tr>
-<td>poll</td>
-<td>没有固定 fd 上限，但仍需线性扫描</td>
-</tr>
-<tr>
-<td>epoll</td>
-<td>Linux 高性能方案，适合大量连接</td>
-</tr>
-</tbody></table>
-<p>笔记中的描述可以理解为：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">内核发现数据准备好时通知进程，进程再把内核数据拷贝到用户空间。</span><br></pre></td></tr></table></figure>
-
-<p>需要注意，I&#x2F;O 多路复用通常解决的是“等待多个 I&#x2F;O 就绪”的问题，不代表数据已经自动进入用户空间。</p>
-<h3 id="11-4-信号驱动-I-O"><a href="#11-4-信号驱动-I-O" class="headerlink" title="11.4 信号驱动 I&#x2F;O"></a>11.4 信号驱动 I&#x2F;O</h3><p>信号驱动 I&#x2F;O 中，进程注册信号处理函数，内核在数据准备好时通过信号通知进程。</p>
-<p>这种模型使用相对少，复杂度较高。</p>
-<h3 id="11-5-异步-I-O"><a href="#11-5-异步-I-O" class="headerlink" title="11.5 异步 I&#x2F;O"></a>11.5 异步 I&#x2F;O</h3><p>异步 I&#x2F;O 中，应用提交 I&#x2F;O 请求后可以继续执行。内核完成数据准备和用户空间拷贝后，再通知应用。</p>
-<p>笔记中的描述是：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">内核数据准备好并且已经拷贝到用户空间后，再通知进程。</span><br></pre></td></tr></table></figure>
-
-<p>异步 I&#x2F;O 的关键是完成通知，而不是就绪通知。</p>
-<h3 id="11-6-同步、异步、阻塞、非阻塞"><a href="#11-6-同步、异步、阻塞、非阻塞" class="headerlink" title="11.6 同步、异步、阻塞、非阻塞"></a>11.6 同步、异步、阻塞、非阻塞</h3><p>这几组概念容易混淆：</p>
-<table>
-<thead>
-<tr>
-<th>概念</th>
-<th>关注点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>阻塞&#x2F;非阻塞</td>
-<td>调用线程在等待时是否被挂起</td>
-</tr>
-<tr>
-<td>同步&#x2F;异步</td>
-<td>I&#x2F;O 完成由调用方等待，还是由内核完成后通知</td>
-</tr>
-</tbody></table>
-<p>I&#x2F;O 多路复用通常仍属于同步 I&#x2F;O，因为真正的读写拷贝还需要应用线程自己调用 <code>read/write</code> 完成。</p>
-<h2 id="12-零拷贝"><a href="#12-零拷贝" class="headerlink" title="12. 零拷贝"></a>12. 零拷贝</h2><p>零拷贝不是完全没有拷贝，而是减少 CPU 拷贝和用户态&#x2F;内核态切换，避免数据在用户缓冲区和内核缓冲区之间来回搬运。</p>
-<p>典型场景：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把磁盘文件发送到网络 Socket。</span><br></pre></td></tr></table></figure>
-
-<h3 id="12-1-传统-read-write"><a href="#12-1-传统-read-write" class="headerlink" title="12.1 传统 read + write"></a>12.1 传统 read + write</h3><p>传统流程：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">磁盘 -&gt; 内核缓冲区 -&gt; 用户缓冲区 -&gt; Socket 缓冲区 -&gt; 网卡</span><br></pre></td></tr></table></figure>
-
-<p>一般会产生：</p>
-<ul>
-<li>4 次用户态&#x2F;内核态上下文切换。</li>
-<li>2 次 DMA 拷贝。</li>
-<li>2 次 CPU 拷贝。</li>
-</ul>
-<h3 id="12-2-mmap-write"><a href="#12-2-mmap-write" class="headerlink" title="12.2 mmap + write"></a>12.2 mmap + write</h3><p><code>mmap()</code> 可以把内核 PageCache 映射到用户空间。应用可以像访问内存一样访问文件内容。</p>
-<p>发送文件时大致流程：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">磁盘 -&gt; 内核 PageCache -&gt; mmap 映射到用户空间 -&gt; Socket 缓冲区 -&gt; 网卡</span><br></pre></td></tr></table></figure>
-
-<p>收益：</p>
-<ul>
-<li>减少一次从内核缓冲区到用户缓冲区的 CPU 拷贝。</li>
-<li>适合大文件读取、内存映射文件。</li>
-</ul>
-<p>仍然存在：</p>
-<ul>
-<li><code>write()</code> 系统调用。</li>
-<li>从 PageCache 到 Socket 缓冲区的拷贝。</li>
-</ul>
-<h3 id="12-3-sendfile"><a href="#12-3-sendfile" class="headerlink" title="12.3 sendfile"></a>12.3 sendfile</h3><p><code>sendfile()</code> 可以在内核态直接把文件数据从 PageCache 发送到 Socket，避免数据经过用户空间。</p>
-<p>简化流程：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">磁盘 -&gt; PageCache -&gt; Socket 缓冲区 -&gt; 网卡</span><br></pre></td></tr></table></figure>
-
-<p>收益：</p>
-<ul>
-<li>少一次系统调用。</li>
-<li>减少用户态&#x2F;内核态切换。</li>
-<li>数据不经过用户空间。</li>
-<li>可以减少 CPU 拷贝。</li>
-</ul>
-<p>在支持 scatter-gather DMA 的网卡上，还可以进一步减少内核内部拷贝。</p>
-<p>典型应用：</p>
-<ul>
-<li>Nginx 静态文件发送。</li>
-<li>Kafka 日志文件发送。</li>
-<li>文件服务器。</li>
-</ul>
-<h3 id="12-4-splice"><a href="#12-4-splice" class="headerlink" title="12.4 splice"></a>12.4 splice</h3><p>Linux 的 <code>splice()</code> 可以在两个文件描述符之间移动数据，常配合管道使用，也可以避免用户态拷贝。</p>
-<p>适合：</p>
-<ul>
-<li>文件、管道、Socket 之间的数据转发。</li>
-<li>高性能代理。</li>
-</ul>
-<h3 id="12-5-零拷贝对比"><a href="#12-5-零拷贝对比" class="headerlink" title="12.5 零拷贝对比"></a>12.5 零拷贝对比</h3><table>
-<thead>
-<tr>
-<th>方案</th>
-<th>数据是否经过用户空间</th>
-<th>系统调用次数</th>
-<th>典型用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>read + write</td>
-<td>是</td>
-<td>2 次</td>
-<td>普通读写</td>
-</tr>
-<tr>
-<td>mmap + write</td>
-<td>映射到用户空间</td>
-<td>2 次</td>
-<td>文件映射、大文件读取</td>
-</tr>
-<tr>
-<td>sendfile</td>
-<td>否</td>
-<td>1 次</td>
-<td>文件到 Socket</td>
-</tr>
-<tr>
-<td>splice</td>
-<td>否</td>
-<td>视场景而定</td>
-<td>fd 到 fd 转发</td>
-</tr>
-</tbody></table>
-<p>零拷贝适合“数据不需要被应用层修改”的场景。如果业务需要压缩、加密、解析、过滤数据，仍然可能需要把数据读到用户空间处理。</p>
-<h2 id="13-资源到底是什么"><a href="#13-资源到底是什么" class="headerlink" title="13. 资源到底是什么"></a>13. 资源到底是什么</h2><p>笔记中提到“进程是分配资源的基本单位”，这里的资源包括：</p>
-<ul>
-<li>虚拟内存。</li>
-<li>文件句柄。</li>
-<li>Socket。</li>
-<li>信号处理配置。</li>
-<li>当前工作目录。</li>
-<li>用户权限和安全上下文。</li>
-<li>CPU 时间片。</li>
-<li>进程号。</li>
-<li>锁、信号量、共享内存等内核对象。</li>
-</ul>
-<p>线程共享进程的大部分资源，但线程自身也有私有资源，例如线程栈、寄存器上下文、线程 id、线程局部存储。</p>
-<h2 id="14-常见面试速记"><a href="#14-常见面试速记" class="headerlink" title="14. 常见面试速记"></a>14. 常见面试速记</h2><h3 id="14-1-进程间通信方式"><a href="#14-1-进程间通信方式" class="headerlink" title="14.1 进程间通信方式"></a>14.1 进程间通信方式</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">管道、命名管道、信号量、消息队列、共享内存、Socket。</span><br></pre></td></tr></table></figure>
-
-<p>如果问“最快的 IPC 是什么”，通常回答共享内存，但要补充它需要同步机制。</p>
-<h3 id="14-2-如何避免死锁"><a href="#14-2-如何避免死锁" class="headerlink" title="14.2 如何避免死锁"></a>14.2 如何避免死锁</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">一次性申请所有资源。</span><br><span class="line">按固定顺序申请资源。</span><br><span class="line">获取锁设置超时，失败后释放已持有资源。</span><br><span class="line">减少锁粒度和持锁时间。</span><br></pre></td></tr></table></figure>
-
-<h3 id="14-3-页面置换算法"><a href="#14-3-页面置换算法" class="headerlink" title="14.3 页面置换算法"></a>14.3 页面置换算法</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OPT：淘汰未来最长时间不用的页面，理论最优。</span><br><span class="line">FIFO：淘汰最早进入的页面，实现简单但可能不合理。</span><br><span class="line">LRU：淘汰最近最少使用页面，符合局部性。</span><br><span class="line">LFU：淘汰使用频率最低页面，需要处理历史热点。</span><br><span class="line">Clock：近似 LRU，成本较低。</span><br></pre></td></tr></table></figure>
-
-<h3 id="14-4-硬链接和软链接"><a href="#14-4-硬链接和软链接" class="headerlink" title="14.4 硬链接和软链接"></a>14.4 硬链接和软链接</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">硬链接：多个目录项指向同一个 inode。</span><br><span class="line">软链接：独立文件，内容是目标路径。</span><br></pre></td></tr></table></figure>
-
-<h3 id="14-5-I-O-多路复用和异步-I-O"><a href="#14-5-I-O-多路复用和异步-I-O" class="headerlink" title="14.5 I&#x2F;O 多路复用和异步 I&#x2F;O"></a>14.5 I&#x2F;O 多路复用和异步 I&#x2F;O</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">I/O 多路复用：内核通知 fd 已就绪，应用自己 read/write。</span><br><span class="line">异步 I/O：内核完成 I/O 后通知应用。</span><br></pre></td></tr></table></figure>
-
-<h3 id="14-6-僵尸进程和孤儿进程"><a href="#14-6-僵尸进程和孤儿进程" class="headerlink" title="14.6 僵尸进程和孤儿进程"></a>14.6 僵尸进程和孤儿进程</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">僵尸进程：子进程已退出，父进程未 wait 回收。</span><br><span class="line">孤儿进程：父进程已退出，子进程仍运行，被 init/systemd 接管。</span><br></pre></td></tr></table></figure>
-
-<h3 id="14-7-虚拟内存核心点"><a href="#14-7-虚拟内存核心点" class="headerlink" title="14.7 虚拟内存核心点"></a>14.7 虚拟内存核心点</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">每个进程拥有独立虚拟地址空间。</span><br><span class="line">MMU 通过页表把虚拟地址转换为物理地址。</span><br><span class="line">TLB 缓存地址转换结果。</span><br><span class="line">缺页中断用于按需加载页面。</span><br><span class="line">页表和权限位实现内存隔离。</span><br></pre></td></tr></table></figure>
-
-<h2 id="15-工程排查常用命令"><a href="#15-工程排查常用命令" class="headerlink" title="15. 工程排查常用命令"></a>15. 工程排查常用命令</h2><p>查看进程：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps aux</span><br><span class="line">top</span><br><span class="line">pidstat -p &lt;pid&gt; 1</span><br></pre></td></tr></table></figure>
-
-<p>查看线程：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">top -H -p &lt;pid&gt;</span><br><span class="line">ps -T -p &lt;pid&gt;</span><br></pre></td></tr></table></figure>
-
-<p>查看文件描述符：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /proc/&lt;pid&gt;/fd</span><br><span class="line">lsof -p &lt;pid&gt;</span><br></pre></td></tr></table></figure>
-
-<p>查看网络连接：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ss -antp</span><br><span class="line">ss -lnpt</span><br></pre></td></tr></table></figure>
-
-<p>查看系统调用：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">strace -p &lt;pid&gt;</span><br><span class="line">strace -f -tt -T -p &lt;pid&gt;</span><br></pre></td></tr></table></figure>
-
-<p>查看内存映射：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pmap -x &lt;pid&gt;</span><br><span class="line"><span class="built_in">cat</span> /proc/&lt;pid&gt;/maps</span><br><span class="line"><span class="built_in">cat</span> /proc/&lt;pid&gt;/smaps</span><br></pre></td></tr></table></figure>
-
-<p>查看僵尸进程：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eo pid,ppid,state,cmd | grep <span class="string">&#x27; Z &#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="16-总结"><a href="#16-总结" class="headerlink" title="16. 总结"></a>16. 总结</h2><p>操作系统知识可以围绕四条主线理解：</p>
-<ol>
-<li>进程线程：谁在运行，如何调度，如何通信。</li>
-<li>内存管理：虚拟地址如何映射到物理地址，缺页如何处理。</li>
-<li>文件与 I&#x2F;O：数据如何从磁盘到网络，如何减少拷贝和切换。</li>
-<li>并发控制：共享资源如何同步，死锁如何避免和排查。</li>
-</ol>
-<p>对后端工程来说，操作系统不是孤立理论。线程池、Socket、epoll、PageCache、sendfile、进程状态、文件描述符、上下文切换都会直接影响服务吞吐、延迟和稳定性。真正掌握这些概念，关键是能把“概念名词”对应到实际运行时现象和排查工具上。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://increasingrate626.github.io/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidK63QDuOWD7OiTHaiDCbx7" data-title="操作系统" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://increasingrate626.github.io/2026/05/14/JVM-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidQ5uA607DWbp2DHCzQWQ9a" data-title="JVM" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -5595,7 +5589,765 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://increasingrate626.github.io/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidjwpb6FcFnOVEi0SruhS3O" data-title="计网" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://increasingrate626.github.io/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidJ_wonQ2sK-iyDMCBU2kS8" data-title="计网" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-操作系统-技术文档" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="article-date">
+  <time class="dt-published" datetime="2026-05-14T02:00:00.000Z" itemprop="datePublished">2026-05-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">操作系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="进程、内存、I-O、文件系统与零拷贝"><a href="#进程、内存、I-O、文件系统与零拷贝" class="headerlink" title="进程、内存、I&#x2F;O、文件系统与零拷贝"></a>进程、内存、I&#x2F;O、文件系统与零拷贝</h1><h2 id="1-操作系统整体视图"><a href="#1-操作系统整体视图" class="headerlink" title="1. 操作系统整体视图"></a>1. 操作系统整体视图</h2><p>操作系统是应用程序和硬件之间的中间层，主要负责资源管理和抽象封装。</p>
+<p>常见职责：</p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>进程管理</td>
+<td>创建、调度、切换、终止进程和线程</td>
+</tr>
+<tr>
+<td>内存管理</td>
+<td>虚拟内存、页表、缺页中断、内存隔离</td>
+</tr>
+<tr>
+<td>文件系统</td>
+<td>文件、目录、权限、硬链接、软链接</td>
+</tr>
+<tr>
+<td>I&#x2F;O 管理</td>
+<td>缓冲、设备驱动、中断、DMA、I&#x2F;O 多路复用</td>
+</tr>
+<tr>
+<td>网络管理</td>
+<td>Socket、协议栈、收发缓冲区</td>
+</tr>
+<tr>
+<td>并发同步</td>
+<td>锁、信号量、条件变量、死锁处理</td>
+</tr>
+</tbody></table>
+<p>从应用程序角度看，操作系统提供的是一组抽象：</p>
+<ul>
+<li>进程：运行中的程序实例。</li>
+<li>线程：CPU 调度的基本单位。</li>
+<li>虚拟内存：每个进程看到的独立地址空间。</li>
+<li>文件：对磁盘、设备、管道、Socket 等资源的统一抽象。</li>
+<li>系统调用：用户态进入内核态请求服务的接口。</li>
+</ul>
+<h2 id="操作系统核心知识图谱"><a href="#操作系统核心知识图谱" class="headerlink" title="操作系统核心知识图谱"></a>操作系统核心知识图谱</h2><p>下图概括了本文中最核心的几组知识：进程与线程、IPC、死锁、虚拟内存、页面置换和零拷贝。</p>
+<p><img src="/images/tech-docs/os-core-map.png" alt="操作系统核心知识图谱"></p>
+<h2 id="2-进程与线程"><a href="#2-进程与线程" class="headerlink" title="2. 进程与线程"></a>2. 进程与线程</h2><h3 id="2-1-进程"><a href="#2-1-进程" class="headerlink" title="2.1 进程"></a>2.1 进程</h3><p>进程是资源分配的基本单位。一个进程通常拥有独立的虚拟地址空间、文件描述符表、信号处理方式、当前工作目录等资源。</p>
+<p>进程的典型组成：</p>
+<table>
+<thead>
+<tr>
+<th>组成</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>代码段</td>
+<td>程序指令</td>
+</tr>
+<tr>
+<td>数据段</td>
+<td>全局变量、静态变量</td>
+</tr>
+<tr>
+<td>堆</td>
+<td>动态分配内存</td>
+</tr>
+<tr>
+<td>栈</td>
+<td>函数调用、局部变量</td>
+</tr>
+<tr>
+<td>文件描述符表</td>
+<td>打开的文件、Socket、管道等</td>
+</tr>
+<tr>
+<td>进程控制块 PCB</td>
+<td>内核维护的进程状态信息</td>
+</tr>
+</tbody></table>
+<p>进程状态常见模型：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">创建 -&gt; 就绪 -&gt; 运行 -&gt; 阻塞 -&gt; 就绪 -&gt; 运行 -&gt; 终止</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-线程"><a href="#2-2-线程" class="headerlink" title="2.2 线程"></a>2.2 线程</h3><p>线程是 CPU 调度的基本单位。同一个进程内的多个线程共享进程资源，例如地址空间、打开文件、全局变量，但每个线程拥有自己的栈、寄存器上下文和线程局部存储。</p>
+<p>线程优点：</p>
+<ul>
+<li>创建和切换成本通常低于进程。</li>
+<li>线程间共享数据方便。</li>
+<li>适合并发处理 I&#x2F;O 或多核并行计算。</li>
+</ul>
+<p>线程风险：</p>
+<ul>
+<li>共享内存带来数据竞争。</li>
+<li>锁使用不当会产生死锁、活锁、饥饿。</li>
+<li>单个线程崩溃可能影响整个进程。</li>
+</ul>
+<h3 id="2-3-进程与线程对比"><a href="#2-3-进程与线程对比" class="headerlink" title="2.3 进程与线程对比"></a>2.3 进程与线程对比</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>进程</th>
+<th>线程</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基本定位</td>
+<td>资源分配单位</td>
+<td>CPU 调度单位</td>
+</tr>
+<tr>
+<td>地址空间</td>
+<td>默认相互隔离</td>
+<td>同进程内共享</td>
+</tr>
+<tr>
+<td>通信成本</td>
+<td>较高，需要 IPC</td>
+<td>较低，可共享内存</td>
+</tr>
+<tr>
+<td>创建切换成本</td>
+<td>较高</td>
+<td>较低</td>
+</tr>
+<tr>
+<td>故障影响</td>
+<td>一个进程崩溃通常不影响其他进程</td>
+<td>一个线程崩溃可能导致整个进程异常</td>
+</tr>
+</tbody></table>
+<h2 id="3-进程间通信"><a href="#3-进程间通信" class="headerlink" title="3. 进程间通信"></a>3. 进程间通信</h2><p>进程间通信 IPC 用于让不同进程交换数据、同步状态或协作完成任务。</p>
+<h3 id="3-1-管道"><a href="#3-1-管道" class="headerlink" title="3.1 管道"></a>3.1 管道</h3><p>管道是单向字节流，常用于具有亲缘关系的进程之间通信，例如父子进程。</p>
+<p>特点：</p>
+<ul>
+<li>半双工，普通管道通常只能单向传输。</li>
+<li>数据按字节流传输，没有消息边界。</li>
+<li>适合简单的数据流转。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep java</span><br></pre></td></tr></table></figure>
+
+<p>这里 <code>ps</code> 的输出通过管道成为 <code>grep</code> 的输入。</p>
+<h3 id="3-2-命名管道"><a href="#3-2-命名管道" class="headerlink" title="3.2 命名管道"></a>3.2 命名管道</h3><p>命名管道 FIFO 有文件系统路径，不要求通信双方一定具有父子关系。</p>
+<p>特点：</p>
+<ul>
+<li>仍然是字节流。</li>
+<li>可以被无亲缘关系的进程打开。</li>
+<li>适合本机简单 IPC。</li>
+</ul>
+<h3 id="3-3-信号量"><a href="#3-3-信号量" class="headerlink" title="3.3 信号量"></a>3.3 信号量</h3><p>信号量主要用于控制多个进程或线程对共享资源的访问。</p>
+<p>常见用途：</p>
+<ul>
+<li>限制并发访问数量。</li>
+<li>实现互斥。</li>
+<li>实现生产者消费者同步。</li>
+</ul>
+<p>信号量不是用来传输大量数据的，它更适合做同步和资源计数。</p>
+<h3 id="3-4-消息队列"><a href="#3-4-消息队列" class="headerlink" title="3.4 消息队列"></a>3.4 消息队列</h3><p>消息队列以消息为单位进行通信，保留消息边界。</p>
+<p>特点：</p>
+<ul>
+<li>发送方和接收方通过内核维护的队列通信。</li>
+<li>相比管道，更适合结构化消息。</li>
+<li>可能存在消息大小和队列容量限制。</li>
+</ul>
+<h3 id="3-5-共享内存"><a href="#3-5-共享内存" class="headerlink" title="3.5 共享内存"></a>3.5 共享内存</h3><p>共享内存允许多个进程映射同一块物理内存，是速度最快的 IPC 方式之一。</p>
+<p>优点：</p>
+<ul>
+<li>减少内核和用户态之间的数据拷贝。</li>
+<li>适合大数据量、高频通信。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>本身不提供同步机制。</li>
+<li>需要配合信号量、互斥锁、条件变量等保证并发安全。</li>
+</ul>
+<h3 id="3-6-Socket"><a href="#3-6-Socket" class="headerlink" title="3.6 Socket"></a>3.6 Socket</h3><p>Socket 可用于同机进程通信，也可用于跨机器网络通信。</p>
+<p>常见类型：</p>
+<ul>
+<li>TCP Socket：可靠、有序、面向连接。</li>
+<li>UDP Socket：无连接、尽力而为、低开销。</li>
+<li>Unix Domain Socket：同机 IPC，性能通常优于 TCP Socket。</li>
+</ul>
+<p>Socket 是分布式系统和网络服务的基础抽象。</p>
+<h2 id="4-进程调度"><a href="#4-进程调度" class="headerlink" title="4. 进程调度"></a>4. 进程调度</h2><p>调度器决定哪个进程或线程获得 CPU 时间片。</p>
+<h3 id="4-1-常见调度算法"><a href="#4-1-常见调度算法" class="headerlink" title="4.1 常见调度算法"></a>4.1 常见调度算法</h3><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>思想</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>先来先服务 FCFS</td>
+<td>按到达顺序执行</td>
+<td>简单</td>
+<td>短任务可能被长任务阻塞</td>
+</tr>
+<tr>
+<td>短作业优先 SJF</td>
+<td>优先执行预计时间短的任务</td>
+<td>平均等待时间低</td>
+<td>长任务可能饥饿，执行时间难预测</td>
+</tr>
+<tr>
+<td>优先级调度</td>
+<td>优先级高的先执行</td>
+<td>可体现业务重要性</td>
+<td>低优先级任务可能饥饿</td>
+</tr>
+<tr>
+<td>时间片轮转 RR</td>
+<td>每个任务轮流获得时间片</td>
+<td>公平，适合分时系统</td>
+<td>时间片过短会增加切换开销</td>
+</tr>
+<tr>
+<td>最短剩余时间优先 SRTF</td>
+<td>剩余时间短的任务优先</td>
+<td>响应快</td>
+<td>需要预估剩余时间</td>
+</tr>
+<tr>
+<td>多级反馈队列 MLFQ</td>
+<td>根据行为动态调整队列</td>
+<td>兼顾响应和吞吐</td>
+<td>实现复杂</td>
+</tr>
+</tbody></table>
+<h3 id="4-2-上下文切换"><a href="#4-2-上下文切换" class="headerlink" title="4.2 上下文切换"></a>4.2 上下文切换</h3><p>上下文切换是 CPU 从一个任务切换到另一个任务时保存和恢复执行上下文的过程。</p>
+<p>需要保存和恢复的内容包括：</p>
+<ul>
+<li>寄存器。</li>
+<li>程序计数器。</li>
+<li>栈指针。</li>
+<li>虚拟内存相关上下文。</li>
+<li>调度统计信息。</li>
+</ul>
+<p>上下文切换不是免费操作。线程过多、锁竞争严重、I&#x2F;O 阻塞频繁都可能导致上下文切换开销升高。</p>
+<h2 id="5-死锁"><a href="#5-死锁" class="headerlink" title="5. 死锁"></a>5. 死锁</h2><p>死锁是多个进程或线程相互等待对方持有的资源，导致都无法继续执行。</p>
+<h3 id="5-1-死锁四个必要条件"><a href="#5-1-死锁四个必要条件" class="headerlink" title="5.1 死锁四个必要条件"></a>5.1 死锁四个必要条件</h3><table>
+<thead>
+<tr>
+<th>条件</th>
+<th>含义</th>
+<th>是否容易破坏</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>互斥</td>
+<td>资源一次只能被一个线程或进程占有</td>
+<td>通常无法消除</td>
+</tr>
+<tr>
+<td>请求和保持</td>
+<td>持有资源的同时继续请求其他资源</td>
+<td>可以破坏</td>
+</tr>
+<tr>
+<td>不可剥夺</td>
+<td>已持有资源不能被强制抢占</td>
+<td>可以设计超时释放</td>
+</tr>
+<tr>
+<td>循环等待</td>
+<td>多个任务形成环形等待链</td>
+<td>可以通过资源排序破坏</td>
+</tr>
+</tbody></table>
+<h3 id="5-2-避免死锁的方法"><a href="#5-2-避免死锁的方法" class="headerlink" title="5.2 避免死锁的方法"></a>5.2 避免死锁的方法</h3><p>常见策略：</p>
+<ul>
+<li>一次性申请所有资源，破坏请求和保持条件。</li>
+<li>按固定顺序申请资源，破坏循环等待条件。</li>
+<li>加锁设置超时，获取失败时释放已持有资源。</li>
+<li>减小锁粒度和锁持有时间。</li>
+<li>避免在持锁期间执行阻塞 I&#x2F;O、远程调用或复杂回调。</li>
+</ul>
+<p>资源排序示例：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">所有线程都必须先申请资源 A，再申请资源 B。</span><br><span class="line">不能有的线程先 A 后 B，有的线程先 B 后 A。</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-工程中的死锁排查"><a href="#5-3-工程中的死锁排查" class="headerlink" title="5.3 工程中的死锁排查"></a>5.3 工程中的死锁排查</h3><p>Java 服务可以用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jstack -l &lt;pid&gt;</span><br><span class="line">jcmd &lt;pid&gt; Thread.<span class="built_in">print</span></span><br></pre></td></tr></table></figure>
+
+<p>Linux 原生程序可以结合：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pstack &lt;pid&gt;</span><br><span class="line">strace -p &lt;pid&gt;</span><br><span class="line">gdb -p &lt;pid&gt;</span><br></pre></td></tr></table></figure>
+
+<p>排查重点：</p>
+<ul>
+<li>哪些线程在等待锁。</li>
+<li>锁由哪个线程持有。</li>
+<li>是否存在环形等待。</li>
+<li>是否在持锁期间调用了外部依赖。</li>
+</ul>
+<h2 id="6-僵尸进程与孤儿进程"><a href="#6-僵尸进程与孤儿进程" class="headerlink" title="6. 僵尸进程与孤儿进程"></a>6. 僵尸进程与孤儿进程</h2><h3 id="6-1-僵尸进程"><a href="#6-1-僵尸进程" class="headerlink" title="6.1 僵尸进程"></a>6.1 僵尸进程</h3><p>僵尸进程是已经退出，但父进程还没有回收其退出状态的进程。它在进程表中仍保留一条记录。</p>
+<p>产生原因：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">子进程退出 -&gt; 父进程未调用 wait/waitpid -&gt; 子进程状态保留 -&gt; 僵尸进程</span><br></pre></td></tr></table></figure>
+
+<p>危害：</p>
+<ul>
+<li>僵尸进程不占用大量内存和 CPU。</li>
+<li>但会占用进程号和进程表项。</li>
+<li>大量僵尸进程可能导致系统无法创建新进程。</li>
+</ul>
+<p>处理方式：</p>
+<ul>
+<li>父进程调用 <code>wait()</code> 或 <code>waitpid()</code> 回收。</li>
+<li>正确处理 <code>SIGCHLD</code> 信号。</li>
+<li>如果父进程异常退出，僵尸进程会被 init 或 systemd 接管并回收。</li>
+</ul>
+<p>查看命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep Z</span><br><span class="line">ps -eo pid,ppid,state,cmd | grep <span class="string">&#x27; Z &#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-孤儿进程"><a href="#6-2-孤儿进程" class="headerlink" title="6.2 孤儿进程"></a>6.2 孤儿进程</h3><p>孤儿进程是父进程已经退出，但子进程仍在运行的进程。</p>
+<p>特点：</p>
+<ul>
+<li>孤儿进程会被 init 或 systemd 接管。</li>
+<li>接管后由 init&#x2F;systemd 负责回收其退出状态。</li>
+<li>孤儿进程本身不一定是问题，守护进程历史上就常利用这种机制。</li>
+</ul>
+<p>僵尸进程和孤儿进程区别：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>子进程状态</th>
+<th>父进程状态</th>
+<th>是否仍运行</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>僵尸进程</td>
+<td>已退出</td>
+<td>父进程未回收</td>
+<td>否</td>
+</tr>
+<tr>
+<td>孤儿进程</td>
+<td>仍运行</td>
+<td>父进程已退出</td>
+<td>是</td>
+</tr>
+</tbody></table>
+<h2 id="7-虚拟内存"><a href="#7-虚拟内存" class="headerlink" title="7. 虚拟内存"></a>7. 虚拟内存</h2><p>虚拟内存是操作系统提供的一种内存管理技术。它让每个进程看到一个独立、连续、巨大的逻辑地址空间，而不直接暴露真实物理内存。</p>
+<h3 id="7-1-为什么需要虚拟内存"><a href="#7-1-为什么需要虚拟内存" class="headerlink" title="7.1 为什么需要虚拟内存"></a>7.1 为什么需要虚拟内存</h3><p>虚拟内存解决了三个核心问题：</p>
+<ul>
+<li>地址抽象：程序使用虚拟地址，不需要关心物理内存位置。</li>
+<li>内存隔离：每个进程有自己的页表，不能随意访问其他进程内存。</li>
+<li>容量扩展：通过换页机制，让程序可用地址空间大于实际物理内存。</li>
+</ul>
+<h3 id="7-2-地址转换"><a href="#7-2-地址转换" class="headerlink" title="7.2 地址转换"></a>7.2 地址转换</h3><p>CPU 访问内存时使用虚拟地址，硬件 MMU 会借助页表把虚拟地址转换为物理地址。</p>
+<p>简化流程：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CPU 产生虚拟地址 -&gt; MMU 查询页表 -&gt; 得到物理地址 -&gt; 访问内存</span><br></pre></td></tr></table></figure>
+
+<p>为了加速地址转换，CPU 内部通常有 TLB。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TLB = Translation Lookaside Buffer</span><br></pre></td></tr></table></figure>
+
+<p>TLB 可以理解为页表缓存。命中 TLB 时，不需要完整查询页表；未命中时才进行页表遍历。</p>
+<h3 id="7-3-页表"><a href="#7-3-页表" class="headerlink" title="7.3 页表"></a>7.3 页表</h3><p>页表记录虚拟页到物理页框的映射关系。</p>
+<p>页表项通常包含：</p>
+<ul>
+<li>物理页框号。</li>
+<li>是否存在于内存。</li>
+<li>读写执行权限。</li>
+<li>用户态&#x2F;内核态访问权限。</li>
+<li>脏页标记。</li>
+<li>访问标记。</li>
+</ul>
+<p>现代系统通常使用多级页表，以减少页表占用空间。</p>
+<h3 id="7-4-缺页中断"><a href="#7-4-缺页中断" class="headerlink" title="7.4 缺页中断"></a>7.4 缺页中断</h3><p>当进程访问的虚拟页不在物理内存中时，会触发缺页中断 Page Fault。</p>
+<p>处理流程：</p>
+<ol>
+<li>CPU 发现页表项无效或页面不在内存。</li>
+<li>触发异常，陷入内核。</li>
+<li>操作系统判断访问是否合法。</li>
+<li>如果合法，从磁盘、交换区或文件映射中加载页面。</li>
+<li>更新页表。</li>
+<li>恢复用户程序继续执行。</li>
+</ol>
+<p>缺页不一定是错误。例如按需分页、内存映射文件、Copy-on-Write 都可能触发正常缺页。</p>
+<p>真正的非法访问通常会导致段错误：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Segmentation fault</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-页面置换算法"><a href="#8-页面置换算法" class="headerlink" title="8. 页面置换算法"></a>8. 页面置换算法</h2><p>当物理内存不足，需要把某些页面换出内存时，操作系统会使用页面置换算法选择淘汰页面。</p>
+<h3 id="8-1-最佳置换算法-OPT"><a href="#8-1-最佳置换算法-OPT" class="headerlink" title="8.1 最佳置换算法 OPT"></a>8.1 最佳置换算法 OPT</h3><p>最佳置换算法淘汰未来最长时间不会被使用的页面。</p>
+<p>优点：</p>
+<ul>
+<li>理论上缺页率最低。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>需要知道未来访问序列，现实中无法实现。</li>
+<li>通常用于理论比较基准。</li>
+</ul>
+<h3 id="8-2-先进先出-FIFO"><a href="#8-2-先进先出-FIFO" class="headerlink" title="8.2 先进先出 FIFO"></a>8.2 先进先出 FIFO</h3><p>FIFO 淘汰最早进入内存的页面。</p>
+<p>优点：</p>
+<ul>
+<li>实现简单。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>可能淘汰经常使用的老页面。</li>
+<li>可能出现 Belady 异常，即分配更多页框反而缺页更多。</li>
+</ul>
+<h3 id="8-3-LRU"><a href="#8-3-LRU" class="headerlink" title="8.3 LRU"></a>8.3 LRU</h3><p>LRU 淘汰最近最少使用的页面。</p>
+<p>思想：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最近长期没被访问的页面，未来也更可能暂时不用。</span><br></pre></td></tr></table></figure>
+
+<p>优点：</p>
+<ul>
+<li>比 FIFO 更贴近局部性原理。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>精确实现成本较高。</li>
+<li>需要维护访问时间或链表顺序。</li>
+</ul>
+<p>工程中常使用近似 LRU。</p>
+<h3 id="8-4-LFU"><a href="#8-4-LFU" class="headerlink" title="8.4 LFU"></a>8.4 LFU</h3><p>LFU 淘汰访问频率最低的页面。</p>
+<p>优点：</p>
+<ul>
+<li>能保留高频页面。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>历史热点可能长期占据内存。</li>
+<li>对突发访问和阶段性访问适应较差。</li>
+<li>需要衰减机制才更实用。</li>
+</ul>
+<h3 id="8-5-时钟置换算法"><a href="#8-5-时钟置换算法" class="headerlink" title="8.5 时钟置换算法"></a>8.5 时钟置换算法</h3><p>时钟算法 Clock 是一种近似 LRU 算法。</p>
+<p>核心思想：</p>
+<ul>
+<li>每个页面有访问位。</li>
+<li>指针像钟表一样扫描页面。</li>
+<li>如果访问位为 1，清零并跳过。</li>
+<li>如果访问位为 0，选择淘汰。</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>成本低。</li>
+<li>效果接近 LRU。</li>
+<li>常用于实际系统。</li>
+</ul>
+<h2 id="9-文件系统：硬链接与软链接"><a href="#9-文件系统：硬链接与软链接" class="headerlink" title="9. 文件系统：硬链接与软链接"></a>9. 文件系统：硬链接与软链接</h2><h3 id="9-1-硬链接"><a href="#9-1-硬链接" class="headerlink" title="9.1 硬链接"></a>9.1 硬链接</h3><p>硬链接可以理解为同一个 inode 的多个目录项。多个文件名指向同一份文件数据。</p>
+<p>特点：</p>
+<ul>
+<li>删除一个硬链接，只是减少 inode 引用计数。</li>
+<li>只有引用计数为 0，且没有进程打开该文件时，文件数据才会被释放。</li>
+<li>通常不能跨文件系统。</li>
+<li>通常不能直接给目录创建硬链接，避免目录结构成环。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> source.txt hard_link.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-2-软链接"><a href="#9-2-软链接" class="headerlink" title="9.2 软链接"></a>9.2 软链接</h3><p>软链接也叫符号链接，是一个独立文件，内容是目标路径。</p>
+<p>特点：</p>
+<ul>
+<li>可以跨文件系统。</li>
+<li>可以指向目录。</li>
+<li>如果目标文件被删除，软链接会变成悬空链接。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s source.txt soft_link.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-3-对比"><a href="#9-3-对比" class="headerlink" title="9.3 对比"></a>9.3 对比</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>硬链接</th>
+<th>软链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>本质</td>
+<td>同一 inode 的多个名字</td>
+<td>独立文件，保存目标路径</td>
+</tr>
+<tr>
+<td>删除源文件影响</td>
+<td>不影响其他硬链接访问</td>
+<td>软链接可能失效</td>
+</tr>
+<tr>
+<td>是否可跨文件系统</td>
+<td>通常不可以</td>
+<td>可以</td>
+</tr>
+<tr>
+<td>是否可链接目录</td>
+<td>通常不可以</td>
+<td>可以</td>
+</tr>
+</tbody></table>
+<h2 id="10-I-O-基础"><a href="#10-I-O-基础" class="headerlink" title="10. I&#x2F;O 基础"></a>10. I&#x2F;O 基础</h2><h3 id="10-1-用户态与内核态"><a href="#10-1-用户态与内核态" class="headerlink" title="10.1 用户态与内核态"></a>10.1 用户态与内核态</h3><p>应用程序运行在用户态，不能直接操作硬件。涉及磁盘、网络、进程管理等敏感操作时，需要通过系统调用进入内核态。</p>
+<p>系统调用会带来上下文切换：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户态 -&gt; 内核态 -&gt; 用户态</span><br></pre></td></tr></table></figure>
+
+<p>频繁系统调用和频繁数据拷贝会影响 I&#x2F;O 性能。</p>
+<h3 id="10-2-缓冲区"><a href="#10-2-缓冲区" class="headerlink" title="10.2 缓冲区"></a>10.2 缓冲区</h3><p>典型文件发送过程涉及多个缓冲区：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">磁盘文件 -&gt; 内核 PageCache -&gt; 用户缓冲区 -&gt; Socket 缓冲区 -&gt; 网卡</span><br></pre></td></tr></table></figure>
+
+<p>缓冲区存在的意义：</p>
+<ul>
+<li>平滑生产者和消费者速度差异。</li>
+<li>减少真实设备访问次数。</li>
+<li>支持批量读写。</li>
+<li>提高吞吐。</li>
+</ul>
+<p>但缓冲区也可能引入额外拷贝和延迟。</p>
+<h3 id="10-3-DMA"><a href="#10-3-DMA" class="headerlink" title="10.3 DMA"></a>10.3 DMA</h3><p>DMA 全称 Direct Memory Access。它允许设备直接和内存交换数据，不需要 CPU 逐字节搬运。</p>
+<p>典型读取流程：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">磁盘 -&gt; DMA 拷贝 -&gt; 内核缓冲区</span><br></pre></td></tr></table></figure>
+
+<p>CPU 仍然负责发起 I&#x2F;O、处理中断、维护页表和内核数据结构，但大块数据搬运可以交给 DMA。</p>
+<h2 id="11-I-O-模型"><a href="#11-I-O-模型" class="headerlink" title="11. I&#x2F;O 模型"></a>11. I&#x2F;O 模型</h2><h3 id="11-1-阻塞-I-O"><a href="#11-1-阻塞-I-O" class="headerlink" title="11.1 阻塞 I&#x2F;O"></a>11.1 阻塞 I&#x2F;O</h3><p>阻塞 I&#x2F;O 中，调用线程发起读写后会一直等待，直到数据准备好并完成拷贝。</p>
+<p>特点：</p>
+<ul>
+<li>编程简单。</li>
+<li>每个连接通常需要一个线程或进程。</li>
+<li>大量连接时线程成本较高。</li>
+</ul>
+<h3 id="11-2-非阻塞-I-O"><a href="#11-2-非阻塞-I-O" class="headerlink" title="11.2 非阻塞 I&#x2F;O"></a>11.2 非阻塞 I&#x2F;O</h3><p>非阻塞 I&#x2F;O 中，系统调用如果无法立即完成，会直接返回错误码，例如 <code>EAGAIN</code>。</p>
+<p>特点：</p>
+<ul>
+<li>线程不会被单个 I&#x2F;O 阻塞。</li>
+<li>需要应用层不断轮询。</li>
+<li>单纯轮询会浪费 CPU。</li>
+</ul>
+<h3 id="11-3-I-O-多路复用"><a href="#11-3-I-O-多路复用" class="headerlink" title="11.3 I&#x2F;O 多路复用"></a>11.3 I&#x2F;O 多路复用</h3><p>I&#x2F;O 多路复用允许一个线程监听多个文件描述符，当某个 fd 就绪时再进行读写。</p>
+<p>常见机制：</p>
+<table>
+<thead>
+<tr>
+<th>机制</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>select</td>
+<td>跨平台较好，fd 数量有限，每次需要传入 fd 集合</td>
+</tr>
+<tr>
+<td>poll</td>
+<td>没有固定 fd 上限，但仍需线性扫描</td>
+</tr>
+<tr>
+<td>epoll</td>
+<td>Linux 高性能方案，适合大量连接</td>
+</tr>
+</tbody></table>
+<p>笔记中的描述可以理解为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">内核发现数据准备好时通知进程，进程再把内核数据拷贝到用户空间。</span><br></pre></td></tr></table></figure>
+
+<p>需要注意，I&#x2F;O 多路复用通常解决的是“等待多个 I&#x2F;O 就绪”的问题，不代表数据已经自动进入用户空间。</p>
+<h3 id="11-4-信号驱动-I-O"><a href="#11-4-信号驱动-I-O" class="headerlink" title="11.4 信号驱动 I&#x2F;O"></a>11.4 信号驱动 I&#x2F;O</h3><p>信号驱动 I&#x2F;O 中，进程注册信号处理函数，内核在数据准备好时通过信号通知进程。</p>
+<p>这种模型使用相对少，复杂度较高。</p>
+<h3 id="11-5-异步-I-O"><a href="#11-5-异步-I-O" class="headerlink" title="11.5 异步 I&#x2F;O"></a>11.5 异步 I&#x2F;O</h3><p>异步 I&#x2F;O 中，应用提交 I&#x2F;O 请求后可以继续执行。内核完成数据准备和用户空间拷贝后，再通知应用。</p>
+<p>笔记中的描述是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">内核数据准备好并且已经拷贝到用户空间后，再通知进程。</span><br></pre></td></tr></table></figure>
+
+<p>异步 I&#x2F;O 的关键是完成通知，而不是就绪通知。</p>
+<h3 id="11-6-同步、异步、阻塞、非阻塞"><a href="#11-6-同步、异步、阻塞、非阻塞" class="headerlink" title="11.6 同步、异步、阻塞、非阻塞"></a>11.6 同步、异步、阻塞、非阻塞</h3><p>这几组概念容易混淆：</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>关注点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>阻塞&#x2F;非阻塞</td>
+<td>调用线程在等待时是否被挂起</td>
+</tr>
+<tr>
+<td>同步&#x2F;异步</td>
+<td>I&#x2F;O 完成由调用方等待，还是由内核完成后通知</td>
+</tr>
+</tbody></table>
+<p>I&#x2F;O 多路复用通常仍属于同步 I&#x2F;O，因为真正的读写拷贝还需要应用线程自己调用 <code>read/write</code> 完成。</p>
+<h2 id="12-零拷贝"><a href="#12-零拷贝" class="headerlink" title="12. 零拷贝"></a>12. 零拷贝</h2><p>零拷贝不是完全没有拷贝，而是减少 CPU 拷贝和用户态&#x2F;内核态切换，避免数据在用户缓冲区和内核缓冲区之间来回搬运。</p>
+<p>典型场景：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把磁盘文件发送到网络 Socket。</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-1-传统-read-write"><a href="#12-1-传统-read-write" class="headerlink" title="12.1 传统 read + write"></a>12.1 传统 read + write</h3><p>传统流程：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">磁盘 -&gt; 内核缓冲区 -&gt; 用户缓冲区 -&gt; Socket 缓冲区 -&gt; 网卡</span><br></pre></td></tr></table></figure>
+
+<p>一般会产生：</p>
+<ul>
+<li>4 次用户态&#x2F;内核态上下文切换。</li>
+<li>2 次 DMA 拷贝。</li>
+<li>2 次 CPU 拷贝。</li>
+</ul>
+<h3 id="12-2-mmap-write"><a href="#12-2-mmap-write" class="headerlink" title="12.2 mmap + write"></a>12.2 mmap + write</h3><p><code>mmap()</code> 可以把内核 PageCache 映射到用户空间。应用可以像访问内存一样访问文件内容。</p>
+<p>发送文件时大致流程：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">磁盘 -&gt; 内核 PageCache -&gt; mmap 映射到用户空间 -&gt; Socket 缓冲区 -&gt; 网卡</span><br></pre></td></tr></table></figure>
+
+<p>收益：</p>
+<ul>
+<li>减少一次从内核缓冲区到用户缓冲区的 CPU 拷贝。</li>
+<li>适合大文件读取、内存映射文件。</li>
+</ul>
+<p>仍然存在：</p>
+<ul>
+<li><code>write()</code> 系统调用。</li>
+<li>从 PageCache 到 Socket 缓冲区的拷贝。</li>
+</ul>
+<h3 id="12-3-sendfile"><a href="#12-3-sendfile" class="headerlink" title="12.3 sendfile"></a>12.3 sendfile</h3><p><code>sendfile()</code> 可以在内核态直接把文件数据从 PageCache 发送到 Socket，避免数据经过用户空间。</p>
+<p>简化流程：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">磁盘 -&gt; PageCache -&gt; Socket 缓冲区 -&gt; 网卡</span><br></pre></td></tr></table></figure>
+
+<p>收益：</p>
+<ul>
+<li>少一次系统调用。</li>
+<li>减少用户态&#x2F;内核态切换。</li>
+<li>数据不经过用户空间。</li>
+<li>可以减少 CPU 拷贝。</li>
+</ul>
+<p>在支持 scatter-gather DMA 的网卡上，还可以进一步减少内核内部拷贝。</p>
+<p>典型应用：</p>
+<ul>
+<li>Nginx 静态文件发送。</li>
+<li>Kafka 日志文件发送。</li>
+<li>文件服务器。</li>
+</ul>
+<h3 id="12-4-splice"><a href="#12-4-splice" class="headerlink" title="12.4 splice"></a>12.4 splice</h3><p>Linux 的 <code>splice()</code> 可以在两个文件描述符之间移动数据，常配合管道使用，也可以避免用户态拷贝。</p>
+<p>适合：</p>
+<ul>
+<li>文件、管道、Socket 之间的数据转发。</li>
+<li>高性能代理。</li>
+</ul>
+<h3 id="12-5-零拷贝对比"><a href="#12-5-零拷贝对比" class="headerlink" title="12.5 零拷贝对比"></a>12.5 零拷贝对比</h3><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>数据是否经过用户空间</th>
+<th>系统调用次数</th>
+<th>典型用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>read + write</td>
+<td>是</td>
+<td>2 次</td>
+<td>普通读写</td>
+</tr>
+<tr>
+<td>mmap + write</td>
+<td>映射到用户空间</td>
+<td>2 次</td>
+<td>文件映射、大文件读取</td>
+</tr>
+<tr>
+<td>sendfile</td>
+<td>否</td>
+<td>1 次</td>
+<td>文件到 Socket</td>
+</tr>
+<tr>
+<td>splice</td>
+<td>否</td>
+<td>视场景而定</td>
+<td>fd 到 fd 转发</td>
+</tr>
+</tbody></table>
+<p>零拷贝适合“数据不需要被应用层修改”的场景。如果业务需要压缩、加密、解析、过滤数据，仍然可能需要把数据读到用户空间处理。</p>
+<h2 id="13-资源到底是什么"><a href="#13-资源到底是什么" class="headerlink" title="13. 资源到底是什么"></a>13. 资源到底是什么</h2><p>笔记中提到“进程是分配资源的基本单位”，这里的资源包括：</p>
+<ul>
+<li>虚拟内存。</li>
+<li>文件句柄。</li>
+<li>Socket。</li>
+<li>信号处理配置。</li>
+<li>当前工作目录。</li>
+<li>用户权限和安全上下文。</li>
+<li>CPU 时间片。</li>
+<li>进程号。</li>
+<li>锁、信号量、共享内存等内核对象。</li>
+</ul>
+<p>线程共享进程的大部分资源，但线程自身也有私有资源，例如线程栈、寄存器上下文、线程 id、线程局部存储。</p>
+<h2 id="14-常见面试速记"><a href="#14-常见面试速记" class="headerlink" title="14. 常见面试速记"></a>14. 常见面试速记</h2><h3 id="14-1-进程间通信方式"><a href="#14-1-进程间通信方式" class="headerlink" title="14.1 进程间通信方式"></a>14.1 进程间通信方式</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">管道、命名管道、信号量、消息队列、共享内存、Socket。</span><br></pre></td></tr></table></figure>
+
+<p>如果问“最快的 IPC 是什么”，通常回答共享内存，但要补充它需要同步机制。</p>
+<h3 id="14-2-如何避免死锁"><a href="#14-2-如何避免死锁" class="headerlink" title="14.2 如何避免死锁"></a>14.2 如何避免死锁</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">一次性申请所有资源。</span><br><span class="line">按固定顺序申请资源。</span><br><span class="line">获取锁设置超时，失败后释放已持有资源。</span><br><span class="line">减少锁粒度和持锁时间。</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-3-页面置换算法"><a href="#14-3-页面置换算法" class="headerlink" title="14.3 页面置换算法"></a>14.3 页面置换算法</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OPT：淘汰未来最长时间不用的页面，理论最优。</span><br><span class="line">FIFO：淘汰最早进入的页面，实现简单但可能不合理。</span><br><span class="line">LRU：淘汰最近最少使用页面，符合局部性。</span><br><span class="line">LFU：淘汰使用频率最低页面，需要处理历史热点。</span><br><span class="line">Clock：近似 LRU，成本较低。</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-4-硬链接和软链接"><a href="#14-4-硬链接和软链接" class="headerlink" title="14.4 硬链接和软链接"></a>14.4 硬链接和软链接</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">硬链接：多个目录项指向同一个 inode。</span><br><span class="line">软链接：独立文件，内容是目标路径。</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-5-I-O-多路复用和异步-I-O"><a href="#14-5-I-O-多路复用和异步-I-O" class="headerlink" title="14.5 I&#x2F;O 多路复用和异步 I&#x2F;O"></a>14.5 I&#x2F;O 多路复用和异步 I&#x2F;O</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">I/O 多路复用：内核通知 fd 已就绪，应用自己 read/write。</span><br><span class="line">异步 I/O：内核完成 I/O 后通知应用。</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-6-僵尸进程和孤儿进程"><a href="#14-6-僵尸进程和孤儿进程" class="headerlink" title="14.6 僵尸进程和孤儿进程"></a>14.6 僵尸进程和孤儿进程</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">僵尸进程：子进程已退出，父进程未 wait 回收。</span><br><span class="line">孤儿进程：父进程已退出，子进程仍运行，被 init/systemd 接管。</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-7-虚拟内存核心点"><a href="#14-7-虚拟内存核心点" class="headerlink" title="14.7 虚拟内存核心点"></a>14.7 虚拟内存核心点</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">每个进程拥有独立虚拟地址空间。</span><br><span class="line">MMU 通过页表把虚拟地址转换为物理地址。</span><br><span class="line">TLB 缓存地址转换结果。</span><br><span class="line">缺页中断用于按需加载页面。</span><br><span class="line">页表和权限位实现内存隔离。</span><br></pre></td></tr></table></figure>
+
+<h2 id="15-工程排查常用命令"><a href="#15-工程排查常用命令" class="headerlink" title="15. 工程排查常用命令"></a>15. 工程排查常用命令</h2><p>查看进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps aux</span><br><span class="line">top</span><br><span class="line">pidstat -p &lt;pid&gt; 1</span><br></pre></td></tr></table></figure>
+
+<p>查看线程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">top -H -p &lt;pid&gt;</span><br><span class="line">ps -T -p &lt;pid&gt;</span><br></pre></td></tr></table></figure>
+
+<p>查看文件描述符：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /proc/&lt;pid&gt;/fd</span><br><span class="line">lsof -p &lt;pid&gt;</span><br></pre></td></tr></table></figure>
+
+<p>查看网络连接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ss -antp</span><br><span class="line">ss -lnpt</span><br></pre></td></tr></table></figure>
+
+<p>查看系统调用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">strace -p &lt;pid&gt;</span><br><span class="line">strace -f -tt -T -p &lt;pid&gt;</span><br></pre></td></tr></table></figure>
+
+<p>查看内存映射：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pmap -x &lt;pid&gt;</span><br><span class="line"><span class="built_in">cat</span> /proc/&lt;pid&gt;/maps</span><br><span class="line"><span class="built_in">cat</span> /proc/&lt;pid&gt;/smaps</span><br></pre></td></tr></table></figure>
+
+<p>查看僵尸进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eo pid,ppid,state,cmd | grep <span class="string">&#x27; Z &#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="16-总结"><a href="#16-总结" class="headerlink" title="16. 总结"></a>16. 总结</h2><p>操作系统知识可以围绕四条主线理解：</p>
+<ol>
+<li>进程线程：谁在运行，如何调度，如何通信。</li>
+<li>内存管理：虚拟地址如何映射到物理地址，缺页如何处理。</li>
+<li>文件与 I&#x2F;O：数据如何从磁盘到网络，如何减少拷贝和切换。</li>
+<li>并发控制：共享资源如何同步，死锁如何避免和排查。</li>
+</ol>
+<p>对后端工程来说，操作系统不是孤立理论。线程池、Socket、epoll、PageCache、sendfile、进程状态、文件描述符、上下文切换都会直接影响服务吞吐、延迟和稳定性。真正掌握这些概念，关键是能把“概念名词”对应到实际运行时现象和排查工具上。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://increasingrate626.github.io/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidevBCBWG7FqfnJ_JQ7ZHSD" data-title="操作系统" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -5632,6 +6384,10 @@ var _hmt = _hmt || [];
           </li>
         
           <li>
+            <a href="/2026/05/16/Spring-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">Spring</a>
+          </li>
+        
+          <li>
             <a href="/2026/05/15/Redis-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">Redis</a>
           </li>
         
@@ -5656,11 +6412,11 @@ var _hmt = _hmt || [];
           </li>
         
           <li>
-            <a href="/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">操作系统</a>
+            <a href="/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">计网</a>
           </li>
         
           <li>
-            <a href="/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">计网</a>
+            <a href="/2026/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">操作系统</a>
           </li>
         
       </ul>
