@@ -1,4 +1,7 @@
-<article id="<%= post.layout %>-<%= post.slug %>" class="h-entry article article-type-<%= post.layout %>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<%
+  var isAboutPost = index && (post.slug === 'about-me' || /about-me\/?$/.test(post.path || ''));
+%>
+<article id="<%= post.layout %>-<%= post.slug %>" class="h-entry article article-type-<%= post.layout %> <%= index ? 'article-preview' : 'article-full' %> <%= isAboutPost ? 'article-about' : '' %>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
     <%- partial('post/category') %>
@@ -11,13 +14,30 @@
       </header>
     <% } %>
     <div class="e-content article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
+      <% if (isAboutPost) { %>
+        <%- post.content %>
+      <% } else if (post.excerpt && index){ %>
         <%- post.excerpt %>
         <% if (theme.excerpt_link){ %>
           <p class="article-more-link">
             <a href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %></a>
           </p>
         <% } %>
+      <% } else if (index) { %>
+        <%
+          var summary = strip_html(post.content || '').replace(/\s+/g, ' ').trim();
+          var summaryLimit = 220;
+          var isTruncated = summary.length > summaryLimit;
+          if (isTruncated) {
+            summary = summary.substring(0, summaryLimit).replace(/[，。；、,.!?！？;:\s]*$/, '');
+          }
+        %>
+        <% if (summary) { %>
+          <p class="article-summary"><%- summary %><% if (isTruncated) { %>...<% } %></p>
+        <% } %>
+        <p class="article-more-link">
+          <a href="<%- url_for(post.path) %>">阅读全文</a>
+        </p>
       <% } else { %>
         <%- post.content %>
       <% } %>
