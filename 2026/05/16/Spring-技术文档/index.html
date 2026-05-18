@@ -114,7 +114,7 @@ var _hmt = _hmt || [];
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Spring-技术文档：IoC、Bean-生命周期、AOP、事务、Spring-MVC-与自动配置"><a href="#Spring-技术文档：IoC、Bean-生命周期、AOP、事务、Spring-MVC-与自动配置" class="headerlink" title="Spring 技术文档：IoC、Bean 生命周期、AOP、事务、Spring MVC 与自动配置"></a>Spring 技术文档：IoC、Bean 生命周期、AOP、事务、Spring MVC 与自动配置</h1><h2 id="1-Spring-核心知识图谱"><a href="#1-Spring-核心知识图谱" class="headerlink" title="1. Spring 核心知识图谱"></a>1. Spring 核心知识图谱</h2><p>Spring 是一个轻量级、非侵入式的 Java 应用开发框架，核心目标是降低对象创建、依赖管理、横切逻辑和企业级开发的复杂度。学习 Spring 可以围绕几条主线展开：IoC 容器、Bean 生命周期、依赖注入、AOP、事务管理、Spring MVC、Spring Boot 自动配置以及常见扩展点。</p>
+        <h1 id="Spring-技术文档：IoC、Bean-生命周期、AOP、事务、Spring-MVC-与自动配置"><a href="#Spring-技术文档：IoC、Bean-生命周期、AOP、事务、Spring-MVC-与自动配置" class="headerlink" aria-hidden="true"></a>Spring 技术文档：IoC、Bean 生命周期、AOP、事务、Spring MVC 与自动配置</h1><h2 id="1-Spring-核心知识图谱"><a href="#1-Spring-核心知识图谱" class="headerlink" aria-hidden="true"></a>1. Spring 核心知识图谱</h2><p>Spring 是一个轻量级、非侵入式的 Java 应用开发框架，核心目标是降低对象创建、依赖管理、横切逻辑和企业级开发的复杂度。学习 Spring 可以围绕几条主线展开：IoC 容器、Bean 生命周期、依赖注入、AOP、事务管理、Spring MVC、Spring Boot 自动配置以及常见扩展点。</p>
 <p>核心关键词：</p>
 <ul>
 <li>IoC：控制反转，把对象创建和依赖管理交给容器。</li>
@@ -126,7 +126,7 @@ var _hmt = _hmt || [];
 <li>Transaction：声明式事务通过 AOP 拦截方法调用，在方法前后开启、提交或回滚事务。</li>
 </ul>
 <p>一句话理解 Spring：它用 IoC 管对象，用 AOP 管增强，用事务抽象管一致性，用 MVC 管 Web 请求，用 Boot 自动配置降低工程搭建成本。</p>
-<h2 id="2-Spring-是什么"><a href="#2-Spring-是什么" class="headerlink" title="2. Spring 是什么"></a>2. Spring 是什么</h2><p>Spring 是轻量级、非侵入式、以 IoC 和 AOP 为核心的企业级开发框架。</p>
+<h2 id="2-Spring-是什么"><a href="#2-Spring-是什么" class="headerlink" aria-hidden="true"></a>2. Spring 是什么</h2><p>Spring 是轻量级、非侵入式、以 IoC 和 AOP 为核心的企业级开发框架。</p>
 <p>“轻量级”不是指功能少，而是指使用成本和侵入成本低。普通 Java 类不需要继承 Spring 的基类，也不需要强绑定 Spring API，就可以被容器管理。</p>
 <p>“非侵入式”意味着业务对象可以保持 POJO 形态：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> OrderRepository orderRepository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">OrderService</span><span class="params">(OrderRepository orderRepository)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.orderRepository = orderRepository;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -140,7 +140,7 @@ var _hmt = _hmt || [];
 <li>为 JDBC、事务、Web、缓存、消息队列等企业级能力提供统一抽象。</li>
 <li>与 Spring Boot 配合，通过自动配置快速搭建应用。</li>
 </ul>
-<h2 id="3-IoC-与-DI"><a href="#3-IoC-与-DI" class="headerlink" title="3. IoC 与 DI"></a>3. IoC 与 DI</h2><h3 id="3-1-IoC-控制反转"><a href="#3-1-IoC-控制反转" class="headerlink" title="3.1 IoC 控制反转"></a>3.1 IoC 控制反转</h3><p>传统写法中，对象主动创建自己的依赖：</p>
+<h2 id="3-IoC-与-DI"><a href="#3-IoC-与-DI" class="headerlink" aria-hidden="true"></a>3. IoC 与 DI</h2><h3 id="3-1-IoC-控制反转"><a href="#3-1-IoC-控制反转" class="headerlink" aria-hidden="true"></a>3.1 IoC 控制反转</h3><p>传统写法中，对象主动创建自己的依赖：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">OrderRepository</span> <span class="variable">orderRepository</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OrderRepository</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这种方式的问题是对象之间强耦合，不利于测试和替换实现。</p>
@@ -148,7 +148,7 @@ var _hmt = _hmt || [];
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> OrderRepository orderRepository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">OrderService</span><span class="params">(OrderRepository orderRepository)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.orderRepository = orderRepository;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>此时 <code>OrderService</code> 只声明自己需要 <code>OrderRepository</code>，具体创建和注入由 Spring 容器完成。</p>
-<h3 id="3-2-DI-依赖注入"><a href="#3-2-DI-依赖注入" class="headerlink" title="3.2 DI 依赖注入"></a>3.2 DI 依赖注入</h3><p>DI 是 IoC 的具体实现方式。常见注入方式有三种。</p>
+<h3 id="3-2-DI-依赖注入"><a href="#3-2-DI-依赖注入" class="headerlink" aria-hidden="true"></a>3.2 DI 依赖注入</h3><p>DI 是 IoC 的具体实现方式。常见注入方式有三种。</p>
 <p>构造器注入：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> UserRepository userRepository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UserService</span><span class="params">(UserRepository userRepository)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.userRepository = userRepository;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -161,13 +161,13 @@ var _hmt = _hmt || [];
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserRepository userRepository;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>字段注入写起来简单，但不利于测试，也不利于显式表达依赖关系。实际项目中更推荐构造器注入。</p>
-<h2 id="4-Bean-与作用域"><a href="#4-Bean-与作用域" class="headerlink" title="4. Bean 与作用域"></a>4. Bean 与作用域</h2><h3 id="4-1-什么是-Bean"><a href="#4-1-什么是-Bean" class="headerlink" title="4.1 什么是 Bean"></a>4.1 什么是 Bean</h3><p>Bean 是由 Spring 容器创建、装配、初始化和管理的对象。通过 XML、注解或 Java 配置都可以把对象注册为 Bean。</p>
+<h2 id="4-Bean-与作用域"><a href="#4-Bean-与作用域" class="headerlink" aria-hidden="true"></a>4. Bean 与作用域</h2><h3 id="4-1-什么是-Bean"><a href="#4-1-什么是-Bean" class="headerlink" aria-hidden="true"></a>4.1 什么是 Bean</h3><p>Bean 是由 Spring 容器创建、装配、初始化和管理的对象。通过 XML、注解或 Java 配置都可以把对象注册为 Bean。</p>
 <p>常见注册方式：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PaymentClient</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> PaymentClient <span class="title function_">paymentClient</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">PaymentClient</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="4-2-Bean-的常见作用域"><a href="#4-2-Bean-的常见作用域" class="headerlink" title="4.2 Bean 的常见作用域"></a>4.2 Bean 的常见作用域</h3><table>
+<h3 id="4-2-Bean-的常见作用域"><a href="#4-2-Bean-的常见作用域" class="headerlink" aria-hidden="true"></a>4.2 Bean 的常见作用域</h3><table>
 <thead>
 <tr>
 <th>作用域</th>
@@ -202,7 +202,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody></table>
 <p>默认情况下，Spring Bean 是单例的。</p>
-<h2 id="5-Spring-单例-Bean-是线程安全的吗"><a href="#5-Spring-单例-Bean-是线程安全的吗" class="headerlink" title="5. Spring 单例 Bean 是线程安全的吗"></a>5. Spring 单例 Bean 是线程安全的吗</h2><p>Spring 单例 Bean 本身不保证线程安全。单例只表示容器中只有一个实例，不表示多线程访问时自动加锁。</p>
+<h2 id="5-Spring-单例-Bean-是线程安全的吗"><a href="#5-Spring-单例-Bean-是线程安全的吗" class="headerlink" aria-hidden="true"></a>5. Spring 单例 Bean 是线程安全的吗</h2><p>Spring 单例 Bean 本身不保证线程安全。单例只表示容器中只有一个实例，不表示多线程访问时自动加锁。</p>
 <p>所有线程共享同一个单例 Bean 实例，如果 Bean 内部有可变成员变量，就可能发生数据竞争。</p>
 <p>线程安全情况：</p>
 <ul>
@@ -219,17 +219,17 @@ var _hmt = _hmt || [];
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CounterService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">AtomicInteger</span> <span class="variable">count</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">increment</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> count.incrementAndGet();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>实际业务中，Service 层通常应该设计成无状态对象。请求级数据放在方法参数、局部变量、数据库、缓存或上下文对象中，不要放在单例 Bean 的普通成员变量里。</p>
-<h2 id="6-Bean-生命周期"><a href="#6-Bean-生命周期" class="headerlink" title="6. Bean 生命周期"></a>6. Bean 生命周期</h2><p>Spring Bean 的生命周期可以分为八个阶段。</p>
-<h3 id="6-1-解析-BeanDefinition"><a href="#6-1-解析-BeanDefinition" class="headerlink" title="6.1 解析 BeanDefinition"></a>6.1 解析 BeanDefinition</h3><p>容器启动时会扫描配置文件、注解或 Java 配置，把 Bean 信息解析成 <code>BeanDefinition</code>。<code>BeanDefinition</code> 描述了 Bean 的类名、作用域、构造参数、属性依赖、初始化方法、销毁方法等元数据。</p>
-<h3 id="6-2-实例化"><a href="#6-2-实例化" class="headerlink" title="6.2 实例化"></a>6.2 实例化</h3><p>容器通过构造函数或工厂方法创建 Bean 实例。</p>
+<h2 id="6-Bean-生命周期"><a href="#6-Bean-生命周期" class="headerlink" aria-hidden="true"></a>6. Bean 生命周期</h2><p>Spring Bean 的生命周期可以分为八个阶段。</p>
+<h3 id="6-1-解析-BeanDefinition"><a href="#6-1-解析-BeanDefinition" class="headerlink" aria-hidden="true"></a>6.1 解析 BeanDefinition</h3><p>容器启动时会扫描配置文件、注解或 Java 配置，把 Bean 信息解析成 <code>BeanDefinition</code>。<code>BeanDefinition</code> 描述了 Bean 的类名、作用域、构造参数、属性依赖、初始化方法、销毁方法等元数据。</p>
+<h3 id="6-2-实例化"><a href="#6-2-实例化" class="headerlink" aria-hidden="true"></a>6.2 实例化</h3><p>容器通过构造函数或工厂方法创建 Bean 实例。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">UserService</span> <span class="variable">userService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserService</span>();</span><br></pre></td></tr></table></figure>
 
 <p>此时对象已经被创建，但依赖属性通常还没有完全注入。</p>
-<h3 id="6-3-属性赋值"><a href="#6-3-属性赋值" class="headerlink" title="6.3 属性赋值"></a>6.3 属性赋值</h3><p>容器为 Bean 注入依赖属性，包括构造器依赖、Setter 依赖、字段依赖等。</p>
+<h3 id="6-3-属性赋值"><a href="#6-3-属性赋值" class="headerlink" aria-hidden="true"></a>6.3 属性赋值</h3><p>容器为 Bean 注入依赖属性，包括构造器依赖、Setter 依赖、字段依赖等。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> UserRepository userRepository;</span><br></pre></td></tr></table></figure>
 
 <p>这一阶段会完成依赖装配，也是循环依赖处理的关键阶段。</p>
-<h3 id="6-4-Aware-接口回调"><a href="#6-4-Aware-接口回调" class="headerlink" title="6.4 Aware 接口回调"></a>6.4 Aware 接口回调</h3><p>如果 Bean 实现了 Spring 的 Aware 接口，容器会把相关上下文信息回调给 Bean。</p>
+<h3 id="6-4-Aware-接口回调"><a href="#6-4-Aware-接口回调" class="headerlink" aria-hidden="true"></a>6.4 Aware 接口回调</h3><p>如果 Bean 实现了 Spring 的 Aware 接口，容器会把相关上下文信息回调给 Bean。</p>
 <p>常见 Aware 接口：</p>
 <ul>
 <li><code>BeanNameAware</code>：获取当前 Bean 名称。</li>
@@ -239,11 +239,11 @@ var _hmt = _hmt || [];
 <p>示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DemoBean</span> <span class="keyword">implements</span> <span class="title class_">ApplicationContextAware</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> ApplicationContext applicationContext;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setApplicationContext</span><span class="params">(ApplicationContext applicationContext)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.applicationContext = applicationContext;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="6-5-BeanPostProcessor-前置处理"><a href="#6-5-BeanPostProcessor-前置处理" class="headerlink" title="6.5 BeanPostProcessor 前置处理"></a>6.5 BeanPostProcessor 前置处理</h3><p>容器调用所有 <code>BeanPostProcessor</code> 的 <code>postProcessBeforeInitialization()</code> 方法。</p>
+<h3 id="6-5-BeanPostProcessor-前置处理"><a href="#6-5-BeanPostProcessor-前置处理" class="headerlink" aria-hidden="true"></a>6.5 BeanPostProcessor 前置处理</h3><p>容器调用所有 <code>BeanPostProcessor</code> 的 <code>postProcessBeforeInitialization()</code> 方法。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object <span class="title function_">postProcessBeforeInitialization</span><span class="params">(Object bean, String beanName)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> bean;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这个阶段可以在初始化前对 Bean 进行扩展处理。</p>
-<h3 id="6-6-初始化"><a href="#6-6-初始化" class="headerlink" title="6.6 初始化"></a>6.6 初始化</h3><p>初始化方法有三类常见方式：</p>
+<h3 id="6-6-初始化"><a href="#6-6-初始化" class="headerlink" aria-hidden="true"></a>6.6 初始化</h3><p>初始化方法有三类常见方式：</p>
 <ul>
 <li><code>@PostConstruct</code></li>
 <li>实现 <code>InitializingBean</code> 的 <code>afterPropertiesSet()</code> 方法</li>
@@ -255,9 +255,9 @@ var _hmt = _hmt || [];
 <li><code>afterPropertiesSet()</code></li>
 <li>自定义 <code>init-method</code></li>
 </ol>
-<h3 id="6-7-BeanPostProcessor-后置处理"><a href="#6-7-BeanPostProcessor-后置处理" class="headerlink" title="6.7 BeanPostProcessor 后置处理"></a>6.7 BeanPostProcessor 后置处理</h3><p>容器调用 <code>BeanPostProcessor</code> 的 <code>postProcessAfterInitialization()</code> 方法。</p>
+<h3 id="6-7-BeanPostProcessor-后置处理"><a href="#6-7-BeanPostProcessor-后置处理" class="headerlink" aria-hidden="true"></a>6.7 BeanPostProcessor 后置处理</h3><p>容器调用 <code>BeanPostProcessor</code> 的 <code>postProcessAfterInitialization()</code> 方法。</p>
 <p>AOP 代理通常在这个阶段生成。也就是说，业务代码里注入到的对象可能已经不是原始 Bean，而是被增强后的代理对象。</p>
-<h3 id="6-8-Bean-就绪与销毁"><a href="#6-8-Bean-就绪与销毁" class="headerlink" title="6.8 Bean 就绪与销毁"></a>6.8 Bean 就绪与销毁</h3><p>初始化完成后，Bean 进入可用状态，可以被其他对象获取和调用。</p>
+<h3 id="6-8-Bean-就绪与销毁"><a href="#6-8-Bean-就绪与销毁" class="headerlink" aria-hidden="true"></a>6.8 Bean 就绪与销毁</h3><p>初始化完成后，Bean 进入可用状态，可以被其他对象获取和调用。</p>
 <p>容器关闭时会触发销毁逻辑，常见方式：</p>
 <ul>
 <li><code>@PreDestroy</code></li>
@@ -267,7 +267,7 @@ var _hmt = _hmt || [];
 <p>Bean 生命周期顺序可以简化为：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BeanDefinition -&gt; 实例化 -&gt; 属性赋值 -&gt; Aware 回调</span><br><span class="line">-&gt; BeanPostProcessor 前置处理 -&gt; 初始化</span><br><span class="line">-&gt; BeanPostProcessor 后置处理 -&gt; 使用</span><br><span class="line">-&gt; 销毁</span><br></pre></td></tr></table></figure>
 
-<h2 id="7-Spring-解决循环依赖"><a href="#7-Spring-解决循环依赖" class="headerlink" title="7. Spring 解决循环依赖"></a>7. Spring 解决循环依赖</h2><p>循环依赖指两个或多个 Bean 相互依赖。</p>
+<h2 id="7-Spring-解决循环依赖"><a href="#7-Spring-解决循环依赖" class="headerlink" aria-hidden="true"></a>7. Spring 解决循环依赖</h2><p>循环依赖指两个或多个 Bean 相互依赖。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> BService bService;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AService aService;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Spring 默认只能解决单例 Bean 的部分循环依赖，主要依赖三级缓存。</p>
@@ -309,7 +309,7 @@ var _hmt = _hmt || [];
 <li>某些复杂 AOP 场景下的循环依赖。</li>
 </ul>
 <p>实际项目中，不建议依赖循环依赖机制。更好的方式是重新拆分职责，或者引入事件、懒加载、接口解耦。</p>
-<h2 id="8-AOP-面向切面编程"><a href="#8-AOP-面向切面编程" class="headerlink" title="8. AOP 面向切面编程"></a>8. AOP 面向切面编程</h2><h3 id="8-1-AOP-解决什么问题"><a href="#8-1-AOP-解决什么问题" class="headerlink" title="8.1 AOP 解决什么问题"></a>8.1 AOP 解决什么问题</h3><p>AOP 用来处理横切关注点。横切关注点不是某一个业务模块独有，而是很多模块都会用到。</p>
+<h2 id="8-AOP-面向切面编程"><a href="#8-AOP-面向切面编程" class="headerlink" aria-hidden="true"></a>8. AOP 面向切面编程</h2><h3 id="8-1-AOP-解决什么问题"><a href="#8-1-AOP-解决什么问题" class="headerlink" aria-hidden="true"></a>8.1 AOP 解决什么问题</h3><p>AOP 用来处理横切关注点。横切关注点不是某一个业务模块独有，而是很多模块都会用到。</p>
 <p>常见场景：</p>
 <ul>
 <li>事务管理。</li>
@@ -324,7 +324,7 @@ var _hmt = _hmt || [];
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createOrder</span><span class="params">()</span> &#123;</span><br><span class="line">    beginTransaction();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 业务逻辑</span></span><br><span class="line">        commit();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        rollback();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>有了 AOP 后，业务方法只关注业务本身，事务、日志等由切面统一处理。</p>
-<h3 id="8-2-AOP-核心概念"><a href="#8-2-AOP-核心概念" class="headerlink" title="8.2 AOP 核心概念"></a>8.2 AOP 核心概念</h3><table>
+<h3 id="8-2-AOP-核心概念"><a href="#8-2-AOP-核心概念" class="headerlink" aria-hidden="true"></a>8.2 AOP 核心概念</h3><table>
 <thead>
 <tr>
 <th>概念</th>
@@ -360,7 +360,7 @@ var _hmt = _hmt || [];
 <td>织入，把增强逻辑应用到目标对象的过程</td>
 </tr>
 </tbody></table>
-<h3 id="8-3-通知类型"><a href="#8-3-通知类型" class="headerlink" title="8.3 通知类型"></a>8.3 通知类型</h3><table>
+<h3 id="8-3-通知类型"><a href="#8-3-通知类型" class="headerlink" aria-hidden="true"></a>8.3 通知类型</h3><table>
 <thead>
 <tr>
 <th>通知</th>
@@ -391,7 +391,7 @@ var _hmt = _hmt || [];
 <p>示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogAspect</span> &#123;</span><br><span class="line">    <span class="meta">@Around(&quot;execution(* com.example.service..*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">log</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">start</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> joinPoint.proceed();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="type">long</span> <span class="variable">cost</span> <span class="operator">=</span> System.currentTimeMillis() - start;</span><br><span class="line">            System.out.println(joinPoint.getSignature() + <span class="string">&quot; cost &quot;</span> + cost + <span class="string">&quot; ms&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="8-4-JDK-动态代理与-CGLIB"><a href="#8-4-JDK-动态代理与-CGLIB" class="headerlink" title="8.4 JDK 动态代理与 CGLIB"></a>8.4 JDK 动态代理与 CGLIB</h3><p>Spring AOP 底层主要使用两类代理。</p>
+<h3 id="8-4-JDK-动态代理与-CGLIB"><a href="#8-4-JDK-动态代理与-CGLIB" class="headerlink" aria-hidden="true"></a>8.4 JDK 动态代理与 CGLIB</h3><p>Spring AOP 底层主要使用两类代理。</p>
 <table>
 <thead>
 <tr>
@@ -418,11 +418,11 @@ var _hmt = _hmt || [];
 <li>Spring AOP 主要增强方法调用，不是完整的编译期织入。</li>
 <li>同类内部方法调用通常不会经过代理，因此事务和切面可能不生效。</li>
 </ul>
-<h2 id="9-Spring-事务"><a href="#9-Spring-事务" class="headerlink" title="9. Spring 事务"></a>9. Spring 事务</h2><h3 id="9-1-声明式事务"><a href="#9-1-声明式事务" class="headerlink" title="9.1 声明式事务"></a>9.1 声明式事务</h3><p>Spring 最常用的是声明式事务，通过 <code>@Transactional</code> 标记方法或类。</p>
+<h2 id="9-Spring-事务"><a href="#9-Spring-事务" class="headerlink" aria-hidden="true"></a>9. Spring 事务</h2><h3 id="9-1-声明式事务"><a href="#9-1-声明式事务" class="headerlink" aria-hidden="true"></a>9.1 声明式事务</h3><p>Spring 最常用的是声明式事务，通过 <code>@Transactional</code> 标记方法或类。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createOrder</span><span class="params">(CreateOrderCommand command)</span> &#123;</span><br><span class="line">        <span class="comment">// 保存订单</span></span><br><span class="line">        <span class="comment">// 扣减库存</span></span><br><span class="line">        <span class="comment">// 写入流水</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><code>@Transactional</code> 本质上依赖 AOP。Spring 为目标对象生成代理，方法调用进入代理后，事务拦截器会在方法前开启事务，在方法正常结束时提交事务，在方法异常时回滚事务。</p>
-<h3 id="9-2-事务传播行为"><a href="#9-2-事务传播行为" class="headerlink" title="9.2 事务传播行为"></a>9.2 事务传播行为</h3><table>
+<h3 id="9-2-事务传播行为"><a href="#9-2-事务传播行为" class="headerlink" aria-hidden="true"></a>9.2 事务传播行为</h3><table>
 <thead>
 <tr>
 <th>传播行为</th>
@@ -459,7 +459,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody></table>
 <p>日常业务最常见的是 <code>REQUIRED</code> 和 <code>REQUIRES_NEW</code>。</p>
-<h3 id="9-3-事务隔离级别"><a href="#9-3-事务隔离级别" class="headerlink" title="9.3 事务隔离级别"></a>9.3 事务隔离级别</h3><table>
+<h3 id="9-3-事务隔离级别"><a href="#9-3-事务隔离级别" class="headerlink" aria-hidden="true"></a>9.3 事务隔离级别</h3><table>
 <thead>
 <tr>
 <th>隔离级别</th>
@@ -484,7 +484,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody></table>
 <p>Spring 的隔离级别最终要落到数据库能力上。Spring 只负责传递事务语义，真正的并发控制由数据库实现。</p>
-<h3 id="9-4-事务失效场景"><a href="#9-4-事务失效场景" class="headerlink" title="9.4 事务失效场景"></a>9.4 事务失效场景</h3><p>常见事务失效原因：</p>
+<h3 id="9-4-事务失效场景"><a href="#9-4-事务失效场景" class="headerlink" aria-hidden="true"></a>9.4 事务失效场景</h3><p>常见事务失效原因：</p>
 <ul>
 <li>方法不是 <code>public</code>。</li>
 <li>同类内部方法调用，没有经过代理对象。</li>
@@ -501,7 +501,7 @@ var _hmt = _hmt || [];
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">outer</span><span class="params">()</span> &#123;</span><br><span class="line">    inner();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">inner</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 这里可能不走代理，事务不生效</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>解决思路是通过代理对象调用，或者把事务方法拆到另一个 Spring Bean 中。</p>
-<h2 id="10-Spring-常用注解"><a href="#10-Spring-常用注解" class="headerlink" title="10. Spring 常用注解"></a>10. Spring 常用注解</h2><h3 id="10-1-Bean-注册注解"><a href="#10-1-Bean-注册注解" class="headerlink" title="10.1 Bean 注册注解"></a>10.1 Bean 注册注解</h3><table>
+<h2 id="10-Spring-常用注解"><a href="#10-Spring-常用注解" class="headerlink" aria-hidden="true"></a>10. Spring 常用注解</h2><h3 id="10-1-Bean-注册注解"><a href="#10-1-Bean-注册注解" class="headerlink" aria-hidden="true"></a>10.1 Bean 注册注解</h3><table>
 <thead>
 <tr>
 <th>注解</th>
@@ -538,7 +538,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody></table>
 <p><code>@Service</code>、<code>@Repository</code>、<code>@Controller</code> 本质上都是特殊语义的 <code>@Component</code>，用于提升代码可读性和分层表达。</p>
-<h3 id="10-2-依赖注入注解"><a href="#10-2-依赖注入注解" class="headerlink" title="10.2 依赖注入注解"></a>10.2 依赖注入注解</h3><table>
+<h3 id="10-2-依赖注入注解"><a href="#10-2-依赖注入注解" class="headerlink" aria-hidden="true"></a>10.2 依赖注入注解</h3><table>
 <thead>
 <tr>
 <th>注解</th>
@@ -565,7 +565,7 @@ var _hmt = _hmt || [];
 <p>如果同一类型有多个 Bean，可以使用 <code>@Qualifier</code> 指定具体 Bean。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">PayService</span><span class="params">(<span class="meta">@Qualifier(&quot;wechatPayClient&quot;)</span> PayClient payClient)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.payClient = payClient;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="10-3-Web-注解"><a href="#10-3-Web-注解" class="headerlink" title="10.3 Web 注解"></a>10.3 Web 注解</h3><table>
+<h3 id="10-3-Web-注解"><a href="#10-3-Web-注解" class="headerlink" aria-hidden="true"></a>10.3 Web 注解</h3><table>
 <thead>
 <tr>
 <th>注解</th>
@@ -609,7 +609,7 @@ var _hmt = _hmt || [];
 <td>返回值写入响应体</td>
 </tr>
 </tbody></table>
-<h3 id="10-4-事务与-AOP-注解"><a href="#10-4-事务与-AOP-注解" class="headerlink" title="10.4 事务与 AOP 注解"></a>10.4 事务与 AOP 注解</h3><table>
+<h3 id="10-4-事务与-AOP-注解"><a href="#10-4-事务与-AOP-注解" class="headerlink" aria-hidden="true"></a>10.4 事务与 AOP 注解</h3><table>
 <thead>
 <tr>
 <th>注解</th>
@@ -637,7 +637,7 @@ var _hmt = _hmt || [];
 <td>环绕通知</td>
 </tr>
 </tbody></table>
-<h3 id="10-5-Spring-Boot-注解"><a href="#10-5-Spring-Boot-注解" class="headerlink" title="10.5 Spring Boot 注解"></a>10.5 Spring Boot 注解</h3><table>
+<h3 id="10-5-Spring-Boot-注解"><a href="#10-5-Spring-Boot-注解" class="headerlink" aria-hidden="true"></a>10.5 Spring Boot 注解</h3><table>
 <thead>
 <tr>
 <th>注解</th>
@@ -675,7 +675,7 @@ var _hmt = _hmt || [];
 <li><code>@EnableAutoConfiguration</code></li>
 <li><code>@ComponentScan</code></li>
 </ul>
-<h2 id="11-Spring-Boot-自动配置"><a href="#11-Spring-Boot-自动配置" class="headerlink" title="11. Spring Boot 自动配置"></a>11. Spring Boot 自动配置</h2><p>Spring Boot 自动配置的核心目标是根据依赖、配置和条件自动创建 Bean，减少手写配置。</p>
+<h2 id="11-Spring-Boot-自动配置"><a href="#11-Spring-Boot-自动配置" class="headerlink" aria-hidden="true"></a>11. Spring Boot 自动配置</h2><p>Spring Boot 自动配置的核心目标是根据依赖、配置和条件自动创建 Bean，减少手写配置。</p>
 <p><code>@EnableAutoConfiguration</code> 会通过 <code>@Import</code> 导入 <code>AutoConfigurationImportSelector</code>。</p>
 <p>自动配置大致流程：</p>
 <ol>
@@ -692,7 +692,7 @@ var _hmt = _hmt || [];
 
 <p>含义是：当类路径下存在 <code>DataSource</code>，且容器中还没有自定义 <code>DataSource</code> Bean 时，自动配置才会生效。</p>
 <p>自动配置不是强行替你配置一切，而是“有条件地提供默认配置”。当用户自己声明了 Bean，Spring Boot 通常会让用户配置优先。</p>
-<h2 id="12-Spring-MVC-请求流程"><a href="#12-Spring-MVC-请求流程" class="headerlink" title="12. Spring MVC 请求流程"></a>12. Spring MVC 请求流程</h2><p>Spring MVC 的核心入口是 <code>DispatcherServlet</code>，它是前端控制器，负责接收请求并协调后续组件。</p>
+<h2 id="12-Spring-MVC-请求流程"><a href="#12-Spring-MVC-请求流程" class="headerlink" aria-hidden="true"></a>12. Spring MVC 请求流程</h2><p>Spring MVC 的核心入口是 <code>DispatcherServlet</code>，它是前端控制器，负责接收请求并协调后续组件。</p>
 <p>请求处理流程：</p>
 <ol>
 <li>浏览器发送 HTTP 请求。</li>
@@ -710,7 +710,7 @@ var _hmt = _hmt || [];
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/users&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UserController</span><span class="params">(UserService userService)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.userService = userService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> UserVO <span class="title function_">getUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> userService.getUser(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><code>@RestController</code> 会让返回值直接写入 HTTP 响应体，而不是走视图解析。</p>
-<h2 id="13-ApplicationContext-与-BeanFactory"><a href="#13-ApplicationContext-与-BeanFactory" class="headerlink" title="13. ApplicationContext 与 BeanFactory"></a>13. ApplicationContext 与 BeanFactory</h2><p><code>BeanFactory</code> 是 Spring 最基础的容器接口，提供 Bean 创建、获取和依赖注入能力。</p>
+<h2 id="13-ApplicationContext-与-BeanFactory"><a href="#13-ApplicationContext-与-BeanFactory" class="headerlink" aria-hidden="true"></a>13. ApplicationContext 与 BeanFactory</h2><p><code>BeanFactory</code> 是 Spring 最基础的容器接口，提供 Bean 创建、获取和依赖注入能力。</p>
 <p><code>ApplicationContext</code> 是更高级的容器接口，继承并扩展了 <code>BeanFactory</code>，常用功能更多。</p>
 <table>
 <thead>
@@ -752,15 +752,15 @@ var _hmt = _hmt || [];
 </tr>
 </tbody></table>
 <p>实际开发中几乎都使用 <code>ApplicationContext</code>。</p>
-<h2 id="14-Spring-扩展点"><a href="#14-Spring-扩展点" class="headerlink" title="14. Spring 扩展点"></a>14. Spring 扩展点</h2><p>Spring 强大的一部分原因是扩展点非常丰富。</p>
-<h3 id="14-1-BeanFactoryPostProcessor"><a href="#14-1-BeanFactoryPostProcessor" class="headerlink" title="14.1 BeanFactoryPostProcessor"></a>14.1 BeanFactoryPostProcessor</h3><p><code>BeanFactoryPostProcessor</code> 可以在 Bean 实例化之前修改 <code>BeanDefinition</code>。</p>
+<h2 id="14-Spring-扩展点"><a href="#14-Spring-扩展点" class="headerlink" aria-hidden="true"></a>14. Spring 扩展点</h2><p>Spring 强大的一部分原因是扩展点非常丰富。</p>
+<h3 id="14-1-BeanFactoryPostProcessor"><a href="#14-1-BeanFactoryPostProcessor" class="headerlink" aria-hidden="true"></a>14.1 BeanFactoryPostProcessor</h3><p><code>BeanFactoryPostProcessor</code> 可以在 Bean 实例化之前修改 <code>BeanDefinition</code>。</p>
 <p>典型用途：</p>
 <ul>
 <li>修改 Bean 的属性定义。</li>
 <li>解析占位符。</li>
 <li>扩展配置元数据。</li>
 </ul>
-<h3 id="14-2-BeanPostProcessor"><a href="#14-2-BeanPostProcessor" class="headerlink" title="14.2 BeanPostProcessor"></a>14.2 BeanPostProcessor</h3><p><code>BeanPostProcessor</code> 可以在 Bean 初始化前后增强 Bean。</p>
+<h3 id="14-2-BeanPostProcessor"><a href="#14-2-BeanPostProcessor" class="headerlink" aria-hidden="true"></a>14.2 BeanPostProcessor</h3><p><code>BeanPostProcessor</code> 可以在 Bean 初始化前后增强 Bean。</p>
 <p>典型用途：</p>
 <ul>
 <li>AOP 代理创建。</li>
@@ -768,57 +768,57 @@ var _hmt = _hmt || [];
 <li>初始化增强。</li>
 <li>对特殊 Bean 做包装。</li>
 </ul>
-<h3 id="14-3-ImportSelector"><a href="#14-3-ImportSelector" class="headerlink" title="14.3 ImportSelector"></a>14.3 ImportSelector</h3><p><code>ImportSelector</code> 可以根据条件动态导入配置类。Spring Boot 自动配置中的 <code>AutoConfigurationImportSelector</code> 就是重要代表。</p>
-<h3 id="14-4-FactoryBean"><a href="#14-4-FactoryBean" class="headerlink" title="14.4 FactoryBean"></a>14.4 FactoryBean</h3><p><code>FactoryBean</code> 本身是一个 Bean，但它生产的对象才是真正暴露给容器使用的对象。</p>
+<h3 id="14-3-ImportSelector"><a href="#14-3-ImportSelector" class="headerlink" aria-hidden="true"></a>14.3 ImportSelector</h3><p><code>ImportSelector</code> 可以根据条件动态导入配置类。Spring Boot 自动配置中的 <code>AutoConfigurationImportSelector</code> 就是重要代表。</p>
+<h3 id="14-4-FactoryBean"><a href="#14-4-FactoryBean" class="headerlink" aria-hidden="true"></a>14.4 FactoryBean</h3><p><code>FactoryBean</code> 本身是一个 Bean，但它生产的对象才是真正暴露给容器使用的对象。</p>
 <p>典型场景：</p>
 <ul>
 <li>MyBatis 的 Mapper 代理对象。</li>
 <li>复杂对象创建。</li>
 <li>框架级代理对象封装。</li>
 </ul>
-<h2 id="15-Spring-常见面试题"><a href="#15-Spring-常见面试题" class="headerlink" title="15. Spring 常见面试题"></a>15. Spring 常见面试题</h2><h3 id="15-1-Spring-单例-Bean-是否线程安全"><a href="#15-1-Spring-单例-Bean-是否线程安全" class="headerlink" title="15.1 Spring 单例 Bean 是否线程安全"></a>15.1 Spring 单例 Bean 是否线程安全</h3><p>不一定。单例只表示一个实例被多个线程共享，不表示自动线程安全。如果 Bean 是无状态的，一般线程安全；如果有可变成员变量且没有同步控制，就不安全。</p>
-<h3 id="15-2-构造器注入和字段注入怎么选"><a href="#15-2-构造器注入和字段注入怎么选" class="headerlink" title="15.2 构造器注入和字段注入怎么选"></a>15.2 构造器注入和字段注入怎么选</h3><p>优先构造器注入。构造器注入可以明确表达必需依赖，支持 <code>final</code> 字段，更利于测试，也能更早暴露循环依赖问题。</p>
+<h2 id="15-Spring-常见面试题"><a href="#15-Spring-常见面试题" class="headerlink" aria-hidden="true"></a>15. Spring 常见面试题</h2><h3 id="15-1-Spring-单例-Bean-是否线程安全"><a href="#15-1-Spring-单例-Bean-是否线程安全" class="headerlink" aria-hidden="true"></a>15.1 Spring 单例 Bean 是否线程安全</h3><p>不一定。单例只表示一个实例被多个线程共享，不表示自动线程安全。如果 Bean 是无状态的，一般线程安全；如果有可变成员变量且没有同步控制，就不安全。</p>
+<h3 id="15-2-构造器注入和字段注入怎么选"><a href="#15-2-构造器注入和字段注入怎么选" class="headerlink" aria-hidden="true"></a>15.2 构造器注入和字段注入怎么选</h3><p>优先构造器注入。构造器注入可以明确表达必需依赖，支持 <code>final</code> 字段，更利于测试，也能更早暴露循环依赖问题。</p>
 <p>字段注入虽然简洁，但依赖关系不够显式，单元测试时也不方便手动构造对象。</p>
-<h3 id="15-3-Bean-生命周期有哪些步骤"><a href="#15-3-Bean-生命周期有哪些步骤" class="headerlink" title="15.3 Bean 生命周期有哪些步骤"></a>15.3 Bean 生命周期有哪些步骤</h3><p>简化回答：</p>
+<h3 id="15-3-Bean-生命周期有哪些步骤"><a href="#15-3-Bean-生命周期有哪些步骤" class="headerlink" aria-hidden="true"></a>15.3 Bean 生命周期有哪些步骤</h3><p>简化回答：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">解析 BeanDefinition -&gt; 实例化 -&gt; 属性注入 -&gt; Aware 回调</span><br><span class="line">-&gt; BeanPostProcessor 前置处理 -&gt; 初始化方法</span><br><span class="line">-&gt; BeanPostProcessor 后置处理 -&gt; 使用 -&gt; 销毁</span><br></pre></td></tr></table></figure>
 
 <p>初始化阶段包括 <code>@PostConstruct</code>、<code>afterPropertiesSet()</code> 和自定义 <code>init-method</code>。</p>
 <p>销毁阶段包括 <code>@PreDestroy</code>、<code>destroy()</code> 和自定义 <code>destroy-method</code>。</p>
-<h3 id="15-4-Spring-AOP-为什么同类内部调用会失效"><a href="#15-4-Spring-AOP-为什么同类内部调用会失效" class="headerlink" title="15.4 Spring AOP 为什么同类内部调用会失效"></a>15.4 Spring AOP 为什么同类内部调用会失效</h3><p>Spring AOP 基于代理对象增强方法调用。同类内部方法调用使用的是 <code>this.inner()</code>，不会经过代理对象，因此事务、日志等切面可能不会生效。</p>
+<h3 id="15-4-Spring-AOP-为什么同类内部调用会失效"><a href="#15-4-Spring-AOP-为什么同类内部调用会失效" class="headerlink" aria-hidden="true"></a>15.4 Spring AOP 为什么同类内部调用会失效</h3><p>Spring AOP 基于代理对象增强方法调用。同类内部方法调用使用的是 <code>this.inner()</code>，不会经过代理对象，因此事务、日志等切面可能不会生效。</p>
 <p>解决方式：</p>
 <ul>
 <li>把被增强方法拆到另一个 Bean。</li>
 <li>通过代理对象调用。</li>
 <li>使用 AspectJ 编译期或加载期织入。</li>
 </ul>
-<h3 id="15-5-Spring-事务什么时候会回滚"><a href="#15-5-Spring-事务什么时候会回滚" class="headerlink" title="15.5 Spring 事务什么时候会回滚"></a>15.5 Spring 事务什么时候会回滚</h3><p>默认情况下，Spring 事务遇到 <code>RuntimeException</code> 或 <code>Error</code> 会回滚，遇到受检异常不会自动回滚。</p>
+<h3 id="15-5-Spring-事务什么时候会回滚"><a href="#15-5-Spring-事务什么时候会回滚" class="headerlink" aria-hidden="true"></a>15.5 Spring 事务什么时候会回滚</h3><p>默认情况下，Spring 事务遇到 <code>RuntimeException</code> 或 <code>Error</code> 会回滚，遇到受检异常不会自动回滚。</p>
 <p>如果希望受检异常也回滚，需要配置：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="15-6-Autowired-和-Resource-的区别"><a href="#15-6-Autowired-和-Resource-的区别" class="headerlink" title="15.6 @Autowired 和 @Resource 的区别"></a>15.6 <code>@Autowired</code> 和 <code>@Resource</code> 的区别</h3><p><code>@Autowired</code> 是 Spring 提供的注解，默认按类型注入；如果同类型有多个 Bean，可以配合 <code>@Qualifier</code> 指定名称。</p>
+<h3 id="15-6-Autowired-和-Resource-的区别"><a href="#15-6-Autowired-和-Resource-的区别" class="headerlink" aria-hidden="true"></a>15.6 <code>@Autowired</code> 和 <code>@Resource</code> 的区别</h3><p><code>@Autowired</code> 是 Spring 提供的注解，默认按类型注入；如果同类型有多个 Bean，可以配合 <code>@Qualifier</code> 指定名称。</p>
 <p><code>@Resource</code> 是 JSR-250 注解，默认按名称注入，找不到名称时再按类型匹配。</p>
-<h3 id="15-7-Controller-和-RestController-的区别"><a href="#15-7-Controller-和-RestController-的区别" class="headerlink" title="15.7 @Controller 和 @RestController 的区别"></a>15.7 <code>@Controller</code> 和 <code>@RestController</code> 的区别</h3><p><code>@RestController</code> 等价于 <code>@Controller</code> 加 <code>@ResponseBody</code>。它适合 REST API，方法返回值会直接序列化到响应体中。</p>
+<h3 id="15-7-Controller-和-RestController-的区别"><a href="#15-7-Controller-和-RestController-的区别" class="headerlink" aria-hidden="true"></a>15.7 <code>@Controller</code> 和 <code>@RestController</code> 的区别</h3><p><code>@RestController</code> 等价于 <code>@Controller</code> 加 <code>@ResponseBody</code>。它适合 REST API，方法返回值会直接序列化到响应体中。</p>
 <p><code>@Controller</code> 更常用于返回页面视图。</p>
-<h3 id="15-8-Spring-Boot-自动配置原理"><a href="#15-8-Spring-Boot-自动配置原理" class="headerlink" title="15.8 Spring Boot 自动配置原理"></a>15.8 Spring Boot 自动配置原理</h3><p><code>@SpringBootApplication</code> 中包含 <code>@EnableAutoConfiguration</code>。<code>@EnableAutoConfiguration</code> 通过 <code>@Import</code> 导入 <code>AutoConfigurationImportSelector</code>，再加载自动配置类，并通过 <code>@Conditional</code> 系列注解判断是否把对应 Bean 注册到容器。</p>
+<h3 id="15-8-Spring-Boot-自动配置原理"><a href="#15-8-Spring-Boot-自动配置原理" class="headerlink" aria-hidden="true"></a>15.8 Spring Boot 自动配置原理</h3><p><code>@SpringBootApplication</code> 中包含 <code>@EnableAutoConfiguration</code>。<code>@EnableAutoConfiguration</code> 通过 <code>@Import</code> 导入 <code>AutoConfigurationImportSelector</code>，再加载自动配置类，并通过 <code>@Conditional</code> 系列注解判断是否把对应 Bean 注册到容器。</p>
 <p>核心思想是：根据 classpath、配置项和已有 Bean 自动提供默认配置，同时允许用户自定义 Bean 覆盖默认行为。</p>
-<h2 id="16-项目实践建议"><a href="#16-项目实践建议" class="headerlink" title="16. 项目实践建议"></a>16. 项目实践建议</h2><h3 id="16-1-Service-尽量无状态"><a href="#16-1-Service-尽量无状态" class="headerlink" title="16.1 Service 尽量无状态"></a>16.1 Service 尽量无状态</h3><p>不要在单例 Service 中保存请求级状态。</p>
+<h2 id="16-项目实践建议"><a href="#16-项目实践建议" class="headerlink" aria-hidden="true"></a>16. 项目实践建议</h2><h3 id="16-1-Service-尽量无状态"><a href="#16-1-Service-尽量无状态" class="headerlink" aria-hidden="true"></a>16.1 Service 尽量无状态</h3><p>不要在单例 Service 中保存请求级状态。</p>
 <p>推荐：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> OrderDTO <span class="title function_">getOrder</span><span class="params">(Long orderId)</span> &#123;</span><br><span class="line">    <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> orderRepository.findById(orderId);</span><br><span class="line">    <span class="keyword">return</span> converter.toDTO(order);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>不推荐：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Long currentOrderId;</span><br></pre></td></tr></table></figure>
 
-<h3 id="16-2-优先使用构造器注入"><a href="#16-2-优先使用构造器注入" class="headerlink" title="16.2 优先使用构造器注入"></a>16.2 优先使用构造器注入</h3><p>构造器注入更适合表达必需依赖，也方便写测试。</p>
+<h3 id="16-2-优先使用构造器注入"><a href="#16-2-优先使用构造器注入" class="headerlink" aria-hidden="true"></a>16.2 优先使用构造器注入</h3><p>构造器注入更适合表达必需依赖，也方便写测试。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> OrderRepository orderRepository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">OrderService</span><span class="params">(OrderRepository orderRepository)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.orderRepository = orderRepository;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="16-3-事务边界放在业务用例层"><a href="#16-3-事务边界放在业务用例层" class="headerlink" title="16.3 事务边界放在业务用例层"></a>16.3 事务边界放在业务用例层</h3><p>事务不宜过大，也不宜过小。通常把事务放在 Service 层的业务用例方法上。</p>
+<h3 id="16-3-事务边界放在业务用例层"><a href="#16-3-事务边界放在业务用例层" class="headerlink" aria-hidden="true"></a>16.3 事务边界放在业务用例层</h3><p>事务不宜过大，也不宜过小。通常把事务放在 Service 层的业务用例方法上。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">payOrder</span><span class="params">(Long orderId)</span> &#123;</span><br><span class="line">    <span class="comment">// 查询订单</span></span><br><span class="line">    <span class="comment">// 扣减余额</span></span><br><span class="line">    <span class="comment">// 更新订单状态</span></span><br><span class="line">    <span class="comment">// 写交易流水</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="16-4-避免在事务中做慢操作"><a href="#16-4-避免在事务中做慢操作" class="headerlink" title="16.4 避免在事务中做慢操作"></a>16.4 避免在事务中做慢操作</h3><p>事务中不建议执行耗时外部调用，例如远程 HTTP、发送大文件、复杂 IO 等。事务时间越长，数据库锁持有时间越长，并发性能越差。</p>
-<h3 id="16-5-明确异常与回滚规则"><a href="#16-5-明确异常与回滚规则" class="headerlink" title="16.5 明确异常与回滚规则"></a>16.5 明确异常与回滚规则</h3><p>业务异常如果需要回滚，要么设计为运行时异常，要么在 <code>@Transactional</code> 中配置 <code>rollbackFor</code>。</p>
+<h3 id="16-4-避免在事务中做慢操作"><a href="#16-4-避免在事务中做慢操作" class="headerlink" aria-hidden="true"></a>16.4 避免在事务中做慢操作</h3><p>事务中不建议执行耗时外部调用，例如远程 HTTP、发送大文件、复杂 IO 等。事务时间越长，数据库锁持有时间越长，并发性能越差。</p>
+<h3 id="16-5-明确异常与回滚规则"><a href="#16-5-明确异常与回滚规则" class="headerlink" aria-hidden="true"></a>16.5 明确异常与回滚规则</h3><p>业务异常如果需要回滚，要么设计为运行时异常，要么在 <code>@Transactional</code> 中配置 <code>rollbackFor</code>。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(rollbackFor = BusinessException.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createOrder</span><span class="params">()</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="17-总结"><a href="#17-总结" class="headerlink" title="17. 总结"></a>17. 总结</h2><p>Spring 的核心不是某几个注解，而是一套围绕对象管理和横切增强建立起来的应用开发模型。</p>
+<h2 id="17-总结"><a href="#17-总结" class="headerlink" aria-hidden="true"></a>17. 总结</h2><p>Spring 的核心不是某几个注解，而是一套围绕对象管理和横切增强建立起来的应用开发模型。</p>
 <p>学习顺序建议：</p>
 <ol>
 <li>先理解 IoC、DI、Bean 和 ApplicationContext。</li>
@@ -832,7 +832,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://increasingrate626.github.io/2026/05/16/Spring-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidkYbVKcE-IpqGFvwR__n6H" data-title="Spring" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://increasingrate626.github.io/2026/05/16/Spring-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidV61R2F1U_Y_GYRA68OvgQ" data-title="Spring" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       

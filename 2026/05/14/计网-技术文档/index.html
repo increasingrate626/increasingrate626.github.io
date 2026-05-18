@@ -116,8 +116,8 @@ var _hmt = _hmt || [];
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="计算机网络技术文档：分层模型、HTTP、HTTPS、TCP-与网络排查"><a href="#计算机网络技术文档：分层模型、HTTP、HTTPS、TCP-与网络排查" class="headerlink" title="计算机网络技术文档：分层模型、HTTP、HTTPS、TCP 与网络排查"></a>计算机网络技术文档：分层模型、HTTP、HTTPS、TCP 与网络排查</h1><h2 id="1-网络分层模型"><a href="#1-网络分层模型" class="headerlink" title="1. 网络分层模型"></a>1. 网络分层模型</h2><p>网络分层的意义是把复杂通信拆成多个职责清晰的层次。每一层只关心自己的任务，并向上层提供服务。</p>
-<h3 id="1-1-OSI-七层模型"><a href="#1-1-OSI-七层模型" class="headerlink" title="1.1 OSI 七层模型"></a>1.1 OSI 七层模型</h3><table>
+        <h1 id="计算机网络技术文档：分层模型、HTTP、HTTPS、TCP-与网络排查"><a href="#计算机网络技术文档：分层模型、HTTP、HTTPS、TCP-与网络排查" class="headerlink" aria-hidden="true"></a>计算机网络技术文档：分层模型、HTTP、HTTPS、TCP 与网络排查</h1><h2 id="1-网络分层模型"><a href="#1-网络分层模型" class="headerlink" aria-hidden="true"></a>1. 网络分层模型</h2><p>网络分层的意义是把复杂通信拆成多个职责清晰的层次。每一层只关心自己的任务，并向上层提供服务。</p>
+<h3 id="1-1-OSI-七层模型"><a href="#1-1-OSI-七层模型" class="headerlink" aria-hidden="true"></a>1.1 OSI 七层模型</h3><table>
 <thead>
 <tr>
 <th>层级</th>
@@ -169,7 +169,7 @@ var _hmt = _hmt || [];
 <td>网线、光纤、无线电</td>
 </tr>
 </tbody></table>
-<h3 id="1-2-TCP-IP-四层模型"><a href="#1-2-TCP-IP-四层模型" class="headerlink" title="1.2 TCP&#x2F;IP 四层模型"></a>1.2 TCP&#x2F;IP 四层模型</h3><p>实际工程中更常使用 TCP&#x2F;IP 四层模型：</p>
+<h3 id="1-2-TCP-IP-四层模型"><a href="#1-2-TCP-IP-四层模型" class="headerlink" aria-hidden="true"></a>1.2 TCP&#x2F;IP 四层模型</h3><p>实际工程中更常使用 TCP&#x2F;IP 四层模型：</p>
 <table>
 <thead>
 <tr>
@@ -202,7 +202,7 @@ var _hmt = _hmt || [];
 <p>数据发送时从应用层一路向下封装，接收时从网络接口层一路向上解封装。</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">应用数据 -&gt; TCP/UDP 段 -&gt; IP 包 -&gt; 以太网帧 -&gt; 比特流</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-从输入-URL-到网页显示"><a href="#2-从输入-URL-到网页显示" class="headerlink" title="2. 从输入 URL 到网页显示"></a>2. 从输入 URL 到网页显示</h2><p>在浏览器地址栏输入 URL 到页面展示，典型过程如下：</p>
+<h2 id="2-从输入-URL-到网页显示"><a href="#2-从输入-URL-到网页显示" class="headerlink" aria-hidden="true"></a>2. 从输入 URL 到网页显示</h2><p>在浏览器地址栏输入 URL 到页面展示，典型过程如下：</p>
 <ol>
 <li>浏览器解析 URL，确认协议、域名、端口、路径和参数。</li>
 <li>查询浏览器缓存、系统缓存和 hosts 文件。</li>
@@ -247,10 +247,10 @@ var _hmt = _hmt || [];
 <td>HTTP</td>
 </tr>
 </tbody></table>
-<h2 id="计算机网络核心知识图谱"><a href="#计算机网络核心知识图谱" class="headerlink" title="计算机网络核心知识图谱"></a>计算机网络核心知识图谱</h2><p>下图概括了本文中最核心的几组知识：网络分层、URL 到页面、DNS 解析、TCP 三次握手、TCP 四次挥手和可靠传输。</p>
+<h2 id="计算机网络核心知识图谱"><a href="#计算机网络核心知识图谱" class="headerlink" aria-hidden="true"></a>计算机网络核心知识图谱</h2><p>下图概括了本文中最核心的几组知识：网络分层、URL 到页面、DNS 解析、TCP 三次握手、TCP 四次挥手和可靠传输。</p>
 <p><img src="/images/tech-docs/network-core-map.png" alt="计算机网络核心知识图谱"></p>
-<h2 id="3-DNS-解析"><a href="#3-DNS-解析" class="headerlink" title="3. DNS 解析"></a>3. DNS 解析</h2><p>DNS 用于把域名解析成 IP 地址。</p>
-<h3 id="3-1-解析流程"><a href="#3-1-解析流程" class="headerlink" title="3.1 解析流程"></a>3.1 解析流程</h3><p>常见递归解析过程：</p>
+<h2 id="3-DNS-解析"><a href="#3-DNS-解析" class="headerlink" aria-hidden="true"></a>3. DNS 解析</h2><p>DNS 用于把域名解析成 IP 地址。</p>
+<h3 id="3-1-解析流程"><a href="#3-1-解析流程" class="headerlink" aria-hidden="true"></a>3.1 解析流程</h3><p>常见递归解析过程：</p>
 <ol>
 <li>浏览器先查自己的 DNS 缓存。</li>
 <li>操作系统查询本地缓存和 hosts 文件。</li>
@@ -263,7 +263,7 @@ var _hmt = _hmt || [];
 <li>权威域名服务器返回目标域名的 IP 地址。</li>
 <li>本地 DNS 缓存结果并返回给客户端。</li>
 </ol>
-<h3 id="3-2-递归查询与迭代查询"><a href="#3-2-递归查询与迭代查询" class="headerlink" title="3.2 递归查询与迭代查询"></a>3.2 递归查询与迭代查询</h3><table>
+<h3 id="3-2-递归查询与迭代查询"><a href="#3-2-递归查询与迭代查询" class="headerlink" aria-hidden="true"></a>3.2 递归查询与迭代查询</h3><table>
 <thead>
 <tr>
 <th>类型</th>
@@ -280,7 +280,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody></table>
 <p>客户端到本地 DNS 通常是递归查询，本地 DNS 到根、顶级、权威 DNS 通常是迭代查询。</p>
-<h3 id="3-3-DNS-缓存与-TTL"><a href="#3-3-DNS-缓存与-TTL" class="headerlink" title="3.3 DNS 缓存与 TTL"></a>3.3 DNS 缓存与 TTL</h3><p>DNS 记录通常带有 TTL，用于控制缓存时间。</p>
+<h3 id="3-3-DNS-缓存与-TTL"><a href="#3-3-DNS-缓存与-TTL" class="headerlink" aria-hidden="true"></a>3.3 DNS 缓存与 TTL</h3><p>DNS 记录通常带有 TTL，用于控制缓存时间。</p>
 <p>优点：</p>
 <ul>
 <li>减少 DNS 查询延迟。</li>
@@ -291,8 +291,8 @@ var _hmt = _hmt || [];
 <li>域名切换 IP 后，旧缓存可能继续生效一段时间。</li>
 </ul>
 <p>线上变更域名解析前，常先降低 TTL，等缓存逐步过期后再切换。</p>
-<h2 id="4-HTTP-基础"><a href="#4-HTTP-基础" class="headerlink" title="4. HTTP 基础"></a>4. HTTP 基础</h2><p>HTTP 是应用层协议，定义客户端和服务端之间的请求响应语义。</p>
-<h3 id="4-1-HTTP-请求"><a href="#4-1-HTTP-请求" class="headerlink" title="4.1 HTTP 请求"></a>4.1 HTTP 请求</h3><p>HTTP 请求通常包括：</p>
+<h2 id="4-HTTP-基础"><a href="#4-HTTP-基础" class="headerlink" aria-hidden="true"></a>4. HTTP 基础</h2><p>HTTP 是应用层协议，定义客户端和服务端之间的请求响应语义。</p>
+<h3 id="4-1-HTTP-请求"><a href="#4-1-HTTP-请求" class="headerlink" aria-hidden="true"></a>4.1 HTTP 请求</h3><p>HTTP 请求通常包括：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">请求行</span><br><span class="line">请求头</span><br><span class="line">空行</span><br><span class="line">请求体</span><br></pre></td></tr></table></figure>
 
 <p>示例：</p>
@@ -335,13 +335,13 @@ var _hmt = _hmt || [];
 <td>查询支持的方法或跨域预检</td>
 </tr>
 </tbody></table>
-<h3 id="4-2-HTTP-响应"><a href="#4-2-HTTP-响应" class="headerlink" title="4.2 HTTP 响应"></a>4.2 HTTP 响应</h3><p>HTTP 响应通常包括：</p>
+<h3 id="4-2-HTTP-响应"><a href="#4-2-HTTP-响应" class="headerlink" aria-hidden="true"></a>4.2 HTTP 响应</h3><p>HTTP 响应通常包括：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">状态行</span><br><span class="line">响应头</span><br><span class="line">空行</span><br><span class="line">响应体</span><br></pre></td></tr></table></figure>
 
 <p>示例：</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">HTTP/1.1</span> <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>text/html; charset=utf-8</span><br><span class="line"><span class="attribute">Content-Length</span><span class="punctuation">: </span>1024</span><br></pre></td></tr></table></figure>
 
-<h3 id="4-3-常见状态码"><a href="#4-3-常见状态码" class="headerlink" title="4.3 常见状态码"></a>4.3 常见状态码</h3><table>
+<h3 id="4-3-常见状态码"><a href="#4-3-常见状态码" class="headerlink" aria-hidden="true"></a>4.3 常见状态码</h3><table>
 <thead>
 <tr>
 <th>分类</th>
@@ -391,7 +391,7 @@ var _hmt = _hmt || [];
 <li><code>503 Service Unavailable</code>：服务不可用。</li>
 <li><code>504 Gateway Timeout</code>：网关等待上游超时。</li>
 </ul>
-<h2 id="5-HTTP-版本演进"><a href="#5-HTTP-版本演进" class="headerlink" title="5. HTTP 版本演进"></a>5. HTTP 版本演进</h2><h3 id="5-1-HTTP-1-0"><a href="#5-1-HTTP-1-0" class="headerlink" title="5.1 HTTP&#x2F;1.0"></a>5.1 HTTP&#x2F;1.0</h3><p>特点：</p>
+<h2 id="5-HTTP-版本演进"><a href="#5-HTTP-版本演进" class="headerlink" aria-hidden="true"></a>5. HTTP 版本演进</h2><h3 id="5-1-HTTP-1-0"><a href="#5-1-HTTP-1-0" class="headerlink" aria-hidden="true"></a>5.1 HTTP&#x2F;1.0</h3><p>特点：</p>
 <ul>
 <li>默认非持久连接。</li>
 <li>每个请求通常建立一次 TCP 连接。</li>
@@ -402,7 +402,7 @@ var _hmt = _hmt || [];
 <li>频繁建连和断连成本高。</li>
 <li>TCP 慢启动重复发生。</li>
 </ul>
-<h3 id="5-2-HTTP-1-1"><a href="#5-2-HTTP-1-1" class="headerlink" title="5.2 HTTP&#x2F;1.1"></a>5.2 HTTP&#x2F;1.1</h3><p>特点：</p>
+<h3 id="5-2-HTTP-1-1"><a href="#5-2-HTTP-1-1" class="headerlink" aria-hidden="true"></a>5.2 HTTP&#x2F;1.1</h3><p>特点：</p>
 <ul>
 <li>默认持久连接。</li>
 <li>支持管线化，但实际使用较少。</li>
@@ -410,7 +410,7 @@ var _hmt = _hmt || [];
 <li>支持分块传输、缓存控制等机制。</li>
 </ul>
 <p>HTTP&#x2F;1.1 的主要问题是队头阻塞。虽然连接可复用，但同一连接上的响应仍然要按顺序返回，前一个请求慢会阻塞后续响应。</p>
-<h3 id="5-3-HTTP-2"><a href="#5-3-HTTP-2" class="headerlink" title="5.3 HTTP&#x2F;2"></a>5.3 HTTP&#x2F;2</h3><p>特点：</p>
+<h3 id="5-3-HTTP-2"><a href="#5-3-HTTP-2" class="headerlink" aria-hidden="true"></a>5.3 HTTP&#x2F;2</h3><p>特点：</p>
 <ul>
 <li>二进制协议。</li>
 <li>多路复用。</li>
@@ -419,7 +419,7 @@ var _hmt = _hmt || [];
 <li>一个 TCP 连接上可以并发多个 stream。</li>
 </ul>
 <p>HTTP&#x2F;2 解决了 HTTP 层面的队头阻塞，但仍然受 TCP 队头阻塞影响。如果 TCP 丢包，整个连接上的多个 stream 都可能受影响。</p>
-<h3 id="5-4-HTTP-3"><a href="#5-4-HTTP-3" class="headerlink" title="5.4 HTTP&#x2F;3"></a>5.4 HTTP&#x2F;3</h3><p>HTTP&#x2F;3 基于 QUIC，QUIC 基于 UDP。</p>
+<h3 id="5-4-HTTP-3"><a href="#5-4-HTTP-3" class="headerlink" aria-hidden="true"></a>5.4 HTTP&#x2F;3</h3><p>HTTP&#x2F;3 基于 QUIC，QUIC 基于 UDP。</p>
 <p>特点：</p>
 <ul>
 <li>多路复用，且每个流相对独立。</li>
@@ -428,7 +428,7 @@ var _hmt = _hmt || [];
 <li>支持连接迁移，例如移动网络切换。</li>
 </ul>
 <p>HTTP&#x2F;3 常用于对延迟敏感、弱网环境、移动端体验要求较高的场景。</p>
-<h2 id="6-HTTPS-与-TLS"><a href="#6-HTTPS-与-TLS" class="headerlink" title="6. HTTPS 与 TLS"></a>6. HTTPS 与 TLS</h2><p>HTTPS 可以理解为：</p>
+<h2 id="6-HTTPS-与-TLS"><a href="#6-HTTPS-与-TLS" class="headerlink" aria-hidden="true"></a>6. HTTPS 与 TLS</h2><p>HTTPS 可以理解为：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTPS = HTTP + TLS</span><br></pre></td></tr></table></figure>
 
 <p>它解决三类问题：</p>
@@ -452,7 +452,7 @@ var _hmt = _hmt || [];
 <td>通过证书确认服务端身份</td>
 </tr>
 </tbody></table>
-<h3 id="6-1-HTTP-与-HTTPS-区别"><a href="#6-1-HTTP-与-HTTPS-区别" class="headerlink" title="6.1 HTTP 与 HTTPS 区别"></a>6.1 HTTP 与 HTTPS 区别</h3><table>
+<h3 id="6-1-HTTP-与-HTTPS-区别"><a href="#6-1-HTTP-与-HTTPS-区别" class="headerlink" aria-hidden="true"></a>6.1 HTTP 与 HTTPS 区别</h3><table>
 <thead>
 <tr>
 <th>维度</th>
@@ -486,7 +486,7 @@ var _hmt = _hmt || [];
 <td>强</td>
 </tr>
 </tbody></table>
-<h3 id="6-2-对称加密与非对称加密"><a href="#6-2-对称加密与非对称加密" class="headerlink" title="6.2 对称加密与非对称加密"></a>6.2 对称加密与非对称加密</h3><table>
+<h3 id="6-2-对称加密与非对称加密"><a href="#6-2-对称加密与非对称加密" class="headerlink" aria-hidden="true"></a>6.2 对称加密与非对称加密</h3><table>
 <thead>
 <tr>
 <th>类型</th>
@@ -506,7 +506,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody></table>
 <p>TLS 通常不是全程使用非对称加密。实际过程是先用非对称加密或密钥交换算法协商会话密钥，再用对称加密传输数据。</p>
-<h3 id="6-3-TLS-握手简化流程"><a href="#6-3-TLS-握手简化流程" class="headerlink" title="6.3 TLS 握手简化流程"></a>6.3 TLS 握手简化流程</h3><p>以 TLS 1.2 的直观理解为例：</p>
+<h3 id="6-3-TLS-握手简化流程"><a href="#6-3-TLS-握手简化流程" class="headerlink" aria-hidden="true"></a>6.3 TLS 握手简化流程</h3><p>以 TLS 1.2 的直观理解为例：</p>
 <ol>
 <li>客户端发送支持的协议版本、随机数、加密套件列表。</li>
 <li>服务端返回选择的加密套件、随机数和证书。</li>
@@ -515,7 +515,7 @@ var _hmt = _hmt || [];
 <li>后续数据使用会话密钥进行对称加密传输。</li>
 </ol>
 <p>TLS 1.3 简化了握手流程，减少了往返次数，安全性也更好。</p>
-<h2 id="7-Cookie-与-Session"><a href="#7-Cookie-与-Session" class="headerlink" title="7. Cookie 与 Session"></a>7. Cookie 与 Session</h2><h3 id="7-1-Cookie"><a href="#7-1-Cookie" class="headerlink" title="7.1 Cookie"></a>7.1 Cookie</h3><p>Cookie 保存在客户端。服务端通过响应头让浏览器保存 Cookie，浏览器后续访问同一站点时会携带 Cookie。</p>
+<h2 id="7-Cookie-与-Session"><a href="#7-Cookie-与-Session" class="headerlink" aria-hidden="true"></a>7. Cookie 与 Session</h2><h3 id="7-1-Cookie"><a href="#7-1-Cookie" class="headerlink" aria-hidden="true"></a>7.1 Cookie</h3><p>Cookie 保存在客户端。服务端通过响应头让浏览器保存 Cookie，浏览器后续访问同一站点时会携带 Cookie。</p>
 <p>典型响应头：</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span><span class="punctuation">: </span>sid=abc123; Path=/; HttpOnly; Secure; SameSite=Lax</span><br></pre></td></tr></table></figure>
 
@@ -551,7 +551,7 @@ var _hmt = _hmt || [];
 <td>控制发送范围</td>
 </tr>
 </tbody></table>
-<h3 id="7-2-Session"><a href="#7-2-Session" class="headerlink" title="7.2 Session"></a>7.2 Session</h3><p>Session 保存在服务端。客户端通常只保存一个 Session ID，服务端通过这个 ID 找到用户状态。</p>
+<h3 id="7-2-Session"><a href="#7-2-Session" class="headerlink" aria-hidden="true"></a>7.2 Session</h3><p>Session 保存在服务端。客户端通常只保存一个 Session ID，服务端通过这个 ID 找到用户状态。</p>
 <p>优点：</p>
 <ul>
 <li>状态数据不直接暴露给客户端。</li>
@@ -562,7 +562,7 @@ var _hmt = _hmt || [];
 <li>服务端需要存储状态。</li>
 <li>分布式系统需要考虑 Session 共享，例如 Redis、粘性会话或无状态 Token。</li>
 </ul>
-<h3 id="7-3-Cookie-与-Session-对比"><a href="#7-3-Cookie-与-Session-对比" class="headerlink" title="7.3 Cookie 与 Session 对比"></a>7.3 Cookie 与 Session 对比</h3><table>
+<h3 id="7-3-Cookie-与-Session-对比"><a href="#7-3-Cookie-与-Session-对比" class="headerlink" aria-hidden="true"></a>7.3 Cookie 与 Session 对比</h3><table>
 <thead>
 <tr>
 <th>维度</th>
@@ -591,7 +591,7 @@ var _hmt = _hmt || [];
 <td>需要共享存储或路由策略</td>
 </tr>
 </tbody></table>
-<h2 id="8-TCP-基础"><a href="#8-TCP-基础" class="headerlink" title="8. TCP 基础"></a>8. TCP 基础</h2><p>TCP 是面向连接、可靠、基于字节流的传输层协议。</p>
+<h2 id="8-TCP-基础"><a href="#8-TCP-基础" class="headerlink" aria-hidden="true"></a>8. TCP 基础</h2><p>TCP 是面向连接、可靠、基于字节流的传输层协议。</p>
 <p>核心特征：</p>
 <ul>
 <li>面向连接。</li>
@@ -602,12 +602,12 @@ var _hmt = _hmt || [];
 <li>支持流量控制和拥塞控制。</li>
 </ul>
 <p>TCP 常用于 HTTP、HTTPS、FTP、SMTP 等需要可靠传输的协议。</p>
-<h2 id="9-TCP-三次握手"><a href="#9-TCP-三次握手" class="headerlink" title="9. TCP 三次握手"></a>9. TCP 三次握手</h2><p>三次握手用于建立 TCP 连接，并同步双方的初始序列号。</p>
+<h2 id="9-TCP-三次握手"><a href="#9-TCP-三次握手" class="headerlink" aria-hidden="true"></a>9. TCP 三次握手</h2><p>三次握手用于建立 TCP 连接，并同步双方的初始序列号。</p>
 <p>流程：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">客户端 -&gt; 服务端：SYN，seq = x</span><br><span class="line">服务端 -&gt; 客户端：SYN + ACK，seq = y，ack = x + 1</span><br><span class="line">客户端 -&gt; 服务端：ACK，seq = x + 1，ack = y + 1</span><br></pre></td></tr></table></figure>
 
 <p>连接建立后，双方进入 <code>ESTABLISHED</code> 状态。</p>
-<h3 id="9-1-为什么不能是两次握手"><a href="#9-1-为什么不能是两次握手" class="headerlink" title="9.1 为什么不能是两次握手"></a>9.1 为什么不能是两次握手</h3><p>两次握手的问题：</p>
+<h3 id="9-1-为什么不能是两次握手"><a href="#9-1-为什么不能是两次握手" class="headerlink" aria-hidden="true"></a>9.1 为什么不能是两次握手</h3><p>两次握手的问题：</p>
 <ul>
 <li>无法确认客户端收到了服务端的初始序列号。</li>
 <li>服务端无法判断客户端是否具备接收能力。</li>
@@ -615,20 +615,20 @@ var _hmt = _hmt || [];
 <li>如果客户端的 SYN 因网络阻塞后重复到达，服务端可能为旧请求分配资源，造成浪费。</li>
 </ul>
 <p>三次握手的第三次 ACK 是客户端对服务端初始序列号的确认，也是服务端确认“客户端确实能收到服务端数据”的依据。</p>
-<h3 id="9-2-为什么不是四次握手"><a href="#9-2-为什么不是四次握手" class="headerlink" title="9.2 为什么不是四次握手"></a>9.2 为什么不是四次握手</h3><p>三次握手已经完成了双方发送能力、接收能力和初始序列号同步。再增加一次握手不能带来必要的新信息，只会增加连接建立延迟。</p>
-<h3 id="9-3-第一次握手丢失"><a href="#9-3-第一次握手丢失" class="headerlink" title="9.3 第一次握手丢失"></a>9.3 第一次握手丢失</h3><p>客户端发送 SYN 后收不到 SYN+ACK，会触发 SYN 超时重传。重传达到上限后连接建立失败。</p>
-<h3 id="9-4-第二次握手丢失"><a href="#9-4-第二次握手丢失" class="headerlink" title="9.4 第二次握手丢失"></a>9.4 第二次握手丢失</h3><p>客户端没有收到 SYN+ACK，会重传第一次握手的 SYN；服务端没有收到第三次 ACK，也会重传第二次握手的 SYN+ACK。</p>
-<h3 id="9-5-第三次握手丢失"><a href="#9-5-第三次握手丢失" class="headerlink" title="9.5 第三次握手丢失"></a>9.5 第三次握手丢失</h3><p>服务端没有收到客户端 ACK，会重传 SYN+ACK。客户端收到重复 SYN+ACK 后再次发送 ACK。</p>
-<h2 id="10-TCP-四次挥手"><a href="#10-TCP-四次挥手" class="headerlink" title="10. TCP 四次挥手"></a>10. TCP 四次挥手</h2><p>TCP 是全双工协议，两个方向的数据流需要分别关闭，因此通常需要四次挥手。</p>
+<h3 id="9-2-为什么不是四次握手"><a href="#9-2-为什么不是四次握手" class="headerlink" aria-hidden="true"></a>9.2 为什么不是四次握手</h3><p>三次握手已经完成了双方发送能力、接收能力和初始序列号同步。再增加一次握手不能带来必要的新信息，只会增加连接建立延迟。</p>
+<h3 id="9-3-第一次握手丢失"><a href="#9-3-第一次握手丢失" class="headerlink" aria-hidden="true"></a>9.3 第一次握手丢失</h3><p>客户端发送 SYN 后收不到 SYN+ACK，会触发 SYN 超时重传。重传达到上限后连接建立失败。</p>
+<h3 id="9-4-第二次握手丢失"><a href="#9-4-第二次握手丢失" class="headerlink" aria-hidden="true"></a>9.4 第二次握手丢失</h3><p>客户端没有收到 SYN+ACK，会重传第一次握手的 SYN；服务端没有收到第三次 ACK，也会重传第二次握手的 SYN+ACK。</p>
+<h3 id="9-5-第三次握手丢失"><a href="#9-5-第三次握手丢失" class="headerlink" aria-hidden="true"></a>9.5 第三次握手丢失</h3><p>服务端没有收到客户端 ACK，会重传 SYN+ACK。客户端收到重复 SYN+ACK 后再次发送 ACK。</p>
+<h2 id="10-TCP-四次挥手"><a href="#10-TCP-四次挥手" class="headerlink" aria-hidden="true"></a>10. TCP 四次挥手</h2><p>TCP 是全双工协议，两个方向的数据流需要分别关闭，因此通常需要四次挥手。</p>
 <p>流程：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">主动关闭方 -&gt; 被动关闭方：FIN</span><br><span class="line">被动关闭方 -&gt; 主动关闭方：ACK</span><br><span class="line">被动关闭方 -&gt; 主动关闭方：FIN</span><br><span class="line">主动关闭方 -&gt; 被动关闭方：ACK</span><br></pre></td></tr></table></figure>
 
 <p>典型状态变化：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主动关闭方：ESTABLISHED -&gt; FIN_WAIT_1 -&gt; FIN_WAIT_2 -&gt; TIME_WAIT -&gt; CLOSED</span><br><span class="line">被动关闭方：ESTABLISHED -&gt; CLOSE_WAIT -&gt; LAST_ACK -&gt; CLOSED</span><br></pre></td></tr></table></figure>
 
-<h3 id="10-1-CLOSE-WAIT-的意义"><a href="#10-1-CLOSE-WAIT-的意义" class="headerlink" title="10.1 CLOSE_WAIT 的意义"></a>10.1 CLOSE_WAIT 的意义</h3><p>被动关闭方收到 FIN 后，会先回复 ACK，表示“我知道你要关闭了”。但被动关闭方可能还有数据要发送，或者还有业务逻辑和资源需要处理，因此进入 <code>CLOSE_WAIT</code>。</p>
+<h3 id="10-1-CLOSE-WAIT-的意义"><a href="#10-1-CLOSE-WAIT-的意义" class="headerlink" aria-hidden="true"></a>10.1 CLOSE_WAIT 的意义</h3><p>被动关闭方收到 FIN 后，会先回复 ACK，表示“我知道你要关闭了”。但被动关闭方可能还有数据要发送，或者还有业务逻辑和资源需要处理，因此进入 <code>CLOSE_WAIT</code>。</p>
 <p>如果服务端出现大量 <code>CLOSE_WAIT</code>，通常说明应用层没有正确关闭连接，例如没有调用 <code>close()</code>。</p>
-<h3 id="10-2-TIME-WAIT-的意义"><a href="#10-2-TIME-WAIT-的意义" class="headerlink" title="10.2 TIME_WAIT 的意义"></a>10.2 TIME_WAIT 的意义</h3><p>主动关闭方最后会进入 <code>TIME_WAIT</code>，等待 2MSL。</p>
+<h3 id="10-2-TIME-WAIT-的意义"><a href="#10-2-TIME-WAIT-的意义" class="headerlink" aria-hidden="true"></a>10.2 TIME_WAIT 的意义</h3><p>主动关闭方最后会进入 <code>TIME_WAIT</code>，等待 2MSL。</p>
 <p>意义：</p>
 <ul>
 <li>确保最后一个 ACK 能到达服务端。如果 ACK 丢失，服务端会重传 FIN，客户端仍能再次回复 ACK。</li>
@@ -637,15 +637,15 @@ var _hmt = _hmt || [];
 <p>四元组是：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">源 IP、源端口、目标 IP、目标端口</span><br></pre></td></tr></table></figure>
 
-<h3 id="10-3-为什么-TIME-WAIT-是-2MSL"><a href="#10-3-为什么-TIME-WAIT-是-2MSL" class="headerlink" title="10.3 为什么 TIME_WAIT 是 2MSL"></a>10.3 为什么 TIME_WAIT 是 2MSL</h3><p>MSL 是 Maximum Segment Lifetime，表示报文在网络中的最大生存时间。</p>
+<h3 id="10-3-为什么-TIME-WAIT-是-2MSL"><a href="#10-3-为什么-TIME-WAIT-是-2MSL" class="headerlink" aria-hidden="true"></a>10.3 为什么 TIME_WAIT 是 2MSL</h3><p>MSL 是 Maximum Segment Lifetime，表示报文在网络中的最大生存时间。</p>
 <p>等待 2MSL 可以覆盖：</p>
 <ul>
 <li>最后一个 ACK 到达服务端的最长时间。</li>
 <li>服务端因没收到 ACK 而重传 FIN 到达客户端的最长时间。</li>
 </ul>
 <p>也可以理解为给旧报文足够时间从网络中消失。</p>
-<h3 id="10-4-四次挥手能变成三次吗"><a href="#10-4-四次挥手能变成三次吗" class="headerlink" title="10.4 四次挥手能变成三次吗"></a>10.4 四次挥手能变成三次吗</h3><p>可以。在被动关闭方没有数据要发送，并且开启 TCP 延迟确认时，第二次 ACK 和第三次 FIN 可能合并发送，看起来像三次挥手。</p>
-<h3 id="10-5-挥手丢包场景"><a href="#10-5-挥手丢包场景" class="headerlink" title="10.5 挥手丢包场景"></a>10.5 挥手丢包场景</h3><p>第一次挥手丢失：</p>
+<h3 id="10-4-四次挥手能变成三次吗"><a href="#10-4-四次挥手能变成三次吗" class="headerlink" aria-hidden="true"></a>10.4 四次挥手能变成三次吗</h3><p>可以。在被动关闭方没有数据要发送，并且开启 TCP 延迟确认时，第二次 ACK 和第三次 FIN 可能合并发送，看起来像三次挥手。</p>
+<h3 id="10-5-挥手丢包场景"><a href="#10-5-挥手丢包场景" class="headerlink" aria-hidden="true"></a>10.5 挥手丢包场景</h3><p>第一次挥手丢失：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">主动关闭方重传 FIN。</span><br></pre></td></tr></table></figure>
 
 <p>第二次挥手丢失：</p>
@@ -657,7 +657,7 @@ var _hmt = _hmt || [];
 <p>第四次挥手丢失：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">被动关闭方重传 FIN。</span><br><span class="line">主动关闭方重传 ACK，并重置 2MSL 定时器。</span><br></pre></td></tr></table></figure>
 
-<h2 id="11-TCP-为什么可靠"><a href="#11-TCP-为什么可靠" class="headerlink" title="11. TCP 为什么可靠"></a>11. TCP 为什么可靠</h2><p>TCP 可靠性由多个机制共同保证：</p>
+<h2 id="11-TCP-为什么可靠"><a href="#11-TCP-为什么可靠" class="headerlink" aria-hidden="true"></a>11. TCP 为什么可靠</h2><p>TCP 可靠性由多个机制共同保证：</p>
 <table>
 <thead>
 <tr>
@@ -711,25 +711,25 @@ var _hmt = _hmt || [];
 <li><code>rwnd</code> 是接收窗口，由接收方缓冲区能力决定。</li>
 <li>发送方实际发送窗口取二者较小值。</li>
 </ul>
-<h2 id="12-流量控制"><a href="#12-流量控制" class="headerlink" title="12. 流量控制"></a>12. 流量控制</h2><p>流量控制解决的是“发送方不要把接收方压垮”。</p>
+<h2 id="12-流量控制"><a href="#12-流量控制" class="headerlink" aria-hidden="true"></a>12. 流量控制</h2><p>流量控制解决的是“发送方不要把接收方压垮”。</p>
 <p>接收方会通过 TCP 头部中的窗口字段告诉发送方自己还能接收多少数据。发送方根据接收窗口调整发送速度。</p>
 <p>如果接收窗口为 0，发送方会暂停发送，并通过窗口探测机制定期确认窗口是否恢复。</p>
-<h2 id="13-拥塞控制"><a href="#13-拥塞控制" class="headerlink" title="13. 拥塞控制"></a>13. 拥塞控制</h2><p>拥塞控制解决的是“发送方不要把网络压垮”。</p>
-<h3 id="13-1-慢启动"><a href="#13-1-慢启动" class="headerlink" title="13.1 慢启动"></a>13.1 慢启动</h3><p>连接刚建立时，拥塞窗口 <code>cwnd</code> 较小，然后指数增长。</p>
+<h2 id="13-拥塞控制"><a href="#13-拥塞控制" class="headerlink" aria-hidden="true"></a>13. 拥塞控制</h2><p>拥塞控制解决的是“发送方不要把网络压垮”。</p>
+<h3 id="13-1-慢启动"><a href="#13-1-慢启动" class="headerlink" aria-hidden="true"></a>13.1 慢启动</h3><p>连接刚建立时，拥塞窗口 <code>cwnd</code> 较小，然后指数增长。</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">每经过一个 RTT，cwnd 大约翻倍。</span><br></pre></td></tr></table></figure>
 
 <p>当 <code>cwnd</code> 超过慢启动阈值 <code>ssthresh</code> 后，进入拥塞避免。</p>
-<h3 id="13-2-拥塞避免"><a href="#13-2-拥塞避免" class="headerlink" title="13.2 拥塞避免"></a>13.2 拥塞避免</h3><p>拥塞避免阶段增长变慢：</p>
+<h3 id="13-2-拥塞避免"><a href="#13-2-拥塞避免" class="headerlink" aria-hidden="true"></a>13.2 拥塞避免</h3><p>拥塞避免阶段增长变慢：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">每经过一个 RTT，cwnd = cwnd + 1</span><br></pre></td></tr></table></figure>
 
-<h3 id="13-3-超时重传"><a href="#13-3-超时重传" class="headerlink" title="13.3 超时重传"></a>13.3 超时重传</h3><p>如果发生 RTO 超时，说明网络可能已经比较拥塞。典型处理：</p>
+<h3 id="13-3-超时重传"><a href="#13-3-超时重传" class="headerlink" aria-hidden="true"></a>13.3 超时重传</h3><p>如果发生 RTO 超时，说明网络可能已经比较拥塞。典型处理：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssthresh = cwnd / 2</span><br><span class="line">cwnd = 1</span><br><span class="line">进入慢启动</span><br></pre></td></tr></table></figure>
 
-<h3 id="13-4-快速重传与快速恢复"><a href="#13-4-快速重传与快速恢复" class="headerlink" title="13.4 快速重传与快速恢复"></a>13.4 快速重传与快速恢复</h3><p>当发送方收到 3 个连续重复 ACK 时，通常认为某个报文段丢失，但网络不一定完全拥塞。</p>
+<h3 id="13-4-快速重传与快速恢复"><a href="#13-4-快速重传与快速恢复" class="headerlink" aria-hidden="true"></a>13.4 快速重传与快速恢复</h3><p>当发送方收到 3 个连续重复 ACK 时，通常认为某个报文段丢失，但网络不一定完全拥塞。</p>
 <p>典型处理：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ssthresh = cwnd / 2</span><br><span class="line">cwnd = ssthresh + 3</span><br><span class="line">重传丢失的数据段</span><br><span class="line">后续每收到重复 ACK，cwnd = cwnd + 1</span><br><span class="line">收到新的 ACK 后，cwnd = ssthresh，进入拥塞避免</span><br></pre></td></tr></table></figure>
 
-<h2 id="14-TCP-粘包与拆包"><a href="#14-TCP-粘包与拆包" class="headerlink" title="14. TCP 粘包与拆包"></a>14. TCP 粘包与拆包</h2><p>TCP 是字节流协议，不保留应用层消息边界。</p>
+<h2 id="14-TCP-粘包与拆包"><a href="#14-TCP-粘包与拆包" class="headerlink" aria-hidden="true"></a>14. TCP 粘包与拆包</h2><p>TCP 是字节流协议，不保留应用层消息边界。</p>
 <p>因此可能出现：</p>
 <ul>
 <li>应用层一个完整消息被 TCP 拆成多个包发送。</li>
@@ -765,7 +765,7 @@ var _hmt = _hmt || [];
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">| magic | version | length | body |</span><br></pre></td></tr></table></figure>
 
 <p>HTTP 通过 <code>Content-Length</code> 或 <code>Transfer-Encoding: chunked</code> 解决消息边界问题。</p>
-<h2 id="15-TCP-与-UDP"><a href="#15-TCP-与-UDP" class="headerlink" title="15. TCP 与 UDP"></a>15. TCP 与 UDP</h2><h3 id="15-1-对比"><a href="#15-1-对比" class="headerlink" title="15.1 对比"></a>15.1 对比</h3><table>
+<h2 id="15-TCP-与-UDP"><a href="#15-TCP-与-UDP" class="headerlink" aria-hidden="true"></a>15. TCP 与 UDP</h2><h3 id="15-1-对比"><a href="#15-1-对比" class="headerlink" aria-hidden="true"></a>15.1 对比</h3><table>
 <thead>
 <tr>
 <th>维度</th>
@@ -814,7 +814,7 @@ var _hmt = _hmt || [];
 <td>DNS、语音视频、游戏、QUIC</td>
 </tr>
 </tbody></table>
-<h3 id="15-2-如何选择"><a href="#15-2-如何选择" class="headerlink" title="15.2 如何选择"></a>15.2 如何选择</h3><p>优先 TCP：</p>
+<h3 id="15-2-如何选择"><a href="#15-2-如何选择" class="headerlink" aria-hidden="true"></a>15.2 如何选择</h3><p>优先 TCP：</p>
 <ul>
 <li>需要可靠传输。</li>
 <li>数据不能丢。</li>
@@ -829,7 +829,7 @@ var _hmt = _hmt || [];
 <li>需要多播或广播。</li>
 </ul>
 <p>QUIC 选择基于 UDP，不是不需要可靠性，而是把可靠性、拥塞控制、加密和多路复用放到了用户态协议中实现。</p>
-<h2 id="16-IP、MAC、ARP-与-ICMP"><a href="#16-IP、MAC、ARP-与-ICMP" class="headerlink" title="16. IP、MAC、ARP 与 ICMP"></a>16. IP、MAC、ARP 与 ICMP</h2><h3 id="16-1-IP-地址与-MAC-地址"><a href="#16-1-IP-地址与-MAC-地址" class="headerlink" title="16.1 IP 地址与 MAC 地址"></a>16.1 IP 地址与 MAC 地址</h3><table>
+<h2 id="16-IP、MAC、ARP-与-ICMP"><a href="#16-IP、MAC、ARP-与-ICMP" class="headerlink" aria-hidden="true"></a>16. IP、MAC、ARP 与 ICMP</h2><h3 id="16-1-IP-地址与-MAC-地址"><a href="#16-1-IP-地址与-MAC-地址" class="headerlink" aria-hidden="true"></a>16.1 IP 地址与 MAC 地址</h3><table>
 <thead>
 <tr>
 <th>地址</th>
@@ -849,19 +849,19 @@ var _hmt = _hmt || [];
 </tr>
 </tbody></table>
 <p>IP 地址是逻辑地址，会随网络位置变化。MAC 地址是网卡硬件地址，通常固定。</p>
-<h3 id="16-2-ARP"><a href="#16-2-ARP" class="headerlink" title="16.2 ARP"></a>16.2 ARP</h3><p>ARP 用于根据目标 IP 查询局域网内目标设备的 MAC 地址。</p>
+<h3 id="16-2-ARP"><a href="#16-2-ARP" class="headerlink" aria-hidden="true"></a>16.2 ARP</h3><p>ARP 用于根据目标 IP 查询局域网内目标设备的 MAC 地址。</p>
 <p>流程：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主机广播：谁拥有这个 IP？</span><br><span class="line">目标主机回复：这个 IP 对应我的 MAC。</span><br></pre></td></tr></table></figure>
 
 <p>如果目标 IP 不在同一网段，主机会通过 ARP 查询网关的 MAC 地址，把数据先发给网关。</p>
-<h3 id="16-3-ICMP"><a href="#16-3-ICMP" class="headerlink" title="16.3 ICMP"></a>16.3 ICMP</h3><p>ICMP 用于传输网络控制和错误报告信息。</p>
+<h3 id="16-3-ICMP"><a href="#16-3-ICMP" class="headerlink" aria-hidden="true"></a>16.3 ICMP</h3><p>ICMP 用于传输网络控制和错误报告信息。</p>
 <p>常见用途：</p>
 <ul>
 <li>目标不可达。</li>
 <li>TTL 超时。</li>
 <li>回显请求和回显响应。</li>
 </ul>
-<h3 id="16-4-Ping"><a href="#16-4-Ping" class="headerlink" title="16.4 Ping"></a>16.4 Ping</h3><p>Ping 基于 ICMP Echo Request 和 ICMP Echo Reply。</p>
+<h3 id="16-4-Ping"><a href="#16-4-Ping" class="headerlink" aria-hidden="true"></a>16.4 Ping</h3><p>Ping 基于 ICMP Echo Request 和 ICMP Echo Reply。</p>
 <p>流程：</p>
 <ol>
 <li>发起方解析域名得到 IP。</li>
@@ -870,7 +870,7 @@ var _hmt = _hmt || [];
 <li>发起方计算 RTT，并统计丢包率。</li>
 </ol>
 <p>Ping 不通不一定代表服务不可用，可能是目标禁用了 ICMP，或防火墙丢弃了 ICMP 包。</p>
-<h2 id="17-SYN-攻击与防护"><a href="#17-SYN-攻击与防护" class="headerlink" title="17. SYN 攻击与防护"></a>17. SYN 攻击与防护</h2><p>SYN Flood 是典型的 TCP 半连接攻击。</p>
+<h2 id="17-SYN-攻击与防护"><a href="#17-SYN-攻击与防护" class="headerlink" aria-hidden="true"></a>17. SYN 攻击与防护</h2><p>SYN Flood 是典型的 TCP 半连接攻击。</p>
 <p>攻击方式：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">攻击者大量发送 SYN，但不完成第三次握手。</span><br><span class="line">服务端维护大量 SYN_RECV 半连接，占用队列和资源。</span><br></pre></td></tr></table></figure>
 
@@ -887,7 +887,7 @@ var _hmt = _hmt || [];
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_syncookies = 1</span><br><span class="line">net.ipv4.tcp_max_syn_backlog = 4096</span><br></pre></td></tr></table></figure>
 
 <p>参数需要结合系统版本、业务流量和压测结果谨慎调整。</p>
-<h2 id="18-TIME-WAIT-过多"><a href="#18-TIME-WAIT-过多" class="headerlink" title="18. TIME_WAIT 过多"></a>18. TIME_WAIT 过多</h2><h3 id="18-1-危害"><a href="#18-1-危害" class="headerlink" title="18.1 危害"></a>18.1 危害</h3><p>如果客户端有大量 <code>TIME_WAIT</code>：</p>
+<h2 id="18-TIME-WAIT-过多"><a href="#18-TIME-WAIT-过多" class="headerlink" aria-hidden="true"></a>18. TIME_WAIT 过多</h2><h3 id="18-1-危害"><a href="#18-1-危害" class="headerlink" aria-hidden="true"></a>18.1 危害</h3><p>如果客户端有大量 <code>TIME_WAIT</code>：</p>
 <ul>
 <li>可能占满本地临时端口。</li>
 <li>短时间无法向同一目标四元组建立新连接。</li>
@@ -899,7 +899,7 @@ var _hmt = _hmt || [];
 <li>增加内核维护成本。</li>
 </ul>
 <p>不过 <code>TIME_WAIT</code> 本身是 TCP 正常状态，不应一看到就认为是故障。要结合数量、增长速度、端口耗尽情况和连接模式判断。</p>
-<h3 id="18-2-优化方向"><a href="#18-2-优化方向" class="headerlink" title="18.2 优化方向"></a>18.2 优化方向</h3><p>优先从架构和连接复用优化：</p>
+<h3 id="18-2-优化方向"><a href="#18-2-优化方向" class="headerlink" aria-hidden="true"></a>18.2 优化方向</h3><p>优先从架构和连接复用优化：</p>
 <ul>
 <li>使用 HTTP Keep-Alive。</li>
 <li>使用连接池。</li>
@@ -917,7 +917,7 @@ var _hmt = _hmt || [];
 <li><code>tcp_max_tw_buckets</code> 超过阈值后，内核可能直接清理 TIME_WAIT 连接。</li>
 </ul>
 <p>不要为了减少 TIME_WAIT 盲目调小内核参数，否则可能引入旧包串扰、连接异常等问题。</p>
-<h2 id="19-常见网络问题排查"><a href="#19-常见网络问题排查" class="headerlink" title="19. 常见网络问题排查"></a>19. 常见网络问题排查</h2><h3 id="19-1-域名解析问题"><a href="#19-1-域名解析问题" class="headerlink" title="19.1 域名解析问题"></a>19.1 域名解析问题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nslookup example.com</span><br><span class="line">dig example.com</span><br><span class="line">dig +trace example.com</span><br></pre></td></tr></table></figure>
+<h2 id="19-常见网络问题排查"><a href="#19-常见网络问题排查" class="headerlink" aria-hidden="true"></a>19. 常见网络问题排查</h2><h3 id="19-1-域名解析问题"><a href="#19-1-域名解析问题" class="headerlink" aria-hidden="true"></a>19.1 域名解析问题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nslookup example.com</span><br><span class="line">dig example.com</span><br><span class="line">dig +trace example.com</span><br></pre></td></tr></table></figure>
 
 <p>关注：</p>
 <ul>
@@ -926,7 +926,7 @@ var _hmt = _hmt || [];
 <li>TTL 是否符合预期。</li>
 <li>权威 DNS 是否正常。</li>
 </ul>
-<h3 id="19-2-连通性问题"><a href="#19-2-连通性问题" class="headerlink" title="19.2 连通性问题"></a>19.2 连通性问题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ping &lt;host&gt;</span><br><span class="line">traceroute &lt;host&gt;</span><br><span class="line">tracepath &lt;host&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="19-2-连通性问题"><a href="#19-2-连通性问题" class="headerlink" aria-hidden="true"></a>19.2 连通性问题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ping &lt;host&gt;</span><br><span class="line">traceroute &lt;host&gt;</span><br><span class="line">tracepath &lt;host&gt;</span><br></pre></td></tr></table></figure>
 
 <p>Windows 可用：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Test-NetConnection</span> &lt;host&gt; <span class="literal">-Port</span> <span class="number">443</span></span><br><span class="line">tracert &lt;host&gt;</span><br></pre></td></tr></table></figure>
@@ -937,7 +937,7 @@ var _hmt = _hmt || [];
 <li>丢包发生在哪一跳。</li>
 <li>RTT 是否异常升高。</li>
 </ul>
-<h3 id="19-3-端口监听与连接状态"><a href="#19-3-端口监听与连接状态" class="headerlink" title="19.3 端口监听与连接状态"></a>19.3 端口监听与连接状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ss -lntp</span><br><span class="line">ss -antp</span><br><span class="line">netstat -antp</span><br></pre></td></tr></table></figure>
+<h3 id="19-3-端口监听与连接状态"><a href="#19-3-端口监听与连接状态" class="headerlink" aria-hidden="true"></a>19.3 端口监听与连接状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ss -lntp</span><br><span class="line">ss -antp</span><br><span class="line">netstat -antp</span><br></pre></td></tr></table></figure>
 
 <p>常见状态：</p>
 <table>
@@ -984,7 +984,7 @@ var _hmt = _hmt || [];
 <td>主动关闭方等待 2MSL</td>
 </tr>
 </tbody></table>
-<h3 id="19-4-HTTP-问题"><a href="#19-4-HTTP-问题" class="headerlink" title="19.4 HTTP 问题"></a>19.4 HTTP 问题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -v http://example.com</span><br><span class="line">curl -I https://example.com</span><br><span class="line">curl --resolve example.com:443:1.2.3.4 https://example.com</span><br></pre></td></tr></table></figure>
+<h3 id="19-4-HTTP-问题"><a href="#19-4-HTTP-问题" class="headerlink" aria-hidden="true"></a>19.4 HTTP 问题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -v http://example.com</span><br><span class="line">curl -I https://example.com</span><br><span class="line">curl --resolve example.com:443:1.2.3.4 https://example.com</span><br></pre></td></tr></table></figure>
 
 <p>关注：</p>
 <ul>
@@ -995,7 +995,7 @@ var _hmt = _hmt || [];
 <li>响应头。</li>
 <li>总耗时和各阶段耗时。</li>
 </ul>
-<h3 id="19-5-抓包"><a href="#19-5-抓包" class="headerlink" title="19.5 抓包"></a>19.5 抓包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i eth0 host 1.2.3.4 -nn</span><br><span class="line">tcpdump -i eth0 port 443 -w out.pcap</span><br></pre></td></tr></table></figure>
+<h3 id="19-5-抓包"><a href="#19-5-抓包" class="headerlink" aria-hidden="true"></a>19.5 抓包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i eth0 host 1.2.3.4 -nn</span><br><span class="line">tcpdump -i eth0 port 443 -w out.pcap</span><br></pre></td></tr></table></figure>
 
 <p>Wireshark 可以打开 <code>.pcap</code> 文件做图形化分析。</p>
 <p>常看内容：</p>
@@ -1006,11 +1006,11 @@ var _hmt = _hmt || [];
 <li>RTT 是否异常。</li>
 <li>TLS 握手失败原因。</li>
 </ul>
-<h2 id="20-面试速记"><a href="#20-面试速记" class="headerlink" title="20. 面试速记"></a>20. 面试速记</h2><h3 id="20-1-OSI-七层"><a href="#20-1-OSI-七层" class="headerlink" title="20.1 OSI 七层"></a>20.1 OSI 七层</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">应用层、表示层、会话层、传输层、网络层、数据链路层、物理层。</span><br></pre></td></tr></table></figure>
+<h2 id="20-面试速记"><a href="#20-面试速记" class="headerlink" aria-hidden="true"></a>20. 面试速记</h2><h3 id="20-1-OSI-七层"><a href="#20-1-OSI-七层" class="headerlink" aria-hidden="true"></a>20.1 OSI 七层</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">应用层、表示层、会话层、传输层、网络层、数据链路层、物理层。</span><br></pre></td></tr></table></figure>
 
-<h3 id="20-2-TCP-IP-四层"><a href="#20-2-TCP-IP-四层" class="headerlink" title="20.2 TCP&#x2F;IP 四层"></a>20.2 TCP&#x2F;IP 四层</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">应用层、传输层、网络层、网络接口层。</span><br></pre></td></tr></table></figure>
+<h3 id="20-2-TCP-IP-四层"><a href="#20-2-TCP-IP-四层" class="headerlink" aria-hidden="true"></a>20.2 TCP&#x2F;IP 四层</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">应用层、传输层、网络层、网络接口层。</span><br></pre></td></tr></table></figure>
 
-<h3 id="20-3-TCP-三次握手"><a href="#20-3-TCP-三次握手" class="headerlink" title="20.3 TCP 三次握手"></a>20.3 TCP 三次握手</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SYN -&gt; SYN+ACK -&gt; ACK</span><br></pre></td></tr></table></figure>
+<h3 id="20-3-TCP-三次握手"><a href="#20-3-TCP-三次握手" class="headerlink" aria-hidden="true"></a>20.3 TCP 三次握手</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SYN -&gt; SYN+ACK -&gt; ACK</span><br></pre></td></tr></table></figure>
 
 <p>作用：</p>
 <ul>
@@ -1018,27 +1018,27 @@ var _hmt = _hmt || [];
 <li>确认双方发送和接收能力。</li>
 <li>避免历史连接干扰。</li>
 </ul>
-<h3 id="20-4-TCP-四次挥手"><a href="#20-4-TCP-四次挥手" class="headerlink" title="20.4 TCP 四次挥手"></a>20.4 TCP 四次挥手</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FIN -&gt; ACK -&gt; FIN -&gt; ACK</span><br></pre></td></tr></table></figure>
+<h3 id="20-4-TCP-四次挥手"><a href="#20-4-TCP-四次挥手" class="headerlink" aria-hidden="true"></a>20.4 TCP 四次挥手</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FIN -&gt; ACK -&gt; FIN -&gt; ACK</span><br></pre></td></tr></table></figure>
 
 <p>原因：</p>
 <ul>
 <li>TCP 是全双工，两个方向需要分别关闭。</li>
 <li>被动关闭方收到 FIN 后，可能还有数据要发送。</li>
 </ul>
-<h3 id="20-5-TCP-可靠性"><a href="#20-5-TCP-可靠性" class="headerlink" title="20.5 TCP 可靠性"></a>20.5 TCP 可靠性</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">序列号、确认应答、校验和、超时重传、快速重传、流量控制、拥塞控制。</span><br></pre></td></tr></table></figure>
+<h3 id="20-5-TCP-可靠性"><a href="#20-5-TCP-可靠性" class="headerlink" aria-hidden="true"></a>20.5 TCP 可靠性</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">序列号、确认应答、校验和、超时重传、快速重传、流量控制、拥塞控制。</span><br></pre></td></tr></table></figure>
 
-<h3 id="20-6-TIME-WAIT"><a href="#20-6-TIME-WAIT" class="headerlink" title="20.6 TIME_WAIT"></a>20.6 TIME_WAIT</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">确保最后 ACK 可重传。</span><br><span class="line">等待旧连接数据包消失。</span><br><span class="line">持续时间通常是 2MSL。</span><br></pre></td></tr></table></figure>
+<h3 id="20-6-TIME-WAIT"><a href="#20-6-TIME-WAIT" class="headerlink" aria-hidden="true"></a>20.6 TIME_WAIT</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">确保最后 ACK 可重传。</span><br><span class="line">等待旧连接数据包消失。</span><br><span class="line">持续时间通常是 2MSL。</span><br></pre></td></tr></table></figure>
 
-<h3 id="20-7-HTTP-与-HTTPS"><a href="#20-7-HTTP-与-HTTPS" class="headerlink" title="20.7 HTTP 与 HTTPS"></a>20.7 HTTP 与 HTTPS</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTPS = HTTP + TLS</span><br></pre></td></tr></table></figure>
+<h3 id="20-7-HTTP-与-HTTPS"><a href="#20-7-HTTP-与-HTTPS" class="headerlink" aria-hidden="true"></a>20.7 HTTP 与 HTTPS</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTPS = HTTP + TLS</span><br></pre></td></tr></table></figure>
 
 <p>HTTPS 提供加密、防篡改和身份认证。</p>
-<h3 id="20-8-Cookie-与-Session"><a href="#20-8-Cookie-与-Session" class="headerlink" title="20.8 Cookie 与 Session"></a>20.8 Cookie 与 Session</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cookie 存客户端。</span><br><span class="line">Session 存服务端。</span><br><span class="line">客户端通常通过 Cookie 携带 Session ID。</span><br></pre></td></tr></table></figure>
+<h3 id="20-8-Cookie-与-Session"><a href="#20-8-Cookie-与-Session" class="headerlink" aria-hidden="true"></a>20.8 Cookie 与 Session</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cookie 存客户端。</span><br><span class="line">Session 存服务端。</span><br><span class="line">客户端通常通过 Cookie 携带 Session ID。</span><br></pre></td></tr></table></figure>
 
-<h3 id="20-9-TCP-与-UDP"><a href="#20-9-TCP-与-UDP" class="headerlink" title="20.9 TCP 与 UDP"></a>20.9 TCP 与 UDP</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TCP 面向连接、可靠、字节流、保证顺序。</span><br><span class="line">UDP 无连接、不保证可靠、数据报、不保证顺序。</span><br></pre></td></tr></table></figure>
+<h3 id="20-9-TCP-与-UDP"><a href="#20-9-TCP-与-UDP" class="headerlink" aria-hidden="true"></a>20.9 TCP 与 UDP</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TCP 面向连接、可靠、字节流、保证顺序。</span><br><span class="line">UDP 无连接、不保证可靠、数据报、不保证顺序。</span><br></pre></td></tr></table></figure>
 
-<h3 id="20-10-粘包拆包"><a href="#20-10-粘包拆包" class="headerlink" title="20.10 粘包拆包"></a>20.10 粘包拆包</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TCP 是字节流，没有应用层消息边界。</span><br><span class="line">解决方式是固定长度、分隔符、长度字段或 TLV。</span><br></pre></td></tr></table></figure>
+<h3 id="20-10-粘包拆包"><a href="#20-10-粘包拆包" class="headerlink" aria-hidden="true"></a>20.10 粘包拆包</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TCP 是字节流，没有应用层消息边界。</span><br><span class="line">解决方式是固定长度、分隔符、长度字段或 TLV。</span><br></pre></td></tr></table></figure>
 
-<h2 id="21-总结"><a href="#21-总结" class="headerlink" title="21. 总结"></a>21. 总结</h2><p>计算机网络可以围绕三条主线学习：</p>
+<h2 id="21-总结"><a href="#21-总结" class="headerlink" aria-hidden="true"></a>21. 总结</h2><p>计算机网络可以围绕三条主线学习：</p>
 <ol>
 <li>分层：不同协议在哪一层，解决什么问题。</li>
 <li>一次请求：DNS、TCP、TLS、HTTP 如何串起来。</li>
@@ -1058,7 +1058,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://increasingrate626.github.io/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidcFqGHAJ_PrWh4uSF055hg" data-title="计网" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://increasingrate626.github.io/2026/05/14/%E8%AE%A1%E7%BD%91-%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" data-id="cuidA7F5X19utDGfsZMvOinru" data-title="计网" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       

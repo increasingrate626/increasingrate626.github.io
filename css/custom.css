@@ -3,6 +3,7 @@
   --page-bg: #f5f7fb;
   --panel-bg: #ffffff;
   --panel-soft: #f8fafc;
+  --panel-tint: #f1f7f6;
   --text-main: #172033;
   --text-muted: #647084;
   --text-faint: #8a96a8;
@@ -11,6 +12,8 @@
   --accent: #2563eb;
   --accent-soft: #e8f0ff;
   --accent-ink: #1645ad;
+  --accent-alt: #0f766e;
+  --accent-warm: #d97706;
   --success: #0f766e;
   --warning: #b45309;
   --code-bg: #111827;
@@ -33,7 +36,8 @@ html {
 
 body {
   background:
-    linear-gradient(180deg, rgba(226, 232, 240, 0.62), transparent 320px),
+    linear-gradient(180deg, rgba(226, 232, 240, 0.58), transparent 320px),
+    linear-gradient(115deg, rgba(15, 118, 110, 0.07), transparent 28%),
     var(--page-bg);
   color: var(--text-main);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
@@ -79,8 +83,8 @@ a {
 /* Header */
 #header {
   height: 360px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  background: #0f172a;
+  border-bottom: 1px solid rgba(203, 213, 225, 0.72);
+  background: #eef4f8;
   overflow: hidden;
 }
 
@@ -88,21 +92,22 @@ a {
   z-index: 1;
   height: 100%;
   background:
-    linear-gradient(90deg, rgba(10, 18, 35, 0.96) 0%, rgba(10, 18, 35, 0.74) 34%, rgba(10, 18, 35, 0.18) 70%, rgba(10, 18, 35, 0.06) 100%),
-    linear-gradient(180deg, rgba(15, 23, 42, 0.14), rgba(15, 23, 42, 0.46));
+    linear-gradient(90deg, rgba(248, 250, 252, 0.98) 0%, rgba(248, 250, 252, 0.9) 34%, rgba(248, 250, 252, 0.36) 66%, rgba(248, 250, 252, 0.04) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(226, 232, 240, 0.18));
 }
 
 #header:after {
   z-index: 1;
   height: 100%;
   background:
-    radial-gradient(circle at 77% 42%, rgba(20, 184, 166, 0.22), transparent 36%),
-    linear-gradient(180deg, transparent 56%, rgba(15, 23, 42, 0.48));
+    radial-gradient(circle at 77% 38%, rgba(20, 184, 166, 0.13), transparent 34%),
+    radial-gradient(circle at 88% 18%, rgba(217, 119, 6, 0.1), transparent 24%),
+    linear-gradient(180deg, transparent 68%, rgba(226, 232, 240, 0.34));
 }
 
 #banner {
-  background: url("/images/site/engineering-hero.webp") right center / cover no-repeat;
-  filter: saturate(1.05) contrast(1.04);
+  background: url("/images/site/engineering-hero-v2.png") right center / cover no-repeat;
+  filter: saturate(0.98) contrast(1.01);
   opacity: 1;
   z-index: 0;
 }
@@ -139,12 +144,14 @@ a {
   justify-content: center;
   min-height: 36px;
   padding: 0 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(148, 163, 184, 0.32);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.68);
+  color: #233044;
   opacity: 1;
   text-shadow: none;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(12px);
   font-size: 14px;
   letter-spacing: 0;
   transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
@@ -157,9 +164,17 @@ a {
 
 .main-nav-link:hover,
 .nav-icon:hover {
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.26);
-  background: rgba(255, 255, 255, 0.12);
+  color: var(--accent-ink);
+  border-color: rgba(37, 99, 235, 0.26);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.main-nav-link:focus-visible,
+.nav-icon:focus-visible,
+.article-more-link a:focus-visible,
+.article-entry a:focus-visible {
+  outline: 3px solid rgba(20, 184, 166, 0.42);
+  outline-offset: 3px;
 }
 
 #main-nav-toggle {
@@ -179,12 +194,12 @@ a {
 #logo {
   display: inline-block;
   max-width: 820px;
-  color: #fff;
+  color: #142033;
   font-size: clamp(32px, 5vw, 52px);
   font-weight: 750;
   line-height: 1.12;
   letter-spacing: 0;
-  text-shadow: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
 }
 
 #logo-wrap:after {
@@ -192,7 +207,7 @@ a {
   display: block;
   max-width: 620px;
   margin-top: 18px;
-  color: rgba(255, 255, 255, 0.72);
+  color: #4b6078;
   font-size: 15px;
   font-weight: 620;
   letter-spacing: 0.08em;
@@ -206,7 +221,7 @@ a {
 #subtitle {
   display: inline-block;
   max-width: 680px;
-  color: rgba(255, 255, 255, 0.78);
+  color: #52667c;
   font-size: 16px;
   line-height: 1.6;
   letter-spacing: 0;
@@ -317,10 +332,28 @@ a {
   transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
 }
 
+.article-preview .article-inner {
+  position: relative;
+}
+
+.article-preview .article-inner:after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-alt));
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
 .article-preview .article-inner:hover {
   border-color: rgba(37, 99, 235, 0.28);
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
+}
+
+.article-preview .article-inner:hover:after {
+  opacity: 1;
 }
 
 .article-about .article-inner:before {
@@ -372,6 +405,10 @@ a.article-title:hover {
   font-size: 16px;
   line-height: 1.8;
   margin: 18px 0 0;
+}
+
+.article-preview:not(.article-about) .article-entry {
+  padding-top: 4px;
 }
 
 .article-more-link {
@@ -458,6 +495,10 @@ a.article-title:hover {
   scroll-margin-top: 24px;
 }
 
+.article-entry .headerlink {
+  display: none;
+}
+
 .article-entry h1 {
   font-size: 32px;
   margin: 28px 0 16px;
@@ -495,9 +536,9 @@ a.article-title:hover {
 .article-entry blockquote {
   margin: 24px 0;
   padding: 16px 20px;
-  border-left: 4px solid var(--accent);
+  border-left: 4px solid var(--accent-alt);
   border-radius: 0 var(--radius) var(--radius) 0;
-  background: var(--panel-soft);
+  background: var(--panel-tint);
   color: var(--text-muted);
   font-family: inherit;
   text-align: left;
@@ -614,6 +655,10 @@ a.article-title:hover {
   color: var(--text-muted);
 }
 
+.widget-wrap + .widget-wrap {
+  margin-top: 20px;
+}
+
 .widget-title {
   margin-bottom: 12px;
   color: var(--text-main);
@@ -638,6 +683,13 @@ a.article-title:hover {
   border-bottom: 1px solid rgba(221, 228, 238, 0.7);
 }
 
+.widget ul li a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .widget ul li:last-child {
   border-bottom: none;
 }
@@ -652,9 +704,14 @@ a.article-title:hover {
   margin: 0 6px 8px 0;
   padding: 4px 8px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: var(--panel-soft);
   line-height: 1.4;
+}
+
+.tagcloud a:hover {
+  border-color: rgba(15, 118, 110, 0.28);
+  background: var(--panel-tint);
 }
 
 /* Archives and pagination */
