@@ -7,6 +7,8 @@ date: 2026-05-16 14:40:00
 
 ## 1. Spring 核心知识图谱
 
+![Spring 核心知识图谱](/images/tech-docs/spring-core-map.svg)
+
 Spring 是一个轻量级、非侵入式的 Java 应用开发框架，核心目标是降低对象创建、依赖管理、横切逻辑和企业级开发的复杂度。学习 Spring 可以围绕几条主线展开：IoC 容器、Bean 生命周期、依赖注入、AOP、事务管理、Spring MVC、Spring Boot 自动配置以及常见扩展点。
 
 核心关键词：

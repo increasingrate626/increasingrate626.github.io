@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980" role="img" aria-labelledby="title desc">
+  <title id="title">Spring 核心知识图谱</title>
+  <desc id="desc">围绕 IoC 容器、Bean 生命周期、依赖注入、AOP、事务、Spring MVC、Spring Boot 自动配置和扩展点组织的 Spring 学习路径。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fbff"/>
+      <stop offset="0.55" stop-color="#eef7f5"/>
+      <stop offset="1" stop-color="#f7f3ea"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.13"/>
+    </filter>
+    <style>
+      .title { font: 800 48px "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif; fill: #142033; }
+      .subtitle { font: 500 23px "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif; fill: #5b6b80; }
+      .node-title { font: 800 28px "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif; fill: #142033; }
+      .node-text { font: 500 21px "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif; fill: #526174; }
+      .center-title { font: 900 42px "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif; fill: #ffffff; }
+      .center-text { font: 600 22px "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif; fill: rgba(255,255,255,0.86); }
+      .label { font: 700 20px "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif; fill: #0f766e; }
+      .card { fill: rgba(255,255,255,0.9); stroke: #d6e2ee; stroke-width: 2; filter: url(#shadow); }
+      .line { stroke: #9db1c5; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 8 12; }
+      .dot { fill: #0f766e; }
+      .accent { fill: #2563eb; }
+      .warn { fill: #d97706; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="980" rx="34" fill="url(#bg)"/>
+  <circle cx="1440" cy="115" r="170" fill="#dbeafe" opacity="0.36"/>
+  <circle cx="170" cy="805" r="210" fill="#ccfbf1" opacity="0.34"/>
+  <circle cx="1225" cy="850" r="145" fill="#fde68a" opacity="0.22"/>
+
+  <text x="90" y="92" class="title">Spring 核心知识图谱</text>
+  <text x="92" y="134" class="subtitle">从容器到增强，从事务到 Web，再到 Boot 自动配置与工程扩展点</text>
+
+  <line x1="520" y1="315" x2="690" y2="450" class="line"/>
+  <line x1="520" y1="665" x2="690" y2="550" class="line"/>
+  <line x1="1080" y1="315" x2="910" y2="450" class="line"/>
+  <line x1="1080" y1="665" x2="910" y2="550" class="line"/>
+  <line x1="365" y1="490" x2="620" y2="490" class="line"/>
+  <line x1="1235" y1="490" x2="980" y2="490" class="line"/>
+
+  <rect x="650" y="360" width="300" height="260" rx="34" fill="url(#core)" filter="url(#shadow)"/>
+  <text x="800" y="455" text-anchor="middle" class="center-title">Spring</text>
+  <text x="800" y="501" text-anchor="middle" class="center-text">IoC + AOP</text>
+  <text x="800" y="538" text-anchor="middle" class="center-text">企业级开发基础设施</text>
+  <circle cx="800" cy="595" r="12" fill="#ffffff" opacity="0.75"/>
+
+  <g>
+    <rect x="92" y="190" width="390" height="220" rx="24" class="card"/>
+    <circle cx="135" cy="236" r="15" class="accent"/>
+    <text x="164" y="245" class="node-title">IoC 容器</text>
+    <text x="128" y="294" class="node-text">BeanFactory / ApplicationContext</text>
+    <text x="128" y="330" class="node-text">BeanDefinition 注册与解析</text>
+    <text x="128" y="366" class="node-text">对象创建、依赖管理、资源加载</text>
+  </g>
+
+  <g>
+    <rect x="92" y="455" width="390" height="220" rx="24" class="card"/>
+    <circle cx="135" cy="501" r="15" class="dot"/>
+    <text x="164" y="510" class="node-title">Bean 生命周期</text>
+    <text x="128" y="559" class="node-text">实例化 → 属性填充 → 初始化</text>
+    <text x="128" y="595" class="node-text">Aware / InitializingBean / init-method</text>
+    <text x="128" y="631" class="node-text">BeanPostProcessor 是关键扩展点</text>
+  </g>
+
+  <g>
+    <rect x="92" y="720" width="390" height="170" rx="24" class="card"/>
+    <circle cx="135" cy="766" r="15" class="warn"/>
+    <text x="164" y="775" class="node-title">依赖注入 DI</text>
+    <text x="128" y="824" class="node-text">构造器注入优先，依赖显式且可测试</text>
+    <text x="128" y="860" class="node-text">Autowired / Qualifier / Primary</text>
+  </g>
+
+  <g>
+    <rect x="560" y="160" width="480" height="150" rx="24" class="card"/>
+    <circle cx="605" cy="206" r="15" class="accent"/>
+    <text x="634" y="215" class="node-title">AOP 面向切面</text>
+    <text x="596" y="264" class="node-text">JDK 动态代理 / CGLIB；切点、通知、连接点</text>
+  </g>
+
+  <g>
+    <rect x="1118" y="190" width="390" height="220" rx="24" class="card"/>
+    <circle cx="1161" cy="236" r="15" class="dot"/>
+    <text x="1190" y="245" class="node-title">事务管理</text>
+    <text x="1154" y="294" class="node-text">@Transactional 基于 AOP 拦截</text>
+    <text x="1154" y="330" class="node-text">传播行为 / 隔离级别 / 回滚规则</text>
+    <text x="1154" y="366" class="node-text">注意自调用、异常捕获、代理失效</text>
+  </g>
+
+  <g>
+    <rect x="1118" y="455" width="390" height="220" rx="24" class="card"/>
+    <circle cx="1161" cy="501" r="15" class="accent"/>
+    <text x="1190" y="510" class="node-title">Spring MVC</text>
+    <text x="1154" y="559" class="node-text">DispatcherServlet 统一入口</text>
+    <text x="1154" y="595" class="node-text">HandlerMapping / Adapter / ViewResolver</text>
+    <text x="1154" y="631" class="node-text">参数绑定、消息转换、异常处理</text>
+  </g>
+
+  <g>
+    <rect x="1118" y="720" width="390" height="170" rx="24" class="card"/>
+    <circle cx="1161" cy="766" r="15" class="warn"/>
+    <text x="1190" y="775" class="node-title">Spring Boot</text>
+    <text x="1154" y="824" class="node-text">Starter 管依赖，AutoConfiguration 管装配</text>
+    <text x="1154" y="860" class="node-text">条件注解决定配置是否生效</text>
+  </g>
+
+  <g>
+    <rect x="560" y="682" width="480" height="208" rx="24" class="card"/>
+    <circle cx="605" cy="728" r="15" class="dot"/>
+    <text x="634" y="737" class="node-title">常见扩展点</text>
+    <text x="596" y="786" class="node-text">BeanPostProcessor / FactoryBean</text>
+    <text x="596" y="822" class="node-text">ImportSelector / BeanFactoryPostProcessor</text>
+    <text x="596" y="858" class="node-text">EnvironmentPostProcessor / ApplicationListener</text>
+  </g>
+
+  <rect x="556" y="920" width="488" height="2" fill="#d6e2ee"/>
+  <text x="800" y="948" text-anchor="middle" class="label">主线：容器创建对象 → 生命周期扩展 → AOP 代理增强 → 事务 / MVC / Boot 工程化</text>
+</svg>
