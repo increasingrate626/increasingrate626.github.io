@@ -28,7 +28,7 @@ date: 2099-12-31 23:59:59
 ## 🔬 科研经历
 
 - **SCT-FL：面向 IoMT 的智能合约辅助可审计可信联邦学习框架**｜第一作者｜IEEE TIFS（SCI 一区）｜Under Review
-- **TAR-FL：面向非独立同分布医疗联邦学习的触发感知可信防御方法**｜第一作者｜PRICAI 2026（CCF-C）｜Accepted
+- **TAR-FL：面向非独立同分布医疗联邦学习的触发感知可信防御方法**｜第一作者｜PRICAI 2026（CCF-C）｜**Accepted**
 
 ## 🛠 核心技术栈
 
