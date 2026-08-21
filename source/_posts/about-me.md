@@ -17,18 +17,18 @@ date: 2099-12-31 23:59:59
 
 ## 🏢 实习经历
 
-- **百度｜秒哒工程组｜Agent 开发实习生**（2026.04 - 至今）
-- **美团｜服体技术部｜Java 后端开发实习生**（2025.08 - 2026.01）
-- **湖南泛联新安信息科技｜AI 应用开发实习生**（2025.04 - 2025.08）
+- **百度｜秒哒工程组｜Agent 开发实习生** <span class="profile-date">2026.04 - 至今</span>
+- **美团｜服体技术部｜Java 后端开发实习生** <span class="profile-date">2025.08 - 2026.01</span>
+- **湖南泛联新安信息科技｜AI 应用开发实习生** <span class="profile-date">2025.04 - 2025.08</span>
 
 ## 🚀 项目经历
 
-- **SimpleDB 数据库**（2025.01 - 2025.04）
+- **SimpleDB 数据库** <span class="profile-date">2025.01 - 2025.04</span>
 
 ## 🔬 科研经历
 
-- **SCT-FL：面向 IoMT 的智能合约辅助可审计可信联邦学习框架**｜第一作者｜IEEE TIFS（SCI 一区）｜Under Review
-- **TAR-FL：面向非独立同分布医疗联邦学习的触发感知可信防御方法**｜第一作者｜PRICAI 2026（CCF-C）｜**Accepted**
+- **SCT-FL：面向 IoMT 的智能合约辅助可审计可信联邦学习框架** <span class="profile-meta">第一作者 · IEEE TIFS（SCI 一区） · Under Review</span>
+- **TAR-FL：面向非独立同分布医疗联邦学习的触发感知可信防御方法** <span class="profile-meta">第一作者 · PRICAI 2026（CCF-C） · <strong>Accepted</strong></span>
 
 ## 🛠 核心技术栈
 
@@ -40,6 +40,6 @@ date: 2099-12-31 23:59:59
 
 ## 📬 联系我
 
-- **Email**：18577321169@163.com
+- **Email**：[18577321169@163.com](mailto:18577321169@163.com)
 - **WeChat**：Struggletofree
 
