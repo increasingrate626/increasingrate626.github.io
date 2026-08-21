@@ -644,6 +644,207 @@ a.article-title:hover {
   color: var(--text-main);
 }
 
+/* Personal profile page */
+#post-about-me > .article-meta,
+#post-about-me .article-footer,
+#post-about-me #article-nav {
+  display: none;
+}
+
+#post-about-me .article-inner {
+  border-color: rgba(148, 163, 184, 0.28);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 92% 2%, rgba(37, 99, 235, 0.09), transparent 24%),
+    radial-gradient(circle at 4% 18%, rgba(15, 118, 110, 0.07), transparent 22%),
+    rgba(255, 255, 255, 0.97);
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.1);
+}
+
+#post-about-me .article-header {
+  max-width: 900px;
+  padding: 48px 48px 10px;
+}
+
+#post-about-me .article-header:before {
+  content: "PROFILE";
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  margin-bottom: 14px;
+  padding: 0 10px;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-size: 12px;
+  font-weight: 760;
+  letter-spacing: 0.14em;
+}
+
+#post-about-me .article-header:after {
+  content: "Java Backend · AI Agent · Distributed Systems";
+  display: block;
+  margin-top: 12px;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 620;
+  letter-spacing: 0.04em;
+}
+
+#post-about-me .article-title {
+  color: var(--text-main);
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+#post-about-me .article-entry {
+  max-width: 900px;
+  padding: 18px 48px 54px;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+#post-about-me .article-entry > blockquote:first-child {
+  position: relative;
+  margin: 12px 0 28px;
+  padding: 18px 22px 18px 52px;
+  border: 1px solid rgba(15, 118, 110, 0.18);
+  border-left-width: 1px;
+  border-radius: 16px;
+  background: linear-gradient(115deg, rgba(236, 253, 245, 0.96), rgba(239, 246, 255, 0.94));
+  box-shadow: 0 12px 28px rgba(15, 118, 110, 0.08);
+  color: #174f4a;
+}
+
+#post-about-me .article-entry > blockquote:first-child:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 22px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.13);
+  transform: translateY(-50%);
+}
+
+#post-about-me .article-entry > blockquote:first-child p {
+  margin: 0;
+}
+
+#post-about-me .article-entry > h2 {
+  margin: 22px 0 0;
+  padding: 15px 20px;
+  border: 1px solid var(--border);
+  border-bottom: 0;
+  border-radius: 16px 16px 0 0;
+  background: linear-gradient(120deg, #f8fafc, #f1f5f9);
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+#post-about-me .article-entry > h2 + p,
+#post-about-me .article-entry > h2 + ul {
+  margin: 0 0 18px;
+  border: 1px solid var(--border);
+  border-top: 0;
+  border-radius: 0 0 16px 16px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.045);
+}
+
+#post-about-me .article-entry > h2 + p {
+  padding: 18px 20px 20px;
+  color: #334155;
+}
+
+#post-about-me .article-entry > h2 + ul {
+  padding: 12px;
+  list-style: none;
+}
+
+#post-about-me .article-entry > h2 + ul > li {
+  position: relative;
+  margin: 0;
+  padding: 11px 14px 11px 34px;
+  border-radius: 11px;
+  color: #334155;
+  line-height: 1.65;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+#post-about-me .article-entry > h2 + ul > li:before {
+  content: "";
+  position: absolute;
+  top: 1.35em;
+  left: 15px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+#post-about-me .article-entry > h2 + ul > li:hover {
+  background: #f8fafc;
+  transform: translateX(2px);
+}
+
+#post-about-me .article-entry > h2 + ul > li + li {
+  margin-top: 4px;
+}
+
+#post-about-me .article-entry > h2 + ul > li > strong:first-child {
+  color: #162033;
+  font-weight: 760;
+}
+
+#post-about-me .profile-date {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  margin-left: 8px;
+  padding: 0 9px;
+  border: 1px solid rgba(37, 99, 235, 0.16);
+  border-radius: 999px;
+  background: rgba(232, 240, 255, 0.74);
+  color: var(--accent-ink);
+  font-size: 13px;
+  font-weight: 650;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+#post-about-me .profile-meta {
+  display: block;
+  margin-top: 7px;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 560;
+}
+
+#post-about-me .profile-meta strong {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 8px;
+  border: 1px solid rgba(5, 150, 105, 0.2);
+  border-radius: 999px;
+  background: #ecfdf5;
+  color: #047857;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+#post-about-me .article-entry a {
+  font-weight: 650;
+  text-decoration-color: rgba(37, 99, 235, 0.36);
+}
+
 /* Sidebar */
 .widget {
   margin-bottom: 18px;
@@ -902,6 +1103,61 @@ a.article-title:hover {
   .article-footer {
     margin-left: 18px;
     margin-right: 18px;
+  }
+
+  #post-about-me .article-inner {
+    border-radius: 18px;
+  }
+
+  #post-about-me .article-header {
+    padding: 30px 20px 6px;
+  }
+
+  #post-about-me .article-header:after {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  #post-about-me .article-title {
+    font-size: 29px;
+  }
+
+  #post-about-me .article-entry {
+    padding: 14px 20px 34px;
+    font-size: 15px;
+  }
+
+  #post-about-me .article-entry > blockquote:first-child {
+    padding: 16px 16px 16px 46px;
+  }
+
+  #post-about-me .article-entry > blockquote:first-child:before {
+    left: 19px;
+  }
+
+  #post-about-me .article-entry > h2 {
+    padding: 14px 16px;
+    font-size: 18px;
+  }
+
+  #post-about-me .article-entry > h2 + p {
+    padding: 16px;
+  }
+
+  #post-about-me .article-entry > h2 + ul {
+    padding: 8px;
+  }
+
+  #post-about-me .article-entry > h2 + ul > li {
+    padding: 10px 10px 10px 30px;
+  }
+
+  #post-about-me .article-entry > h2 + ul > li:before {
+    left: 12px;
+  }
+
+  #post-about-me .profile-date {
+    margin: 7px 0 0;
   }
 
   .article-entry pre,
